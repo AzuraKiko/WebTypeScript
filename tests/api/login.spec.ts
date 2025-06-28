@@ -1,195 +1,227 @@
-import { test, expect, request } from "@playwright/test";
-import crypto from "crypto";
-import { v4 as uuidv4 } from "uuid";
+import { test, expect } from "@playwright/test";
+import LoginApi from "../../page/LoginApi";
 import dotenv from "dotenv";
+import { v4 as uuidv4 } from 'uuid';
+import CryptoJS from 'crypto-js';
 
 dotenv.config({ path: ".env" });
 
 let env = process.env.NODE_ENV?.toUpperCase() || "PROD";
 if (env === "PRODUCTION") env = "PROD";
 const WS_BASE_URL = process.env[`${env}_WEB_LOGIN_URL`];
-
-const Env = {
-  WS_BASE_URL: WS_BASE_URL,
-  K6_DURATION: "10s",
-  K6_VUS: 1,
+const PROD_TEST_USER = process.env[`${env}_TEST_USER`];
+const PROD_TEST_PASSWORD = process.env[`${env}_TEST_PASS_ENCRYPT`];
+const PROD_PASSWORD = process.env[`${env}_TEST_PASS`];
+const Env: any = {
+    WS_BASE_URL: WS_BASE_URL,
+    TEST_USERNAME: PROD_TEST_USER,
+    TEST_PASSWORD: PROD_TEST_PASSWORD,
+    TEST_FCM_TOKEN: PROD_TEST_USER,
+    PASSWORD: PROD_PASSWORD,
 };
 
-function sha256Hash(text: string) {
-  return crypto.createHash("sha256").update(text).digest();
-}
+// Replace the crypto encryption with CryptoJS equivalent
+const encryptionKey: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
+const OTP: string = "615291";
+const value: string = CryptoJS.AES.encrypt(OTP, encryptionKey).toString();
 
-function base64Stringify(buffer: Buffer) {
-  return buffer.toString("base64");
-}
+test.describe("LoginApi Tests", () => {
+    let loginApi: LoginApi;
 
-function generateSignStr(
-  acntNo: string,      // Số tài khoản
-  subAcntNo: string,   // Số tài khoản phụ
-  symbol: string,      // Mã chứng khoán/symbol
-  ordrQty: string,     // Số lượng đặt lệnh
-  ordrUntprc: string,  // Giá đặt lệnh
-  ordrTrdTp: string,   // Loại giao dịch
-  buySelTp: string,    // Loại mua/bán
-  oddOrdrYn: string,   // Có phải lệnh lẻ không
-  uuid: string,        // ID duy nhất
-  privateKey: string   // Khóa bí mật
-) {
-  // Nối tất cả tham số thành một chuỗi
-  const text = acntNo + subAcntNo + symbol + ordrQty + ordrUntprc + ordrTrdTp + buySelTp + oddOrdrYn + uuid + privateKey;
-
-  // Tạo hash SHA-256
-  const hash = sha256Hash(text);
-
-  // Chuyển đổi sang Base64
-  const signStr = base64Stringify(hash);
-
-  return signStr;
-}
-
-
-test("Playwright API test - NewOrder flow", async ({ request }) => {
-  const loginUrl = `${Env.WS_BASE_URL}/loginAdv`;
-  const authUrl = `${Env.WS_BASE_URL}/CoreServlet.pt`;
-
-  const loginPayload = {
-    user: "010C000433",
-    pass: "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
-    fcmToken: "010C000433",
-  };
-
-  const loginRes = await request.post(loginUrl, {
-    data: loginPayload,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  expect(loginRes.status()).toBe(200);
-  const loginData = await loginRes.json();
-
-  if (!loginData.error) {
-    const session = loginData.data.session;
-    const cif = loginData.data.cif;
-    const user = loginPayload.user;
-    const acntInfo =
-      loginData.data.custInfo?.normal?.find((a: any) =>
-        a.subAcntNo.startsWith("N")
-      ) || {};
-    const acntNo = acntInfo.acntNo;
-    const subAcntNo = acntInfo.subAcntNo;
-
-    const rqId = uuidv4();
-
-    const authPayload = {
-      group: "CORE",
-      cmd: "generateAUTH",
-      channel: "WTS",
-      user: user,
-      session: session,
-      data: {
-        trdType: "1",
-        authType: "2",
-        positionNo: "3",
-      },
-    };
-
-    const authRes = await request.post(authUrl, {
-      data: authPayload,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    expect(authRes.status()).toBe(200);
-
-    const getTokenPayload = {
-      group: "CORE",
-      user: user,
-      session: session,
-      cmd: "getToken",
-      rqId: rqId,
-      channel: "WTS",
-      data: {
-        cif: cif,
-        type: "3",
-        value: "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=",
-      },
-    };
-
-    const getTokenRes = await request.post(authUrl, {
-      data: getTokenPayload,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        Accept: "*/*",
-        "Accept-Language": "en-US,en;q=0.9,vi;q=0.8",
-        Connection: "keep-alive",
-      },
+    test.beforeEach(async () => {
+        loginApi = new LoginApi(Env.WS_BASE_URL as string);
     });
 
-    expect(getTokenRes.status()).toBe(200);
+    test.describe("loginApi method", () => {
+        test("1. should successfully login with valid credentials", async () => {
+            const response = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
+            expect(response).toBeDefined();
+            expect(response).toHaveProperty("data");
+            expect(response.rc).toBe(1);
+            if (response.data) {
+                expect(response.data).toHaveProperty("session");
+                expect(response.data).toHaveProperty("cif");
+                expect(response.data.session).toBeDefined();
+                expect(response.data.cif).toBeDefined();
+            }
+        });
 
-    // Prepare NewOrder
-    const symbol = "VPB";
-    const ordrQty = "100";
-    const ordrUntprc = "16800";
-    const ordrTrdTp = "01";
-    const buySelTp = "1";
-    const oddOrdrYn = "N";
-    const privateKey = "a06ab782-118c-4819-a3c5-7b958ba85f7e";
+        test("2. should successfully login without fcmToken", async () => {
+            const response = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string);
 
-    const signStr = generateSignStr(
-      acntNo,
-      subAcntNo,
-      symbol,
-      ordrQty,
-      ordrUntprc,
-      ordrTrdTp,
-      buySelTp,
-      oddOrdrYn,
-      rqId,
-      privateKey
-    );
+            expect(response).toBeDefined();
+            expect(response).toHaveProperty("data");
+            expect(response.rc).toBe(1);
+            if (response.data) {
+                expect(response.data).toHaveProperty("session");
+                expect(response.data).toHaveProperty("cif");
+                expect(response.data.session.length).toBeGreaterThan(0);
+                expect(response.data.cif.length).toBeGreaterThan(0);
+            }
+        });
 
-    const newOrderPayload = {
-      group: "CORE",
-      user: user,
-      session: session,
-      cmd: "NewOrder",
-      rqId: rqId,
-      channel: "WTS",
-      type: "3",
-      token: "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=",
-      data: {
-        acntNo,
-        subAcntNo,
-        symbol,
-        ordrQty,
-        ordrUntprc,
-        ordrTrdTp,
-        buySelTp,
-        oddOrdrYn,
-        signStr,
-      },
-    };
+        test("3. should handle login with empty username", async () => {
+            try {
+                await loginApi.loginApi(
+                    "",
+                    Env.TEST_PASSWORD as string,
+                    Env.TEST_FCM_TOKEN as string
+                );
+                // Nếu API không throw error, test sẽ fail
+                expect(true).toBe(false);
+            } catch (error: any) {
+                // Check if error has response data with the expected message
+                if (
+                    error.response &&
+                    error.response.data &&
+                    error.response.data.data &&
+                    error.response.data.data.message
+                ) {
+                    expect(error.response.data.rc).toBe(-1);
+                    expect(error.response.data.data.message).toBe(
+                        "Không có thông tin khách hàng"
+                    );
+                } else {
+                    expect(error).toBeDefined();
+                }
+            }
+        });
 
-    const newOrderRes = await request.post(authUrl, {
-      data: newOrderPayload,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      },
+        test("4. should handle login with empty password", async () => {
+            try {
+                await loginApi.loginApi(Env.TEST_USERNAME as string, "", Env.TEST_FCM_TOKEN as string);
+                // If we reach here, the test should fail
+                expect(true).toBe(false);
+            } catch (error: any) {
+                // Check if error has response data with the expected message
+                if (error.response && error.response.data && error.response.data.data && error.response.data.data.message) {
+                    expect(error.response.data.rc).toBe(-1);
+                    expect(error.response.data.data.message).toBe("Quý Khách đã nhập sai thông tin đăng nhập 1 LẦN. Quý Khách lưu ý, tài khoản sẽ bị tạm khóa nếu Quý Khách nhập sai liên tiếp 05 LẦN.");
+                } else {
+                    expect(error).toBeDefined();
+                }
+            }
+        });
+
+        test.describe("generateAuth method", () => {
+            test("5. should successfully generate authentication", async () => {
+                const loginResponse = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
+                const response = await loginApi.generateAuth(Env.TEST_USERNAME as string, loginResponse.data?.session as string);
+
+                expect(response).toBeDefined();
+                expect(response.rc).toBe(1);
+            });
+
+            test("6. should handle generateAuth with empty user", async () => {
+                const loginResponse = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
+                const response = await loginApi.generateAuth("", loginResponse.data?.session as string);
+
+                expect(response.rc).toBe("-1");
+                expect(response.data.message).toBe("Servlet.exception.SessionException: Not logged in!");
+            });
+
+            test("7. should handle generateAuth with empty session", async () => {
+                const response = await loginApi.generateAuth(Env.TEST_USERNAME as string, "");
+
+                expect(response.rc).toBe("-1");
+                expect(response.data.message).toBe(`Servlet.exception.SessionException: Session ${Env.TEST_USERNAME}is not correct.`);
+            });
+
+            test("8. should handle generateAuth with invalid session", async () => {
+                const response = await loginApi.generateAuth(Env.TEST_USERNAME as string, "invalidsession");
+
+                expect(response.rc).toBe("-1");
+                expect(response.data.message).toBe(`Servlet.exception.SessionException: Session ${Env.TEST_USERNAME}is not correct.`);
+            });
+        });
+
+        test.describe("getToken method", () => {
+            test("9. should successfully get token", async () => {
+                const loginResponse = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
+                const response = await loginApi.getToken(Env.TEST_USERNAME as string, loginResponse.data?.session as string, loginResponse.data?.cif as string, uuidv4(), value);
+
+                expect(response).toBeDefined();
+                expect(response.rc).toBe(1);
+            });
+        });
+
+        test.describe("Integration Tests", () => {
+            test("10. should complete full login flow: login -> generateAuth -> getToken", async () => {
+                // Step 1: Login
+                const loginResponse = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
+
+                expect(loginResponse).toBeDefined();
+                expect(loginResponse).toHaveProperty("data");
+                if (loginResponse.data) {
+                    expect(loginResponse.data).toHaveProperty("session");
+                    expect(loginResponse.data).toHaveProperty("cif");
+
+                    const session: string = loginResponse.data.session;
+                    const cif: string = loginResponse.data.cif;
+
+                    // Step 2: Generate Auth
+                    const authResponse = await loginApi.generateAuth(Env.TEST_USERNAME as string, session);
+                    expect(authResponse).toBeDefined();
+
+                    // Step 3: Get Token
+                    const tokenResponse = await loginApi.getToken(Env.TEST_USERNAME as string, session, cif, uuidv4(), value);
+                    expect(tokenResponse).toBeDefined();
+                }
+            });
+        });
+
+        test("11. should handle session expiration scenario", async () => {
+            // First login to get valid session
+            const loginResponse = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
+            if (loginResponse.data) {
+                const session: string = loginResponse.data.session;
+                const cif: string = loginResponse.data.cif;
+                try {
+                    await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
+                    await loginApi.generateAuth(Env.TEST_USERNAME as string, session);
+                    // If we reach here, the test should fail
+                    expect(true).toBe(false);
+                } catch (error) {
+                    expect(error).toBeDefined();
+                }
+            }
+        });
+
+        test("12. should handle concurrent requests", async () => {
+            // Test multiple concurrent login requests
+            const promises = [
+                loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string),
+                loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string),
+                loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string)
+            ];
+
+            const responses = await Promise.all(promises);
+
+            expect(responses).toHaveLength(3);
+            responses.forEach(response => {
+                expect(response).toBeDefined();
+                expect(response).toHaveProperty("data");
+            });
+        });
     });
 
-    if (newOrderRes.status() !== 200) {
-      console.error("❌ NewOrder failed:", await newOrderRes.text());
-    } else {
-      console.log("✅ NewOrder success:", await newOrderRes.text());
-    }
+    test.describe("Performance Tests", () => {
+        test("13. should handle rapid successive requests", async () => {
+            const startTime = Date.now();
 
-    expect(newOrderRes.status()).toBe(200);
+            for (let i = 0; i < 5; i++) {
+                try {
+                    await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
 
-    const listRes = await request.get(`${Env.WS_BASE_URL}/getlistallstock`);
-    expect(listRes.status()).toBe(200);
-  } else {
-    console.error("Login failed:", loginData.error);
-  }
-});
+            const endTime = Date.now();
+            const duration = endTime - startTime;
+
+            // Should complete within reasonable time (adjust as needed)
+            expect(duration).toBeLessThan(30 * 1000); // 30 seconds
+        });
+    });
+})

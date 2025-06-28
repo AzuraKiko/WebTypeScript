@@ -1,4 +1,4 @@
-import ApiHelper from "./ApiHelper";
+import ApiHelper from "../helpers/ApiHelper";
 import crypto from "crypto";
 import { v4 as uuidv4 } from "uuid";
 import dotenv from "dotenv";
