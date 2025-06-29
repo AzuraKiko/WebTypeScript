@@ -1,24 +1,26 @@
 import { test, expect } from '@playwright/test';
 import { getMatrixCodes, isValidCoordinate } from '../../page/Matrix';
+import LoginPage from '../../page/LoginPage';
+
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+
+let env = process.env.NODE_ENV?.toUpperCase() || 'PROD';
+if (env === 'PRODUCTION') env = 'PROD';
+const WEB_LOGIN_URL = process.env[`${env}_WEB_LOGIN_URL`];
+const TEST_USER = process.env[`${env}_TEST_USER`];
+const TEST_PASS = process.env[`${env}_TEST_PASS`];
 
 test('test', async ({ page }) => {
-
-  await page.goto('https://trade.pinetree.vn/#/home/bang-gia/vn30');
-  await page.getByRole('button', { name: 'Đăng nhập' }).click();
-  await page.getByPlaceholder('Tên đăng nhập').fill('thunvt');
-  await page.getByPlaceholder('Mật khẩu').fill('Thethu#4');
-  await page.getByRole('button', { name: 'Đăng nhập' }).click();
+  let loginPage = new LoginPage(page);
+  await loginPage.gotoWeb(WEB_LOGIN_URL as string)
+  await loginPage.login(TEST_USER as string, TEST_PASS as string);
   await page.waitForTimeout(5000);
-  // Bỏ chọn nếu có hộp thoại 2FA
-  // Click bỏ popup
-  const dialogSpan = page.locator('span.btn-icon.btn--light > span.icon.iClose');
-  if (await dialogSpan.isVisible()) {
-    await dialogSpan.click();
-  }
+
   await page.getByText('Đặt lệnh').click();
 
   // === LẤY TỌA ĐỘ OTP MATRIX ===
-  await page.waitForTimeout(5000);
+  await page.getByText('Nhập mã ma trận của bạn').isVisible();
   const coords = await page.locator('p.fw-500').allTextContents();
 
   // Validate coordinates before processing
