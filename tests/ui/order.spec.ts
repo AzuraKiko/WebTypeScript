@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getMatrixCodes, isValidCoordinate } from '../../helpers/Matrix';
+import { getMatrixCodes, isValidCoordinate } from '../../page/Matrix';
 
 test('test', async ({ page }) => {
 
