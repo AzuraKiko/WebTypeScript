@@ -80,7 +80,7 @@ export default class LoginApi {
     }
 
     /**
-     * Generate authentication
+     * Generate authentication (chỉ phương thức Matrix mới call API này)
      */
     async generateAuth(user: string, session: string): Promise<any> {
         const authApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
@@ -115,7 +115,7 @@ export default class LoginApi {
             channel: "WTS",
             data: {
                 cif: cif,
-                type: "3",
+                type: "5",
                 value: value,
             },
         };

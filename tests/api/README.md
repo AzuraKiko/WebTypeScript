@@ -88,6 +88,23 @@ npx playwright test tests/api/login.spec.ts --workers=1 --project=Chrome
 npm run test:prod:chrome tests/api/login.spec.ts --workers=1 
 (workers=1 to run in serial, test cases chạy theo đúng thứ tự)
 
+# Chạy test với giao diện hiển thị
+npx playwright test tests/api/maket_data.spec.ts --headed
+
+# Chạy test ở chế độ headless (mặc định)
+npx playwright test tests/api/maket_data.spec.ts
+
+# Nếu không có lỗi
+$ npx tsc --noEmit tests/api/maket_data.spec.ts
+# (không có output - nghĩa là OK)
+
+# Nếu có lỗi
+$ npx tsc --noEmit tests/api/maket_data.spec.ts
+tests/api/maket_data.spec.ts:15:5 - error TS2304: Cannot find name 'apiHelper'
+
+npx tsc tests/api/maket_data.spec.ts: Compile và tạo file .js
+npx tsc --noEmit tests/api/maket_data.spec.ts: Chỉ kiểm tra lỗi
+npx playwright test tests/api/maket_data.spec.ts: Chạy test thực tế
 ```
 
 
@@ -200,3 +217,5 @@ When adding new tests:
 - dotenv
 - crypto
 - uuid 
+
+

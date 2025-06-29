@@ -102,10 +102,30 @@ class ApiHelper {
         }
     }
 
+    async getFullResponse(url: string, params: Record<string, any> = {}, config: AxiosRequestConfig = {}): Promise<AxiosResponse> {
+        try {
+            const response = await this.api.get(url, { ...config, params });
+            return response;
+        } catch (error) {
+            logger.error(`GET request failed: ${url}`, error);
+            throw error;
+        }
+    }
+
     async post(url: string, data: any = {}, config: AxiosRequestConfig = {}): Promise<any> {
         try {
             const response = await this.api.post(url, data, config);
             return response.data;
+        } catch (error) {
+            logger.error(`POST request failed: ${url}`, error);
+            throw error;
+        }
+    }
+
+    async postFullResponse(url: string, data: any = {}, config: AxiosRequestConfig = {}): Promise<AxiosResponse> {
+        try {
+            const response = await this.api.post(url, data, config);
+            return response;
         } catch (error) {
             logger.error(`POST request failed: ${url}`, error);
             throw error;
@@ -140,6 +160,13 @@ class ApiHelper {
             logger.error(`DELETE request failed: ${url}`, error);
             throw error;
         }
+    }
+
+    async measureResponseTime(requestFn: () => Promise<any>) {
+        const start = Date.now();
+        const result = await requestFn();
+        const end = Date.now();
+        return { result, responseTime: end - start };
     }
 
     static createWithBaseUrl(baseUrl: string): ApiHelper {

@@ -43,6 +43,7 @@
     "allure-playwright": "^3.2.1",
     "circular-dependency-plugin": "^5.2.2",
     "cross-env": "^7.0.3",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "typescript": "^5.8.3"
   }
 }

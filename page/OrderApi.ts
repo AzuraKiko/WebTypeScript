@@ -1,67 +1,5 @@
 import ApiHelper from "../helpers/ApiHelper";
 import crypto from "crypto";
-import { v4 as uuidv4 } from "uuid";
-import dotenv from "dotenv";
-
-dotenv.config({ path: ".env" });
-
-let env = process.env.NODE_ENV?.toUpperCase() || "PROD";
-if (env === "PRODUCTION") env = "PROD";
-const WS_BASE_URL = process.env[`${env}_WEB_LOGIN_URL`];
-
-const Env = {
-    WS_BASE_URL: WS_BASE_URL,
-    K6_DURATION: "10s",
-    K6_VUS: 1,
-};
-
-// Interfaces for type safety
-interface LoginPayload {
-    user: string;
-    pass: string;
-    fcmToken: string;
-}
-
-interface LoginResponse {
-    error?: string;
-    data?: {
-        session: string;
-        cif: string;
-        custInfo?: {
-            normal?: Array<{
-                acntNo: string;
-                subAcntNo: string;
-            }>;
-        };
-    };
-}
-
-interface AuthPayload {
-    group: string;
-    cmd: string;
-    channel: string;
-    user: string;
-    session: string;
-    data: {
-        trdType: string;
-        authType: string;
-        positionNo: string;
-    };
-}
-
-interface GetTokenPayload {
-    group: string;
-    user: string;
-    session: string;
-    cmd: string;
-    rqId: string;
-    channel: string;
-    data: {
-        cif: string;
-        type: string;
-        value: string;
-    };
-}
 
 interface NewOrderPayload {
     group: string;
@@ -95,13 +33,17 @@ interface OrderParams {
     privateKey: string;
 }
 
-export default class CommonApi {
-    private apiHelper: ApiHelper;
+export default class OrderApi {
     private baseUrl: string;
+    private apiHelper: ApiHelper;
 
-    constructor(apiHelper: ApiHelper) {
-        this.apiHelper = apiHelper;
-        this.baseUrl = Env.WS_BASE_URL || '';
+    constructor(baseUrl: string, timeout?: number) {
+        this.baseUrl = baseUrl;
+        if (timeout) {
+            this.apiHelper = new ApiHelper({ baseUrl: this.baseUrl, timeout: timeout });
+        } else {
+            this.apiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+        }
     }
 
     /**
@@ -146,81 +88,6 @@ export default class CommonApi {
     }
 
     /**
-     * Login API
-     */
-    async loginApi(username: string, password: string, fcmToken?: string): Promise<LoginResponse> {
-        const loginUrl = `${this.baseUrl}/loginAdv`;
-        const loginPayload: LoginPayload = {
-            user: username,
-            pass: password,
-            fcmToken: fcmToken || username,
-        };
-
-        const response = await this.apiHelper.post(loginUrl, loginPayload, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        return response;
-    }
-
-    /**
-     * Generate authentication
-     */
-    async generateAuth(user: string, session: string): Promise<any> {
-        const authUrl = `${this.baseUrl}/CoreServlet.pt`;
-        const authPayload: AuthPayload = {
-            group: "CORE",
-            cmd: "generateAUTH",
-            channel: "WTS",
-            user: user,
-            session: session,
-            data: {
-                trdType: "1",
-                authType: "2",
-                positionNo: "3",
-            },
-        };
-
-        const response = await this.apiHelper.post(authUrl, authPayload, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        return response;
-    }
-
-    /**
-     * Get token
-     */
-    async getToken(user: string, session: string, cif: string, rqId: string): Promise<any> {
-        const authUrl = `${this.baseUrl}/CoreServlet.pt`;
-        const getTokenPayload: GetTokenPayload = {
-            group: "CORE",
-            user: user,
-            session: session,
-            cmd: "getToken",
-            rqId: rqId,
-            channel: "WTS",
-            data: {
-                cif: cif,
-                type: "3",
-                value: "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=",
-            },
-        };
-
-        const response = await this.apiHelper.post(authUrl, getTokenPayload, {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-                Accept: "*/*",
-                "Accept-Language": "en-US,en;q=0.9,vi;q=0.8",
-                Connection: "keep-alive",
-            },
-        });
-        return response;
-    }
-
-    /**
      * Place new order
      */
     async placeNewOrder(
@@ -232,7 +99,7 @@ export default class CommonApi {
         rqId: string,
         token: string
     ): Promise<any> {
-        const authUrl = `${this.baseUrl}/CoreServlet.pt`;
+        const orderApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
 
         const signStr = this.generateSignStr(
             acntNo,
@@ -254,7 +121,7 @@ export default class CommonApi {
             cmd: "NewOrder",
             rqId: rqId,
             channel: "WTS",
-            type: "3",
+            type: "5",
             token: token,
             data: {
                 acntNo,
@@ -269,7 +136,7 @@ export default class CommonApi {
             },
         };
 
-        const response = await this.apiHelper.post(authUrl, newOrderPayload, {
+        const response = await orderApiHelper.post('/CoreServlet.pt', newOrderPayload, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             },
@@ -281,87 +148,8 @@ export default class CommonApi {
      * Get list of all stocks
      */
     async getListAllStock(): Promise<any> {
-        const response = await this.apiHelper.get(`${this.baseUrl}/getlistallstock`);
+        const listStockApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+        const response = await listStockApiHelper.get(`${this.baseUrl}/getlistallstock`);
         return response;
-    }
-
-    /**
-     * Complete trading flow - login, auth, get token, and place order
-     */
-    async completeTradingFlow(
-        username: string,
-        password: string,
-        orderParams: OrderParams
-    ): Promise<{
-        loginSuccess: boolean;
-        orderSuccess: boolean;
-        loginData?: LoginResponse;
-        orderResponse?: any;
-        error?: string;
-    }> {
-        try {
-            // Step 1: Login
-            const loginData = await this.loginApi(username, password);
-
-            if (loginData.error) {
-                return {
-                    loginSuccess: false,
-                    orderSuccess: false,
-                    error: `Login failed: ${loginData.error}`
-                };
-            }
-
-            const session = loginData.data!.session;
-            const cif = loginData.data!.cif;
-            const user = username;
-            const acntInfo = loginData.data!.custInfo?.normal?.find((a: any) =>
-                a.subAcntNo.startsWith("N")
-            );
-
-            if (!acntInfo || !acntInfo.acntNo || !acntInfo.subAcntNo) {
-                return {
-                    loginSuccess: true,
-                    orderSuccess: false,
-                    loginData,
-                    error: "Account information not found"
-                };
-            }
-
-            const acntNo = acntInfo.acntNo;
-            const subAcntNo = acntInfo.subAcntNo;
-
-            const rqId = uuidv4();
-
-            // Step 2: Generate Auth
-            await this.generateAuth(user, session);
-
-            // Step 3: Get Token
-            await this.getToken(user, session, cif, rqId);
-
-            // Step 4: Place Order
-            const orderResponse = await this.placeNewOrder(
-                user,
-                session,
-                acntNo,
-                subAcntNo,
-                orderParams,
-                rqId,
-                "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4="
-            );
-
-            return {
-                loginSuccess: true,
-                orderSuccess: true,
-                loginData,
-                orderResponse
-            };
-
-        } catch (error) {
-            return {
-                loginSuccess: false,
-                orderSuccess: false,
-                error: `Trading flow failed: ${error}`
-            };
-        }
     }
 }
