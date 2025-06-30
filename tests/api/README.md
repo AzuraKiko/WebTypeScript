@@ -12,6 +12,7 @@ This directory contains comprehensive tests for the LoginApi class functionality
 The `login.spec.ts` file includes tests for:
 
 ### 1. LoginApi Method Tests
+
 - ✅ Successful login with valid credentials
 - ✅ Login without fcmToken
 - ✅ Error handling for empty username/password
@@ -20,25 +21,30 @@ The `login.spec.ts` file includes tests for:
 - ✅ Timeout scenarios
 
 ### 2. GenerateAuth Method Tests
+
 - ✅ Successful authentication generation
 - ✅ Error handling for empty parameters
 - ✅ Invalid session handling
 
 ### 3. GetToken Method Tests
+
 - ✅ Successful token retrieval
 - ✅ Error handling for empty parameters
 
 ### 4. Integration Tests
+
 - ✅ Full login flow (login → generateAuth → getToken)
 - ✅ Session expiration scenarios
 - ✅ Concurrent request handling
 
 ### 5. Edge Cases
+
 - ✅ Very long input handling
 - ✅ Special characters in credentials
 - ✅ Null/undefined value handling
 
 ### 6. Performance Tests
+
 - ✅ Rapid successive requests
 
 ## Running Tests
@@ -85,7 +91,7 @@ npx playwright test tests/api/login.spec.ts -g "getToken method"
 npm run test:prod:chrome tests/api/login.spec.ts -g "getToken method"
 
 npx playwright test tests/api/login.spec.ts --workers=1 --project=Chrome
-npm run test:prod:chrome tests/api/login.spec.ts --workers=1 
+npm run test:prod:chrome tests/api/login.spec.ts --workers=1
 (workers=1 to run in serial, test cases chạy theo đúng thứ tự)
 
 # Chạy test với giao diện hiển thị
@@ -106,9 +112,6 @@ npx tsc tests/api/maket_data.spec.ts: Compile và tạo file .js
 npx tsc --noEmit tests/api/maket_data.spec.ts: Chỉ kiểm tra lỗi
 npx playwright test tests/api/maket_data.spec.ts: Chạy test thực tế
 ```
-
-
-
 
 ## Environment Configuration
 
@@ -151,12 +154,14 @@ test.describe("LoginApi Tests", () => {
 ## Expected Test Results
 
 ### Successful Tests
+
 - ✅ Login with valid credentials returns session and CIF
 - ✅ GenerateAuth creates authentication successfully
 - ✅ GetToken retrieves token successfully
 - ✅ Full integration flow works end-to-end
 
 ### Error Handling Tests
+
 - ✅ Invalid credentials return error response
 - ✅ Empty parameters throw appropriate errors
 - ✅ Network errors are handled gracefully
@@ -167,15 +172,19 @@ test.describe("LoginApi Tests", () => {
 ### Common Issues
 
 1. **Environment Variables Not Set**
+
    ```
    Error: Cannot read property 'WS_BASE_URL' of undefined
    ```
+
    Solution: Ensure `.env` file exists with proper configuration
 
 2. **Network Connectivity Issues**
+
    ```
    Error: connect ECONNREFUSED
    ```
+
    Solution: Check if the API server is running and accessible
 
 3. **Authentication Failures**
@@ -216,6 +225,6 @@ When adding new tests:
 - Axios (via ApiHelper)
 - dotenv
 - crypto
-- uuid 
+- uuid
 
-
+npm install qs

@@ -21,9 +21,9 @@ const Env: any = {
 };
 
 // Replace the crypto encryption with CryptoJS equivalent
-const encryptionKey: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
-const OTP: string = "989773";
-const value: string = CryptoJS.AES.encrypt(OTP, encryptionKey).toString();
+// const encryptionKey: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
+const OTP: string = "022356";
+// const value: string = CryptoJS.AES.encrypt(OTP, encryptionKey).toString();
 
 test.describe("LoginApi Tests", () => {
     let loginApi: LoginApi;
@@ -138,7 +138,7 @@ test.describe("LoginApi Tests", () => {
         test.describe("getToken method", () => {
             test("9. should successfully get token", async () => {
                 const loginResponse = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
-                const response = await loginApi.getToken(Env.TEST_USERNAME as string, loginResponse.data?.session as string, loginResponse.data?.cif as string, uuidv4(), OTP);
+                const response = await loginApi.getToken(Env.TEST_USERNAME as string, loginResponse.data?.session as string, loginResponse.data?.cif as string, uuidv4(), OTP, "OTP");
 
                 expect(response).toBeDefined();
                 expect(response.rc).toBe(1);
@@ -165,7 +165,7 @@ test.describe("LoginApi Tests", () => {
                     expect(authResponse).toBeDefined();
 
                     // Step 3: Get Token
-                    const tokenResponse = await loginApi.getToken(Env.TEST_USERNAME as string, session, cif, uuidv4(), OTP);
+                    const tokenResponse = await loginApi.getToken(Env.TEST_USERNAME as string, session, cif, uuidv4(), OTP, "OTP");
                     expect(tokenResponse).toBeDefined();
                 }
             });

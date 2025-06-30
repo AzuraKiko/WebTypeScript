@@ -1,6 +1,4 @@
 import ApiHelper from "../helpers/ApiHelper";
-
-
 // Interfaces for type safety
 interface LoginPayload {
     user: string;
@@ -102,10 +100,16 @@ export default class LoginApi {
     }
 
     /**
-     * Get token
+     * Get token OTP
      */
-    async getToken(user: string, session: string, cif: string, rqId: string, value: string): Promise<any> {
+    async getToken(user: string, session: string, cif: string, rqId: string, value: string, type: string): Promise<any> {
         const authApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+        let typeValue = "5";
+        if (type === "OTP") {
+            typeValue = "5";
+        } else if (type === "Matrix") {
+            typeValue = "3";
+        }
         const getTokenPayload: GetTokenPayload = {
             group: "CORE",
             user: user,
@@ -115,7 +119,7 @@ export default class LoginApi {
             channel: "WTS",
             data: {
                 cif: cif,
-                type: "5",
+                type: typeValue,
                 value: value,
             },
         };

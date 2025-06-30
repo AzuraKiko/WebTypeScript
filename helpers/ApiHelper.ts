@@ -60,10 +60,12 @@ class ApiHelper {
         // Response interceptor
         this.api.interceptors.response.use(
             (response: AxiosResponse) => {
-                logger.debug(`API Response: ${response.status} ${response.statusText}`, {
-                    data: response.data,
-                    headers: response.headers
-                });
+                logger.debug(
+                    `API Response: ${response.status} ${response.statusText}\nData: ${typeof response.data === 'object'
+                        ? JSON.stringify(response.data, null, 2)
+                        : response.data
+                    }\nHeaders: ${JSON.stringify(response.headers, null, 2)}`
+                );
                 return response;
             },
             (error: any) => {

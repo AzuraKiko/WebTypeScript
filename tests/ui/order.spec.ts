@@ -1,43 +1,14 @@
 import { test, expect } from '@playwright/test';
-import { getMatrixCodes, isValidCoordinate } from '../../page/Matrix';
 import LoginPage from '../../page/LoginPage';
-
-import dotenv from 'dotenv';
-dotenv.config({ path: '.env' });
-
-let env = process.env.NODE_ENV?.toUpperCase() || 'PROD';
-if (env === 'PRODUCTION') env = 'PROD';
-const WEB_LOGIN_URL = process.env[`${env}_WEB_LOGIN_URL`];
-const TEST_USER = process.env[`${env}_TEST_USER`];
-const TEST_PASS = process.env[`${env}_TEST_PASS`];
+import OrderPage from '../../page/OrderPage';
 
 test('test', async ({ page }) => {
   let loginPage = new LoginPage(page);
-  await loginPage.gotoWeb(WEB_LOGIN_URL as string)
-  await loginPage.login(TEST_USER as string, TEST_PASS as string);
-  await page.waitForTimeout(5000);
+  let orderPage = new OrderPage(page);
 
-  await page.getByText('Đặt lệnh').click();
-
-  // === LẤY TỌA ĐỘ OTP MATRIX ===
-  await page.getByText('Nhập mã ma trận của bạn').isVisible();
-  const coords = await page.locator('p.fw-500').allTextContents();
-
-  // Validate coordinates before processing
-  const validCoords = coords.filter(coord => isValidCoordinate(coord.trim()));
-  if (validCoords.length < 3) {
-    throw new Error(`Expected 3 valid coordinates, but got ${validCoords.length}. Coordinates: ${coords.join(', ')}`);
-  }
-
-  // === LẤY GIÁ TRỊ THEO BẢNG MA TRẬN ===
-  const matrixValues = getMatrixCodes(validCoords.slice(0, 3));
-  const [val1, val2, val3] = matrixValues;
-
-  // === ĐIỀN MÃ VÀO 3 INPUT ===
-  await page.locator('input[name="inputEl1"]').fill(val1);
-  await page.locator('input[name="inputEl2"]').fill(val2);
-  await page.locator('input[name="inputEl3"]').fill(val3);
-  await page.getByRole('button', { name: 'Xác nhận' }).click();
+  await loginPage.loginSuccess();
+  await orderPage.openOrder();
+  await orderPage.enterMatrix();
 
   // === ĐẶT LỆNH ===
   // Danh sách mã cổ phiếu

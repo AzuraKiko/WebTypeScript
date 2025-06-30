@@ -121,7 +121,7 @@ export default class OrderApi {
             cmd: "NewOrder",
             rqId: rqId,
             channel: "WTS",
-            type: "5",
+            type: "3",
             token: token,
             data: {
                 acntNo,
@@ -136,11 +136,16 @@ export default class OrderApi {
             },
         };
 
-        const response = await orderApiHelper.post('/CoreServlet.pt', newOrderPayload, {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-            },
-        });
+        const response = await orderApiHelper.post(
+            '/CoreServlet.pt',
+            JSON.stringify(newOrderPayload),
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                },
+            }
+        );
+
         return response;
     }
 

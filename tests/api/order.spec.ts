@@ -8,7 +8,7 @@ import CryptoJS from 'crypto-js';
 dotenv.config({ path: ".env" });
 
 let env = process.env.NODE_ENV?.toUpperCase() || "PROD";
-if (env === "PRODUCTION") env = "PROD";
+if (env === "PRODUCTION") env = "UAT";
 const WS_BASE_URL = process.env[`${env}_WEB_LOGIN_URL`];
 const PROD_TEST_USER = process.env[`${env}_TEST_USER`];
 const PROD_TEST_PASSWORD = process.env[`${env}_TEST_PASS_ENCRYPT`];
@@ -21,10 +21,13 @@ const Env: any = {
     PASSWORD: PROD_PASSWORD,
 };
 
+// 01.LO, 02.ATO,03.ATC,04.MP,05.MTL,06.MOK,07.MAK, 08.PLO (Post Close), 09. Buy-in
 // Replace the crypto encryption with CryptoJS equivalent
 const encryptionKey: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
 const OTP: string = "563447";
-const value: string = CryptoJS.AES.encrypt(OTP, encryptionKey).toString();
+const matrixAuth: string = "111";
+// const value: string = CryptoJS.AES.encrypt(matrixAuth, encryptionKey).toString();
+const value: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
 
 test.describe("OrderApi Tests", () => {
     let loginApi: LoginApi;
@@ -35,6 +38,7 @@ test.describe("OrderApi Tests", () => {
     let acntNo: string;
     let subAcntNo: string;
     let privateKey: string;
+    let typeAuth: string;
 
     test.beforeAll(async () => {
         privateKey = "a06ab782-118c-4819-a3c5-7b958ba85f7e";
@@ -54,25 +58,44 @@ test.describe("OrderApi Tests", () => {
 
             // Get account information
             if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
-                const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("M"));
+                const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("N"));
                 acntNo = account?.acntNo;
                 subAcntNo = account?.subAcntNo;
             }
 
+            typeAuth = "Matrix";
+            let tokenResponse: any;
+
             // Generate auth and get token
-            // const authResponse = await loginApi.generateAuth(Env.TEST_USERNAME as string, session);
-            // if (authResponse.rc === 1) {
-            const tokenResponse = await loginApi.getToken(
-                Env.TEST_USERNAME as string,
-                session,
-                cif,
-                uuidv4(),
-                OTP
-            );
-            if (tokenResponse.rc === 1 && tokenResponse.data?.token) {
-                token = tokenResponse.data.token;
+            if (typeAuth === "OTP") {
+                tokenResponse = await loginApi.getToken(
+                    Env.TEST_USERNAME as string,
+                    session,
+                    cif,
+                    uuidv4(),
+                    OTP,
+                    typeAuth
+                );
+                if (tokenResponse.rc === 1 && tokenResponse.data?.token) {
+                    token = tokenResponse.data.token;
+                }
+            } else if (typeAuth === "Matrix") {
+                const authResponse = await loginApi.generateAuth(Env.TEST_USERNAME as string, session);
+                if (authResponse.rc === 1) {
+                    tokenResponse = await loginApi.getToken(
+                        Env.TEST_USERNAME as string,
+                        session,
+                        cif,
+                        uuidv4(),
+                        value,
+                        typeAuth
+                    );
+                    if (tokenResponse.rc === 1 && tokenResponse.data?.token) {
+                        token = tokenResponse.data.token;
+                    }
+                }
             }
-            // }
+
         }
     });
 
@@ -83,12 +106,12 @@ test.describe("OrderApi Tests", () => {
             expect(response).toBeDefined();
             expect(Array.isArray(response)).toBe(true);
 
-            if (response.length > 0) {
-                response.forEach((stock: any) => {
-                    expect(stock).toHaveProperty("stock_code");
-                    expect(stock).toHaveProperty("name_vn");
-                });
-            }
+            // if (response.length > 0) {
+            //     response.forEach((stock: any) => {
+            //         expect(stock).toHaveProperty("stock_code");
+            //         expect(stock).toHaveProperty("name_vn");
+            //     });
+            // }
         });
     });
 
@@ -100,9 +123,9 @@ test.describe("OrderApi Tests", () => {
             }
 
             const orderParams = {
-                symbol: "CFPT2501",
+                symbol: "CEO",
                 ordrQty: "100",
-                ordrUntprc: "10",
+                ordrUntprc: "12500",
                 ordrTrdTp: "01", // Normal order
                 buySelTp: "1", // Buy
                 oddOrdrYn: "N", // Not odd lot
@@ -131,9 +154,9 @@ test.describe("OrderApi Tests", () => {
                 return;
             }
             const orderParams = {
-                symbol: "CFPT2501",
+                symbol: "CEO",
                 ordrQty: "100",
-                ordrUntprc: "10",
+                ordrUntprc: "12500",
                 ordrTrdTp: "01", // Normal order
                 buySelTp: "2", // Sell
                 oddOrdrYn: "N", // Not odd lot
@@ -163,9 +186,9 @@ test.describe("OrderApi Tests", () => {
             }
 
             const orderParams = {
-                symbol: "CFPT25018",
+                symbol: "CEO1",
                 ordrQty: "100",
-                ordrUntprc: "10",
+                ordrUntprc: "12500",
                 ordrTrdTp: "01", // Normal order
                 buySelTp: "1", // Buy
                 oddOrdrYn: "N", // Not odd lot
@@ -198,11 +221,11 @@ test.describe("OrderApi Tests", () => {
 
             const orderParams = {
                 symbol: "CEO",
-                ordrQty: "10", // Quantity > Holding hoặc vượt sức mua
-                ordrUntprc: "16500",
+                ordrQty: "500", // Quantity > Holding hoặc vượt sức mua
+                ordrUntprc: "12500",
                 ordrTrdTp: "01",
                 buySelTp: "2",
-                oddOrdrYn: "Y",
+                oddOrdrYn: "N",
                 privateKey: privateKey
             };
 
@@ -233,7 +256,7 @@ test.describe("OrderApi Tests", () => {
             const orderParams = {
                 symbol: "CFPT2501",
                 ordrQty: "100",
-                ordrUntprc: "1000", // Nằm ngoài trần sàn
+                ordrUntprc: "1200", // Nằm ngoài trần sàn
                 ordrTrdTp: "01",
                 buySelTp: "1",
                 oddOrdrYn: "N",

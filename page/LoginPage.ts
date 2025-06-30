@@ -1,5 +1,18 @@
 import { Page, Locator } from '@playwright/test';
 import BasePage from './BasePage';
+import dotenv from "dotenv";
+dotenv.config({ path: ".env" });
+
+let env = process.env.NODE_ENV?.toUpperCase() || "PROD";
+if (env === "PRODUCTION") env = "PROD";
+const WS_BASE_URL = process.env[`${env}_WEB_LOGIN_URL`];
+const PROD_TEST_USER = process.env[`${env}_TEST_USER`];
+const PROD_PASSWORD = process.env[`${env}_TEST_PASS`];
+const Env: any = {
+    WS_BASE_URL: WS_BASE_URL,
+    TEST_USERNAME: PROD_TEST_USER,
+    TEST_PASSWORD: PROD_PASSWORD,
+};
 
 class LoginPage extends BasePage {
     openLogin: Locator;
@@ -69,6 +82,13 @@ class LoginPage extends BasePage {
         await this.enterUsername(username);
         await this.enterPassword(password);
         await this.clickLoginButton();
+    }
+
+    async loginSuccess() {
+        await this.gotoWeb(Env.WS_BASE_URL);
+        await this.enterUsernameAndPassword(Env.TEST_USERNAME, Env.TEST_PASSWORD);
+        await this.waitForPageLoad();
+        await this.clickCloseBanner();
     }
 
     async verifyLoginSuccess(username: string) {
