@@ -88,6 +88,15 @@ export default class OrderApi {
     }
 
     /**
+     * Generate matrix auth
+     */
+    public genMatrixAuth(matrixCode: string): string {
+        const hashValue = this.sha256Hash(matrixCode);
+        const matrixValue = this.base64Stringify(hashValue);
+        return matrixValue;
+    }
+
+    /**
      * Place new order
      */
     async placeNewOrder(

@@ -1,4 +1,31 @@
 import ApiHelper from "../helpers/ApiHelper";
+import OrderApi from "./OrderApi";
+import dotenv from "dotenv";
+import { v4 as uuidv4 } from 'uuid';
+import { getMatrixCodes } from "./Matrix";
+
+dotenv.config({ path: ".env" });
+
+let env = process.env.NODE_ENV?.toUpperCase() || "PROD";
+if (env === "PRODUCTION") env = "PROD";
+const WS_BASE_URL = process.env[`${env}_WEB_LOGIN_URL`];
+const PROD_TEST_USER = process.env[`${env}_TEST_USER`];
+const PROD_TEST_PASSWORD = process.env[`${env}_TEST_PASS_ENCRYPT`];
+const PROD_PASSWORD = process.env[`${env}_TEST_PASS`];
+const Env: any = {
+    WS_BASE_URL: WS_BASE_URL,
+    TEST_USERNAME: PROD_TEST_USER,
+    TEST_PASSWORD: PROD_TEST_PASSWORD,
+    TEST_FCM_TOKEN: PROD_TEST_USER,
+    PASSWORD: PROD_PASSWORD,
+};
+
+// 01.LO, 02.ATO,03.ATC,04.MP,05.MTL,06.MOK,07.MAK, 08.PLO (Post Close), 09. Buy-in
+// Replace the crypto encryption with CryptoJS equivalent
+const OTP: string = "563447";
+let matrixAuth: string = "111";
+let value: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
+
 // Interfaces for type safety
 interface LoginPayload {
     user: string;
@@ -126,5 +153,74 @@ export default class LoginApi {
 
         const response = await authApiHelper.post('/CoreServlet.pt', getTokenPayload);
         return response;
+    }
+
+    /**
+    * Login success
+    */
+    async loginSuccess() {
+        let orderApi: OrderApi = new OrderApi(Env.WS_BASE_URL);
+        let session: string = "";
+        let cif: string = "";
+        let token: string = "";
+        let acntNo: string = "";
+        let subAcntNo: string = "";
+        let typeAuth: string = "Matrix";
+
+        const loginResponse = await this.loginApi(
+            Env.TEST_USERNAME as string,
+            Env.TEST_PASSWORD as string,
+            Env.TEST_FCM_TOKEN as string
+        );
+        if (loginResponse.data) {
+            session = loginResponse.data.session;
+            cif = loginResponse.data.cif;
+            // Get account information
+            if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
+                const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("N"));
+                acntNo = account?.acntNo;
+                subAcntNo = account?.subAcntNo;
+            }
+        } else {
+            throw new Error("Login failed, no data returned.");
+        }
+
+        let tokenResponse: any;
+        // Generate auth and get token
+        if (typeAuth === "OTP") {
+            tokenResponse = await this.getToken(
+                Env.TEST_USERNAME as string,
+                session,
+                cif,
+                uuidv4(),
+                OTP,
+                typeAuth
+            );
+            if (tokenResponse.rc === 1 && tokenResponse.data?.token) {
+                token = tokenResponse.data.token;
+            }
+        } else if (typeAuth === "Matrix") {
+            const authResponse = await this.generateAuth(Env.TEST_USERNAME as string, session);
+            console.log('authResponse:', authResponse.data);
+
+            if (authResponse.rc === 1) {
+                const matrixGen: string[] = Object.values(authResponse.data);
+                console.log('matrixGen:', matrixGen);
+                matrixAuth = getMatrixCodes(matrixGen).join('');
+                value = orderApi.genMatrixAuth(matrixAuth);
+                tokenResponse = await this.getToken(
+                    Env.TEST_USERNAME as string,
+                    session,
+                    cif,
+                    uuidv4(),
+                    value,
+                    typeAuth
+                );
+                if (tokenResponse.rc === 1 && tokenResponse.data?.token) {
+                    token = tokenResponse.data.token;
+                }
+            }
+        }
+        return { session, cif, token, acntNo, subAcntNo };
     }
 }

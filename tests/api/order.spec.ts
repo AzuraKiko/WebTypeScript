@@ -3,8 +3,6 @@ import LoginApi from "../../page/LoginApi";
 import OrderApi from "../../page/OrderApi";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from 'uuid';
-import CryptoJS from 'crypto-js';
-import { getMatrixCodes, matrix } from "../../page/Matrix";
 
 dotenv.config({ path: ".env" });
 
@@ -22,90 +20,23 @@ const Env: any = {
     PASSWORD: PROD_PASSWORD,
 };
 
-// 01.LO, 02.ATO,03.ATC,04.MP,05.MTL,06.MOK,07.MAK, 08.PLO (Post Close), 09. Buy-in
-// Replace the crypto encryption with CryptoJS equivalent
-const encryptionKey: string = "ID9gGVwB7nlX7xjSLqqJiplbLCSshJxGk243hC4OhsA=";
-const OTP: string = "563447";
-let matrixAuth: string = "";
-// let value: string = CryptoJS.AES.encrypt(matrixAuth, encryptionKey).toString();
-// let value: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
-let value: string = "";
-
 test.describe("OrderApi Tests", () => {
-    let loginApi: LoginApi;
-    let orderApi: OrderApi;
-    let session: string;
-    let cif: string;
-    let token: string;
-    let acntNo: string;
-    let subAcntNo: string;
-    let privateKey: string;
-    let typeAuth: string;
+    let loginApi: LoginApi = new LoginApi(Env.WS_BASE_URL as string);
+    let orderApi: OrderApi = new OrderApi(Env.WS_BASE_URL as string);
+    let privateKey: string = "a06ab782-118c-4819-a3c5-7b958ba85f7e";
+    let session: string = "";
+    let token: string = "";
+    let acntNo: string = "";
+    let subAcntNo: string = "";
+
 
     test.beforeAll(async () => {
         privateKey = "a06ab782-118c-4819-a3c5-7b958ba85f7e";
-        loginApi = new LoginApi(Env.WS_BASE_URL as string);
-        orderApi = new OrderApi(Env.WS_BASE_URL as string);
-
-        // Login and get session, cif, and token for order tests
-        const loginResponse = await loginApi.loginApi(
-            Env.TEST_USERNAME as string,
-            Env.TEST_PASSWORD as string,
-            Env.TEST_FCM_TOKEN as string
-        );
-
-        if (loginResponse.data) {
-            session = loginResponse.data.session;
-            cif = loginResponse.data.cif;
-
-            // Get account information
-            if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
-                const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("N"));
-                acntNo = account?.acntNo;
-                subAcntNo = account?.subAcntNo;
-            }
-
-            typeAuth = "Matrix";
-            let tokenResponse: any;
-
-            // Generate auth and get token
-            if (typeAuth === "OTP") {
-                tokenResponse = await loginApi.getToken(
-                    Env.TEST_USERNAME as string,
-                    session,
-                    cif,
-                    uuidv4(),
-                    OTP,
-                    typeAuth
-                );
-                if (tokenResponse.rc === 1 && tokenResponse.data?.token) {
-                    token = tokenResponse.data.token;
-                }
-            } else if (typeAuth === "Matrix") {
-                const authResponse = await loginApi.generateAuth(Env.TEST_USERNAME as string, session);
-                console.log('authResponse:', authResponse.data);
-
-                if (authResponse.rc === 1) {
-                    const matrixGen: string[] = Object.values(authResponse.data);
-                    console.log('matrixGen:', matrixGen);
-                    matrixAuth = getMatrixCodes(matrixGen).join('');
-                    console.log('matrixAuth:', matrixAuth);
-                    value = CryptoJS.AES.encrypt(matrixAuth, encryptionKey).toString();
-                    tokenResponse = await loginApi.getToken(
-                        Env.TEST_USERNAME as string,
-                        session,
-                        cif,
-                        uuidv4(),
-                        value,
-                        typeAuth
-                    );
-                    if (tokenResponse.rc === 1 && tokenResponse.data?.token) {
-                        token = tokenResponse.data.token;
-                    }
-                }
-            }
-
-        }
+        const loginResponse = await loginApi.loginSuccess();
+        session = loginResponse.session;
+        token = loginResponse.token;
+        acntNo = loginResponse.acntNo;
+        subAcntNo = loginResponse.subAcntNo;
     });
 
     // test.describe("getListAllStock method", () => {
