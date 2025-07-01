@@ -1,43 +1,18 @@
 import { test, expect } from "@playwright/test";
 import LoginApi from "../../page/LoginApi";
 import OrderApi from "../../page/OrderApi";
-import dotenv from "dotenv";
 import { v4 as uuidv4 } from 'uuid';
-
-dotenv.config({ path: ".env" });
-
-// Environment setup
-const env = process.env.NODE_ENV?.toUpperCase() === "PRODUCTION" ? "PROD" : (process.env.NODE_ENV?.toUpperCase() || "PROD");
-const WS_BASE_URL = process.env[`${env}_WEB_LOGIN_URL`];
-const PROD_TEST_USER = process.env[`${env}_TEST_USER`];
-const PROD_TEST_PASSWORD = process.env[`${env}_TEST_PASS_ENCRYPT`];
-const PROD_PASSWORD = process.env[`${env}_TEST_PASS`];
-
-const Env = {
-    WS_BASE_URL,
-    TEST_USERNAME: PROD_TEST_USER,
-    TEST_PASSWORD: PROD_TEST_PASSWORD,
-    TEST_FCM_TOKEN: PROD_TEST_USER,
-    PASSWORD: PROD_PASSWORD,
-} as const;
+import {
+    TEST_CONFIG,
+    ERROR_MESSAGES,
+    TEST_DATA,
+    PERFORMANCE,
+    delay,
+    assertionHelpers
+} from "../utils/testConfig";
 
 // Constants
 const PRIVATE_KEY = "a06ab782-118c-4819-a3c5-7b958ba85f7e";
-const DEFAULT_DELAY = 100;
-const PERFORMANCE_TIMEOUT = 10000;
-
-// Test data constants
-const ORDER_SYMBOLS = {
-    VALID: "CEO",
-    INVALID: "CEO1",
-    FUTURES: "CFPT2501"
-} as const;
-
-const ORDER_TYPES = {
-    BUY: "1",
-    SELL: "2",
-    NORMAL: "01"
-} as const;
 
 // Shared session data
 let sharedLoginData: {
@@ -49,8 +24,8 @@ let sharedLoginData: {
 
 // Helper functions
 const createFreshInstances = () => ({
-    loginApi: new LoginApi(Env.WS_BASE_URL as string),
-    orderApi: new OrderApi(Env.WS_BASE_URL as string)
+    loginApi: new LoginApi(TEST_CONFIG.WEB_LOGIN_URL),
+    orderApi: new OrderApi(TEST_CONFIG.WEB_LOGIN_URL)
 });
 
 const getLoginSession = async () => {
@@ -67,15 +42,13 @@ const getLoginSession = async () => {
     return sharedLoginData;
 };
 
-const delay = (ms: number = DEFAULT_DELAY) => new Promise(resolve => setTimeout(resolve, ms));
-
 // Common order parameters factory
 const createOrderParams = (overrides: Partial<any> = {}) => ({
-    symbol: ORDER_SYMBOLS.VALID,
+    symbol: TEST_DATA.ORDER_SYMBOLS.VALID,
     ordrQty: "100",
     ordrUntprc: "12500",
-    ordrTrdTp: ORDER_TYPES.NORMAL,
-    buySelTp: ORDER_TYPES.BUY,
+    ordrTrdTp: TEST_DATA.ORDER_TYPES.NORMAL,
+    buySelTp: TEST_DATA.ORDER_TYPES.BUY,
     oddOrdrYn: "N",
     privateKey: PRIVATE_KEY,
     ...overrides
@@ -88,7 +61,7 @@ const placeOrderWithErrorHandling = async (orderParams: any, overrides: Partial<
     const { session, token, acntNo, subAcntNo } = loginData;
 
     return orderApi.placeNewOrder(
-        Env.TEST_USERNAME as string,
+        TEST_CONFIG.TEST_USER,
         overrides.session || session,
         acntNo,
         subAcntNo,
@@ -98,23 +71,9 @@ const placeOrderWithErrorHandling = async (orderParams: any, overrides: Partial<
     );
 };
 
-// Test helper for successful order expectations
-const expectSuccessfulOrder = (response: any) => {
-    expect(response).toBeDefined();
-    expect(response.rc).toBe(1);
-    expect(response.data.ordrNo).toBeDefined();
-};
-
-// Test helper for failed order expectations
-const expectFailedOrder = (response: any, expectedMessage?: string) => {
-    expect(response).toBeDefined();
-    expect(response.rc).toBe(-1);
-    if (expectedMessage) {
-        expect(response.data.message).toBe(expectedMessage);
-    }
-};
-
 test.describe("OrderApi Tests", () => {
+    test.describe.configure({ mode: 'serial' });
+
     test.beforeAll(async () => {
         try {
             await getLoginSession();
@@ -142,20 +101,22 @@ test.describe("OrderApi Tests", () => {
         test("2. should successfully place a buy order", async () => {
             const orderParams = createOrderParams();
             const response = await placeOrderWithErrorHandling(orderParams);
-            expectSuccessfulOrder(response);
+            assertionHelpers.expectSuccessfulResponse(response);
+            expect(response.data.ordrNo).toBeDefined();
         });
 
         test("3. should successfully place a sell order", async () => {
             await delay();
-            const orderParams = createOrderParams({ buySelTp: ORDER_TYPES.SELL });
+            const orderParams = createOrderParams({ buySelTp: TEST_DATA.ORDER_TYPES.SELL });
             const response = await placeOrderWithErrorHandling(orderParams);
-            expectSuccessfulOrder(response);
+            assertionHelpers.expectSuccessfulResponse(response);
+            expect(response.data.ordrNo).toBeDefined();
         });
 
         test("4. should handle order with invalid symbol", async () => {
             await delay();
             const orderParams = createOrderParams({
-                symbol: ORDER_SYMBOLS.INVALID,
+                symbol: TEST_DATA.ORDER_SYMBOLS.INVALID,
                 ordrQty: "1",
                 ordrUntprc: "17500",
                 oddOrdrYn: "Y"
@@ -171,29 +132,28 @@ test.describe("OrderApi Tests", () => {
             const orderParams = createOrderParams({
                 ordrQty: "1000",
                 ordrUntprc: "17500",
-                buySelTp: ORDER_TYPES.SELL
+                buySelTp: TEST_DATA.ORDER_TYPES.SELL
             });
 
             const response = await placeOrderWithErrorHandling(orderParams);
-            expect(response).toBeDefined();
-            expect(response.data.message).toBe("order available sell quantity has been exceeded.");
+            assertionHelpers.expectFailedResponseWithCode(response, ERROR_MESSAGES.ORDER_QUANTITY_EXCEEDED);
         });
 
         test("6. should handle order with invalid price", async () => {
             await delay();
             const orderParams = createOrderParams({
-                symbol: ORDER_SYMBOLS.FUTURES,
+                symbol: TEST_DATA.ORDER_SYMBOLS.FUTURES,
                 ordrUntprc: "2200"
             });
 
             const response = await placeOrderWithErrorHandling(orderParams);
-            expectFailedOrder(response, "Order price is greater than upper limit.");
+            assertionHelpers.expectFailedResponseWithCode(response, ERROR_MESSAGES.ORDER_PRICE_LIMIT);
         });
 
         test("7. should handle order with invalid session", async () => {
             await delay();
             const orderParams = createOrderParams({
-                symbol: ORDER_SYMBOLS.FUTURES,
+                symbol: TEST_DATA.ORDER_SYMBOLS.FUTURES,
                 ordrUntprc: "500"
             });
 
@@ -203,13 +163,13 @@ test.describe("OrderApi Tests", () => {
 
             expect(response).toBeDefined();
             expect(response.rc).toBe("-1");
-            expect(response.data.message).toBe(`Servlet.exception.SessionException: Session ${Env.TEST_USERNAME}is not correct.`);
+            expect(response.data.message).toBe(ERROR_MESSAGES.SESSION_INCORRECT(TEST_CONFIG.TEST_USER));
         });
 
         test("8. should handle order with invalid token", async () => {
             await delay();
             const orderParams = createOrderParams({
-                symbol: ORDER_SYMBOLS.FUTURES,
+                symbol: TEST_DATA.ORDER_SYMBOLS.FUTURES,
                 ordrUntprc: "500"
             });
 
@@ -217,20 +177,21 @@ test.describe("OrderApi Tests", () => {
                 token: "94c0f7f3eeded133d233c21902bd3a5bb282e11735093b62f5ed1cd36ac67b9b"
             });
 
-            expectFailedOrder(response, "Not match Certification value as 2FA.");
+            assertionHelpers.expectFailedResponseWithCode(response, "Not match Certification value as 2FA.");
         });
 
         test("10. should handle order with odd lot", async () => {
             await delay();
             const orderParams = createOrderParams({
-                symbol: ORDER_SYMBOLS.FUTURES,
+                symbol: TEST_DATA.ORDER_SYMBOLS.FUTURES,
                 ordrQty: "15",
                 ordrUntprc: "10",
                 oddOrdrYn: "Y"
             });
 
             const response = await placeOrderWithErrorHandling(orderParams);
-            expectSuccessfulOrder(response);
+            assertionHelpers.expectSuccessfulResponse(response);
+            expect(response.data.ordrNo).toBeDefined();
         });
     });
 
@@ -245,16 +206,17 @@ test.describe("OrderApi Tests", () => {
 
             if (stocksResponse.length > 0) {
                 const orderStock = stocksResponse.find((stock: any) =>
-                    stock.stock_code?.includes(ORDER_SYMBOLS.FUTURES)
+                    stock.stock_code?.includes(TEST_DATA.ORDER_SYMBOLS.FUTURES)
                 );
 
                 const orderParams = createOrderParams({
-                    symbol: orderStock?.stock_code || ORDER_SYMBOLS.FUTURES,
+                    symbol: orderStock?.stock_code || TEST_DATA.ORDER_SYMBOLS.FUTURES,
                     ordrUntprc: "10"
                 });
 
                 const response = await placeOrderWithErrorHandling(orderParams);
-                expectSuccessfulOrder(response);
+                assertionHelpers.expectSuccessfulResponse(response);
+                expect(response.data.ordrNo).toBeDefined();
             }
         });
 
@@ -263,7 +225,7 @@ test.describe("OrderApi Tests", () => {
             const { session, token, acntNo, subAcntNo } = loginData;
 
             const orderParams = createOrderParams({
-                symbol: ORDER_SYMBOLS.FUTURES,
+                symbol: TEST_DATA.ORDER_SYMBOLS.FUTURES,
                 ordrQty: "10",
                 ordrUntprc: "10",
                 oddOrdrYn: "Y"
@@ -273,7 +235,7 @@ test.describe("OrderApi Tests", () => {
                 return delay(delayMs).then(() => {
                     const { orderApi } = createFreshInstances();
                     return orderApi.placeNewOrder(
-                        Env.TEST_USERNAME as string,
+                        TEST_CONFIG.TEST_USER,
                         session,
                         acntNo,
                         subAcntNo,
@@ -291,7 +253,10 @@ test.describe("OrderApi Tests", () => {
             ]);
 
             expect(responses).toHaveLength(3);
-            responses.forEach(expectSuccessfulOrder);
+            responses.forEach(response => {
+                assertionHelpers.expectSuccessfulResponse(response);
+                expect(response.data.ordrNo).toBeDefined();
+            });
         });
     });
 
@@ -302,7 +267,7 @@ test.describe("OrderApi Tests", () => {
             const { orderApi } = createFreshInstances();
 
             const orderParams = createOrderParams({
-                symbol: ORDER_SYMBOLS.FUTURES,
+                symbol: TEST_DATA.ORDER_SYMBOLS.FUTURES,
                 ordrQty: "5",
                 ordrUntprc: "10",
                 oddOrdrYn: "Y"
@@ -314,7 +279,7 @@ test.describe("OrderApi Tests", () => {
             // Create 5 concurrent order requests for better performance
             for (let i = 0; i < 5; i++) {
                 const orderPromise = orderApi.placeNewOrder(
-                    Env.TEST_USERNAME as string,
+                    TEST_CONFIG.TEST_USER,
                     session,
                     acntNo,
                     subAcntNo,
@@ -335,7 +300,7 @@ test.describe("OrderApi Tests", () => {
             const endTime = Date.now();
             const duration = endTime - startTime;
 
-            expect(duration).toBeLessThan(PERFORMANCE_TIMEOUT);
+            expect(duration).toBeLessThan(PERFORMANCE.TIMEOUT);
             expect(successfulResponses.length).toBeGreaterThan(0);
         });
     });

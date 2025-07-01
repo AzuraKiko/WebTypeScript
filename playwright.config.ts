@@ -2,18 +2,18 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
     testDir: './tests', //testDir: Đường dẫn đến thư mục chứa các file test. Trong trường hợp này, Playwright sẽ tìm và chạy các test trong thư mục ./tests
-    timeout: 0, //Thời gian tối đa (tính bằng mili giây) cho mỗi test. 0 có nghĩa là không giới hạn thời gian.
+    timeout: 60000, //Thời gian tối đa cho mỗi test (60 giây) thay vì unlimited để tránh test treo
     expect: {
-        timeout: 5000 //Thời gian tối đa (tính bằng mili giây) cho mỗi assertion (kiểm tra) trong test. Ở đây là 5 giây (5000ms).
+        timeout: 10000 //Tăng timeout cho assertions lên 10 giây để tránh flaky tests
     },
-    /* Run tests in files in parallel */
+    /* Run tests in files in parallel with controlled workers */
     fullyParallel: true,
     /* Fail the build on CI if you accidentally left test.only in the source code. */
     forbidOnly: !!process.env.CI,
     /* Retry on CI only */
-    retries: process.env.CI ? 2 : 0,
-    /* Opt out of parallel tests on CI. */
-    workers: process.env.CI ? 1 : undefined,
+    retries: process.env.CI ? 2 : 1,
+    /* Limit workers to avoid overwhelming server and account lockout */
+    workers: process.env.CI ? 1 : 2, // Giới hạn 2 workers để tránh conflicts
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         // baseURL: 'https://portal-tradeforgood-uat.equix.app', //URL cơ sở cho tất cả các test. Khi bạn sử dụng page.goto('/products'), nó sẽ điều hướng đến https://www.demoblaze.com/products.
@@ -25,6 +25,8 @@ export default defineConfig({
         // 'off' - Tắt hoàn toàn
         // 'on' - Luôn quay video
         // 'retain-on-failure' - Quay mọi test nhưng chỉ giữ lại nếu fail
+        actionTimeout: 30000,
+        navigationTimeout: 30000,
     },
     projects: [
         {

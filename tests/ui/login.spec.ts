@@ -4,21 +4,28 @@ import { attachScreenshot } from '../../helpers/reporterHelper';
 import LogoutPage from "../../page/LogoutPage";
 import { TEST_CONFIG, ERROR_MESSAGES, TEST_DATA } from '../utils/testConfig';
 
+// Configure test suite for better isolation
 test.describe("Login Functionality Tests", () => {
-  let loginPage: LoginPage;
-  let logoutPage: LogoutPage;
+  // Configure mode to ensure proper browser isolation
+  test.describe.configure({ mode: 'parallel' });
 
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    logoutPage = new LogoutPage(page, loginPage);
+  test.afterEach(async ({ page, context }) => {
+    // Clean up after each test
+    try {
+      await context.clearCookies();
+      await page.close();
+    } catch (error) {
+      // Ignore errors during cleanup
+      console.log('Cleanup error (ignored):', error);
+    }
+  });
+
+  test("TC_01: Should login successfully with valid account", async ({ page, context }) => {
+    // Create isolated page instances
+    const loginPage = new LoginPage(page);
+    const logoutPage = new LogoutPage(page, loginPage);
+
     await loginPage.gotoWeb(TEST_CONFIG.WEB_LOGIN_URL);
-  });
-
-  test.afterEach(async ({ page }) => {
-    await page.close();
-  });
-
-  test("TC_01: Should login successfully with valid account", async ({ page }) => {
     await loginPage.login(TEST_CONFIG.TEST_USER, TEST_CONFIG.TEST_PASS);
 
     expect(await loginPage.verifyLoginSuccess(TEST_CONFIG.TEST_USER)).toBeTruthy();
@@ -27,7 +34,10 @@ test.describe("Login Functionality Tests", () => {
     await logoutPage.logout();
   });
 
-  test("TC_02: Should show error message with empty username and password", async () => {
+  test("TC_02: Should show error message with empty username and password", async ({ page }) => {
+    const loginPage = new LoginPage(page);
+
+    await loginPage.gotoWeb(TEST_CONFIG.WEB_LOGIN_URL);
     await loginPage.clickOpenLogin();
     await loginPage.enterUsernameAndPassword('', '');
 
@@ -35,38 +45,44 @@ test.describe("Login Functionality Tests", () => {
     expect(await loginPage.verifyValidatePasswordError(ERROR_MESSAGES.EMPTY_FIELD)).toBeTruthy();
   });
 
-  test("TC_03: Should show error message with invalid username", async () => {
-    await loginPage.enterUsernameAndPassword(TEST_DATA.INVALID_CREDENTIALS.INVALID_USERNAME, TEST_CONFIG.TEST_PASS);
+  test("TC_03: Should show error message with invalid username", async ({ page }) => {
+    const loginPage = new LoginPage(page);
+
+    await loginPage.gotoWeb(TEST_CONFIG.WEB_LOGIN_URL);
+    await loginPage.login(TEST_DATA.INVALID_CREDENTIALS.INVALID_USERNAME, TEST_CONFIG.TEST_PASS);
 
     expect(await loginPage.loginWithInvalidUsername(ERROR_MESSAGES.INVALID_CUSTOMER)).toBeTruthy();
   });
 
-  test("TC_04: Should show error message with wrong password multiple times", async () => {
-    const wrongPasswordAttempts = [
-      ERROR_MESSAGES.WRONG_PASSWORD_1,
-      ERROR_MESSAGES.WRONG_PASSWORD_2,
-      ERROR_MESSAGES.WRONG_PASSWORD_3,
-    ];
+  // Group dangerous tests that could cause account lockout
+  test.describe.serial("Password Validation Tests", () => {
+    test("TC_04: Should show error message with wrong password multiple times", async ({ page }) => {
+      const loginPage = new LoginPage(page);
 
-    for (let i = 0; i < wrongPasswordAttempts.length; i++) {
+      await loginPage.gotoWeb(TEST_CONFIG.WEB_LOGIN_URL);
+
+      // Test 1st wrong password attempt
+      await loginPage.login(TEST_CONFIG.TEST_USER, TEST_DATA.INVALID_CREDENTIALS.INVALID_PASSWORD);
+      expect(await loginPage.verifyWrongPassword1()).toBeTruthy();
+      await page.waitForTimeout(1000);
+
+      // Test 2nd wrong password attempt
       await loginPage.enterUsernameAndPassword(TEST_CONFIG.TEST_USER, TEST_DATA.INVALID_CREDENTIALS.INVALID_PASSWORD);
-      expect(await loginPage.loginWithInvalidPassword(wrongPasswordAttempts[i])).toBeTruthy();
-    }
-  });
+      expect(await loginPage.verifyWrongPassword2()).toBeTruthy();
+      await page.waitForTimeout(1000);
 
-  // Commented out dangerous tests that could lock the account
-  /*
-  test("TC_05: Should show error message for 4th wrong password attempt", async () => {
-    // Note: This test is risky as it approaches account lockout
-    await loginPage.enterUsernameAndPassword(TEST_CONFIG.TEST_USER, TEST_DATA.INVALID_CREDENTIALS.INVALID_PASSWORD);
-    expect(await loginPage.loginWithInvalidPassword(ERROR_MESSAGES.WRONG_PASSWORD_4)).toBeTruthy();
-  });
+      // Test 3rd wrong password attempt
+      await loginPage.enterUsernameAndPassword(TEST_CONFIG.TEST_USER, TEST_DATA.INVALID_CREDENTIALS.INVALID_PASSWORD);
+      expect(await loginPage.verifyWrongPassword3()).toBeTruthy();
 
-  test("TC_06: Should lock account after 5 wrong password attempts", async () => {
-    // Note: This test will lock the account and should only be run in isolated test environment
-    await loginPage.enterUsernameAndPassword(TEST_CONFIG.TEST_USER, TEST_DATA.INVALID_CREDENTIALS.INVALID_PASSWORD);
-    expect(await loginPage.loginWithInvalidPassword(ERROR_MESSAGES.ACCOUNT_LOCKED)).toBeTruthy();
+      // // Test 4th wrong password attempt
+      // await loginPage.enterUsernameAndPassword(TEST_CONFIG.TEST_USER, TEST_DATA.INVALID_CREDENTIALS.INVALID_PASSWORD);
+      // expect(await loginPage.verifyWrongPassword4()).toBeTruthy();
+
+      // // Test 5th wrong password attempt
+      // await loginPage.enterUsernameAndPassword(TEST_CONFIG.TEST_USER, TEST_DATA.INVALID_CREDENTIALS.INVALID_PASSWORD);
+      // expect(await loginPage.verifyAccountLocked()).toBeTruthy();
+    });
   });
-  */
 });
 

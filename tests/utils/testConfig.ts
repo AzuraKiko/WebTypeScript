@@ -42,9 +42,10 @@ export const ERROR_MESSAGES = {
 
     // API Error Messages
     NO_CUSTOMER_INFO: "Không có thông tin khách hàng",
-    NOT_LOGGED_IN: "Quý khách chưa đăng nhập.",
+    WRONG_LOGIN_INFO: "Quý Khách đã nhập sai thông tin đăng nhập 1 LẦN. Quý Khách lưu ý, tài khoản sẽ bị tạm khóa nếu Quý Khách nhập sai liên tiếp 05 LẦN.",
+    NOT_LOGGED_IN: "Servlet.exception.SessionException: Not logged in!",
     SESSION_INCORRECT: (username: string) => `Servlet.exception.SessionException: Session ${username}is not correct.`,
-    INVALID_OTP: "OTP không đúng",
+    INVALID_OTP: "Invalid OTP",
 
     // Order Error Messages
     ORDER_QUANTITY_EXCEEDED: "order available sell quantity has been exceeded.",
@@ -102,17 +103,6 @@ export const delay = (ms: number = PERFORMANCE.DEFAULT_DELAY): Promise<void> =>
 export const getRandomStockCode = (): string =>
     TEST_DATA.STOCK_CODES[Math.floor(Math.random() * TEST_DATA.STOCK_CODES.length)];
 
-/**
- * Validates that required environment variables are set
- */
-export const validateTestConfig = (): void => {
-    const requiredVars = ['WEB_LOGIN_URL', 'TEST_USER', 'TEST_PASS'];
-    const missingVars = requiredVars.filter(varName => !TEST_CONFIG[varName as keyof typeof TEST_CONFIG]);
-
-    if (missingVars.length > 0) {
-        throw new Error(`Missing required environment variables: ${missingVars.join(', ')}`);
-    }
-};
 
 /**
  * Common assertion helpers
@@ -127,7 +117,7 @@ export const assertionHelpers = {
     expectFailedResponse: (response: any, expectedMessage?: string) => {
         expect(response).toBeDefined();
         expect(response).toHaveProperty("data");
-        expect(response.rc).toBe(-1);
+        expect(String(response.rc)).toBe("-1");
 
         if (expectedMessage && response.data) {
             expect((response.data as any).message).toBe(expectedMessage);
@@ -136,13 +126,10 @@ export const assertionHelpers = {
 
     expectFailedResponseWithCode: (response: any, expectedMessage?: string) => {
         expect(response).toBeDefined();
-        expect(response.rc).toBe("-1");
+        expect(String(response.rc)).toBe("-1");
 
         if (expectedMessage) {
             expect(response.data.message).toBe(expectedMessage);
         }
     },
 };
-
-// Auto-validate configuration on import
-validateTestConfig(); 

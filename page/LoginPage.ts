@@ -1,18 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import BasePage from './BasePage';
-import dotenv from "dotenv";
-dotenv.config({ path: ".env" });
-
-let env = process.env.NODE_ENV?.toUpperCase() || "PROD";
-if (env === "PRODUCTION") env = "PROD";
-const WS_BASE_URL = process.env[`${env}_WEB_LOGIN_URL`];
-const PROD_TEST_USER = process.env[`${env}_TEST_USER`];
-const PROD_PASSWORD = process.env[`${env}_TEST_PASS`];
-const Env: any = {
-    WS_BASE_URL: WS_BASE_URL,
-    TEST_USERNAME: PROD_TEST_USER,
-    TEST_PASSWORD: PROD_PASSWORD,
-};
+import { TEST_CONFIG, ERROR_MESSAGES } from '../tests/utils/testConfig';
 
 class LoginPage extends BasePage {
     openLogin: Locator;
@@ -85,8 +73,8 @@ class LoginPage extends BasePage {
     }
 
     async loginSuccess() {
-        await this.gotoWeb(Env.WS_BASE_URL);
-        await this.enterUsernameAndPassword(Env.TEST_USERNAME, Env.TEST_PASSWORD);
+        await this.gotoWeb(TEST_CONFIG.WEB_LOGIN_URL);
+        await this.enterUsernameAndPassword(TEST_CONFIG.TEST_USER, TEST_CONFIG.TEST_PASS);
         await this.waitForPageLoad();
         await this.clickCloseBanner();
     }
@@ -97,28 +85,62 @@ class LoginPage extends BasePage {
         return text?.trim() === username;
     }
 
-    async verifyValidateUsernameError(expectedError: string) {
+    async verifyValidateUsernameError(expectedError: string = ERROR_MESSAGES.EMPTY_FIELD) {
         await this.usernameError.waitFor({ state: 'visible', timeout: 3000 });
         const errorText = await this.usernameError.textContent();
         return errorText?.trim() === expectedError;
     }
 
-    async verifyValidatePasswordError(expectedError: string) {
+    async verifyValidatePasswordError(expectedError: string = ERROR_MESSAGES.EMPTY_FIELD) {
         await this.passwordError.waitFor({ state: 'visible', timeout: 3000 });
         const errorText = await this.passwordError.textContent();
         return errorText?.trim() === expectedError;
     }
 
-    async loginWithInvalidUsername(expectedError: string) {
+    async loginWithInvalidUsername(expectedError: string = ERROR_MESSAGES.INVALID_CUSTOMER) {
         await this.invalidLogin.waitFor({ state: 'visible', timeout: 3000 });
         const errorText = await this.invalidLogin.textContent();
         return errorText?.trim() === expectedError;
     }
 
-    async loginWithInvalidPassword(expectedError: string) {
+    async verifyWrongPasswordAttempt(attemptNumber: number) {
+        const errorMessages = {
+            1: ERROR_MESSAGES.WRONG_PASSWORD_1,
+            2: ERROR_MESSAGES.WRONG_PASSWORD_2,
+            3: ERROR_MESSAGES.WRONG_PASSWORD_3,
+            4: ERROR_MESSAGES.WRONG_PASSWORD_4,
+            5: ERROR_MESSAGES.ACCOUNT_LOCKED
+        };
+
+        const expectedError = errorMessages[attemptNumber as keyof typeof errorMessages];
+        if (!expectedError) {
+            throw new Error(`Invalid attempt number: ${attemptNumber}. Must be between 1-5`);
+        }
+
         await this.invalidLogin.waitFor({ state: 'visible', timeout: 3000 });
         const errorText = await this.invalidLogin.textContent();
         return errorText?.trim() === expectedError;
+    }
+
+    // Convenient methods for specific wrong password attempts
+    async verifyWrongPassword1() {
+        return await this.verifyWrongPasswordAttempt(1);
+    }
+
+    async verifyWrongPassword2() {
+        return await this.verifyWrongPasswordAttempt(2);
+    }
+
+    async verifyWrongPassword3() {
+        return await this.verifyWrongPasswordAttempt(3);
+    }
+
+    async verifyWrongPassword4() {
+        return await this.verifyWrongPasswordAttempt(4);
+    }
+
+    async verifyAccountLocked() {
+        return await this.verifyWrongPasswordAttempt(5);
     }
 
     async forgotPassword() {

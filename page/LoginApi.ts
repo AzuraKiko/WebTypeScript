@@ -3,22 +3,9 @@ import OrderApi from "./OrderApi";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from 'uuid';
 import { getMatrixCodes } from "./Matrix";
+import { TEST_CONFIG, ENV } from "../tests/utils/testConfig";
 
 dotenv.config({ path: ".env" });
-
-let env = process.env.NODE_ENV?.toUpperCase() || "PROD";
-if (env === "PRODUCTION") env = "PROD";
-const WS_BASE_URL = process.env[`${env}_WEB_LOGIN_URL`];
-const PROD_TEST_USER = process.env[`${env}_TEST_USER`];
-const PROD_TEST_PASSWORD = process.env[`${env}_TEST_PASS_ENCRYPT`];
-const PROD_PASSWORD = process.env[`${env}_TEST_PASS`];
-const Env: any = {
-    WS_BASE_URL: WS_BASE_URL,
-    TEST_USERNAME: PROD_TEST_USER,
-    TEST_PASSWORD: PROD_TEST_PASSWORD,
-    TEST_FCM_TOKEN: PROD_TEST_USER,
-    PASSWORD: PROD_PASSWORD,
-};
 
 // 01.LO, 02.ATO,03.ATC,04.MP,05.MTL,06.MOK,07.MAK, 08.PLO (Post Close), 09. Buy-in
 const OTP: string = "563447";
@@ -79,6 +66,7 @@ export default class LoginApi {
 
     constructor(baseUrl: string, timeout?: number) {
         this.baseUrl = baseUrl;
+
         if (timeout) {
             this.apiHelper = new ApiHelper({ baseUrl: this.baseUrl, timeout: timeout });
         } else {
@@ -90,6 +78,7 @@ export default class LoginApi {
      * Login API
      */
     async loginApi(username: string, password: string, fcmToken?: string): Promise<LoginResponse> {
+        // Create fresh API helper instance for each request to avoid state conflicts
         const loginApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
         const loginPayload: LoginPayload = {
             user: username,
@@ -105,6 +94,7 @@ export default class LoginApi {
      * Generate authentication (chỉ phương thức Matrix mới call API này)
      */
     async generateAuth(user: string, session: string): Promise<any> {
+        // Create fresh API helper instance for each request
         const authApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
         const authPayload: AuthPayload = {
             group: "CORE",
@@ -127,6 +117,7 @@ export default class LoginApi {
      * Get token OTP
      */
     async getToken(user: string, session: string, cif: string, rqId: string, value: string, type: string): Promise<any> {
+        // Create fresh API helper instance for each request
         const authApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
         let typeValue = "5";
         if (type === "OTP") {
@@ -153,10 +144,11 @@ export default class LoginApi {
     }
 
     /**
-    * Login success
+    * Login success with centralized configuration
     */
     async loginSuccess(typeAuth: string) {
-        let orderApi: OrderApi = new OrderApi(Env.WS_BASE_URL);
+        // Create fresh instance of OrderApi to avoid state conflicts
+        let orderApi: OrderApi = new OrderApi(TEST_CONFIG.WEB_LOGIN_URL);
         let session: string = "";
         let cif: string = "";
         let token: string = "";
@@ -165,10 +157,11 @@ export default class LoginApi {
         typeAuth = typeAuth;
 
         const loginResponse = await this.loginApi(
-            Env.TEST_USERNAME as string,
-            Env.TEST_PASSWORD as string,
-            Env.TEST_FCM_TOKEN as string
+            TEST_CONFIG.TEST_USER,
+            TEST_CONFIG.TEST_PASS_ENCRYPT,
+            TEST_CONFIG.TEST_USER
         );
+
         if (loginResponse.data) {
             session = loginResponse.data.session;
             cif = loginResponse.data.cif;
@@ -186,7 +179,7 @@ export default class LoginApi {
         // Generate auth and get token
         if (typeAuth === "OTP") {
             tokenResponse = await this.getToken(
-                Env.TEST_USERNAME as string,
+                TEST_CONFIG.TEST_USER,
                 session,
                 cif,
                 uuidv4(),
@@ -197,7 +190,7 @@ export default class LoginApi {
                 token = tokenResponse.data.token;
             }
         } else if (typeAuth === "Matrix") {
-            const authResponse = await this.generateAuth(Env.TEST_USERNAME as string, session);
+            const authResponse = await this.generateAuth(TEST_CONFIG.TEST_USER, session);
             console.log('authResponse:', authResponse.data);
 
             if (authResponse.rc === 1) {
@@ -205,13 +198,13 @@ export default class LoginApi {
                 console.log('matrixGen:', matrixGen);
                 let matrixAuth: string = getMatrixCodes(matrixGen).join('');
                 let value: string = "";
-                if (env === "PROD") {
+                if (ENV === "PROD") {
                     value = orderApi.genMatrixAuth(matrixAuth);
-                } else if (env === "UAT") {
+                } else if (ENV === "UAT") {
                     value = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
                 }
                 tokenResponse = await this.getToken(
-                    Env.TEST_USERNAME as string,
+                    TEST_CONFIG.TEST_USER,
                     session,
                     cif,
                     uuidv4(),
