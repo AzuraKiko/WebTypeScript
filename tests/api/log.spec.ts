@@ -63,7 +63,7 @@ const expectFailedResponse = (response: any, expectedMessage?: string) => {
     expect(response).toBeDefined();
     expect(response).toHaveProperty("data");
     expect(response.rc).toBe(-1);
-    
+
     if (expectedMessage && response.data) {
         expect((response.data as any).message).toBe(expectedMessage);
     }
@@ -72,7 +72,7 @@ const expectFailedResponse = (response: any, expectedMessage?: string) => {
 const expectFailedResponseWithCode = (response: any, expectedMessage?: string) => {
     expect(response).toBeDefined();
     expect(response.rc).toBe("-1");
-    
+
     if (expectedMessage) {
         expect(response.data.message).toBe(expectedMessage);
     }
@@ -82,7 +82,7 @@ const expectFailedResponseWithCode = (response: any, expectedMessage?: string) =
 const performLogin = async (username?: string, password?: string, fcmToken?: string) => {
     const { loginApi } = createFreshInstances();
     await delay(getTestDelay());
-    
+
     return loginApi.loginApi(
         username ?? testConfig.TEST_USERNAME as string,
         password ?? testConfig.TEST_PASSWORD as string,
@@ -93,37 +93,37 @@ const performLogin = async (username?: string, password?: string, fcmToken?: str
 const performLoginWithAuth = async () => {
     const { loginApi } = createFreshInstances();
     await delay(getTestDelay());
-    
+
     const loginResponse = await loginApi.loginApi(
         testConfig.TEST_USERNAME as string,
         testConfig.TEST_PASSWORD as string,
         testConfig.TEST_FCM_TOKEN as string
     );
-    
+
     expectSuccessfulResponse(loginResponse);
     expect(loginResponse.data?.session).toBeDefined();
-    
+
     const authResponse = await loginApi.generateAuth(
         testConfig.TEST_USERNAME as string,
         loginResponse.data?.session as string
     );
-    
+
     return { loginResponse, authResponse, loginApi };
 };
 
 const performFullTokenFlow = async () => {
     const { loginResponse, authResponse, loginApi } = await performLoginWithAuth();
     const { orderApi } = createFreshInstances();
-    
+
     expect(authResponse.rc).toBe(1);
-    
+
     const matrixGen: string[] = Object.values(authResponse.data);
     const matrixAuth = getMatrixCodes(matrixGen).join('');
-    
-    const value = testConfig.ENV === "PROD" 
+
+    const value = testConfig.ENV === "PROD"
         ? orderApi.genMatrixAuth(matrixAuth)
         : "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
-    
+
     const tokenResponse = await loginApi.getToken(
         testConfig.TEST_USERNAME as string,
         loginResponse.data?.session as string,
@@ -132,7 +132,7 @@ const performFullTokenFlow = async () => {
         value,
         "Matrix"
     );
-    
+
     return { loginResponse, authResponse, tokenResponse };
 };
 
@@ -174,7 +174,7 @@ test.describe("LoginApi Tests", () => {
     test.describe("generateAuth method", () => {
         test("5. should successfully generate authentication", async () => {
             const { authResponse } = await performLoginWithAuth();
-            
+
             expect(authResponse).toBeDefined();
             expect(authResponse.rc).toBe(1);
             expect(authResponse.data).not.toHaveProperty("message");
@@ -264,7 +264,7 @@ test.describe("LoginApi Tests", () => {
         test("12. should handle concurrent requests", async () => {
             await delay(getTestDelay());
 
-            const createConcurrentRequest = (delayMs: number = 0) => 
+            const createConcurrentRequest = (delayMs: number = 0) =>
                 delay(delayMs).then(() => performLogin());
 
             // Test multiple concurrent login requests with staggered timing

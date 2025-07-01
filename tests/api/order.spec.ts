@@ -6,410 +6,337 @@ import { v4 as uuidv4 } from 'uuid';
 
 dotenv.config({ path: ".env" });
 
-let env = process.env.NODE_ENV?.toUpperCase() || "PROD";
-if (env === "PRODUCTION") env = "PROD";
+// Environment setup
+const env = process.env.NODE_ENV?.toUpperCase() === "PRODUCTION" ? "PROD" : (process.env.NODE_ENV?.toUpperCase() || "PROD");
 const WS_BASE_URL = process.env[`${env}_WEB_LOGIN_URL`];
 const PROD_TEST_USER = process.env[`${env}_TEST_USER`];
 const PROD_TEST_PASSWORD = process.env[`${env}_TEST_PASS_ENCRYPT`];
 const PROD_PASSWORD = process.env[`${env}_TEST_PASS`];
-const Env: any = {
-    WS_BASE_URL: WS_BASE_URL,
+
+const Env = {
+    WS_BASE_URL,
     TEST_USERNAME: PROD_TEST_USER,
     TEST_PASSWORD: PROD_TEST_PASSWORD,
     TEST_FCM_TOKEN: PROD_TEST_USER,
     PASSWORD: PROD_PASSWORD,
-};
+} as const;
 
-let loginApi: LoginApi = new LoginApi(Env.WS_BASE_URL as string);
-let orderApi: OrderApi = new OrderApi(Env.WS_BASE_URL as string);
-let privateKey: string = "a06ab782-118c-4819-a3c5-7b958ba85f7e";
+// Constants
+const PRIVATE_KEY = "a06ab782-118c-4819-a3c5-7b958ba85f7e";
+const DEFAULT_DELAY = 100;
+const PERFORMANCE_TIMEOUT = 10000;
 
-let session: string;
-let token: string;
-let acntNo: string;
-let subAcntNo: string;
+// Test data constants
+const ORDER_SYMBOLS = {
+    VALID: "CEO",
+    INVALID: "CEO1",
+    FUTURES: "CFPT2501"
+} as const;
 
-test.beforeAll(async () => {
-    const loginResponse = await loginApi.loginSuccess("Matrix");
-    session = loginResponse.session;
-    token = loginResponse.token;
-    acntNo = loginResponse.acntNo;
-    subAcntNo = loginResponse.subAcntNo;
+const ORDER_TYPES = {
+    BUY: "1",
+    SELL: "2",
+    NORMAL: "01"
+} as const;
+
+// Shared session data
+let sharedLoginData: {
+    session: string;
+    token: string;
+    acntNo: string;
+    subAcntNo: string;
+} | null = null;
+
+// Helper functions
+const createFreshInstances = () => ({
+    loginApi: new LoginApi(Env.WS_BASE_URL as string),
+    orderApi: new OrderApi(Env.WS_BASE_URL as string)
 });
 
+const getLoginSession = async () => {
+    if (!sharedLoginData) {
+        const { loginApi } = createFreshInstances();
+        const loginResponse = await loginApi.loginSuccess("Matrix");
+        sharedLoginData = {
+            session: loginResponse.session,
+            token: loginResponse.token,
+            acntNo: loginResponse.acntNo,
+            subAcntNo: loginResponse.subAcntNo
+        };
+    }
+    return sharedLoginData;
+};
+
+const delay = (ms: number = DEFAULT_DELAY) => new Promise(resolve => setTimeout(resolve, ms));
+
+// Common order parameters factory
+const createOrderParams = (overrides: Partial<any> = {}) => ({
+    symbol: ORDER_SYMBOLS.VALID,
+    ordrQty: "100",
+    ordrUntprc: "12500",
+    ordrTrdTp: ORDER_TYPES.NORMAL,
+    buySelTp: ORDER_TYPES.BUY,
+    oddOrdrYn: "N",
+    privateKey: PRIVATE_KEY,
+    ...overrides
+});
+
+// Helper function for placing orders with error handling
+const placeOrderWithErrorHandling = async (orderParams: any, overrides: Partial<any> = {}) => {
+    const { orderApi } = createFreshInstances();
+    const loginData = await getLoginSession();
+    const { session, token, acntNo, subAcntNo } = loginData;
+
+    return orderApi.placeNewOrder(
+        Env.TEST_USERNAME as string,
+        overrides.session || session,
+        acntNo,
+        subAcntNo,
+        orderParams,
+        uuidv4(),
+        overrides.token || token
+    );
+};
+
+// Test helper for successful order expectations
+const expectSuccessfulOrder = (response: any) => {
+    expect(response).toBeDefined();
+    expect(response.rc).toBe(1);
+    expect(response.data.ordrNo).toBeDefined();
+};
+
+// Test helper for failed order expectations
+const expectFailedOrder = (response: any, expectedMessage?: string) => {
+    expect(response).toBeDefined();
+    expect(response.rc).toBe(-1);
+    if (expectedMessage) {
+        expect(response.data.message).toBe(expectedMessage);
+    }
+};
+
 test.describe("OrderApi Tests", () => {
+    test.beforeAll(async () => {
+        try {
+            await getLoginSession();
+            console.log("Shared login session established");
+        } catch (error) {
+            console.error("Failed to establish shared login session:", error);
+        }
+    });
+
+    test.afterAll(async () => {
+        sharedLoginData = null;
+    });
 
     test.describe("getListAllStock method", () => {
         test("1. should successfully get list of all stocks", async () => {
+            const { orderApi } = createFreshInstances();
             const response = await orderApi.getListAllStock();
 
             expect(response).toBeDefined();
             expect(Array.isArray(response)).toBe(true);
-
-            if (response.length > 0) {
-                response.forEach((stock: any) => {
-                    // expect(stock).toHaveProperty("stock_code");
-                    // expect(stock).toHaveProperty("name_vn");
-                });
-            }
         });
     });
 
     test.describe("placeNewOrder method", () => {
-        // test("2. should successfully place a buy order", async () => {
-        //     if (!session || !token || !acntNo || !subAcntNo) {
-        //         test.skip();
-        //         return;
-        //     }
+        test("2. should successfully place a buy order", async () => {
+            const orderParams = createOrderParams();
+            const response = await placeOrderWithErrorHandling(orderParams);
+            expectSuccessfulOrder(response);
+        });
 
-        //     const orderParams = {
-        //         symbol: "CEO",
-        //         ordrQty: "100",
-        //         ordrUntprc: "12500",
-        //         ordrTrdTp: "01", // Normal order
-        //         buySelTp: "1", // Buy
-        //         oddOrdrYn: "N", // Not odd lot
-        //         privateKey: privateKey
-        //     };
-
-        //     const rqId: string = uuidv4();
-        //     const response = await orderApi.placeNewOrder(
-        //         Env.TEST_USERNAME as string,
-        //         session,
-        //         acntNo,
-        //         subAcntNo,
-        //         orderParams,
-        //         rqId,
-        //         token
-        //     );
-
-        //     expect(response).toBeDefined();
-        //     expect(response.rc).toBe(1);
-        //     expect(response.data.ordrNo).toBeDefined();
-        // });
-
-        // test("3. should successfully place a sell order", async () => {
-        //     if (!session || !token || !acntNo || !subAcntNo) {
-        //         test.skip();
-        //         return;
-        //     }
-        //     const orderParams = {
-        //         symbol: "CEO",
-        //         ordrQty: "100",
-        //         ordrUntprc: "12500",
-        //         ordrTrdTp: "01", // Normal order
-        //         buySelTp: "2", // Sell
-        //         oddOrdrYn: "N", // Not odd lot
-        //         privateKey: privateKey
-        //     };
-
-        //     const rqId: string = uuidv4();
-        //     const response = await orderApi.placeNewOrder(
-        //         Env.TEST_USERNAME as string,
-        //         session,
-        //         acntNo,
-        //         subAcntNo,
-        //         orderParams,
-        //         rqId,
-        //         token
-        //     );
-
-        //     expect(response).toBeDefined();
-        //     expect(response.rc).toBe(1);
-        //     expect(response.data.ordrNo).toBeDefined();
-        // });
+        test("3. should successfully place a sell order", async () => {
+            await delay();
+            const orderParams = createOrderParams({ buySelTp: ORDER_TYPES.SELL });
+            const response = await placeOrderWithErrorHandling(orderParams);
+            expectSuccessfulOrder(response);
+        });
 
         test("4. should handle order with invalid symbol", async () => {
-
-            // if (!session || !token || !acntNo || !subAcntNo) {
-            //     test.skip();
-            //     return;
-            // }
-
-            const orderParams = {
-                symbol: "CEO1",
+            await delay();
+            const orderParams = createOrderParams({
+                symbol: ORDER_SYMBOLS.INVALID,
                 ordrQty: "1",
                 ordrUntprc: "17500",
-                ordrTrdTp: "01", // Normal order
-                buySelTp: "1", // Buy
-                oddOrdrYn: "Y", // Not odd lot
-                privateKey: privateKey
-            };
+                oddOrdrYn: "Y"
+            });
 
-            const rqId: string = uuidv4();
-
-            const response = await orderApi.placeNewOrder(
-                Env.TEST_USERNAME as string,
-                session,
-                acntNo,
-                subAcntNo,
-                orderParams,
-                rqId,
-                token
-            );
+            const response = await placeOrderWithErrorHandling(orderParams);
             expect(response).toBeDefined();
-            // expect(response.rc).toBe(-1);
             expect(response.data.message).toBe("Please check SYMBOL.");
         });
 
         test("5. should handle order with invalid quantity (quantity > holding)", async () => {
-            // if (!session || !token || !acntNo || !subAcntNo) {
-            //     test.skip();
-            //     return;
-            // }
-
-            const orderParams = {
-                symbol: "CEO",
-                ordrQty: "1000", // Quantity > Holding hoặc vượt sức mua
+            await delay();
+            const orderParams = createOrderParams({
+                ordrQty: "1000",
                 ordrUntprc: "17500",
-                ordrTrdTp: "01",
-                buySelTp: "2",
-                oddOrdrYn: "N",
-                privateKey: privateKey
-            };
+                buySelTp: ORDER_TYPES.SELL
+            });
 
-            const rqId: string = uuidv4();
-
-            const response = await orderApi.placeNewOrder(
-                Env.TEST_USERNAME as string,
-                session,
-                acntNo,
-                subAcntNo,
-                orderParams,
-                rqId,
-                token
-            );
+            const response = await placeOrderWithErrorHandling(orderParams);
             expect(response).toBeDefined();
-            // expect(response.rc).toBe('-1');
             expect(response.data.message).toBe("order available sell quantity has been exceeded.");
         });
 
-        // test("6. should handle order with invalid price", async () => {
-        //     if (!session || !token || !acntNo || !subAcntNo) {
-        //         test.skip();
-        //         return;
-        //     }
+        test("6. should handle order with invalid price", async () => {
+            await delay();
+            const orderParams = createOrderParams({
+                symbol: ORDER_SYMBOLS.FUTURES,
+                ordrUntprc: "2200"
+            });
 
-        //     const orderParams = {
-        //         symbol: "CFPT2501",
-        //         ordrQty: "100",
-        //         ordrUntprc: "2200", // Nằm ngoài trần sàn
-        //         ordrTrdTp: "01",
-        //         buySelTp: "1",
-        //         oddOrdrYn: "N",
-        //         privateKey: privateKey
-        //     };
+            const response = await placeOrderWithErrorHandling(orderParams);
+            expectFailedOrder(response, "Order price is greater than upper limit.");
+        });
 
-        //     const rqId = uuidv4();
+        test("7. should handle order with invalid session", async () => {
+            await delay();
+            const orderParams = createOrderParams({
+                symbol: ORDER_SYMBOLS.FUTURES,
+                ordrUntprc: "500"
+            });
 
-        //     const response = await orderApi.placeNewOrder(
-        //         Env.TEST_USERNAME as string,
-        //         session,
-        //         acntNo,
-        //         subAcntNo,
-        //         orderParams,
-        //         rqId,
-        //         token
-        //     );
-        //     expect(response).toBeDefined();
-        //     expect(response.rc).toBe(-1);
-        //     expect(response.data.message).toBe("Order price is greater than upper limit.");
-        // });
+            const response = await placeOrderWithErrorHandling(orderParams, {
+                session: "76qjXSCN1xpJYYRpKaLmVMD8D3PxFQiy2NRKws2sCw9RukmzVDyeJUN9tupNxHAS"
+            });
 
-        // test("7. should handle order with invalid session", async () => {
-        //     if (!token || !acntNo || !subAcntNo) {
-        //         test.skip();
-        //         return;
-        //     }
+            expect(response).toBeDefined();
+            expect(response.rc).toBe("-1");
+            expect(response.data.message).toBe(`Servlet.exception.SessionException: Session ${Env.TEST_USERNAME}is not correct.`);
+        });
 
-        //     const orderParams = {
-        //         symbol: "CFPT2501",
-        //         ordrQty: "100",
-        //         ordrUntprc: "500",
-        //         ordrTrdTp: "01",
-        //         buySelTp: "1",
-        //         oddOrdrYn: "N",
-        //         privateKey: privateKey
-        //     };
+        test("8. should handle order with invalid token", async () => {
+            await delay();
+            const orderParams = createOrderParams({
+                symbol: ORDER_SYMBOLS.FUTURES,
+                ordrUntprc: "500"
+            });
 
-        //     const rqId = uuidv4();
+            const response = await placeOrderWithErrorHandling(orderParams, {
+                token: "94c0f7f3eeded133d233c21902bd3a5bb282e11735093b62f5ed1cd36ac67b9b"
+            });
 
-        //     const response = await orderApi.placeNewOrder(
-        //         Env.TEST_USERNAME as string,
-        //         "76qjXSCN1xpJYYRpKaLmVMD8D3PxFQiy2NRKws2sCw9RukmzVDyeJUN9tupNxHAS",
-        //         acntNo,
-        //         subAcntNo,
-        //         orderParams,
-        //         rqId,
-        //         token
-        //     );
-        //     expect(response).toBeDefined();
-        //     expect(response.rc).toBe("-1");
-        //     expect(response.data.message).toBe(`Servlet.exception.SessionException: Session ${Env.TEST_USERNAME}is not correct.`);
-        // });
+            expectFailedOrder(response, "Not match Certification value as 2FA.");
+        });
 
-        // test("8. should handle order with invalid token", async () => {
-        //     if (!session || !acntNo || !subAcntNo) {
-        //         test.skip();
-        //         return;
-        //     }
+        test("10. should handle order with odd lot", async () => {
+            await delay();
+            const orderParams = createOrderParams({
+                symbol: ORDER_SYMBOLS.FUTURES,
+                ordrQty: "15",
+                ordrUntprc: "10",
+                oddOrdrYn: "Y"
+            });
 
-        //     const orderParams = {
-        //         symbol: "CFPT2501",
-        //         ordrQty: "100",
-        //         ordrUntprc: "500",
-        //         ordrTrdTp: "01",
-        //         buySelTp: "1",
-        //         oddOrdrYn: "N",
-        //         privateKey: privateKey
-        //     };
-
-        //     const rqId = uuidv4();
-
-        //     const response = await orderApi.placeNewOrder(
-        //         Env.TEST_USERNAME as string,
-        //         session,
-        //         acntNo,
-        //         subAcntNo,
-        //         orderParams,
-        //         rqId,
-        //         "94c0f7f3eeded133d233c21902bd3a5bb282e11735093b62f5ed1cd36ac67b9b"
-        //     );
-        //     expect(response).toBeDefined();
-        //     expect(response.rc).toBe(-1);
-        //     expect(response.data.message).toBe(`Not match Certification value as 2FA.`);
-        // });
-
-        // test("10. should handle order with odd lot", async () => {
-        //     if (!session || !token || !acntNo || !subAcntNo) {
-        //         test.skip();
-        //         return;
-        //     }
-
-        //     const orderParams = {
-        //         symbol: "CFPT2501",
-        //         ordrQty: "15", // Odd lot quantity
-        //         ordrUntprc: "10",
-        //         ordrTrdTp: "01",
-        //         buySelTp: "1",
-        //         oddOrdrYn: "Y", // Odd lot
-        //         privateKey: privateKey
-        //     };
-
-        //     const rqId = uuidv4();
-        //     const response = await orderApi.placeNewOrder(
-        //         Env.TEST_USERNAME as string,
-        //         session,
-        //         acntNo,
-        //         subAcntNo,
-        //         orderParams,
-        //         rqId,
-        //         token
-        //     );
-
-        //     expect(response).toBeDefined();
-        //     expect(response.rc).toBe(1);
-        //     expect(response.data.ordrNo).toBeDefined();
-        // });
+            const response = await placeOrderWithErrorHandling(orderParams);
+            expectSuccessfulOrder(response);
+        });
     });
 
-    //     test.describe("Integration Tests", () => {
-    //         test("11. should complete full order flow: login -> get stocks -> place order", async () => {
-    //             // Step 1: Get list of stocks
-    //             const stocksResponse = await orderApi.getListAllStock();
-    //             expect(stocksResponse).toBeDefined();
-    //             expect(stocksResponse.rc).toBe(1);
-    //             expect(Array.isArray(stocksResponse)).toBe(true);
+    test.describe("Integration Tests", () => {
+        test("11. should complete full order flow: login -> get stocks -> place order", async () => {
+            const { orderApi } = createFreshInstances();
 
-    //             if (!session || !token || !acntNo || !subAcntNo) {
-    //                 test.skip();
-    //                 return;
-    //             }
+            // Get list of stocks
+            const stocksResponse = await orderApi.getListAllStock();
+            expect(stocksResponse).toBeDefined();
+            expect(Array.isArray(stocksResponse)).toBe(true);
 
-    //             // Step 2: Place order with first available stock
-    //             if (stocksResponse.length > 0) {
-    //                 const orderStock = stocksResponse.find((it: any) => it.stock_code.includes("CFPT2501"));
-    //                 const orderParams = {
-    //                     symbol: orderStock.stock_code,
-    //                     ordrQty: "100",
-    //                     ordrUntprc: "10",
-    //                     ordrTrdTp: "01",
-    //                     buySelTp: "1",
-    //                     oddOrdrYn: "N",
-    //                     privateKey: privateKey
-    //                 };
+            if (stocksResponse.length > 0) {
+                const orderStock = stocksResponse.find((stock: any) =>
+                    stock.stock_code?.includes(ORDER_SYMBOLS.FUTURES)
+                );
 
-    //                 const rqId = uuidv4();
-    //                 const orderResponse = await orderApi.placeNewOrder(
-    //                     Env.TEST_USERNAME as string,
-    //                     session,
-    //                     acntNo,
-    //                     subAcntNo,
-    //                     orderParams,
-    //                     rqId,
-    //                     token
-    //                 );
+                const orderParams = createOrderParams({
+                    symbol: orderStock?.stock_code || ORDER_SYMBOLS.FUTURES,
+                    ordrUntprc: "10"
+                });
 
-    //                 expect(orderResponse).toBeDefined();
-    //                 expect(orderResponse.rc).toBe(1);
-    //                 expect(orderResponse.data.ordrNo).toBeDefined();
-    //             }
-    //         });
+                const response = await placeOrderWithErrorHandling(orderParams);
+                expectSuccessfulOrder(response);
+            }
+        });
 
-    //         test("12. should handle concurrent order requests", async () => {
-    //             if (!session || !token || !acntNo || !subAcntNo) {
-    //                 test.skip();
-    //                 return;
-    //             }
+        test("12. should handle concurrent order requests", async () => {
+            const loginData = await getLoginSession();
+            const { session, token, acntNo, subAcntNo } = loginData;
 
-    //             const orderParams = {
-    //                 symbol: "CFPT2501",
-    //                 ordrQty: "10",
-    //                 ordrUntprc: "10",
-    //                 ordrTrdTp: "01",
-    //                 buySelTp: "1",
-    //                 oddOrdrYn: "Y",
-    //                 privateKey: privateKey
-    //             };
+            const orderParams = createOrderParams({
+                symbol: ORDER_SYMBOLS.FUTURES,
+                ordrQty: "10",
+                ordrUntprc: "10",
+                oddOrdrYn: "Y"
+            });
 
-    //             const promises = [
-    //                 orderApi.placeNewOrder(
-    //                     Env.TEST_USERNAME as string,
-    //                     session,
-    //                     acntNo,
-    //                     subAcntNo,
-    //                     orderParams,
-    //                     uuidv4(),
-    //                     token
-    //                 ),
-    //                 orderApi.placeNewOrder(
-    //                     Env.TEST_USERNAME as string,
-    //                     session,
-    //                     acntNo,
-    //                     subAcntNo,
-    //                     orderParams,
-    //                     uuidv4(),
-    //                     token
-    //                 ),
-    //                 orderApi.placeNewOrder(
-    //                     Env.TEST_USERNAME as string,
-    //                     session,
-    //                     acntNo,
-    //                     subAcntNo,
-    //                     orderParams,
-    //                     uuidv4(),
-    //                     token
-    //                 )
-    //             ];
+            const createConcurrentOrder = (delayMs: number = 0) => {
+                return delay(delayMs).then(() => {
+                    const { orderApi } = createFreshInstances();
+                    return orderApi.placeNewOrder(
+                        Env.TEST_USERNAME as string,
+                        session,
+                        acntNo,
+                        subAcntNo,
+                        orderParams,
+                        uuidv4(),
+                        token
+                    );
+                });
+            };
 
-    //             const responses = await Promise.all(promises);
-    //             expect(responses).toHaveLength(3);
+            const responses = await Promise.all([
+                createConcurrentOrder(0),
+                createConcurrentOrder(50),
+                createConcurrentOrder(100)
+            ]);
 
-    //             responses.forEach(response => {
-    //                 expect(response).toBeDefined();
-    //                 expect(response.rc).toBe(1);
-    //                 expect(response.data.ordrNo).toBeDefined();
-    //             });
-    //         });
-    //     });
+            expect(responses).toHaveLength(3);
+            responses.forEach(expectSuccessfulOrder);
+        });
+    });
+
+    test.describe("Performance Tests", () => {
+        test("13. should handle rapid successive order requests", async () => {
+            const loginData = await getLoginSession();
+            const { session, token, acntNo, subAcntNo } = loginData;
+            const { orderApi } = createFreshInstances();
+
+            const orderParams = createOrderParams({
+                symbol: ORDER_SYMBOLS.FUTURES,
+                ordrQty: "5",
+                ordrUntprc: "10",
+                oddOrdrYn: "Y"
+            });
+
+            const startTime = Date.now();
+            const orderPromises: Promise<any>[] = [];
+
+            // Create 5 concurrent order requests for better performance
+            for (let i = 0; i < 5; i++) {
+                const orderPromise = orderApi.placeNewOrder(
+                    Env.TEST_USERNAME as string,
+                    session,
+                    acntNo,
+                    subAcntNo,
+                    orderParams,
+                    uuidv4(),
+                    token
+                ).catch(error => {
+                    console.log(`Order ${i + 1} failed:`, error);
+                    return null;
+                });
+
+                orderPromises.push(orderPromise);
+            }
+
+            const responses = await Promise.all(orderPromises);
+            const successfulResponses = responses.filter(response => response?.rc === 1);
+
+            const endTime = Date.now();
+            const duration = endTime - startTime;
+
+            expect(duration).toBeLessThan(PERFORMANCE_TIMEOUT);
+            expect(successfulResponses.length).toBeGreaterThan(0);
+        });
+    });
 });

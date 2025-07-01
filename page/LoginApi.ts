@@ -21,10 +21,7 @@ const Env: any = {
 };
 
 // 01.LO, 02.ATO,03.ATC,04.MP,05.MTL,06.MOK,07.MAK, 08.PLO (Post Close), 09. Buy-in
-// Replace the crypto encryption with CryptoJS equivalent
 const OTP: string = "563447";
-let matrixAuth: string = "111";
-let value: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
 
 // Interfaces for type safety
 interface LoginPayload {
@@ -206,8 +203,13 @@ export default class LoginApi {
             if (authResponse.rc === 1) {
                 const matrixGen: string[] = Object.values(authResponse.data);
                 console.log('matrixGen:', matrixGen);
-                matrixAuth = getMatrixCodes(matrixGen).join('');
-                value = orderApi.genMatrixAuth(matrixAuth);
+                let matrixAuth: string = getMatrixCodes(matrixGen).join('');
+                let value: string = "";
+                if (env === "PROD") {
+                    value = orderApi.genMatrixAuth(matrixAuth);
+                } else if (env === "UAT") {
+                    value = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
+                }
                 tokenResponse = await this.getToken(
                     Env.TEST_USERNAME as string,
                     session,

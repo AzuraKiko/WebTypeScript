@@ -13,7 +13,7 @@
     "test:uat": "cross-env NODE_ENV=uat npx playwright test",
     "test:prod": "cross-env NODE_ENV=prod npx playwright test",
     "test:dev:chrome": "cross-env NODE_ENV=dev npx playwright test --config=playwright.config.ts --project=Chrome",
-    "test:uat:chrome": "cross-env NODE_ENV=uat npx playwright test --config=playwright.config.ts --project=Firefox",
+    "test:uat:chrome": "cross-env NODE_ENV=uat npx playwright test --config=playwright.config.ts --project=Chrome",
     "test:prod:chrome": "cross-env NODE_ENV=prod npx playwright test --config=playwright.config.ts --project=Chrome"
   },
   "keywords": [

@@ -92,6 +92,8 @@ npm run test:prod:chrome tests/api/login.spec.ts -g "getToken method"
 
 npx playwright test tests/api/login.spec.ts --workers=1 --project=Chrome
 npm run test:prod:chrome tests/api/login.spec.ts --workers=1
+npm run test:uat:chrome tests/api/login.spec.ts --workers=1
+
 (workers=1 to run in serial, test cases chạy theo đúng thứ tự)
 
 # Chạy test với giao diện hiển thị

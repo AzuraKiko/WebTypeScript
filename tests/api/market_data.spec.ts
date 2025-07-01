@@ -3,306 +3,117 @@ import ApiHelper from '../../helpers/ApiHelper';
 
 let apiHelper: ApiHelper;
 
+// Configuration constants
+const CONFIG = {
+  BASE_URL: 'https://uat-gateway.pinetree.com.vn',
+  MAX_RESPONSE_TIME: 5000,
+  JSON_CONTENT_TYPE: 'application/json'
+};
+
+// Test data configurations
+const API_ENDPOINTS = {
+  CATEGORY_ALL: '/market/public/category/all',
+  CATEGORY_STOCKS: '/market/public/category/stocks?categoryCode=SAN_XUAT&sortBy=VOLUME&market=HOSE',
+  GLOBAL_MARKET: '/market/public/global-market',
+  HEAT_MAP: '/market/public/category/heat-map',
+  BREADTH_DATA: '/market/public/market/breadth/data?exchange=HOSE',
+  INDEX_LIQUIDITY: '/market/public/index/liquidity/data?exchange=HOSE',
+  STOCK_INFLUENCE: '/market/public/stock/influence?exchange=HOSE',
+  INDEX_FOREIGN: '/market/public/index/foreign/data?exchange=HOSE&numberOfSessions=1',
+  STOCK_TOP: '/market/public/stock/top?type=TOP_VOLUME&exchange=HOSE&tradingValue=5000000&limit=1',
+  STOCK_INFLUENCE_LIMIT: '/market/public/stock/influence?exchange=HOSE&limit=1'
+};
+
 test.beforeAll(async () => {
-  const baseUrl: string = 'https://uat-gateway.pinetree.com.vn';
-  apiHelper = new ApiHelper({ baseUrl: baseUrl });
+  apiHelper = new ApiHelper({ baseUrl: CONFIG.BASE_URL });
 });
 
-test.describe('Market Category All API Tests', () => {
-  test('should get all public categories', async ({ }) => {
+// Helper functions for common validations
+class ApiTestHelper {
+  static async performApiTest(
+    apiHelper: ApiHelper,
+    endpoint: string,
+    testName: string,
+    customValidations?: (responseData: any) => void
+  ) {
     const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse('/market/public/category/all')
+      apiHelper.getFullResponse(endpoint)
     );
 
-    // Verify response status is successful
-    expect(response.status).toBe(200);
+    // Common validations
+    this.validateBasicResponse(response);
+    this.validateResponseTime(responseTime, testName);
+    this.validateDataExists(response.data);
 
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
-
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
-
-    // If the response is an array, verify it has content
-    if (Array.isArray(response.data)) {
-      expect(response.data.length).toBeGreaterThan(0);
+    // Custom validations if provided
+    if (customValidations) {
+      customValidations(response.data);
     }
 
-    // Log response for debugging (optional)
-    console.log('API Response:', JSON.stringify(response.data, null, 2));
+    // Log response for debugging
+    console.log(`${testName} API Response:`, JSON.stringify(response.data, null, 2));
+    console.log(`${testName} API response time: ${responseTime}ms`);
 
-    // Verify response time is reasonable (less than 5 seconds)
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`API response time: ${responseTime}ms`);
-  });
-});
+    return { response, responseTime };
+  }
 
-test.describe('Market Category Stocks API Tests', () => {
-  test('should get stocks by category with specific parameters', async ({ }) => {
-    const stocksUrl = '/market/public/category/stocks?categoryCode=SAN_XUAT&sortBy=VOLUME&market=HOSE';
-
-    // Make GET request with query parameters using measureResponseTime
-    const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse(stocksUrl)
-    );
-
-    // Verify response status is successful
+  static validateBasicResponse(response: any) {
     expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toContain(CONFIG.JSON_CONTENT_TYPE);
+  }
 
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
+  static validateResponseTime(responseTime: number, testName: string) {
+    expect(responseTime).toBeLessThan(CONFIG.MAX_RESPONSE_TIME);
+  }
 
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
+  static validateDataExists(data: any) {
+    expect(data).toBeDefined();
+  }
 
-    // Check if response.data has a data property (nested structure)
-    const responseData = response.data.data || response.data;
-    expect(responseData).toBeDefined();
-
-    // Check if list exists in the response
-    if (responseData.list) {
-      expect(responseData.list).toBeDefined();
-
-      // Verify response structure (assuming it returns an array of stocks)
-      if (Array.isArray(responseData.list)) {
-        expect(responseData.list.length).toBeGreaterThanOrEqual(0);
-        // Nếu có stocks, kiểm tra một số trường cơ bản
-        if (responseData.list.length > 0) {
-          responseData.list.forEach((stock: any) => {
-            expect(stock).toHaveProperty('stockCode');
-            expect(stock).toHaveProperty('volume');
-          });
-        }
-      }
+  static validateArrayData(data: any, minLength: number = 0) {
+    if (Array.isArray(data)) {
+      expect(data.length).toBeGreaterThanOrEqual(minLength);
     }
+  }
 
-    // Verify response time is reasonable (less than 5 seconds)
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`Stocks API response time: ${responseTime}ms`);
-  });
-});
+  static validateObjectData(data: any) {
+    if (typeof data === 'object' && !Array.isArray(data)) {
+      expect(Object.keys(data).length).toBeGreaterThan(0);
+    }
+  }
 
-test.describe('Global Market API Tests', () => {
-  test('should get global market data', async ({ }) => {
-    const globalMarketUrl = '/market/public/global-market';
-
-    // Make GET request to global market endpoint using measureResponseTime
-    const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse(globalMarketUrl)
-    );
-
-    // Verify response status is successful
-    expect(response.status).toBe(200);
-
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
-
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
-
-    // Nếu là object hoặc array, kiểm tra có dữ liệu
-    if (typeof response.data === 'object') {
-      if (Array.isArray(response.data)) {
-        expect(response.data.length).toBeGreaterThanOrEqual(0);
+  static validateNestedData(data: any, minLength: number = 0) {
+    if (typeof data === 'object') {
+      if (Array.isArray(data)) {
+        this.validateArrayData(data, minLength);
       } else {
-        expect(Object.keys(response.data).length).toBeGreaterThan(0);
+        this.validateObjectData(data);
       }
     }
-    console.log('Global Market API Response:', JSON.stringify(response.data, null, 2));
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`Global Market API response time: ${responseTime}ms`);
-  });
-});
+  }
 
-test.describe('Market Category Heat Map API Tests', () => {
-  test('should get heat map data', async ({ }) => {
-    const heatMapUrl = '/market/public/category/heat-map';
-
-    // Make GET request to heat map endpoint using measureResponseTime
-    const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse(heatMapUrl)
-    );
-
-    // Verify response status is successful
-    expect(response.status).toBe(200);
-
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
-
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
-
-    // Nếu là object hoặc array, kiểm tra có dữ liệu
-    if (typeof response.data === 'object') {
-      if (Array.isArray(response.data)) {
-        expect(response.data.length).toBeGreaterThanOrEqual(0);
-      } else {
-        expect(Object.keys(response.data).length).toBeGreaterThan(0);
-      }
+  static validateStockData(stocks: any[]) {
+    if (stocks.length > 0) {
+      stocks.forEach((stock: any) => {
+        expect(stock).toHaveProperty('stockCode');
+        expect(stock).toHaveProperty('volume');
+      });
     }
-    console.log('Heat Map API Response:', JSON.stringify(response.data, null, 2));
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`Heat Map API response time: ${responseTime}ms`);
-  });
-});
+  }
 
-test.describe('Market Breadth Data API Tests', () => {
-  test('should get market breadth data for HOSE', async ({ }) => {
-    const breadthUrl = '/market/public/market/breadth/data?exchange=HOSE';
-
-    // Make GET request to breadth data endpoint using measureResponseTime
-    const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse(breadthUrl)
-    );
-
-    // Verify response status is successful
-    expect(response.status).toBe(200);
-
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
-
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
-
-    // Nếu là object hoặc array, kiểm tra có dữ liệu
-    if (typeof response.data === 'object') {
-      if (Array.isArray(response.data)) {
-        expect(response.data.length).toBeGreaterThanOrEqual(0);
-      } else {
-        expect(Object.keys(response.data).length).toBeGreaterThan(0);
-      }
-    }
-    console.log('Market Breadth API Response:', JSON.stringify(response.data, null, 2));
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`Market Breadth API response time: ${responseTime}ms`);
-  });
-});
-
-test.describe('Market Index Liquidity Data API Tests', () => {
-  test('should get index liquidity data for HOSE', async ({ }) => {
-    const liquidityUrl = '/market/public/index/liquidity/data?exchange=HOSE';
-
-    // Make GET request to liquidity data endpoint using measureResponseTime
-    const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse(liquidityUrl)
-    );
-
-    // Verify response status is successful
-    expect(response.status).toBe(200);
-
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
-
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
-
-    // Nếu là object hoặc array, kiểm tra có dữ liệu
-    if (typeof response.data === 'object') {
-      if (Array.isArray(response.data)) {
-        expect(response.data.length).toBeGreaterThanOrEqual(0);
-      } else {
-        expect(Object.keys(response.data).length).toBeGreaterThan(0);
-      }
-    }
-    console.log('Index Liquidity API Response:', JSON.stringify(response.data, null, 2));
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`Index Liquidity API response time: ${responseTime}ms`);
-  });
-
-});
-
-test.describe('Market Stock Influence API Tests', () => {
-  test('should get stock influence data for HOSE', async ({ }) => {
-    const influenceUrl = '/market/public/stock/influence?exchange=HOSE';
-
-    // Make GET request to stock influence endpoint using measureResponseTime
-    const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse(influenceUrl)
-    );
-
-    // Verify response status is successful
-    expect(response.status).toBe(200);
-
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
-
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
-
-    // Nếu là object hoặc array, kiểm tra có dữ liệu
-    if (typeof response.data === 'object') {
-      if (Array.isArray(response.data)) {
-        expect(response.data.length).toBeGreaterThanOrEqual(0);
-      } else {
-        expect(Object.keys(response.data).length).toBeGreaterThan(0);
-      }
-    }
-    console.log('Stock Influence API Response:', JSON.stringify(response.data, null, 2));
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`Stock Influence API response time: ${responseTime}ms`);
-  });
-});
-
-test.describe('Market Index Foreign Data API Tests', () => {
-  test('should get index foreign data for HOSE', async ({ }) => {
-    const foreignUrl = '/market/public/index/foreign/data?exchange=HOSE&numberOfSessions=1';
-
-    // Make GET request to foreign data endpoint using measureResponseTime
-    const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse(foreignUrl)
-    );
-
-    // Verify response status is successful
-    expect(response.status).toBe(200);
-
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
-
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
-
-    // Nếu là object hoặc array, kiểm tra có dữ liệu
-    if (typeof response.data === 'object') {
-      if (Array.isArray(response.data)) {
-        expect(response.data.length).toBeGreaterThanOrEqual(0);
-      } else {
-        expect(Object.keys(response.data).length).toBeGreaterThan(0);
-      }
-    }
-    console.log('Index Foreign API Response:', JSON.stringify(response.data, null, 2));
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`Index Foreign API response time: ${responseTime}ms`);
-  });
-});
-
-test.describe('Market Stock Top API Tests', () => {
-  test('should get top stock by volume for HOSE', async ({ }) => {
-    const topStockUrl = '/market/public/stock/top?type=TOP_VOLUME&exchange=HOSE&tradingValue=5000000&limit=1';
-
-    // Make GET request to top stock endpoint using measureResponseTime
-    const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse(topStockUrl)
-    );
-
-    // Verify response status is successful
-    expect(response.status).toBe(200);
-
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
-
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
-
-    // Nếu là array, kiểm tra có ít nhất 0 phần tử (vì limit=1)
-    if (Array.isArray(response.data)) {
-      expect(response.data.length).toBeGreaterThanOrEqual(0);
-      // Nếu có phần tử, kiểm tra một số trường cơ bản
-      if (response.data.length > 0) {
-        const first = response.data[0];
+  static validateTopStockData(data: any) {
+    if (Array.isArray(data)) {
+      expect(data.length).toBeGreaterThanOrEqual(0);
+      if (data.length > 0) {
+        const first = data[0];
         expect(first).toHaveProperty('stockCode');
         expect(first).toHaveProperty('volume');
-        const body: any = response.data;
-        const stock = body.data[0];
+      }
+    } else if (data && typeof data === 'object' && data.data && Array.isArray(data.data)) {
+      // Handle nested data structure
+      const stockArray = data.data;
+      if (stockArray.length > 0) {
+        const stock = stockArray[0];
         expect(stock.stockCode).toBe('SHB');
         expect(stock.name).toContain('Sài Gòn - Hà Nội');
         expect(stock.stockExchange).toBe('HOSE');
@@ -311,42 +122,89 @@ test.describe('Market Stock Top API Tests', () => {
         expect(stock.value).toBeGreaterThan(0);
       }
     }
-    console.log('Top Stock API Response:', JSON.stringify(response.data, null, 2));
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`Top Stock API response time: ${responseTime}ms`);
+  }
+
+  static validateInfluenceData(data: any) {
+    if (Array.isArray(data) && data.length > 0) {
+      const first = data[0];
+      expect(first).toHaveProperty('stockCode');
+      expect(first).toHaveProperty('influenceIndex');
+    }
+  }
+}
+
+// Test suites using the optimized helper
+test.describe('Market Category All API Tests', () => {
+  test('should get all public categories', async () => {
+    await ApiTestHelper.performApiTest(
+      apiHelper,
+      API_ENDPOINTS.CATEGORY_ALL,
+      'Market Category All',
+      (data) => ApiTestHelper.validateArrayData(data, 1)
+    );
   });
 });
 
-test.describe('Market Stock Influence (Limit) API Tests', () => {
-  test('should get stock influence data for HOSE with limit=1', async ({ }) => {
-    const influenceLimitUrl = '/market/public/stock/influence?exchange=HOSE&limit=1';
+test.describe('Market Category Stocks API Tests', () => {
+  test('should get stocks by category with specific parameters', async () => {
+    await ApiTestHelper.performApiTest(
+      apiHelper,
+      API_ENDPOINTS.CATEGORY_STOCKS,
+      'Category Stocks',
+      (data) => {
+        const responseData = data.data || data;
+        expect(responseData).toBeDefined();
 
-    // Make GET request to stock influence endpoint with limit using measureResponseTime
-    const { result: response, responseTime } = await apiHelper.measureResponseTime(() =>
-      apiHelper.getFullResponse(influenceLimitUrl)
-    );
-
-    // Verify response status is successful
-    expect(response.status).toBe(200);
-
-    // Verify response headers contain JSON content type
-    expect(response.headers['content-type']).toContain('application/json');
-
-    // Verify response body is not empty
-    expect(response.data).toBeDefined();
-
-    // Nếu là array, kiểm tra có ít nhất 0 phần tử (vì limit=1)
-    if (Array.isArray(response.data)) {
-      expect(response.data.length).toBeGreaterThanOrEqual(0);
-      // Nếu có phần tử, kiểm tra một số trường cơ bản
-      if (response.data.length > 0) {
-        const first = response.data[0];
-        expect(first).toHaveProperty('stockCode');
-        expect(first).toHaveProperty('influenceIndex');
+        if (responseData.list) {
+          expect(responseData.list).toBeDefined();
+          if (Array.isArray(responseData.list)) {
+            expect(responseData.list.length).toBeGreaterThanOrEqual(0);
+            ApiTestHelper.validateStockData(responseData.list);
+          }
+        }
       }
-    }
-    console.log('Stock Influence (Limit) API Response:', JSON.stringify(response.data, null, 2));
-    expect(responseTime).toBeLessThan(5000);
-    console.log(`Stock Influence (Limit) API response time: ${responseTime}ms`);
+    );
+  });
+});
+
+test.describe('Market Data API Tests', () => {
+  const marketDataTests = [
+    { name: 'Global Market', endpoint: API_ENDPOINTS.GLOBAL_MARKET },
+    { name: 'Heat Map', endpoint: API_ENDPOINTS.HEAT_MAP },
+    { name: 'Market Breadth', endpoint: API_ENDPOINTS.BREADTH_DATA },
+    { name: 'Index Liquidity', endpoint: API_ENDPOINTS.INDEX_LIQUIDITY },
+    { name: 'Stock Influence', endpoint: API_ENDPOINTS.STOCK_INFLUENCE },
+    { name: 'Index Foreign', endpoint: API_ENDPOINTS.INDEX_FOREIGN }
+  ];
+
+  marketDataTests.forEach(({ name, endpoint }) => {
+    test(`should get ${name.toLowerCase()} data`, async () => {
+      await ApiTestHelper.performApiTest(
+        apiHelper,
+        endpoint,
+        name,
+        (data) => ApiTestHelper.validateNestedData(data)
+      );
+    });
+  });
+});
+
+test.describe('Market Stock Specific API Tests', () => {
+  test('should get top stock by volume for HOSE', async () => {
+    await ApiTestHelper.performApiTest(
+      apiHelper,
+      API_ENDPOINTS.STOCK_TOP,
+      'Top Stock',
+      (data) => ApiTestHelper.validateTopStockData(data)
+    );
+  });
+
+  test('should get stock influence data for HOSE with limit=1', async () => {
+    await ApiTestHelper.performApiTest(
+      apiHelper,
+      API_ENDPOINTS.STOCK_INFLUENCE_LIMIT,
+      'Stock Influence (Limit)',
+      (data) => ApiTestHelper.validateInfluenceData(data)
+    );
   });
 });
