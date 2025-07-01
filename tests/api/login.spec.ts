@@ -2,7 +2,8 @@ import { test, expect } from "@playwright/test";
 import LoginApi from "../../page/LoginApi";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from 'uuid';
-import CryptoJS from 'crypto-js';
+import { getMatrixCodes } from "../../page/Matrix";
+import OrderApi from "../../page/OrderApi";
 
 dotenv.config({ path: ".env" });
 
@@ -20,18 +21,21 @@ const Env: any = {
     PASSWORD: PROD_PASSWORD,
 };
 
+let loginApi: LoginApi;
+let orderApi: OrderApi;
+
+test.beforeEach(async () => {
+    loginApi = new LoginApi(Env.WS_BASE_URL as string);
+    orderApi = new OrderApi(Env.WS_BASE_URL as string);
+});
+
 // Replace the crypto encryption with CryptoJS equivalent
-// const encryptionKey: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
-const OTP: string = "022356";
-// const value: string = CryptoJS.AES.encrypt(OTP, encryptionKey).toString();
+const OTP: string = "563447";
+let matrixAuth: string = "111";
+let value: string = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
+
 
 test.describe("LoginApi Tests", () => {
-    let loginApi: LoginApi;
-
-    test.beforeEach(async () => {
-        loginApi = new LoginApi(Env.WS_BASE_URL as string);
-    });
-
     test.describe("loginApi method", () => {
         test("1. should successfully login with valid credentials", async () => {
             const response = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
@@ -121,11 +125,16 @@ test.describe("LoginApi Tests", () => {
         test.describe("getToken method", () => {
             test("9. should successfully get token", async () => {
                 const loginResponse = await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
-                const response = await loginApi.getToken(Env.TEST_USERNAME as string, loginResponse.data?.session as string, loginResponse.data?.cif as string, uuidv4(), OTP, "OTP");
-
+                const authResponse = await loginApi.generateAuth(Env.TEST_USERNAME as string, loginResponse.data?.session as string);
+                const matrixGen: string[] = Object.values(authResponse.data);
+                console.log('matrixGen:', matrixGen);
+                let matrixAuth = getMatrixCodes(matrixGen).join('');
+                console.log('matrixAuth:', matrixAuth);
+                value = orderApi.genMatrixAuth(matrixAuth);
+                const response = await loginApi.getToken(Env.TEST_USERNAME as string, loginResponse.data?.session as string, loginResponse.data?.cif as string, uuidv4(), value, "Matrix");
                 expect(response).toBeDefined();
                 expect(response.rc).toBe(1);
-                console.log(response);
+                expect(response.data.token).not.toBe("Invalid OTP");
             });
         });
 
@@ -142,14 +151,19 @@ test.describe("LoginApi Tests", () => {
 
                     const session: string = loginResponse.data.session;
                     const cif: string = loginResponse.data.cif;
-
                     // Step 2: Generate Auth
                     const authResponse = await loginApi.generateAuth(Env.TEST_USERNAME as string, session);
                     expect(authResponse).toBeDefined();
+                    expect(authResponse.rc).toBe(1);
+                    let matrixGen: string[] = Object.values(authResponse.data);
+                    let matrixAuth = getMatrixCodes(matrixGen).join('');
+                    let value = orderApi.genMatrixAuth(matrixAuth);
 
                     // Step 3: Get Token
-                    const tokenResponse = await loginApi.getToken(Env.TEST_USERNAME as string, session, cif, uuidv4(), OTP, "OTP");
+                    const tokenResponse = await loginApi.getToken(Env.TEST_USERNAME as string, session, cif, uuidv4(), value, "Matrix");
                     expect(tokenResponse).toBeDefined();
+                    expect(tokenResponse.rc).toBe(1);
+                    expect(tokenResponse.data.token).not.toBe("Invalid OTP");
                 }
             });
         });

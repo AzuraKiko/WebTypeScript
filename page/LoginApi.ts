@@ -158,14 +158,14 @@ export default class LoginApi {
     /**
     * Login success
     */
-    async loginSuccess() {
+    async loginSuccess(typeAuth: string) {
         let orderApi: OrderApi = new OrderApi(Env.WS_BASE_URL);
         let session: string = "";
         let cif: string = "";
         let token: string = "";
         let acntNo: string = "";
         let subAcntNo: string = "";
-        let typeAuth: string = "Matrix";
+        typeAuth = typeAuth;
 
         const loginResponse = await this.loginApi(
             Env.TEST_USERNAME as string,
