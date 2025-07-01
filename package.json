@@ -1,7 +1,7 @@
 {
   "name": "playwright",
   "version": "1.0.0",
-  "type": "module",
+  "type": "es2020",
   "description": "✅ npx playwright install\r ✅ npm i -D @playwright/test allure-playwright\r ✅ npm i -g allure-commandline\r     npx playwright test --reporter=html\r     npx playwright show-report\r ✅ npx playwright test --reporter=allure-playwright\r ✅ allure serve allure-results",
   "main": "index.js",
   "directories": {

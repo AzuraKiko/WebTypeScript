@@ -61,45 +61,28 @@ test.describe("LoginApi Tests", () => {
         });
 
         test("3. should handle login with empty username", async () => {
-            try {
-                await loginApi.loginApi(
-                    "",
-                    Env.TEST_PASSWORD as string,
-                    Env.TEST_FCM_TOKEN as string
-                );
-                // Nếu API không throw error, test sẽ fail
-                expect(true).toBe(false);
-            } catch (error: any) {
-                // Check if error has response data with the expected message
-                if (
-                    error.response &&
-                    error.response.data &&
-                    error.response.data.data &&
-                    error.response.data.data.message
-                ) {
-                    expect(error.response.data.rc).toBe(-1);
-                    expect(error.response.data.data.message).toBe(
-                        "Không có thông tin khách hàng"
-                    );
-                } else {
-                    expect(error).toBeDefined();
-                }
+
+            const response = await loginApi.loginApi(
+                "",
+                Env.TEST_PASSWORD as string,
+                Env.TEST_FCM_TOKEN as string
+            );
+            expect(response).toBeDefined();
+            expect(response).toHaveProperty("data");
+            expect(response.rc).toBe(-1);
+            if (response.data && (response.rc === -1)) {
+                expect((response.data as any).message).toBe("Không có thông tin khách hàng");
             }
         });
 
         test("4. should handle login with empty password", async () => {
-            try {
-                await loginApi.loginApi(Env.TEST_USERNAME as string, "", Env.TEST_FCM_TOKEN as string);
-                // If we reach here, the test should fail
-                expect(true).toBe(false);
-            } catch (error: any) {
-                // Check if error has response data with the expected message
-                if (error.response && error.response.data && error.response.data.data && error.response.data.data.message) {
-                    expect(error.response.data.rc).toBe(-1);
-                    expect(error.response.data.data.message).toBe("Quý Khách đã nhập sai thông tin đăng nhập 1 LẦN. Quý Khách lưu ý, tài khoản sẽ bị tạm khóa nếu Quý Khách nhập sai liên tiếp 05 LẦN.");
-                } else {
-                    expect(error).toBeDefined();
-                }
+            const response = await loginApi.loginApi(Env.TEST_USERNAME as string, "", Env.TEST_FCM_TOKEN as string);
+
+            expect(response).toBeDefined();
+            expect(response).toHaveProperty("data");
+            expect(response.rc).toBe(-1);
+            if (response.data && (response.rc === -1)) {
+                expect((response.data as any).message).toBe("Quý Khách đã nhập sai thông tin đăng nhập 1 LẦN. Quý Khách lưu ý, tài khoản sẽ bị tạm khóa nếu Quý Khách nhập sai liên tiếp 05 LẦN.");
             }
         });
 
@@ -177,14 +160,11 @@ test.describe("LoginApi Tests", () => {
             if (loginResponse.data) {
                 const session: string = loginResponse.data.session;
                 const cif: string = loginResponse.data.cif;
-                try {
-                    await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
-                    await loginApi.generateAuth(Env.TEST_USERNAME as string, session);
-                    // If we reach here, the test should fail
-                    expect(true).toBe(false);
-                } catch (error) {
-                    expect(error).toBeDefined();
-                }
+                await loginApi.loginApi(Env.TEST_USERNAME as string, Env.TEST_PASSWORD as string, Env.TEST_FCM_TOKEN as string);
+                const authResponse = await loginApi.generateAuth(Env.TEST_USERNAME as string, session);
+                expect(authResponse).toBeDefined();
+                expect(authResponse.rc).toBe("-1");
+                expect(authResponse.data.message).toBe(`Servlet.exception.SessionException: Session ${Env.TEST_USERNAME}is not correct.`);
             }
         });
 

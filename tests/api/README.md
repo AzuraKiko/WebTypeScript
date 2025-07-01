@@ -111,6 +111,12 @@ tests/api/maket_data.spec.ts:15:5 - error TS2304: Cannot find name 'apiHelper'
 npx tsc tests/api/maket_data.spec.ts: Compile và tạo file .js
 npx tsc --noEmit tests/api/maket_data.spec.ts: Chỉ kiểm tra lỗi
 npx playwright test tests/api/maket_data.spec.ts: Chạy test thực tế
+
+
+npx playwright test tests/api/order.spec.ts --grep "should handle order with invalid token"
+npm run test:prod:chrome tests/api/order.spec.ts --grep "should handle order with invalid token"
+
+
 ```
 
 ## Environment Configuration
