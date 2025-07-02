@@ -8,7 +8,7 @@ dotenv.config({ path: '.env' });
  */
 export const getEnvironment = () => {
     let env = process.env.NODE_ENV?.toUpperCase() || 'PROD';
-    if (env === 'PRODUCTION') env = 'PROD';
+    if (env === 'PRODUCTION') env = 'UAT';
     return env;
 };
 
@@ -46,8 +46,10 @@ export const ERROR_MESSAGES = {
     NOT_LOGGED_IN: "Servlet.exception.SessionException: Not logged in!",
     SESSION_INCORRECT: (username: string) => `Servlet.exception.SessionException: Session ${username}is not correct.`,
     INVALID_OTP: "Invalid OTP",
+    TOKEN_NOT_MATCH: "Not match Certification value as 2FA.",
 
     // Order Error Messages
+    ORDER_SYMBOL_NOT_FOUND: "Please check SYMBOL.",
     ORDER_QUANTITY_EXCEEDED: "order available sell quantity has been exceeded.",
     ORDER_PRICE_LIMIT: "Order price is greater than upper limit.",
 } as const;
@@ -67,7 +69,7 @@ export const TEST_DATA = {
     ORDER_SYMBOLS: {
         VALID: "CEO",
         INVALID: "CEO1",
-        FUTURES: "CFPT2501"
+        CW: "CFPT2501"
     },
 
     ORDER_TYPES: {
