@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 import BasePage from './BasePage';
-import { getMatrixCodes, isValidCoordinate } from './Matrix';
-import { getRandomStockCode } from '../tests/utils/testConfig';
+import { getMatrixCodes, isValidCoordinate } from '../api/Matrix';
+import { getRandomStockCode } from '../../tests/utils/testConfig';
 
 class OrderPage extends BasePage {
     // Navigation
@@ -16,9 +16,13 @@ class OrderPage extends BasePage {
     refreshMatrix: Locator;
     popup2FA: Locator;
 
+    // Asset
+
+
     // Order Form
     stockCodeInput: Locator;
     quantityInput: Locator;
+    priceInput: Locator;
     priceSpan: Locator;
     placeOrderButton: Locator;
     confirmOrderButton: Locator;
@@ -35,7 +39,7 @@ class OrderPage extends BasePage {
         super(page);
 
         // Navigation
-        this.orderButton = page.getByText('Đặt lệnh');
+        this.orderButton = page.locator('.footer-btn:has(.iOrder)');
         this.orderBookButton = page.getByText('Sổ lệnh');
 
         // Matrix 2FA
@@ -48,6 +52,7 @@ class OrderPage extends BasePage {
 
         // Order Form
         this.stockCodeInput = page.getByPlaceholder('Mã CK', { exact: true });
+        this.priceInput = page.getByPlaceholder('Giá x1000');
         this.quantityInput = page.getByPlaceholder('KL x1');
         this.priceSpan = page.locator('span.cursor-pointer.f');
         this.placeOrderButton = page.getByRole('button', { name: 'Đặt lệnh' });

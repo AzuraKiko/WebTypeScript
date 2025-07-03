@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import LoginApi from "../../page/LoginApi";
-import OrderApi from "../../page/OrderApi";
+import LoginApi from "../../page/api/LoginApi";
+import OrderApi from "../../page/api/OrderApi";
 import { v4 as uuidv4 } from 'uuid';
 import {
     TEST_CONFIG,

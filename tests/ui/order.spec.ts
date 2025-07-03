@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import LoginPage from '../../page/LoginPage';
-import OrderPage from '../../page/OrderPage';
+import LoginPage from '../../page/ui/LoginPage';
+import OrderPage from '../../page/ui/OrderPage';
 import { TEST_DATA, getRandomStockCode } from '../utils/testConfig';
 
 test.describe('Order Management Tests', () => {

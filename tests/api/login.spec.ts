@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import LoginApi from "../../page/LoginApi";
+import LoginApi from "../../page/api/LoginApi";
 import { v4 as uuidv4 } from 'uuid';
-import { getMatrixCodes } from "../../page/Matrix";
-import OrderApi from "../../page/OrderApi";
+import { getMatrixCodes } from "../../page/api/Matrix";
+import OrderApi from "../../page/api/OrderApi";
 import {
     TEST_CONFIG,
     ERROR_MESSAGES,

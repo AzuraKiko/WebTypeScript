@@ -1,4 +1,4 @@
-import ApiHelper from "../helpers/ApiHelper";
+import ApiHelper from "../../helpers/ApiHelper";
 import crypto from "crypto";
 
 interface NewOrderPayload {

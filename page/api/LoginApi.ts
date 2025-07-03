@@ -1,9 +1,9 @@
-import ApiHelper from "../helpers/ApiHelper";
+import ApiHelper from "../../helpers/ApiHelper";
 import OrderApi from "./OrderApi";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from 'uuid';
 import { getMatrixCodes } from "./Matrix";
-import { TEST_CONFIG, ENV } from "../tests/utils/testConfig";
+import { TEST_CONFIG, ENV } from "../../tests/utils/testConfig";
 
 dotenv.config({ path: ".env" });
 

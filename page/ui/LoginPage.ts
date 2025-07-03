@@ -1,6 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import BasePage from './BasePage';
-import { TEST_CONFIG, ERROR_MESSAGES } from '../tests/utils/testConfig';
+import { TEST_CONFIG, ERROR_MESSAGES } from '../../tests/utils/testConfig';
 
 class LoginPage extends BasePage {
     openLogin: Locator;

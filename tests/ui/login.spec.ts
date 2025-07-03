@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import LoginPage from "../../page/LoginPage";
+import LoginPage from "../../page/ui/LoginPage";
 import { attachScreenshot } from '../../helpers/reporterHelper';
-import LogoutPage from "../../page/LogoutPage";
+import LogoutPage from "../../page/ui/LogoutPage";
 import { TEST_CONFIG, ERROR_MESSAGES, TEST_DATA } from '../utils/testConfig';
 
 // Configure test suite for better isolation
