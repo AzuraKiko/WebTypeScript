@@ -25,7 +25,7 @@ class LoginPage extends BasePage {
         this.openAccountLink = page.locator('.btn.btn--primary2.mt-3');
         this.verifyUser = page.locator('.header-btn .icon.iAccount + span');
         this.invalidLogin = page.locator('.d.mt-2 ul li');
-        this.usernameError = page.locator('.order-text:has(input[name="password"]) + .d.mt-2');
+        this.usernameError = page.locator('.order-text:has(input[name="username"]) + .d.mt-2');
         this.passwordError = page.locator('.order-text:has(input[name="password"]) + .d.mt-2');
         this.closeBanner = page.locator('.btn-icon.btn--light > span');
     }

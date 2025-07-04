@@ -1,23 +1,12 @@
 import { Page, Locator, expect } from '@playwright/test';
 import BasePage from './BasePage';
-import { getMatrixCodes, isValidCoordinate } from '../api/Matrix';
 import { getRandomStockCode } from '../../tests/utils/testConfig';
+import MatrixPage from './MatrixPage';
 
 class OrderPage extends BasePage {
+    matrixPage: MatrixPage;
     // Navigation
     orderButton: Locator;
-    orderBookButton: Locator;
-
-    // Matrix 2FA
-    matrixGen: Locator;
-    matrixInput: Locator;
-    confirmButton: Locator;
-    change2FA: Locator;
-    refreshMatrix: Locator;
-    popup2FA: Locator;
-
-    // Asset
-
 
     // Order Form
     stockCodeInput: Locator;
@@ -28,6 +17,8 @@ class OrderPage extends BasePage {
     confirmOrderButton: Locator;
 
     // Order Book
+    orderIndayTab: Locator;
+    orderHistoryTab: Locator;
     cancelOrderButton: Locator;
     modifyOrderButton: Locator;
 
@@ -37,18 +28,10 @@ class OrderPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
+        this.matrixPage = new MatrixPage(page);
 
         // Navigation
         this.orderButton = page.locator('.footer-btn:has(.iOrder)');
-        this.orderBookButton = page.getByText('Sổ lệnh');
-
-        // Matrix 2FA
-        this.matrixGen = page.locator('p.fw-500');
-        this.matrixInput = page.locator('.text-center.text-otp');
-        this.confirmButton = page.getByRole('button', { name: 'Xác nhận' });
-        this.change2FA = page.locator('.btn.btn--primary2.fw-500');
-        this.refreshMatrix = page.locator('.text-refresh.cursor-pointer');
-        this.popup2FA = page.locator('.mb-0.text-title');
 
         // Order Form
         this.stockCodeInput = page.getByPlaceholder('Mã CK', { exact: true });
@@ -59,6 +42,8 @@ class OrderPage extends BasePage {
         this.confirmOrderButton = page.getByRole('button', { name: 'Xác nhận' });
 
         // Order Book
+        this.orderIndayTab = page.locator('.asset-panel .card-panel-header__title:nth-child(1)');
+        this.orderHistoryTab = page.locator('.asset-panel .card-panel-header__title:nth-child(2)');
         this.cancelOrderButton = page.locator('td:nth-child(14) > div > span:nth-child(2) > .icon').first();
         this.modifyOrderButton = page.locator('td:nth-child(14) > div > span:nth-child(2) > .icon').nth(1);
 
@@ -74,42 +59,7 @@ class OrderPage extends BasePage {
      */
     async navigateToOrder(): Promise<void> {
         await this.orderButton.click();
-        await this.handleMatrixIfVisible();
-    }
-
-    /**
-     * Handle matrix input if the matrix popup is visible
-     */
-    async handleMatrixIfVisible(): Promise<void> {
-        try {
-            await this.matrixGen.waitFor({ state: 'visible', timeout: 3000 });
-            await this.enterMatrix();
-        } catch {
-            // Matrix not required, continue
-        }
-    }
-
-    /**
-     * Enter matrix codes for 2FA
-     */
-    async enterMatrix(): Promise<void> {
-        await expect(this.matrixGen).toBeVisible();
-
-        const coords: string[] = await this.matrixGen.allTextContents();
-        const validCoords: string[] = coords.filter((coord: string) => isValidCoordinate(coord.trim()));
-
-        if (validCoords.length < 3) {
-            throw new Error(`Expected 3 valid coordinates, but got ${validCoords.length}. Coordinates: ${coords.join(', ')}`);
-        }
-
-        const matrixValues: string[] = getMatrixCodes(validCoords.slice(0, 3));
-
-        // Use for...of loop instead of forEach for proper async handling
-        for (let index = 0; index < matrixValues.length; index++) {
-            await this.matrixInput.nth(index).fill(matrixValues[index]);
-        }
-
-        await this.confirmButton.click();
+        await this.matrixPage.enterMatrixValid();
     }
 
     /**
@@ -151,17 +101,9 @@ class OrderPage extends BasePage {
     }
 
     /**
-     * Navigate to order book
-     */
-    async navigateToOrderBook(): Promise<void> {
-        await this.orderBookButton.click();
-    }
-
-    /**
      * Cancel the first order in order book
      */
     async cancelFirstOrder(): Promise<void> {
-        await this.navigateToOrderBook();
         await this.cancelOrderButton.click();
         await this.confirmOrderButton.click();
     }
@@ -182,23 +124,6 @@ class OrderPage extends BasePage {
             const errorText = await this.errorMessage.textContent();
             return { success: false, message: errorText || 'Order failed' };
         }
-    }
-
-    /**
-     * Refresh matrix when needed
-     */
-    async refreshMatrixCodes(): Promise<void> {
-        await this.refreshMatrix.click();
-    }
-
-    /**
-     * Verify 2FA method change popup
-     */
-    async verifyChange2FAPopup(): Promise<boolean> {
-        await this.change2FA.click();
-        await expect(this.popup2FA).toBeVisible();
-        const text = await this.popup2FA.textContent();
-        return text?.trim() === "Chọn Phương Thức Xác Thực";
     }
 
     // Legacy method for backward compatibility
