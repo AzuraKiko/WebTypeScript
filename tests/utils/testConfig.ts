@@ -8,7 +8,7 @@ dotenv.config({ path: '.env' });
  */
 export const getEnvironment = () => {
     let env = process.env.NODE_ENV?.toUpperCase() || 'PROD';
-    if (env === 'PRODUCTION') env = 'UAT';
+    if (env === 'PRODUCTION') env = 'PROD';
     return env;
 };
 

@@ -205,10 +205,6 @@ class OrderBook extends BasePage {
         return await this.tableRows.count();
     }
 
-    async getTotalOrderText(): Promise<string> {
-        return await this.totalOrder.innerText();
-    }
-
     // Order Action Methods
     async cancelOrder(rowIndex: number = 0): Promise<void> {
         const cancelButton = this.tableRows.nth(rowIndex).locator('.icon-cancel, .cancel-btn');
