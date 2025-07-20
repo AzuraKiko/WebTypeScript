@@ -45,6 +45,21 @@ class OrderBook extends BasePage {
     cancelOrderButton: (rowIndex: number) => Locator;
     modifyOrderButton: (rowIndex: number) => Locator;
 
+    // Cancel All Orders Modal Elements
+    cancelAllModal: Locator;
+    cancelAllModalHeader: Locator;
+    cancelAllModalTable: Locator;
+    cancelAllConfirmButton: Locator;
+    cancelAllModalCloseButton: Locator;
+
+    // Individual Order Cancel Modal Elements
+    deleteOrderModal: Locator;
+    deleteOrderStockCode: Locator;
+    deleteOrderType: Locator;
+    deleteOrderNumber: Locator;
+    deleteOrderConfirmButton: Locator;
+    deleteOrderCancelButton: Locator;
+
     constructor(page: Page) {
         super(page);
         this.orderBookButton = page.locator('.footer-btn:has(.iOrderList)');
@@ -89,6 +104,21 @@ class OrderBook extends BasePage {
         // Action Buttons in Table
         this.cancelOrderButton = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .icon-cancel, .table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .cancel-btn`);
         this.modifyOrderButton = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .icon-edit, .table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .modify-btn`);
+
+        // Cancel All Orders Modal Elements
+        this.cancelAllModal = page.locator('.wts-modal', { hasText: /Xác nhận hủy lệnh/ });
+        this.cancelAllModalHeader = page.locator('.wts-modal__header', { hasText: /Xác nhận hủy lệnh/ });
+        this.cancelAllModalTable = page.locator('.wts-modal .table.table-bordered.table-fix');
+        this.cancelAllConfirmButton = page.locator('.wts-modal .btn.btn--primary');
+        this.cancelAllModalCloseButton = page.locator('C');
+
+        // Individual Order Cancel Modal Elements
+        this.deleteOrderModal = page.locator('.delete-order');
+        this.deleteOrderStockCode = page.locator('.delete-order-body__infor-value p').nth(0);
+        this.deleteOrderType = page.locator('.delete-order-body__infor-value p').nth(1);
+        this.deleteOrderNumber = page.locator('.delete-order-body__infor-value p').nth(2);
+        this.deleteOrderConfirmButton = page.locator('.delete-order .btn-confirm');
+        this.deleteOrderCancelButton = page.locator('.delete-order .btn-cancel');
     }
 
     // Navigation Methods
@@ -172,15 +202,18 @@ class OrderBook extends BasePage {
             const cells = await row.locator('td').all();
             if (cells.length > 0) {
                 orders.push({
-                    account: await cells[0]?.innerText() || '',
-                    stockCode: await cells[5]?.innerText() || '',
-                    time: await cells[3]?.innerText() || '',
-                    transactionType: await cells[4]?.innerText() || '',
-                    price: await cells[7]?.innerText() || '',
-                    quantity: await cells[8]?.innerText() || '',
-                    matchedQuantity: await cells[9]?.innerText() || '',
-                    remainingQuantity: await cells[10]?.innerText() || '',
-                    status: await cells[11]?.innerText() || '',
+                    account: await cells[1]?.innerText() || '',
+                    orderNo: await cells[2]?.innerText() || '',
+                    originOrderNo: await cells[3]?.innerText() || '',
+                    time: await cells[4]?.innerText() || '',
+                    side: await cells[5]?.innerText() || '',
+                    stockCode: await cells[6]?.innerText() || '',
+                    orderType: await cells[7]?.innerText() || '',
+                    price: await cells[8]?.innerText() || '',
+                    quantity: await cells[9]?.innerText() || '',
+                    matchedQuantity: await cells[10]?.innerText() || '',
+                    remainingQuantity: await cells[11]?.innerText() || '',
+                    status: await cells[12]?.innerText() || '',
                 });
             }
         }
@@ -190,8 +223,11 @@ class OrderBook extends BasePage {
     async getOrderDataByIndex(rowIndex: number) {
         return {
             account: await this.accountColumn(rowIndex).innerText(),
-            stockCode: await this.stockCodeColumn(rowIndex).innerText(),
+            orderNo: await this.orderNoColumn(rowIndex).innerText(),
+            originOrderNo: await this.originOrderNoColumn(rowIndex).innerText(),
             time: await this.timeColumn(rowIndex).innerText(),
+            side: await this.sideColumn(rowIndex).innerText(),
+            stockCode: await this.stockCodeColumn(rowIndex).innerText(),
             orderType: await this.orderTypeColumn(rowIndex).innerText(),
             price: await this.priceColumn(rowIndex).innerText(),
             quantity: await this.quantityColumn(rowIndex).innerText(),
@@ -206,22 +242,101 @@ class OrderBook extends BasePage {
     }
 
     // Order Action Methods
+    // Cancel Order
     async cancelOrder(rowIndex: number = 0): Promise<void> {
-        const cancelButton = this.tableRows.nth(rowIndex).locator('.icon-cancel, .cancel-btn');
-        await cancelButton.click();
+        await this.cancelOrderButton(rowIndex).click();
+        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: 10000 });
+        await this.deleteOrderConfirmButton.click();
+        await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: 10000 });
         await this.page.waitForTimeout(1000);
     }
 
+    async getDeleteOrderModalInfo(): Promise<{ stockCode: string; orderType: string; orderNumber: string }> {
+        await this.cancelOrderButton(0).click();
+        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: 10000 });
+        return {
+            stockCode: await this.deleteOrderStockCode.textContent() ?? '',
+            orderType: await this.deleteOrderType.textContent() ?? '',
+            orderNumber: await this.deleteOrderNumber.textContent() ?? ''
+        };
+    }
+
+    async cancelOrderByStatus(targetStatus: string): Promise<void> {
+        const allOrders = await this.getOrderTableData();
+        const ordersToCancel = allOrders.filter(order => order.status.includes(targetStatus));
+
+        console.log(`Found ${ordersToCancel.length} orders with status '${targetStatus}' to cancel`);
+
+        for (let i = 0; i < ordersToCancel.length; i++) {
+            try {
+                const currentOrders = await this.getOrderTableData();
+                const orderIndex = currentOrders.findIndex(order =>
+                    order.orderNo === ordersToCancel[i].orderNo &&
+                    order.stockCode === ordersToCancel[i].stockCode
+                );
+
+                if (orderIndex >= 0) {
+                    await this.cancelOrder(orderIndex);
+                    console.log(`Canceled order ${ordersToCancel[i].stockCode} - ${ordersToCancel[i].orderNo}`);
+                } else {
+                    console.log(`Order not found: ${ordersToCancel[i].stockCode} - ${ordersToCancel[i].orderNo}`);
+                }
+
+                await this.page.waitForTimeout(500);
+            } catch (error) {
+                console.log(`Failed to cancel order ${ordersToCancel[i].stockCode}: ${error}`);
+            }
+        }
+    }
+
+    async cancelAction(rowIndex: number = 0): Promise<void> {
+        await this.cancelOrderButton(rowIndex).click();
+        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: 10000 });
+        await this.deleteOrderCancelButton.click();
+        await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: 10000 });
+        await this.page.waitForTimeout(1000);
+    }
+
+    // Modify Order
     async modifyOrder(rowIndex: number = 0): Promise<void> {
-        const modifyButton = this.tableRows.nth(rowIndex).locator('.icon-edit, .modify-btn');
-        await modifyButton.click();
-        await this.page.waitForTimeout(1000);
+        await this.modifyOrderButton(rowIndex).click();
     }
 
+    // Cancel All Orders
     async cancelAllOrders(): Promise<void> {
         await this.cancelAllOrderButton.click();
-        // Wait for confirmation dialog
+        await this.cancelAllModal.waitFor({ state: 'visible', timeout: 10000 });
+        await this.cancelAllConfirmButton.click();
+        await this.cancelAllModal.waitFor({ state: 'hidden', timeout: 10000 });
         await this.page.waitForTimeout(2000);
+    }
+
+    async closeCancelAllModal(): Promise<void> {
+        await this.cancelAllModalCloseButton.click();
+        await this.cancelAllModal.waitFor({ state: 'hidden', timeout: 5000 });
+    }
+
+    async getCancelAllModalOrdersData(): Promise<any[]> {
+        await this.cancelAllOrderButton.click();
+        await this.cancelAllModal.waitFor({ state: 'visible', timeout: 10000 });
+        const modalTable = this.cancelAllModalTable;
+        const rows = await modalTable.locator('tbody tr').all();
+        const orders = [];
+
+        for (const row of rows) {
+            const cells = await row.locator('td').all();
+            if (cells.length > 0) {
+                orders.push({
+                    account: await cells[0]?.innerText() || '',
+                    orderNo: await cells[1]?.innerText() || '',
+                    stockCode: await cells[2]?.innerText() || '',
+                    side: await cells[3]?.innerText() || '',
+                    price: await cells[4]?.innerText() || '',
+                    remainingQuantity: await cells[5]?.innerText() || '',
+                });
+            }
+        }
+        return orders;
     }
 
     // Verification Methods
@@ -242,8 +357,9 @@ class OrderBook extends BasePage {
     }
 
     async verifyNoDataMessage(): Promise<boolean> {
-        const noDataMessage = this.page.locator('.no-data, .empty-state');
-        return await noDataMessage.isVisible();
+        const noDataMessage = this.page.locator('table.table-bordered.tbl-list + p');
+        const message = await noDataMessage.textContent();
+        return message?.includes('Không có dữ liệu') ?? false;
     }
 }
 
