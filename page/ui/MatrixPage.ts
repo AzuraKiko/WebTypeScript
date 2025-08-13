@@ -27,11 +27,16 @@ class MatrixPage extends BasePage {
         // Messages
         this.errorMessage = page.locator('.d.mx-auto.text-error');
     }
+
+    async isMatrixVisible(): Promise<boolean> {
+        return await this.refreshMatrix.isVisible();
+    }
+
     /**
      * Enter matrix codes for 2FA
      */
     async enterMatrixValid(): Promise<void> {
-        await this.matrixGen.waitFor({ state: 'visible', timeout: 3000 });
+        await this.refreshMatrix.waitFor({ state: 'visible', timeout: 3000 });
 
         const coords: string[] = await this.matrixGen.allTextContents();
         const validCoords: string[] = coords.filter((coord: string) => isValidCoordinate(coord.trim()));
@@ -51,7 +56,7 @@ class MatrixPage extends BasePage {
     }
 
     async enterMatrixInvalid(): Promise<void> {
-        await this.matrixGen.waitFor({ state: 'visible', timeout: 3000 });
+        await this.refreshMatrix.waitFor({ state: 'visible', timeout: 3000 });
 
         for (let index = 0; index < 3; index++) {
             await this.matrixInput.nth(index).fill('123');

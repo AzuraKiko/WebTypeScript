@@ -1,4 +1,4 @@
-import { TEST_CONFIG } from "../../tests/utils/testConfig";
+import { ENV } from "../../tests/utils/testConfig";
 
 // const matrix = {
 //     A: ['0', '0', '2', 'X', 'S', 'N', '6'],
@@ -10,7 +10,28 @@ import { TEST_CONFIG } from "../../tests/utils/testConfig";
 //     G: ['C', '9', 'V', 'X', 'K', '8', 'K']
 // };
 
-const matrix = TEST_CONFIG.MATRIX;
+const PROD_MATRIX = {
+    A: ['2', '0', '2', 'A', '7', 'O', '1'],
+    B: ['0', 'Y', '5', '6', '7', '8', 'T'],
+    C: ['S', '0', '9', '1', 'U', '6', 'A'],
+    D: ['3', '5', '1', 'L', '7', '3', 'S'],
+    E: ['9', '2', 'Y', 'F', 'C', 'P', 'R'],
+    F: ['1', '9', 'L', '6', '4', 'H', '2'],
+    G: ['Q', 'F', '7', '9', '3', '4', 'O']
+}
+
+const UAT_DEV_MATRIX = {
+    A: ['1', '1', '1', '1', '1', '1', '1'],
+    B: ['1', '1', '1', '1', '1', '1', '1'],
+    C: ['1', '1', '1', '1', '1', '1', '1'],
+    D: ['1', '1', '1', '1', '1', '1', '1'],
+    E: ['1', '1', '1', '1', '1', '1', '1'],
+    F: ['1', '1', '1', '1', '1', '1', '1'],
+    G: ['1', '1', '1', '1', '1', '1', '1']
+}
+
+
+const matrix = ENV === 'PROD' ? PROD_MATRIX : UAT_DEV_MATRIX;
 
 
 type MatrixRow = Extract<keyof typeof matrix, string>;

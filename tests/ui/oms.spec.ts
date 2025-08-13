@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
-import { ENV, TEST_CONFIG, getRandomStockCode } from '../utils/testConfig';
+import { ENV } from '../utils/testConfig';
 import MatrixPage from "../../page/ui/MatrixPage";
 import LoginPage from '../../page/ui/LoginPage';
 import OrderPage from '../../page/ui/OrderPage';
@@ -17,9 +17,9 @@ const OUTPUT_FILE = `oms_postman_collection_${ENV}.json`;
 const DEV_API_CORE = ['http://10.8.80.104:8888/', 'http://10.8.80.164:8888/']
 const UAT_API_CORE = ['http://10.8.90.16:8888/', 'http://10.8.90.164:8888/']
 
-// const PROD_API_CORE = ['http://10.8.90.16:8888/', 'http://10.8.90.164:8888/']
+const PROD_API_CORE = ['https://trade.pinetree.vn/', 'https://trade.pinetree.vn/']
 
-const API_DOMAINS = ENV === 'DEV' ? DEV_API_CORE : UAT_API_CORE;
+const API_DOMAINS = ENV === 'DEV' ? DEV_API_CORE : ENV === 'UAT' ? UAT_API_CORE : PROD_API_CORE;
 
 // Normalize configured domains to origins (scheme + host + optional port)
 const CONFIGURED_ORIGINS: string[] = API_DOMAINS.map((domain) => {
@@ -69,22 +69,14 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
 
     await orderPage.navigateToOrder();
 
-    // const stockCode = getRandomStockCode();
-    // await orderPage.placeBuyOrder(stockCode, '1');
+    // Place order buy with normal account
+    await orderPage.placeBuyOrder('ACB', '1');
+    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    await page.waitForTimeout(3000);
 
-
-    // const target = page.locator('span.cursor-pointer.f');
-    // await expect(target).toHaveCount(1);
-    // await target.scrollIntoViewIfNeeded();
-    // await expect(target).toBeVisible();
-    // await target.dblclick();
-
-    // await page.getByPlaceholder('KL x1').fill('1');
-    // await page.getByRole('button', { name: 'Đặt lệnh' }).click();
-    // await page.getByRole('button', { name: 'Xác nhận' }).click();
-
-
-
+    // Place order sell with normal account
+    await orderPage.placeSellOrder();
+    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
 
     const postmanCollection = {

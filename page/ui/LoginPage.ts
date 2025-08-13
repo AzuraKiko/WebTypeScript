@@ -85,6 +85,7 @@ class LoginPage extends BasePage {
         }
         await this.enterUsernameAndPassword(TEST_CONFIG.TEST_USER, TEST_CONFIG.TEST_PASS);
         await this.waitForPageLoad();
+        await this.page.waitForTimeout(3000);
         await this.clickCloseBanner();
     }
 

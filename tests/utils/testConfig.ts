@@ -7,8 +7,8 @@ dotenv.config({ path: '.env' });
  * Centralizes environment variable handling across all tests
  */
 export const getEnvironment = () => {
-    let env = process.env.NODE_ENV?.toUpperCase() || 'UAT';
-    if (env === 'PRODUCTION') env = 'UAT';
+    let env = process.env.NODE_ENV?.toUpperCase() || 'PROD';
+    if (env === 'PRODUCTION') env = 'PROD';
     return env;
 };
 
@@ -23,7 +23,6 @@ export const TEST_CONFIG = {
     TEST_USER: process.env[`${ENV}_TEST_USER`] as string,
     TEST_PASS: process.env[`${ENV}_TEST_PASS`] as string,
     TEST_PASS_ENCRYPT: process.env[`${ENV}_TEST_PASS_ENCRYPT`] as string,
-    MATRIX: process.env[`${ENV}_MATRIX`] as any,
     ENV,
 } as const;
 
@@ -65,7 +64,7 @@ export const TEST_DATA = {
         INVALID_PASSWORD: 'abc',
     },
 
-    STOCK_CODES: ['MBG', 'TTH', 'ITQ', 'HDA', 'NSH', 'VHE', 'CET', 'KSD'],
+    STOCK_CODES: ['ACB', 'SHB', 'VET', 'CEO', 'HPG', 'DHT', 'CGV', 'CACB2508'],
 
     ORDER_SYMBOLS: {
         VALID: "CEO",
