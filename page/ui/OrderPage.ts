@@ -58,8 +58,25 @@ class OrderPage extends BasePage {
      * Navigate to order page and handle matrix if needed
      */
     async navigateToOrder(): Promise<void> {
-        await this.orderButton.click();
-        await this.matrixPage.enterMatrixValid();
+        // Some pages show a modal overlay (e.g., 2FA or banners) that may intercept clicks.
+        // Retry clicking the order button after handling 2FA when present.
+        try {
+            await this.orderButton.click();
+        } catch {
+            // If intercepted, attempt to resolve potential 2FA first, then retry
+            try {
+                await this.matrixPage.enterMatrixValid();
+            } catch {
+                // ignore if 2FA not present
+            }
+            await this.orderButton.click();
+        }
+        // If 2FA appears after clicking, handle it
+        try {
+            await this.matrixPage.enterMatrixValid();
+        } catch {
+            // ignore if 2FA not present
+        }
     }
 
     /**

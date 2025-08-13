@@ -108,3 +108,7 @@ npm install --save-dev @types/dotenv
 npm install uuid @types/uuid
 npm install --save-dev cross-env
 npm install qs @types/qs --save
+
+npm install --silent
+npx --yes playwright install --with-deps | cat
+npm run test:dev:chrome --silent | cat

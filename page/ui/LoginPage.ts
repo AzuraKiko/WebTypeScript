@@ -35,14 +35,17 @@ class LoginPage extends BasePage {
     }
 
     async clickOpenLogin() {
+        await this.openLogin.waitFor({ state: 'visible' });
         await this.openLogin.click();
     }
 
     async enterUsername(username: string) {
+        await this.usernameInput.waitFor({ state: 'visible' });
         await this.usernameInput.fill(username);
     }
 
     async enterPassword(password: string) {
+        await this.passwordInput.waitFor({ state: 'visible' });
         await this.passwordInput.fill(password);
     }
 
@@ -51,7 +54,6 @@ class LoginPage extends BasePage {
     }
 
     async clickCloseBanner() {
-        await this.page.waitForTimeout(3000);
         if (await this.closeBanner.isVisible()) {
             await this.closeBanner.click();
         }
@@ -74,6 +76,13 @@ class LoginPage extends BasePage {
 
     async loginSuccess() {
         await this.gotoWeb(TEST_CONFIG.WEB_LOGIN_URL);
+        // Ensure the login form is open. If not, open it.
+        const loginFormVisible = await this.usernameInput.isVisible().catch(() => false);
+        if (!loginFormVisible) {
+            await this.clickCloseBanner();
+            await this.clickOpenLogin();
+            await this.usernameInput.waitFor({ state: 'visible' });
+        }
         await this.enterUsernameAndPassword(TEST_CONFIG.TEST_USER, TEST_CONFIG.TEST_PASS);
         await this.waitForPageLoad();
         await this.clickCloseBanner();

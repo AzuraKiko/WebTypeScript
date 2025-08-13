@@ -517,35 +517,24 @@ class OrderBook extends BasePage {
         return priceMatch && quantityMatch;
     }
 
-    // Additional Helper Methods for Better Testing Coverage
-
-    // Check if orderbook is currently visible
-    async isOrderBookVisible(): Promise<boolean> {
-        try {
-            return await this.orderTable.isVisible({ timeout: 3000 });
-        } catch {
-            return false;
-        }
-    }
-
     // Wait for orderbook to load completely
     async waitForOrderBookToLoad(timeout: number = 10000): Promise<void> {
         await this.orderTable.waitFor({ state: 'visible', timeout });
-        await this.page.waitForTimeout(1000); // Additional wait for data to load
+        await this.page.waitForTimeout(1000);
     }
 
     // Get all available order statuses from the table
     async getAllOrderStatuses(): Promise<string[]> {
         const orders = await this.getOrderTableData();
         const statuses = orders.map(order => order.status);
-        return [...new Set(statuses)]; // Remove duplicates
+        return [...new Set(statuses)]; 
     }
 
     // Get all available stock codes from the table
     async getAllStockCodes(): Promise<string[]> {
         const orders = await this.getOrderTableData();
         const stockCodes = orders.map(order => order.stockCode);
-        return [...new Set(stockCodes)]; // Remove duplicates
+        return [...new Set(stockCodes)]; 
     }
 
     // Check if specific tab is active

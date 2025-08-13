@@ -1,0 +1,2306 @@
+{
+  "info": {
+    "name": "OMS Captured API - http://10.8.90.16:8888/, http://10.8.90.164:8888/",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET http://10.8.90.16:8888/",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "upgrade-insecure-requests",
+            "value": "1"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/bootstrap.min.css",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/bootstrap.min.css"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/js/main.82eddeb0.js",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/js/main.82eddeb0.js"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/css/main.a216999c.css",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0kb",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0kb"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/listMessage",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/listMessage"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getlistallstock",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getlistallstock"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getListDvx",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getListDvx"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/js/20.41f747ae.chunk.js",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/js/20.41f747ae.chunk.js"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/js/727.f7d9f5e8.chunk.js",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/js/727.f7d9f5e8.chunk.js"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/js/676.df8e39ce.chunk.js",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/js/676.df8e39ce.chunk.js"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/css/141.39dcdd7f.chunk.css",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/css/141.39dcdd7f.chunk.css"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/js/141.d90fb9c3.chunk.js",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/js/141.d90fb9c3.chunk.js"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/js/333.2674901e.chunk.js",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/js/333.2674901e.chunk.js"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/css/596.51e80277.chunk.css",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/css/596.51e80277.chunk.css"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/js/596.c6c8aef1.chunk.js",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/js/596.c6c8aef1.chunk.js"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/listCW.pt",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/listCW.pt"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getlistindexdetail/10,11,02,03",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getlistindexdetail/10,11,02,03"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getSummary",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getSummary"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getlistbaseworldindex/",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getlistbaseworldindex/"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Next.13d992ff02804a6b5dfa.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Next.13d992ff02804a6b5dfa.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Small.c9bfd0582a67bae38f03.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Small.c9bfd0582a67bae38f03.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Back.ebc3bb83d5f2a220bced.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Back.ebc3bb83d5f2a220bced.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Roboto-Regular.a8d6ac03c7b96b7acb62.ttf",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Roboto-Regular.a8d6ac03c7b96b7acb62.ttf"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/list30.pt?market=HSX30",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/list30.pt?market=HSX30"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Search.50762cec59e987499f69360254af94a3.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Search.50762cec59e987499f69360254af94a3.svg"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0mv&sid=ngBCDXhqcoIWbbrTFvzw",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "content-type",
+            "value": "text/plain;charset=UTF-8"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "8:40/dtnd,"
+        },
+        "url": "http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0mv&sid=ngBCDXhqcoIWbbrTFvzw"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0m-&sid=ngBCDXhqcoIWbbrTFvzw",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0m-&sid=ngBCDXhqcoIWbbrTFvzw"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/list30.pt?market=HSX30",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/list30.pt?market=HSX30"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getlistindexdetail/10,11,02,03",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getlistindexdetail/10,11,02,03"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getSummary",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getSummary"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getlistbaseworldindex/",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getlistbaseworldindex/"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0r7&sid=ngBCDXhqcoIWbbrTFvzw",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0r7&sid=ngBCDXhqcoIWbbrTFvzw"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0rB&sid=ngBCDXhqcoIWbbrTFvzw",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "content-type",
+            "value": "text/plain;charset=UTF-8"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "71:42/dtnd,[\"regs\",\"{\\\"action\\\":\\\"ping\\\",\\\"mode\\\":\\\"async\\\",\\\"data\\\":{}}\"]"
+        },
+        "url": "http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0rB&sid=ngBCDXhqcoIWbbrTFvzw"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/list30.pt?market=HSX30",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/list30.pt?market=HSX30"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Stock.2da162189e228f768f30.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Stock.2da162189e228f768f30.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Derivative.ca028a3eddbdd23ea0fc.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Derivative.ca028a3eddbdd23ea0fc.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/News.56505353984f931cd71b.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/News.56505353984f931cd71b.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Bond.61dc8bc095a0e411062e.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Bond.61dc8bc095a0e411062e.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Pinefolio.442f8422168dddfc4d83.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Pinefolio.442f8422168dddfc4d83.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Transaction.460b780caecac0091702.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Transaction.460b780caecac0091702.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Asset.9dcd4268fbe02bf9999b.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Asset.9dcd4268fbe02bf9999b.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Search.181e84d8b3e76cf0b87d.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/141.39dcdd7f.chunk.css"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Search.181e84d8b3e76cf0b87d.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Help.80149c2060513bf5b49f.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Help.80149c2060513bf5b49f.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/BrightMode.fa227670e96db207b472.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/BrightMode.fa227670e96db207b472.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Account.fe7b035630b80b7080a6.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Account.fe7b035630b80b7080a6.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Logo.f082b5107a1cb4b363d033fae9ed038a.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Logo.f082b5107a1cb4b363d033fae9ed038a.svg"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0x8&sid=ngBCDXhqcoIWbbrTFvzw",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "content-type",
+            "value": "text/plain;charset=UTF-8"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "212:42/dtnd,0[\"regs\",\"{\\\"action\\\":\\\"leave\\\",\\\"data\\\":\\\"41I1F7000,41I2F7000,41I1F8000,41I2F8000,GB05F2509,41I2F9000,VN30F2509,GB10F2509,GB05F2512,41I2FC000,VN30F2512,GB10F2512,41B5G3000,41BAG3000\\\",\\\"board\\\":\\\"G1\\\"}\"]"
+        },
+        "url": "http://10.8.90.16:8888/socket.io/?EIO=3&transport=polling&t=PYY_0x8&sid=ngBCDXhqcoIWbbrTFvzw"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Quick_Order.143f924809b9c8bc5f76.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Quick_Order.143f924809b9c8bc5f76.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Orders_list.7867b85eeb157d000375.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Orders_list.7867b85eeb157d000375.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Connecting.a87073320be5619b7339.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Connecting.a87073320be5619b7339.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/EN.7c4fe6792893dbcc54a9.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/EN.7c4fe6792893dbcc54a9.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/document_link.b9a1e0844bb2af85dc98.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/document_link.b9a1e0844bb2af85dc98.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getchartInmemData/10",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getchartInmemData/10"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getchartInmemData/02",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getchartInmemData/02"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getchartInmemData/03",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getchartInmemData/03"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getchartInmemData/11",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getchartInmemData/11"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Volume.68c1c436172913ad0a11.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Volume.68c1c436172913ad0a11.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Money.1504b7bb1c95ad86cee3.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Money.1504b7bb1c95ad86cee3.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Up.dc61b30e21da1a323a39.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Up.dc61b30e21da1a323a39.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Ref.87e71cbe4cb2622de250.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Ref.87e71cbe4cb2622de250.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Down.b3d65a9713704a88c60d.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Down.b3d65a9713704a88c60d.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/zoomfull.e5520443bb3af7894c01.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/zoomfull.e5520443bb3af7894c01.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getliststockdata/ACB,BCM,BID,BVH,CTG,FPT,GAS,GVR,HDB,HPG,LPB,MBB,MSN,MWG,PLX,SAB,SHB,SSB,SSI,STB,TCB,TPB,VCB,VHM,VIB,VIC,VJC,VNM,VPB,VRE",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getliststockdata/ACB,BCM,BID,BVH,CTG,FPT,GAS,GVR,HDB,HPG,LPB,MBB,MSN,MWG,PLX,SAB,SHB,SSB,SSI,STB,TCB,TPB,VCB,VHM,VIB,VIC,VJC,VNM,VPB,VRE"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Logo.dd7e5ae37a9799bcda07.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Logo.dd7e5ae37a9799bcda07.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/User.aa0cf30b054d106ee785.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/User.aa0cf30b054d106ee785.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Lock.3dd25eac0e34d8ec0cbe.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Lock.3dd25eac0e34d8ec0cbe.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Eye_show.096037c894095d009a8b.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Eye_show.096037c894095d009a8b.svg"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/loginAdv",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"user\":\"Tuepd1\",\"pass\":\"jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=\",\"device\":\"\",\"fcmToken\":\"Tuepd1\",\"lang\":\"vn\"}"
+        },
+        "url": "http://10.8.90.16:8888/loginAdv"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Notification.1e1999d4f4876a69e2e6.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Notification.1e1999d4f4876a69e2e6.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Analysis.1d9ec724d065147e9482.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Analysis.1d9ec724d065147e9482.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/config.pt?user=Tuepd1&session=2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/config.pt?user=Tuepd1&session=2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"GetNotifications\",\"channel\":\"WTS\",\"rqId\":\"ccb4d3d1-24f4-4690-944e-b358da4cec0f\",\"data\":{\"langTp\":\"vi\",\"custNo\":\"00244068\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"BACK\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"GET_WAT\",\"rqId\":\"e3311c24-852e-4fa7-9ad7-649873c993d2\",\"channel\":\"WTS\",\"data\":{}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Notice.7c41bb567f1c90b42129.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Notice.7c41bb567f1c90b42129.svg"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Close.bf0d0143f3e5bc306787.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Close.bf0d0143f3e5bc306787.svg"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"getRegistMr\",\"rqId\":\"90c59db6-a1e6-4eb7-a003-abd8c5a7813a\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00244068\",\"acntNo\":\"00139072\",\"subAcntNo\":\"M00005982\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"rqId\":\"3195d423-c843-448d-84a7-e658a3733aac\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00244068\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"GetNotifications\",\"channel\":\"WTS\",\"rqId\":\"e797b37a-74a1-40ae-99e9-66461a931ff4\",\"data\":{\"langTp\":\"vi\",\"custNo\":\"00244068\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"getBrkInfo\",\"rqId\":\"e9f8f2c6-0ddc-424f-8337-fd67f983967f\",\"channel\":\"WTS\",\"data\":{\"cif\":\"00244068\",\"acntNo\":\"00139072\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/list30.pt?market=HSX30",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/list30.pt?market=HSX30"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/getliststockdata/ACB,BCM,BID,BVH,CTG,FPT,GAS,GVR,HDB,HPG,LPB,MBB,MSN,MWG,PLX,SAB,SHB,SSB,SSI,STB,TCB,TPB,VCB,VHM,VIB,VIC,VJC,VNM,VPB,VRE",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/getliststockdata/ACB,BCM,BID,BVH,CTG,FPT,GAS,GVR,HDB,HPG,LPB,MBB,MSN,MWG,PLX,SAB,SHB,SSB,SSI,STB,TCB,TPB,VCB,VHM,VIB,VIC,VJC,VNM,VPB,VRE"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Smart.a0cab53675ee3e3f117c.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Smart.a0cab53675ee3e3f117c.svg"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"generateAUTH\",\"rqId\":\"a324382e-3de9-4d7e-937b-18ea87be6920\",\"channel\":\"WTS\",\"data\":{\"trdType\":\"1\",\"authType\":\"2\",\"positionNo\":\"3\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"GetAuthList\",\"rqId\":\"09b6a262-efd3-4966-88d5-d8918a8b0b49\",\"channel\":\"WTS\",\"data\":{\"cif\":\"00244068\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"PurchasePower\",\"rqId\":\"8553d0f8-8805-4c7f-8b22-b05d9598a439\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00139072\",\"subAcntNo\":\"N00139071\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"getTotalAssetAll\",\"rqId\":\"55869227-aa67-46fa-ae05-c14154c76839\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00139072\",\"subAcntNo\":\"N00139071\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"getPositions\",\"rqId\":\"ea498646-d6b8-497d-bb02-87ced6d15ae6\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00139072\",\"subAcntNo\":\"N00139071\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"PurchasePower\",\"rqId\":\"53ce913a-2b37-49f7-8bcd-ecf551a207ab\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00139072\",\"subAcntNo\":\"N00139071\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"getTotalAssetAll\",\"rqId\":\"c1f183dc-ea33-4701-85cc-0fb4fc4b812f\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00139072\",\"subAcntNo\":\"N00139071\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"getPositions\",\"rqId\":\"6d6c5a4d-bca4-40d2-975a-01220f46f884\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00139072\",\"subAcntNo\":\"N00139071\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"PurchasePower\",\"rqId\":\"8113882a-8ffd-4604-9a4e-6a43a0df72ee\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00139072\",\"subAcntNo\":\"N00139071\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    },
+    {
+      "name": "GET http://10.8.90.16:8888/static/media/Refresh.0ad0c1e40d3ab496debb.svg",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "origin",
+            "value": "http://10.8.90.16:8888"
+          },
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/static/css/main.a216999c.css"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "url": "http://10.8.90.16:8888/static/media/Refresh.0ad0c1e40d3ab496debb.svg"
+      }
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.90.16:8888/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"Tuepd1\",\"session\":\"2g5rydy8HwuArkcSfUMLWmZxKXYYdw91q5TEWWxDvTRgxbYWuXEJ3x6KgEHr7Aag\",\"cmd\":\"PurchasePower\",\"rqId\":\"00e7e146-d8f9-41a0-ac86-5cb3448bb3ab\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00139072\",\"subAcntNo\":\"N00139071\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      }
+    }
+  ]
+}

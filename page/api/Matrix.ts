@@ -1,3 +1,5 @@
+import { TEST_CONFIG } from "../../tests/utils/testConfig";
+
 // const matrix = {
 //     A: ['0', '0', '2', 'X', 'S', 'N', '6'],
 //     B: ['S', 'I', '0', 'G', '4', 'G', '5'],
@@ -8,18 +10,10 @@
 //     G: ['C', '9', 'V', 'X', 'K', '8', 'K']
 // };
 
-const matrix = {
-    A: ['2', '0', '2', 'A', '7', 'O', '1'],
-    B: ['0', 'Y', '5', '6', '7', '8', 'T'],
-    C: ['S', '0', '9', '1', 'U', '6', 'A'],
-    D: ['3', '5', '1', 'L', '7', '3', 'S'],
-    E: ['9', '2', 'Y', 'F', 'C', 'P', 'R'],
-    F: ['1', '9', 'L', '6', '4', 'H', '2'],
-    G: ['Q', 'F', '7', '9', '3', '4', 'O']
-};
+const matrix = TEST_CONFIG.MATRIX;
 
 
-type MatrixRow = keyof typeof matrix;
+type MatrixRow = Extract<keyof typeof matrix, string>;
 type MatrixCoord = `${MatrixRow}${1 | 2 | 3 | 4 | 5 | 6 | 7}`;
 
 /**

@@ -7,8 +7,8 @@ dotenv.config({ path: '.env' });
  * Centralizes environment variable handling across all tests
  */
 export const getEnvironment = () => {
-    let env = process.env.NODE_ENV?.toUpperCase() || 'DEV';
-    if (env === 'PRODUCTION') env = 'DEV';
+    let env = process.env.NODE_ENV?.toUpperCase() || 'UAT';
+    if (env === 'PRODUCTION') env = 'UAT';
     return env;
 };
 
@@ -23,6 +23,7 @@ export const TEST_CONFIG = {
     TEST_USER: process.env[`${ENV}_TEST_USER`] as string,
     TEST_PASS: process.env[`${ENV}_TEST_PASS`] as string,
     TEST_PASS_ENCRYPT: process.env[`${ENV}_TEST_PASS_ENCRYPT`] as string,
+    MATRIX: process.env[`${ENV}_MATRIX`] as any,
     ENV,
 } as const;
 
