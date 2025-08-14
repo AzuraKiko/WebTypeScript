@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
 import { ENV } from '../utils/testConfig';
-import MatrixPage from "../../page/ui/MatrixPage";
 import LoginPage from '../../page/ui/LoginPage';
 import OrderPage from '../../page/ui/OrderPage';
+import OrderBook from '../../page/ui/OrderBook';
+import SubaccPage from '../../page/ui/SubaccPage';
 
 
 type CapturedCall = {
@@ -14,8 +15,10 @@ type CapturedCall = {
     timestamp: string;
 };
 const OUTPUT_FILE = `oms_postman_collection_${ENV}.json`;
-const DEV_API_CORE = ['http://10.8.80.104:8888/', 'http://10.8.80.164:8888/']
-const UAT_API_CORE = ['http://10.8.90.16:8888/', 'http://10.8.90.164:8888/']
+// const DEV_API_CORE = ['http://10.8.80.104:8888/', 'http://10.8.80.164:8888/']
+// const UAT_API_CORE = ['http://10.8.90.16:8888/', 'http://10.8.90.164:8888/']
+const DEV_API_CORE = ['http://10.8.80.164:8888/']
+const UAT_API_CORE = ['http://10.8.90.164:8888/']
 
 const PROD_API_CORE = ['https://trade.pinetree.vn/', 'https://trade.pinetree.vn/']
 
@@ -58,12 +61,14 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
     });
 
     let loginPage: LoginPage;
-    let matrixPage: MatrixPage;
+    let orderBook: OrderBook;
     let orderPage: OrderPage;
+    let subaccPage: SubaccPage;
 
     loginPage = new LoginPage(page);
-    matrixPage = new MatrixPage(page);
     orderPage = new OrderPage(page);
+    orderBook = new OrderBook(page);
+    subaccPage = new SubaccPage(page);
 
     await loginPage.loginSuccess();
 
@@ -78,6 +83,37 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
     await orderPage.placeSellOrder();
     await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
+
+    // Place order buy with margin account
+    await subaccPage.selectMarginSubacc();
+    await orderPage.placeBuyOrder('MBB', '1');
+    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    await page.waitForTimeout(3000);
+
+    // Place order sell with margin account
+    await subaccPage.selectMarginSubacc();
+    await orderPage.placeSellOrder();
+    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    await page.waitForTimeout(3000);
+
+    // Modify order with normal account
+    await orderBook.openOrderBook();
+    await orderBook.filterByAccount('Normal');
+    await orderBook.filterByStatus('Pending');
+    await orderBook.modifyOrderByStockCode('ACB', undefined, '2');
+    await orderPage.verifyMessage('Chỉnh sửa lệnh thành công', 'Số hiệu lệnh');
+    await page.waitForTimeout(3000);
+
+    // Modify order with margin account
+    await orderBook.openOrderBook();
+    await orderBook.filterByAccount('Margin');
+    await orderBook.filterByOrderType('Buy');
+    await orderBook.filterByStatus('Pending');
+    await orderBook.modifyOrderByStockCode('MBB', undefined, '2');
+    await orderPage.verifyMessage('Chỉnh sửa lệnh thành công', 'Số hiệu lệnh');
+    await page.waitForTimeout(3000);
+
+
 
     const postmanCollection = {
         info: {
