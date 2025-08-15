@@ -166,4 +166,5 @@ export default class OrderApi {
         const response = await listStockApiHelper.get(`${this.baseUrl}/getlistallstock`);
         return response;
     }
+
 }

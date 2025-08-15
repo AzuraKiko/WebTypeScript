@@ -1,79 +1,157 @@
 import { Page, Locator, expect } from '@playwright/test';
 import BasePage from './BasePage';
 
+// Interface definitions for better type safety
+interface OrderData {
+    account: string;
+    orderNo: string;
+    originOrderNo: string;
+    time: string;
+    side: string;
+    stockCode: string;
+    orderType: string;
+    price: string;
+    quantity: string;
+    matchedQuantity: string;
+    remainingQuantity: string;
+    status: string;
+}
+
+interface OrderModalInfo {
+    stockCode: string;
+    orderType: string;
+    orderNumber: string;
+}
+
+interface ModifyOrderModalInfo {
+    orderNumber: string;
+    account: string;
+    orderType: string;
+    symbol: string;
+    currentPrice: string;
+    currentQuantity: string;
+}
+
+interface ActionButtonsAvailability {
+    hasCancel: boolean;
+    hasModify: boolean;
+}
+
+interface SearchVerificationResult {
+    success: boolean;
+    filteredCount: number;
+    originalCount: number;
+}
+
+interface TableStructureValidation {
+    hasHeaders: boolean;
+    hasRows: boolean;
+    columnCount: number;
+}
+
+interface AvailableFilters {
+    status: boolean;
+    account: boolean;
+    orderType: boolean;
+}
+
+interface OrderSummaryStats {
+    totalOrders: number;
+    uniqueStocks: number;
+    uniqueStatuses: number;
+    avgOrderQuantity?: number;
+    hasMatches: boolean;
+}
+
+interface DataValidationResult {
+    isValid: boolean;
+    errors: string[];
+}
+
+interface PerformanceMetrics {
+    orderLoadTime: number;
+    tableRenderTime: number;
+    searchResponseTime: number;
+}
+
+interface HealthCheckResult {
+    overall: 'healthy' | 'warning' | 'error';
+    checks: {
+        tableStructure: boolean;
+        dataIntegrity: boolean;
+        filtersWorking: boolean;
+        searchWorking: boolean;
+        tabsWorking: boolean;
+    };
+    issues: string[];
+}
+
+type TabName = 'inday' | 'history' | 'conditional' | 'putthrough';
+
 class OrderBook extends BasePage {
-    orderBookButton: Locator;
-    orderIndayTab: Locator;
-    orderHistoryTab: Locator;
-    conditionalOrderTab: Locator;
-    putThroughOrderTab: Locator;
-    reloadOrderBookButton: Locator;
-    expandOrderBookButton: Locator;
-    closeOrderBookButton: Locator;
+    // Constants
+    private static readonly DEFAULT_TIMEOUT = 10000;
+    private static readonly SHORT_TIMEOUT = 1000;
+    private static readonly POLLING_INTERVAL = 500;
+
+    // Navigation Elements
+    orderBookButton!: Locator;
+    orderIndayTab!: Locator;
+    orderHistoryTab!: Locator;
+    conditionalOrderTab!: Locator;
+    putThroughOrderTab!: Locator;
+    reloadOrderBookButton!: Locator;
+    expandOrderBookButton!: Locator;
+    closeOrderBookButton!: Locator;
 
     // Filter and Search Elements
-    cancelAllOrderButton: Locator;
-    searchInput: Locator;
-    statusSelect: Locator;
-    accountSelect: Locator;
-    orderTypeSelect: Locator;
+    cancelAllOrderButton!: Locator;
+    searchInput!: Locator;
+    statusSelect!: Locator;
+    accountSelect!: Locator;
+    orderTypeSelect!: Locator;
 
     // Table Elements
-    orderTable: Locator;
-    tableHeaders: Locator;
-    tableRows: Locator;
-    totalOrder: Locator;
+    orderTable!: Locator;
+    tableHeaders!: Locator;
+    tableRows!: Locator;
+    totalOrder!: Locator;
 
-    // Table Column Locators
-    checkboxHeaderAll: Locator;
-    checkboxColumn: (rowIndex: number) => Locator;
-    accountColumn: (rowIndex: number) => Locator;
-    orderNoColumn: (rowIndex: number) => Locator;
-    originOrderNoColumn: (rowIndex: number) => Locator;
-    sideColumn: (rowIndex: number) => Locator;
-    stockCodeColumn: (rowIndex: number) => Locator;
-    timeColumn: (rowIndex: number) => Locator;
-    orderTypeColumn: (rowIndex: number) => Locator;
-    priceColumn: (rowIndex: number) => Locator;
-    quantityColumn: (rowIndex: number) => Locator;
-    matchedQuantityColumn: (rowIndex: number) => Locator;
-    remainingQuantityColumn: (rowIndex: number) => Locator;
-    statusColumn: (rowIndex: number) => Locator;
-    actionColumn: (rowIndex: number) => Locator;
-    expandOrderButton: (rowIndex: number) => Locator;
+    // Table Column Locators (using functions for dynamic row selection)
+    checkboxHeaderAll!: Locator;
 
-    // Action Buttons in Table
-    cancelOrderButton: (rowIndex: number) => Locator;
-    modifyOrderButton: (rowIndex: number) => Locator;
-
-    // Cancel All Orders Modal Elements
-    cancelAllModal: Locator;
-    cancelAllModalHeader: Locator;
-    cancelAllModalTable: Locator;
-    cancelAllConfirmButton: Locator;
-    cancelAllModalCloseButton: Locator;
-
-    // Individual Order Cancel Modal Elements
-    deleteOrderModal: Locator;
-    deleteOrderStockCode: Locator;
-    deleteOrderType: Locator;
-    deleteOrderNumber: Locator;
-    deleteOrderConfirmButton: Locator;
-    deleteOrderCancelButton: Locator;
-
-    // Modify Order Modal Elements
-    modifyOrderModal: Locator;
-    modifyOrderNumber: Locator;
-    modifyOrderAccount: Locator;
-    modifyOrderType: Locator;
-    modifyOrderSymbol: Locator;
-    modifyOrderPriceInput: Locator;
-    modifyOrderQuantityInput: Locator;
-    modifyOrderConfirmButton: Locator;
-    modifyOrderCancelButton: Locator;
+    // Modal Elements
+    cancelAllModal!: Locator;
+    cancelAllModalHeader!: Locator;
+    cancelAllModalTable!: Locator;
+    cancelAllConfirmButton!: Locator;
+    cancelAllModalCloseButton!: Locator;
+    deleteOrderModal!: Locator;
+    deleteOrderStockCode!: Locator;
+    deleteOrderType!: Locator;
+    deleteOrderNumber!: Locator;
+    deleteOrderConfirmButton!: Locator;
+    deleteOrderCancelButton!: Locator;
+    modifyOrderModal!: Locator;
+    modifyOrderNumber!: Locator;
+    modifyOrderAccount!: Locator;
+    modifyOrderType!: Locator;
+    modifyOrderSymbol!: Locator;
+    modifyOrderPriceInput!: Locator;
+    modifyOrderQuantityInput!: Locator;
+    modifyOrderConfirmButton!: Locator;
+    modifyOrderCancelButton!: Locator;
 
     constructor(page: Page) {
         super(page);
+        this.initializeLocators(page);
+    }
+
+    /**
+     * Initialize all locators in one place
+     */
+    private initializeLocators(page: Page): void {
+        // Navigation Elements
         this.orderBookButton = page.locator('.footer-btn:has(.iOrderList)');
         this.orderIndayTab = page.locator('.panel-tab', { hasText: /Lệnh trong ngày/ });
         this.orderHistoryTab = page.locator('.panel-tab', { hasText: /Lịch sử lệnh/ });
@@ -95,37 +173,24 @@ class OrderBook extends BasePage {
         this.orderTable = page.locator('.table.table-bordered.tbl-list');
         this.tableHeaders = page.locator('.table-bordered.tbl-list thead th');
         this.tableRows = page.locator('.table-bordered.tbl-list tbody tr');
+        this.checkboxHeaderAll = page.locator('.table-bordered.tbl-list thead th:nth-child(1) span');
 
-        // Table Column Locators
-        this.checkboxHeaderAll = page.locator('.table-bordered.tbl-list thead th:nth-child(1) span]'); // Checkbox chọn tất cả
-        this.checkboxColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(1)"]`); // Checkbox từng lệnh
-        this.accountColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(2)`); // Tiểu khoản
-        this.orderNoColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(3)`); // SHL
-        this.originOrderNoColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(4)`); //SHL gốc
-        this.timeColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(5)`); // Thời gian
-        this.sideColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(6)`); // GD
-        this.stockCodeColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(7)`); // Mã CK
-        this.orderTypeColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(8)`); // Loại lệnh
-        this.priceColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(9)`); // Giá
-        this.quantityColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(10)`); // KL đặt
-        this.matchedQuantityColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(11)`); // KL khớp
-        this.remainingQuantityColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(12)`); // KL còn lại
-        this.statusColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(13)`); // Trạng thái
-        this.actionColumn = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14)`); // Thao tác
-        this.expandOrderButton = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(15)`); // Mở rộng lệnh con khớp
+        // Modal Elements
+        this.initializeModalLocators(page);
+    }
 
-        // Action Buttons in Table
-        this.cancelOrderButton = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .icon-cancel, .table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .cancel-btn`);
-        this.modifyOrderButton = (rowIndex: number) => page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .icon-edit, .table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .modify-btn`);
-
-        // Cancel All Orders Modal Elements
+    /**
+     * Initialize modal locators separately for better organization
+     */
+    private initializeModalLocators(page: Page): void {
+        // Cancel All Orders Modal
         this.cancelAllModal = page.locator('.wts-modal', { hasText: /Xác nhận hủy lệnh/ });
         this.cancelAllModalHeader = page.locator('.wts-modal__header', { hasText: /Xác nhận hủy lệnh/ });
         this.cancelAllModalTable = page.locator('.wts-modal .table.table-bordered.table-fix');
         this.cancelAllConfirmButton = page.locator('.wts-modal .btn.btn--primary');
-        this.cancelAllModalCloseButton = page.locator('C');
+        this.cancelAllModalCloseButton = page.locator('.wts-modal .btn-close');
 
-        // Individual Order Cancel Modal Elements
+        // Individual Order Cancel Modal
         this.deleteOrderModal = page.locator('.delete-order');
         this.deleteOrderStockCode = page.locator('.delete-order-body__infor-value p').nth(0);
         this.deleteOrderType = page.locator('.delete-order-body__infor-value p').nth(1);
@@ -133,7 +198,7 @@ class OrderBook extends BasePage {
         this.deleteOrderConfirmButton = page.locator('.delete-order .btn-confirm');
         this.deleteOrderCancelButton = page.locator('.delete-order .btn-cancel');
 
-        // Modify Order Modal Elements
+        // Modify Order Modal
         this.modifyOrderModal = page.locator('.confirm-order');
         this.modifyOrderNumber = page.locator('.confirm-order-body__infor-value p').nth(0);
         this.modifyOrderAccount = page.locator('.confirm-order-body__infor-value p').nth(1);
@@ -145,93 +210,133 @@ class OrderBook extends BasePage {
         this.modifyOrderCancelButton = page.locator('.confirm-order .btn-cancel');
     }
 
-    // Navigation Methods
+    // =================== DYNAMIC LOCATOR METHODS ===================
+
+    /**
+     * Get column locator for specific row
+     */
+    private getColumnLocator(rowIndex: number, columnIndex: number): Locator {
+        return this.page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${columnIndex})`);
+    }
+
+    private checkboxColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 1);
+    private accountColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 2);
+    private orderNoColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 3);
+    private originOrderNoColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 4);
+    private timeColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 5);
+    private sideColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 6);
+    private stockCodeColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 7);
+    private orderTypeColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 8);
+    private priceColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 9);
+    private quantityColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 10);
+    private matchedQuantityColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 11);
+    private remainingQuantityColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 12);
+    private statusColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 13);
+    private actionColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 14);
+    private expandOrderButton = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 15);
+
+    /**
+     * Get action button locators for specific row
+     */
+    private cancelOrderButton = (rowIndex: number): Locator =>
+        this.page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .icon-cancel, .table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .cancel-btn`);
+
+    private modifyOrderButton = (rowIndex: number): Locator =>
+        this.page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .icon-edit, .table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .modify-btn`);
+
+    // =================== NAVIGATION METHODS ===================
+
     async openOrderBook(): Promise<void> {
         await this.orderBookButton.click();
-        await this.page.waitForSelector('.card-panel-body', { timeout: 10000 });
+        await this.page.waitForSelector('.card-panel-body', { timeout: OrderBook.DEFAULT_TIMEOUT });
     }
 
     async reloadOrderBook(): Promise<void> {
         await this.reloadOrderBookButton.click();
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
 
     async expandOrderBook(): Promise<void> {
         await this.expandOrderBookButton.click();
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
 
     async closeOrderBook(): Promise<void> {
         await this.closeOrderBookButton.click();
     }
 
+    async switchToTab(tabName: TabName): Promise<void> {
+        const tabMap = {
+            inday: this.orderIndayTab,
+            history: this.orderHistoryTab,
+            conditional: this.conditionalOrderTab,
+            putthrough: this.putThroughOrderTab
+        };
+
+        await tabMap[tabName].click();
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
+    }
+
     async switchToOrderInDayTab(): Promise<void> {
-        await this.orderIndayTab.click();
-        await this.page.waitForTimeout(1000);
+        await this.switchToTab('inday');
     }
 
     async switchToOrderHistoryTab(): Promise<void> {
-        await this.orderHistoryTab.click();
-        await this.page.waitForTimeout(1000);
+        await this.switchToTab('history');
     }
 
     async switchToConditionalOrderTab(): Promise<void> {
-        await this.conditionalOrderTab.click();
-        await this.page.waitForTimeout(1000);
+        await this.switchToTab('conditional');
     }
 
     async switchToPutThroughOrderTab(): Promise<void> {
-        await this.putThroughOrderTab.click();
-        await this.page.waitForTimeout(1000);
+        await this.switchToTab('putthrough');
     }
 
-    // Filter and Search Methods
+    // =================== FILTER AND SEARCH METHODS ===================
+
     async searchOrder(searchTerm: string): Promise<void> {
         await this.searchInput.fill(searchTerm);
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
 
     async filterByStatus(status: string): Promise<void> {
         await this.statusSelect.click();
         await this.page.waitForSelector('.filter-control-select__menu-list', { state: 'visible' });
         await this.page.locator('.filter-control-select__option').filter({ hasText: status }).click();
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
 
     async filterByAccount(account: string): Promise<void> {
         await this.accountSelect.click();
         await this.page.waitForSelector('.filter-control-select__menu-list', { state: 'visible' });
         await this.page.locator('.filter-control-select__option').filter({ hasText: account }).click();
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
 
     async filterByOrderType(orderType: string): Promise<void> {
         await this.orderTypeSelect.click();
         await this.page.waitForSelector('.filter-control-select__menu-list', { state: 'visible' });
         await this.page.locator('.filter-control-select__option').filter({ hasText: orderType }).click();
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
+
+    // =================== DATA RETRIEVAL METHODS ===================
 
     async getTotalOrder(): Promise<string> {
         return await this.totalOrder.textContent() ?? '';
     }
 
-    // Checkbox Methods
-    async selectAllOrders(): Promise<void> {
-        await this.checkboxHeaderAll.click();
-        await this.page.waitForTimeout(500);
+    async getOrderbookTableHeader(): Promise<string[]> {
+        await this.tableHeaders.waitFor({ state: 'visible' });
+        const headers = await this.tableHeaders.allTextContents();
+        return headers.map((header: string) => header.trim());
     }
 
-    async selectOrderByIndex(rowIndex: number): Promise<void> {
-        await this.checkboxColumn(rowIndex).click();
-        await this.page.waitForTimeout(300);
-    }
-
-    // Table Data Methods
-    async getOrderTableData(): Promise<any[]> {
+    async getOrderTableData(): Promise<OrderData[]> {
         await this.orderTable.waitFor({ state: 'visible' });
         const rows = await this.tableRows.all();
-        const orders = [];
+        const orders: OrderData[] = [];
 
         for (const row of rows) {
             const cells = await row.locator('td').all();
@@ -255,7 +360,7 @@ class OrderBook extends BasePage {
         return orders;
     }
 
-    async getOrderDataByIndex(rowIndex: number) {
+    async getOrderDataByIndex(rowIndex: number): Promise<OrderData> {
         return {
             account: await this.accountColumn(rowIndex).innerText(),
             orderNo: await this.orderNoColumn(rowIndex).innerText(),
@@ -276,19 +381,45 @@ class OrderBook extends BasePage {
         return await this.tableRows.count();
     }
 
-    // Order Action Methods
-    // Cancel Order
-    async cancelOrder(rowIndex: number = 0): Promise<void> {
-        await this.cancelOrderButton(rowIndex).click();
-        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: 10000 });
-        await this.deleteOrderConfirmButton.click();
-        await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: 10000 });
-        await this.page.waitForTimeout(1000);
+    // =================== SELECTION METHODS ===================
+
+    async selectAllOrders(): Promise<void> {
+        await this.checkboxHeaderAll.click();
+        await this.page.waitForTimeout(OrderBook.POLLING_INTERVAL);
     }
 
-    async getDeleteOrderModalInfo(rowIndex: number = 0): Promise<{ stockCode: string; orderType: string; orderNumber: string }> {
+    async selectOrderByIndex(rowIndex: number): Promise<void> {
+        await this.checkboxColumn(rowIndex).click();
+        await this.page.waitForTimeout(300);
+    }
+
+    async selectOrdersByIndexes(orderIndexes: number[]): Promise<void> {
+        for (const index of orderIndexes) {
+            await this.selectOrderByIndex(index);
+        }
+    }
+
+    // =================== ORDER ACTION METHODS ===================
+
+    async cancelOrder(rowIndex: number = 0): Promise<void> {
         await this.cancelOrderButton(rowIndex).click();
-        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: 10000 });
+        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
+        await this.deleteOrderConfirmButton.click();
+        await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
+    }
+
+    async cancelActionCancelOrder(rowIndex: number = 0): Promise<void> {
+        await this.cancelOrderButton(rowIndex).click();
+        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
+        await this.deleteOrderCancelButton.click();
+        await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
+    }
+
+    async getDeleteOrderModalInfo(rowIndex: number = 0): Promise<OrderModalInfo> {
+        await this.cancelOrderButton(rowIndex).click();
+        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
         return {
             stockCode: await this.deleteOrderStockCode.textContent() ?? '',
             orderType: await this.deleteOrderType.textContent() ?? '',
@@ -317,7 +448,7 @@ class OrderBook extends BasePage {
                     console.log(`Order not found: ${ordersToCancel[i].stockCode} - ${ordersToCancel[i].orderNo}`);
                 }
 
-                await this.page.waitForTimeout(500);
+                await this.page.waitForTimeout(OrderBook.POLLING_INTERVAL);
             } catch (error) {
                 console.log(`Failed to cancel order ${ordersToCancel[i].stockCode}: ${error}`);
             }
@@ -325,28 +456,20 @@ class OrderBook extends BasePage {
     }
 
     async cancelOrderByOrderNumber(orderNumber: string): Promise<void> {
-        const allOrders = await this.getOrderTableData();
-        const orderIndex = allOrders.findIndex(order => order.orderNo === orderNumber);
+        const orderIndex = await this.findOrderIndexByOrderNumber(orderNumber);
         if (orderIndex >= 0) {
             await this.cancelOrder(orderIndex);
         }
     }
 
-    async cancelActionCancelOrder(rowIndex: number = 0): Promise<void> {
-        await this.cancelOrderButton(rowIndex).click();
-        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: 10000 });
-        await this.deleteOrderCancelButton.click();
-        await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: 10000 });
-        await this.page.waitForTimeout(1000);
-    }
+    // =================== MODIFY ORDER METHODS ===================
 
-    // Modify Order Methods
     async openModifyOrderModal(rowIndex: number = 0): Promise<void> {
         await this.modifyOrderButton(rowIndex).click();
-        await this.modifyOrderModal.waitFor({ state: 'visible', timeout: 10000 });
+        await this.modifyOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
     }
 
-    async getModifyOrderModalInfo(rowIndex: number = 0): Promise<{ orderNumber: string; account: string; orderType: string; symbol: string; currentPrice: string; currentQuantity: string }> {
+    async getModifyOrderModalInfo(rowIndex: number = 0): Promise<ModifyOrderModalInfo> {
         await this.openModifyOrderModal(rowIndex);
         return {
             orderNumber: await this.modifyOrderNumber.textContent() ?? '',
@@ -380,20 +503,18 @@ class OrderBook extends BasePage {
         }
 
         await this.modifyOrderConfirmButton.click();
-        await this.modifyOrderModal.waitFor({ state: 'hidden', timeout: 10000 });
-        await this.page.waitForTimeout(1000);
+        await this.modifyOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
 
     async cancelModifyOrder(): Promise<void> {
         await this.modifyOrderCancelButton.click();
-        await this.modifyOrderModal.waitFor({ state: 'hidden', timeout: 10000 });
-        await this.page.waitForTimeout(1000);
+        await this.modifyOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
 
     async modifyOrderByOrderNumber(orderNumber: string, newPrice?: string, newQuantity?: string): Promise<void> {
-        const allOrders = await this.getOrderTableData();
-        const orderIndex = allOrders.findIndex(order => order.orderNo === orderNumber);
-
+        const orderIndex = await this.findOrderIndexByOrderNumber(orderNumber);
         if (orderIndex >= 0) {
             await this.modifyOrder(orderIndex, newPrice, newQuantity);
             console.log(`Modified order ${orderNumber} with new price: ${newPrice}, new quantity: ${newQuantity}`);
@@ -414,13 +535,14 @@ class OrderBook extends BasePage {
         }
     }
 
-    // Cancel All Orders
+    // =================== CANCEL ALL ORDERS METHODS ===================
+
     async cancelAllOrders(): Promise<void> {
         await this.selectAllOrders();
         await this.cancelAllOrderButton.click();
-        await this.cancelAllModal.waitFor({ state: 'visible', timeout: 10000 });
+        await this.cancelAllModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
         await this.cancelAllConfirmButton.click();
-        await this.cancelAllModal.waitFor({ state: 'hidden', timeout: 10000 });
+        await this.cancelAllModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
         await this.page.waitForTimeout(2000);
     }
 
@@ -431,25 +553,22 @@ class OrderBook extends BasePage {
 
     async cancelSelectedOrders(): Promise<void> {
         await this.cancelAllOrderButton.click();
-        await this.cancelAllModal.waitFor({ state: 'visible', timeout: 10000 });
+        await this.cancelAllModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
         await this.cancelAllConfirmButton.click();
-        await this.cancelAllModal.waitFor({ state: 'hidden', timeout: 10000 });
+        await this.cancelAllModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
         await this.page.waitForTimeout(2000);
     }
 
     async cancelOrdersBySelection(orderIndexes: number[]): Promise<void> {
-        // Hủy các lệnh được chọn theo index
-        for (const index of orderIndexes) {
-            await this.selectOrderByIndex(index);
-        }
+        await this.selectOrdersByIndexes(orderIndexes);
         await this.cancelSelectedOrders();
     }
 
-    async getCancelAllModalOrdersData(): Promise<any[]> {
-        await this.cancelAllModal.waitFor({ state: 'visible', timeout: 10000 });
+    async getCancelAllModalOrdersData(): Promise<OrderData[]> {
+        await this.cancelAllModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
         const modalTable = this.cancelAllModalTable;
         const rows = await modalTable.locator('tbody tr').all();
-        const orders = [];
+        const orders: OrderData[] = [];
 
         for (const row of rows) {
             const cells = await row.locator('td').all();
@@ -461,19 +580,61 @@ class OrderBook extends BasePage {
                     side: await cells[3]?.innerText() || '',
                     price: await cells[4]?.innerText() || '',
                     remainingQuantity: await cells[5]?.innerText() || '',
+                    // Fill empty fields for consistency
+                    originOrderNo: '',
+                    time: '',
+                    orderType: '',
+                    quantity: '',
+                    matchedQuantity: '',
+                    status: ''
                 });
             }
         }
         return orders;
     }
 
-    async openCancelAllModalAndGetData(): Promise<any[]> {
+    async openCancelAllModalAndGetData(): Promise<OrderData[]> {
         await this.selectAllOrders();
         await this.cancelAllOrderButton.click();
         return await this.getCancelAllModalOrdersData();
     }
 
-    // Verification Methods
+    // =================== SEARCH AND FIND UTILITY METHODS ===================
+
+    private async findOrderIndexByOrderNumber(orderNumber: string): Promise<number> {
+        const allOrders = await this.getOrderTableData();
+        return allOrders.findIndex(order => order.orderNo === orderNumber);
+    }
+
+    async getOrderByOrderNumber(orderNumber: string): Promise<OrderData | null> {
+        const orders = await this.getOrderTableData();
+        return orders.find(order => order.orderNo === orderNumber) || null;
+    }
+
+    async getOrdersByStatus(status: string): Promise<OrderData[]> {
+        const orders = await this.getOrderTableData();
+        return orders.filter(order => order.status.includes(status));
+    }
+
+    async getOrdersByStockCode(stockCode: string): Promise<OrderData[]> {
+        const orders = await this.getOrderTableData();
+        return orders.filter(order => order.stockCode.includes(stockCode));
+    }
+
+    async getAllOrderStatuses(): Promise<string[]> {
+        const orders = await this.getOrderTableData();
+        const statuses = orders.map(order => order.status);
+        return [...new Set(statuses)];
+    }
+
+    async getAllStockCodes(): Promise<string[]> {
+        const orders = await this.getOrderTableData();
+        const stockCodes = orders.map(order => order.stockCode);
+        return [...new Set(stockCodes)];
+    }
+
+    // =================== VERIFICATION METHODS ===================
+
     async verifyOrderExists(stockCode: string): Promise<boolean> {
         const orders = await this.getOrderTableData();
         return orders.some(order => order.stockCode.includes(stockCode));
@@ -517,93 +678,17 @@ class OrderBook extends BasePage {
         return priceMatch && quantityMatch;
     }
 
-    // Wait for orderbook to load completely
-    async waitForOrderBookToLoad(timeout: number = 10000): Promise<void> {
-        await this.orderTable.waitFor({ state: 'visible', timeout });
-        await this.page.waitForTimeout(1000);
-    }
-
-    // Get all available order statuses from the table
-    async getAllOrderStatuses(): Promise<string[]> {
-        const orders = await this.getOrderTableData();
-        const statuses = orders.map(order => order.status);
-        return [...new Set(statuses)]; 
-    }
-
-    // Get all available stock codes from the table
-    async getAllStockCodes(): Promise<string[]> {
-        const orders = await this.getOrderTableData();
-        const stockCodes = orders.map(order => order.stockCode);
-        return [...new Set(stockCodes)]; 
-    }
-
-    // Check if specific tab is active
-    async isTabActive(tabName: 'inday' | 'history' | 'conditional' | 'putthrough'): Promise<boolean> {
-        let tab: Locator;
-        switch (tabName) {
-            case 'inday':
-                tab = this.orderIndayTab;
-                break;
-            case 'history':
-                tab = this.orderHistoryTab;
-                break;
-            case 'conditional':
-                tab = this.conditionalOrderTab;
-                break;
-            case 'putthrough':
-                tab = this.putThroughOrderTab;
-                break;
-        }
-
-        try {
-            const classes = await tab.getAttribute('class');
-            return classes?.includes('active') || classes?.includes('selected') || false;
-        } catch {
-            return false;
-        }
-    }
-
-    // Get orders by specific status
-    async getOrdersByStatus(status: string): Promise<any[]> {
-        const orders = await this.getOrderTableData();
-        return orders.filter(order => order.status.includes(status));
-    }
-
-    // Get orders by specific stock code
-    async getOrdersByStockCode(stockCode: string): Promise<any[]> {
-        const orders = await this.getOrderTableData();
-        return orders.filter(order => order.stockCode.includes(stockCode));
-    }
-
-    // Check if any action buttons are available for a specific order
-    async hasActionButtons(rowIndex: number): Promise<{ hasCancel: boolean; hasModify: boolean }> {
-        try {
-            const hasCancel = await this.cancelOrderButton(rowIndex).isVisible({ timeout: 1000 });
-            const hasModify = await this.modifyOrderButton(rowIndex).isVisible({ timeout: 1000 });
-            return { hasCancel, hasModify };
-        } catch {
-            return { hasCancel: false, hasModify: false };
-        }
-    }
-
-    // Get order by order number
-    async getOrderByOrderNumber(orderNumber: string): Promise<any | null> {
-        const orders = await this.getOrderTableData();
-        return orders.find(order => order.orderNo === orderNumber) || null;
-    }
-
-    // Check if search functionality is working
-    async verifySearchFunctionality(searchTerm: string): Promise<{ success: boolean; filteredCount: number; originalCount: number }> {
+    async verifySearchFunctionality(searchTerm: string): Promise<SearchVerificationResult> {
         const originalCount = await this.getOrderCount();
 
         await this.searchOrder(searchTerm);
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
 
         const filteredCount = await this.getOrderCount();
 
         // Clear search
         await this.searchOrder('');
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
 
         const clearedCount = await this.getOrderCount();
 
@@ -614,28 +699,35 @@ class OrderBook extends BasePage {
         };
     }
 
-    // Validate table structure
-    async validateTableStructure(): Promise<{ hasHeaders: boolean; hasRows: boolean; columnCount: number }> {
-        try {
-            const headers = await this.tableHeaders.count();
-            const rows = await this.tableRows.count();
+    // =================== STATUS AND INFORMATION METHODS ===================
 
-            return {
-                hasHeaders: headers > 0,
-                hasRows: rows > 0,
-                columnCount: headers
-            };
+    async hasActionButtons(rowIndex: number): Promise<ActionButtonsAvailability> {
+        try {
+            const hasCancel = await this.cancelOrderButton(rowIndex).isVisible({ timeout: OrderBook.SHORT_TIMEOUT });
+            const hasModify = await this.modifyOrderButton(rowIndex).isVisible({ timeout: OrderBook.SHORT_TIMEOUT });
+            return { hasCancel, hasModify };
         } catch {
-            return {
-                hasHeaders: false,
-                hasRows: false,
-                columnCount: 0
-            };
+            return { hasCancel: false, hasModify: false };
         }
     }
 
-    // Check if filters are available
-    async checkAvailableFilters(): Promise<{ status: boolean; account: boolean; orderType: boolean }> {
+    async isTabActive(tabName: TabName): Promise<boolean> {
+        const tabMap = {
+            inday: this.orderIndayTab,
+            history: this.orderHistoryTab,
+            conditional: this.conditionalOrderTab,
+            putthrough: this.putThroughOrderTab
+        };
+
+        try {
+            const classes = await tabMap[tabName].getAttribute('class');
+            return classes?.includes('active') || classes?.includes('selected') || false;
+        } catch {
+            return false;
+        }
+    }
+
+    async checkAvailableFilters(): Promise<AvailableFilters> {
         try {
             const statusAvailable = await this.statusSelect.isVisible({ timeout: 2000 });
             const accountAvailable = await this.accountSelect.isVisible({ timeout: 2000 });
@@ -655,17 +747,6 @@ class OrderBook extends BasePage {
         }
     }
 
-    // Performance and monitoring methods
-
-    // Measure order loading time
-    async measureOrderLoadTime(): Promise<number> {
-        const startTime = Date.now();
-        await this.waitForOrderBookToLoad();
-        const endTime = Date.now();
-        return endTime - startTime;
-    }
-
-    // Check if pagination exists
     async hasPagination(): Promise<boolean> {
         try {
             const paginationElement = this.page.locator('.pagination, .page-navigation, .pager');
@@ -675,45 +756,14 @@ class OrderBook extends BasePage {
         }
     }
 
-    // Get order summary statistics
-    async getOrderSummaryStats(): Promise<{
-        totalOrders: number;
-        uniqueStocks: number;
-        uniqueStatuses: number;
-        avgOrderQuantity?: number;
-        hasMatches: boolean;
-    }> {
-        const orders = await this.getOrderTableData();
-        const stockCodes = new Set(orders.map(o => o.stockCode));
-        const statuses = new Set(orders.map(o => o.status));
+    // =================== UTILITY AND WAIT METHODS ===================
 
-        // Calculate average quantity (if numeric)
-        let avgQuantity: number | undefined;
-        const quantities = orders
-            .map(o => parseFloat(o.quantity.replace(/[,\s]/g, '')))
-            .filter(q => !isNaN(q));
-
-        if (quantities.length > 0) {
-            avgQuantity = quantities.reduce((sum, q) => sum + q, 0) / quantities.length;
-        }
-
-        // Check if any orders have matches
-        const hasMatches = orders.some(o =>
-            o.matchedQuantity &&
-            parseFloat(o.matchedQuantity.replace(/[,\s]/g, '')) > 0
-        );
-
-        return {
-            totalOrders: orders.length,
-            uniqueStocks: stockCodes.size,
-            uniqueStatuses: statuses.size,
-            avgOrderQuantity: avgQuantity,
-            hasMatches
-        };
+    async waitForOrderBookToLoad(timeout: number = OrderBook.DEFAULT_TIMEOUT): Promise<void> {
+        await this.orderTable.waitFor({ state: 'visible', timeout });
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
 
-    // Utility method to wait for specific order count
-    async waitForOrderCount(expectedCount: number, timeout: number = 10000): Promise<boolean> {
+    async waitForOrderCount(expectedCount: number, timeout: number = OrderBook.DEFAULT_TIMEOUT): Promise<boolean> {
         const startTime = Date.now();
 
         while (Date.now() - startTime < timeout) {
@@ -722,18 +772,36 @@ class OrderBook extends BasePage {
                 if (currentCount === expectedCount) {
                     return true;
                 }
-                await this.page.waitForTimeout(500);
+                await this.page.waitForTimeout(OrderBook.POLLING_INTERVAL);
             } catch {
-                await this.page.waitForTimeout(500);
+                await this.page.waitForTimeout(OrderBook.POLLING_INTERVAL);
             }
         }
         return false;
     }
 
-    // Advanced validation methods
+    // =================== VALIDATION AND STRUCTURE METHODS ===================
 
-    // Validate order data consistency
-    async validateOrderDataConsistency(): Promise<{ isValid: boolean; errors: string[] }> {
+    async validateTableStructure(): Promise<TableStructureValidation> {
+        try {
+            const headers = await this.tableHeaders.count();
+            const rows = await this.tableRows.count();
+
+            return {
+                hasHeaders: headers > 0,
+                hasRows: rows > 0,
+                columnCount: headers
+            };
+        } catch {
+            return {
+                hasHeaders: false,
+                hasRows: false,
+                columnCount: 0
+            };
+        }
+    }
+
+    async validateOrderDataConsistency(): Promise<DataValidationResult> {
         const errors: string[] = [];
 
         try {
@@ -779,12 +847,46 @@ class OrderBook extends BasePage {
         };
     }
 
-    // Get performance metrics
-    async getPerformanceMetrics(): Promise<{
-        orderLoadTime: number;
-        tableRenderTime: number;
-        searchResponseTime: number;
-    }> {
+    // =================== ANALYTICS AND PERFORMANCE METHODS ===================
+
+    async getOrderSummaryStats(): Promise<OrderSummaryStats> {
+        const orders = await this.getOrderTableData();
+        const stockCodes = new Set(orders.map(o => o.stockCode));
+        const statuses = new Set(orders.map(o => o.status));
+
+        // Calculate average quantity (if numeric)
+        let avgQuantity: number | undefined;
+        const quantities = orders
+            .map(o => parseFloat(o.quantity.replace(/[,\s]/g, '')))
+            .filter(q => !isNaN(q));
+
+        if (quantities.length > 0) {
+            avgQuantity = quantities.reduce((sum, q) => sum + q, 0) / quantities.length;
+        }
+
+        // Check if any orders have matches
+        const hasMatches = orders.some(o =>
+            o.matchedQuantity &&
+            parseFloat(o.matchedQuantity.replace(/[,\s]/g, '')) > 0
+        );
+
+        return {
+            totalOrders: orders.length,
+            uniqueStocks: stockCodes.size,
+            uniqueStatuses: statuses.size,
+            avgOrderQuantity: avgQuantity,
+            hasMatches
+        };
+    }
+
+    async measureOrderLoadTime(): Promise<number> {
+        const startTime = Date.now();
+        await this.waitForOrderBookToLoad();
+        const endTime = Date.now();
+        return endTime - startTime;
+    }
+
+    async getPerformanceMetrics(): Promise<PerformanceMetrics> {
         // Measure order loading time
         const orderLoadTime = await this.measureOrderLoadTime();
 
@@ -796,7 +898,7 @@ class OrderBook extends BasePage {
         // Measure search response time
         const searchStart = Date.now();
         await this.searchOrder('TEST');
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(OrderBook.POLLING_INTERVAL);
         await this.searchOrder(''); // Clear search
         const searchResponseTime = Date.now() - searchStart;
 
@@ -807,18 +909,9 @@ class OrderBook extends BasePage {
         };
     }
 
-    // Comprehensive health check
-    async performHealthCheck(): Promise<{
-        overall: 'healthy' | 'warning' | 'error';
-        checks: {
-            tableStructure: boolean;
-            dataIntegrity: boolean;
-            filtersWorking: boolean;
-            searchWorking: boolean;
-            tabsWorking: boolean;
-        };
-        issues: string[];
-    }> {
+    // =================== COMPREHENSIVE HEALTH CHECK ===================
+
+    async performHealthCheck(): Promise<HealthCheckResult> {
         const issues: string[] = [];
         const checks = {
             tableStructure: false,
