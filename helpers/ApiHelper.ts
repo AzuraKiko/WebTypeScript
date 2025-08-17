@@ -12,7 +12,7 @@ interface ApiHelperOptions {
     timeout?: number;
 }
 
-class ApiHelper {
+class apiHelper {
     private options: ApiHelperOptions;
     private api: AxiosInstance;
 
@@ -171,10 +171,10 @@ class ApiHelper {
         return { result, responseTime: end - start };
     }
 
-    static createWithBaseUrl(baseUrl: string): ApiHelper {
-        return new ApiHelper({ baseUrl });
+    static createWithBaseUrl(baseUrl: string): apiHelper {
+        return new apiHelper({ baseUrl });
     }
 }
 
 // Export class ApiHelper
-export default ApiHelper;
+export default apiHelper;

@@ -1,4 +1,4 @@
-import ApiHelper from "../../helpers/ApiHelper";
+import apiHelper from "../../helpers/ApiHelper";
 
 // Interface definitions for better type safety
 interface PortfolioPayload {
@@ -40,7 +40,7 @@ interface ApiResponse {
  */
 export default class PortfolioApi {
     private baseUrl: string;
-    private apiHelper: ApiHelper;
+    private apiHelper: apiHelper;
     private readonly defaultTimeout: number = 30000;
 
     // Constants
@@ -56,7 +56,7 @@ export default class PortfolioApi {
         this.baseUrl = config.baseUrl;
 
         const timeout = config.timeout || this.defaultTimeout;
-        this.apiHelper = new ApiHelper({
+        this.apiHelper = new apiHelper({
             baseUrl: this.baseUrl,
             timeout: timeout
         });
@@ -215,7 +215,7 @@ export default class PortfolioApi {
      * Get API helper instance for advanced usage
      * @returns ApiHelper instance
      */
-    public getApiHelper(): ApiHelper {
+    public getApiHelper(): apiHelper {
         return this.apiHelper;
     }
 
@@ -225,7 +225,7 @@ export default class PortfolioApi {
      */
     public updateBaseUrl(newBaseUrl: string): void {
         this.baseUrl = newBaseUrl;
-        this.apiHelper = new ApiHelper({
+        this.apiHelper = new apiHelper({
             baseUrl: this.baseUrl,
             timeout: this.defaultTimeout
         });

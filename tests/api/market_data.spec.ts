@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import ApiHelper from '../../helpers/ApiHelper';
+import ApiHelper from '../../helpers/apiHelper';
 
 let apiHelper: ApiHelper;
 

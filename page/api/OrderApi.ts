@@ -1,4 +1,4 @@
-import ApiHelper from "../../helpers/ApiHelper";
+import apiHelper from "../../helpers/ApiHelper";
 import crypto from "crypto";
 
 interface NewOrderPayload {
@@ -35,14 +35,14 @@ interface OrderParams {
 
 export default class OrderApi {
     private baseUrl: string;
-    private apiHelper: ApiHelper;
+    private apiHelper: apiHelper;
 
     constructor(baseUrl: string, timeout?: number) {
         this.baseUrl = baseUrl;
         if (timeout) {
-            this.apiHelper = new ApiHelper({ baseUrl: this.baseUrl, timeout: timeout });
+            this.apiHelper = new apiHelper({ baseUrl: this.baseUrl, timeout: timeout });
         } else {
-            this.apiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+            this.apiHelper = new apiHelper({ baseUrl: this.baseUrl });
         }
     }
 
@@ -108,7 +108,7 @@ export default class OrderApi {
         rqId: string,
         token: string
     ): Promise<any> {
-        const orderApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+        const orderApiHelper = new apiHelper({ baseUrl: this.baseUrl });
 
         const signStr = this.generateSignStr(
             acntNo,
@@ -162,7 +162,7 @@ export default class OrderApi {
      * Get list of all stocks
      */
     async getListAllStock(): Promise<any> {
-        const listStockApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+        const listStockApiHelper = new apiHelper({ baseUrl: this.baseUrl });
         const response = await listStockApiHelper.get(`${this.baseUrl}/getlistallstock`);
         return response;
     }

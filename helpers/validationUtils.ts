@@ -16,7 +16,8 @@ export interface NumberFormatOptions {
 }
 
 export interface StockCodeValidationOptions {
-    length?: number;
+    minLength?: number;
+    maxLength?: number;
     caseSensitive?: boolean;
     pattern?: RegExp;
 }
@@ -25,8 +26,10 @@ export interface StockCodeValidationOptions {
  * Stock code validation utilities
  */
 export class StockCodeValidator {
-    private static readonly DEFAULT_PATTERN = /^[A-Z]{3}$/;
-    private static readonly DEFAULT_LENGTH = 3;
+    // More flexible pattern to support stocks, warrants, ETFs with numbers and variable length
+    private static readonly DEFAULT_PATTERN = /^[A-Z][A-Z0-9]{2,9}$/;
+    private static readonly DEFAULT_MIN_LENGTH = 3;
+    private static readonly DEFAULT_MAX_LENGTH = 10;
 
     /**
      * Validate stock code format
@@ -44,14 +47,18 @@ export class StockCodeValidator {
 
         const trimmedCode = stockCode.trim();
         const {
-            length = StockCodeValidator.DEFAULT_LENGTH,
+            minLength = StockCodeValidator.DEFAULT_MIN_LENGTH,
+            maxLength = StockCodeValidator.DEFAULT_MAX_LENGTH,
             caseSensitive = true,
             pattern = StockCodeValidator.DEFAULT_PATTERN
         } = options;
 
         // Length validation
-        if (trimmedCode.length !== length) {
-            errors.push(`Stock code must be exactly ${length} characters`);
+        if (trimmedCode.length < minLength) {
+            errors.push(`Stock code must be at least ${minLength} characters`);
+        }
+        if (trimmedCode.length > maxLength) {
+            errors.push(`Stock code must not exceed ${maxLength} characters`);
         }
 
         // Case sensitivity
@@ -399,8 +406,8 @@ export const Validators = {
 
 // Export common patterns
 export const ValidationPatterns = {
-    STOCK_CODE: /^[A-Z]{3}$/,
+    STOCK_CODE: /^[A-Z][A-Z0-9]{2,9}$/,
     NUMBER_WITH_COMMAS: /^-?(\d{1,3}(,\d{3})*(\.\d+)?|\d+(\.\d+)?)$/,
-    PERCENTAGE: /^-?(\d{1,3}(,\d{3})*(\.\d+)?|\d+(\.\d+)?)%$/,
+    PERCENTAGE: /^-?(\d{1,3}(,\d{3})*(\.\d{2})?|\d+(\.\d{2})?)%$/,
     EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 };

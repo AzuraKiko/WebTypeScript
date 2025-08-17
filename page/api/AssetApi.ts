@@ -1,4 +1,4 @@
-import ApiHelper from "../../helpers/ApiHelper";
+import apiHelper from "../../helpers/ApiHelper";
 
 interface AssetPayload {
     group: string;
@@ -15,14 +15,14 @@ interface AssetPayload {
 
 export default class AssetApi {
     private baseUrl: string;
-    private apiHelper: ApiHelper;
+    private apiHelper: apiHelper;
 
     constructor(baseUrl: string, timeout?: number) {
         this.baseUrl = baseUrl;
         if (timeout) {
-            this.apiHelper = new ApiHelper({ baseUrl: this.baseUrl, timeout: timeout });
+            this.apiHelper = new apiHelper({ baseUrl: this.baseUrl, timeout: timeout });
         } else {
-            this.apiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+            this.apiHelper = new apiHelper({ baseUrl: this.baseUrl });
         }
     }
 
@@ -36,7 +36,7 @@ export default class AssetApi {
         subAcntNo: string,
         rqId: string,
     ): Promise<any> {
-        const assetApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+        const assetApiHelper = new apiHelper({ baseUrl: this.baseUrl });
 
         const assetPayload: AssetPayload = {
             group: "CORE",

@@ -1,4 +1,4 @@
-import ApiHelper from "../../helpers/ApiHelper";
+import apiHelper from "../../helpers/ApiHelper";
 import OrderApi from "./OrderApi";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from 'uuid';
@@ -62,15 +62,15 @@ interface GetTokenPayload {
 
 export default class LoginApi {
     private baseUrl: string;
-    private apiHelper: ApiHelper;
+    private apiHelper: apiHelper;
 
     constructor(baseUrl: string, timeout?: number) {
         this.baseUrl = baseUrl;
 
         if (timeout) {
-            this.apiHelper = new ApiHelper({ baseUrl: this.baseUrl, timeout: timeout });
+            this.apiHelper = new apiHelper({ baseUrl: this.baseUrl, timeout: timeout });
         } else {
-            this.apiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+            this.apiHelper = new apiHelper({ baseUrl: this.baseUrl });
         }
     }
 
@@ -79,7 +79,7 @@ export default class LoginApi {
      */
     async loginApi(username: string, password: string, fcmToken?: string): Promise<LoginResponse> {
         // Create fresh API helper instance for each request to avoid state conflicts
-        const loginApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+        const loginApiHelper = new apiHelper({ baseUrl: this.baseUrl });
         const loginPayload: LoginPayload = {
             user: username,
             pass: password,
@@ -95,7 +95,7 @@ export default class LoginApi {
      */
     async generateAuth(user: string, session: string): Promise<any> {
         // Create fresh API helper instance for each request
-        const authApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+        const authApiHelper = new apiHelper({ baseUrl: this.baseUrl });
         const authPayload: AuthPayload = {
             group: "CORE",
             cmd: "generateAUTH",
@@ -118,7 +118,7 @@ export default class LoginApi {
      */
     async getToken(user: string, session: string, cif: string, rqId: string, value: string, type: string): Promise<any> {
         // Create fresh API helper instance for each request
-        const authApiHelper = new ApiHelper({ baseUrl: this.baseUrl });
+        const authApiHelper = new apiHelper({ baseUrl: this.baseUrl });
         let typeValue = "5";
         if (type === "OTP") {
             typeValue = "5";

@@ -281,6 +281,7 @@ export class FormUtils {
     static async selectOption(
         page: Page,
         selectElement: Locator,
+        dropdownSelector: Locator,
         optionText: string,
         options: RetryOptions = {}
     ): Promise<void> {
@@ -289,8 +290,8 @@ export class FormUtils {
         for (let attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
                 await selectElement.click();
-                await page.waitForSelector('.filter-control-select__menu-list', { state: 'visible' });
-                await page.locator('.filter-control-select__option')
+                await dropdownSelector.waitFor({ state: 'visible' });
+                await dropdownSelector
                     .filter({ hasText: optionText })
                     .click();
                 await WaitUtils.delay(1000);
@@ -342,11 +343,11 @@ export class TableUtils {
      * Get all table data with scrolling support
      */
     static async getAllTableData<T>(
-        page: Page,
-        tableRows: Locator,
-        scrollContainer: Locator,
-        dataExtractor: (rowIndex: number) => Promise<T>,
-        useScrolling: boolean = true
+        page: Page,                  // Trang Playwright
+        tableRows: Locator,          // Locator của các dòng trong bảng
+        scrollContainer: Locator,    // Locator của vùng chứa scrollable
+        dataExtractor: (rowIndex: number) => Promise<T>, // Hàm trích xuất dữ liệu
+        useScrolling: boolean = true // Có tự động scroll không?
     ): Promise<T[]> {
         if (useScrolling) {
             await ScrollUtils.loadAllData(page, scrollContainer);
