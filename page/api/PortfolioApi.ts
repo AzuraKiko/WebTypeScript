@@ -1,4 +1,5 @@
 import apiHelper from "../../helpers/ApiHelper";
+import { WaitUtils } from "../../helpers/uiUtils";
 
 // Interface definitions for better type safety
 interface PortfolioPayload {
@@ -34,13 +35,10 @@ interface ApiResponse {
     status?: number;
 }
 
-/**
- * Portfolio API class for handling portfolio-related operations
- * Fixed typo in class name and improved structure
- */
 export default class PortfolioApi {
     private baseUrl: string;
     private apiHelper: apiHelper;
+    private waitUtils: WaitUtils;
     private readonly defaultTimeout: number = 30000;
 
     // Constants
@@ -54,6 +52,7 @@ export default class PortfolioApi {
 
     constructor(config: PortfolioApiConfig) {
         this.baseUrl = config.baseUrl;
+        this.waitUtils = new WaitUtils();
 
         const timeout = config.timeout || this.defaultTimeout;
         this.apiHelper = new apiHelper({
@@ -112,7 +111,7 @@ export default class PortfolioApi {
                 if (attempt < retryCount) {
                     const delay = Math.pow(2, attempt) * 1000; // Exponential backoff
                     console.log(`Portfolio API attempt ${attempt} failed, retrying in ${delay}ms...`);
-                    await this.delay(delay);
+                    await WaitUtils.delay(delay);
                 }
             } catch (error) {
                 lastError = error instanceof Error ? error : new Error('Unknown error');
@@ -120,7 +119,7 @@ export default class PortfolioApi {
                 if (attempt < retryCount) {
                     const delay = Math.pow(2, attempt) * 1000;
                     console.log(`Portfolio API attempt ${attempt} failed, retrying in ${delay}ms...`);
-                    await this.delay(delay);
+                    await WaitUtils.delay(delay);
                 }
             }
         }
@@ -200,68 +199,6 @@ export default class PortfolioApi {
         } catch (error) {
             console.error('API request failed:', error);
             throw new Error(`Portfolio API request failed: ${error}`);
-        }
-    }
-
-    /**
-     * Utility method for delay
-     * @param ms - Delay in milliseconds
-     */
-    private delay(ms: number): Promise<void> {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    /**
-     * Get API helper instance for advanced usage
-     * @returns ApiHelper instance
-     */
-    public getApiHelper(): apiHelper {
-        return this.apiHelper;
-    }
-
-    /**
-     * Update base URL
-     * @param newBaseUrl - New base URL
-     */
-    public updateBaseUrl(newBaseUrl: string): void {
-        this.baseUrl = newBaseUrl;
-        this.apiHelper = new apiHelper({
-            baseUrl: this.baseUrl,
-            timeout: this.defaultTimeout
-        });
-    }
-
-    /**
-     * Get current configuration
-     * @returns Current API configuration
-     */
-    public getConfig(): PortfolioApiConfig {
-        return {
-            baseUrl: this.baseUrl,
-            timeout: this.defaultTimeout
-        };
-    }
-
-    /**
-     * Test API connectivity
-     * @returns Promise<boolean> - Connection test result
-     */
-    async testConnection(): Promise<boolean> {
-        try {
-            // Use a minimal test payload
-            const testParams: PortfolioRequestParams = {
-                user: 'test',
-                session: 'test',
-                acntNo: 'test',
-                subAcntNo: 'test',
-                rqId: 'connectivity-test'
-            };
-
-            const result = await this.getPortfolio(testParams);
-            return result.success;
-        } catch (error) {
-            console.error('Connection test failed:', error);
-            return false;
         }
     }
 

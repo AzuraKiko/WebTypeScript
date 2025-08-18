@@ -3,6 +3,8 @@ import BasePage from './BasePage';
 import { getRandomStockCode } from '../../tests/utils/testConfig';
 import MatrixPage from './MatrixPage';
 import OrderBook from './OrderBook';
+import PortfolioPage from './PorfolioPage';
+import { FormUtils } from '../../helpers/uiUtils';
 
 // Interface definitions for better type safety
 interface OrderFormData {
@@ -45,6 +47,7 @@ class OrderPage extends BasePage {
     // Dependencies
     matrixPage: MatrixPage;
     orderBook: OrderBook;
+    portfolioPage: PortfolioPage;
 
     // Constants
     private static readonly DEFAULT_QUANTITY = '1';
@@ -59,6 +62,7 @@ class OrderPage extends BasePage {
         super(page);
         this.matrixPage = new MatrixPage(page);
         this.orderBook = new OrderBook(page);
+        this.portfolioPage = new PortfolioPage(page);
         this.initializeElements(page);
     }
 
@@ -145,7 +149,7 @@ class OrderPage extends BasePage {
      */
     async navigateToOrder(): Promise<void> {
         try {
-            await this.elements.navigation.orderButton.click();
+            await this.orderButton.click();
             await this.page.waitForTimeout(OrderPage.NAVIGATION_TIMEOUT);
 
             if (await this.matrixPage.isMatrixVisible()) {
@@ -166,7 +170,7 @@ class OrderPage extends BasePage {
     async fillStockCode(stockCode?: string): Promise<string> {
         const code = stockCode || getRandomStockCode();
         try {
-            await this.elements.form.stockCodeInput.fill(code);
+            await FormUtils.fillField(this.stockCodeInput, code);
             return code;
         } catch (error) {
             throw new Error(`Failed to fill stock code: ${error}`);
@@ -178,7 +182,7 @@ class OrderPage extends BasePage {
      */
     async fillQuantity(quantity: string): Promise<void> {
         try {
-            await this.elements.form.quantityInput.fill(quantity);
+            await FormUtils.fillField(this.quantityInput, quantity);
         } catch (error) {
             throw new Error(`Failed to fill quantity: ${error}`);
         }
@@ -190,15 +194,13 @@ class OrderPage extends BasePage {
     async selectPriceOption(priceType: 'floor' | 'ceil' | 'reference'): Promise<void> {
         try {
             const priceElements = {
-                floor: this.elements.form.priceFloor,
-                ceil: this.elements.form.priceCeil,
-                reference: this.elements.form.priceReference
+                floor: this.priceFloor,
+                ceil: this.priceCeil,
+                reference: this.priceReference
             };
 
             const selectedElement = priceElements[priceType];
 
-            // Wait for element to be visible and clickable
-            await expect(selectedElement).toHaveCount(1);
             await expect(selectedElement).toBeVisible();
             await selectedElement.dblclick();
         } catch (error) {
@@ -211,7 +213,7 @@ class OrderPage extends BasePage {
      */
     async setCustomPrice(price: string): Promise<void> {
         try {
-            await this.elements.form.priceInput.fill(price);
+            await FormUtils.fillField(this.priceInput, price);
         } catch (error) {
             throw new Error(`Failed to set custom price: ${error}`);
         }
@@ -222,8 +224,8 @@ class OrderPage extends BasePage {
      */
     async submitOrder(): Promise<void> {
         try {
-            await this.elements.form.placeOrderButton.click();
-            await this.elements.form.confirmOrderButton.click();
+            await this.placeOrderButton.click();
+            await this.confirmOrderButton.click();
         } catch (error) {
             throw new Error(`Failed to submit order: ${error}`);
         }
@@ -586,17 +588,6 @@ class OrderPage extends BasePage {
         }
 
         return false;
-    }
-
-    // =================== LEGACY METHODS (for backward compatibility) ===================
-
-    /**
-     * Legacy method - use placeBuyOrder instead
-     * @deprecated Use placeBuyOrder method instead
-     */
-    async placeBuyOrder_Legacy(stockCode?: string, quantity: string = OrderPage.DEFAULT_QUANTITY): Promise<void> {
-        console.warn('placeBuyOrder_Legacy is deprecated. Use placeBuyOrder instead.');
-        await this.placeBuyOrder({ stockCode, quantity });
     }
 }
 

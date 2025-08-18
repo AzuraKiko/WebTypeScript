@@ -171,6 +171,15 @@ class apiHelper {
         return { result, responseTime: end - start };
     }
 
+    /**
+     * Update base URL
+     * @param newBaseUrl - New base URL
+     */
+    public updateBaseUrl(newBaseUrl: string): void {
+        this.options.baseUrl = newBaseUrl;
+        this.api.defaults.baseURL = newBaseUrl;
+    }
+
     static createWithBaseUrl(baseUrl: string): apiHelper {
         return new apiHelper({ baseUrl });
     }

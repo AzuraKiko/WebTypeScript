@@ -98,7 +98,7 @@ export class StockCodeValidator {
  */
 export class NumberValidator {
     private static readonly COMMA_FORMAT_PATTERN = /^-?(\d{1,3}(,\d{3})*(\.\d+)?|\d+(\.\d+)?)$/;
-    private static readonly PERCENTAGE_PATTERN = /^-?(\d{1,3}(,\d{3})*(\.\d+)?|\d+(\.\d+)?)%$/;
+    private static readonly PERCENTAGE_PATTERN = /^-?(\d{1,3}(,\d{3})*(\.\d{2})?|\d+(\.\d{2})?)%$/;
 
     /**
      * Validate number format with comma thousands separator
@@ -116,25 +116,36 @@ export class NumberValidator {
         }
 
         const trimmedValue = value.trim();
-        const { allowNegative = false, minValue, maxValue } = options;
+        const { allowNegative = false, minValue, maxValue, decimalPlaces } = options;
 
-        // Check basic format
-        const pattern = allowNegative ?
-            NumberValidator.COMMA_FORMAT_PATTERN :
-            /^(\d{1,3}(,\d{3})*(\.\d+)?|\d+(\.\d+)?)$/;
+        // Regex cơ bản (cho phép hoặc không cho số âm)
+        const pattern = allowNegative
+            ? NumberValidator.COMMA_FORMAT_PATTERN
+            : /^(\d{1,3}(,\d{3})*(\.\d+)?|\d+(\.\d+)?)$/;
 
         if (!pattern.test(trimmedValue)) {
             errors.push(`${fieldName} has invalid format`);
             return { isValid: false, errors };
         }
 
-        // Parse and validate numeric value
+        // Parse và validate numeric value
         const numericValue = NumberValidator.parseNumberWithCommas(trimmedValue);
 
         if (isNaN(numericValue)) {
             errors.push(`${fieldName} is not a valid number`);
         } else {
-            // Range validation
+            // ✅ Kiểm tra đúng số chữ số sau dấu thập phân
+            if (decimalPlaces !== undefined) {
+                const decimalMatch = trimmedValue.split('.')[1];
+
+                if (!decimalMatch || decimalMatch.length !== decimalPlaces) {
+                    errors.push(
+                        `${fieldName} must have exactly ${decimalPlaces} decimal place${decimalPlaces > 1 ? 's' : ''}`
+                    );
+                }
+            }
+
+            // ✅ Range validation
             if (minValue !== undefined && numericValue < minValue) {
                 errors.push(`${fieldName} must be at least ${minValue}`);
             }
@@ -171,8 +182,7 @@ export class NumberValidator {
             return { isValid: false, errors };
         }
 
-        const percentageValue = trimmedValue.replace('%', '');
-        if (!NumberValidator.COMMA_FORMAT_PATTERN.test(percentageValue)) {
+        if (!NumberValidator.PERCENTAGE_PATTERN.test(trimmedValue)) {
             errors.push(`${fieldName} has invalid format`);
         }
 
@@ -197,7 +207,7 @@ export class NumberValidator {
         decimalPlaces: number = 0
     ): string {
         return value.toLocaleString('en-US', {
-            minimumFractionDigits: 0,
+            minimumFractionDigits: decimalPlaces,
             maximumFractionDigits: decimalPlaces
         });
     }
@@ -205,20 +215,22 @@ export class NumberValidator {
     /**
      * Validate quantity format (positive numbers only)
      */
-    static validateQuantity(value: string, fieldName: string = 'Quantity'): ValidationResult {
+    static validateQuantity(value: string, fieldName: string = 'Quantity', decimalPlaces: number = 0): ValidationResult {
         return NumberValidator.validateNumberFormat(value, fieldName, {
             allowNegative: false,
-            minValue: 0
+            minValue: 0,
+            decimalPlaces: decimalPlaces
         });
     }
 
     /**
      * Validate price format (positive numbers only)
      */
-    static validatePrice(value: string, fieldName: string = 'Price'): ValidationResult {
+    static validatePrice(value: string, fieldName: string = 'Price', decimalPlaces: number = 2): ValidationResult {
         return NumberValidator.validateNumberFormat(value, fieldName, {
             allowNegative: false,
-            minValue: 0
+            minValue: 0,
+            decimalPlaces: decimalPlaces
         });
     }
 }
@@ -339,7 +351,10 @@ export class DataConsistencyValidator {
         if (orderData.price &&
             !orderData.price.includes('MP') &&
             !orderData.price.includes('ATO') &&
-            !orderData.price.includes('ATC')) {
+            !orderData.price.includes('MTL') &&
+            !orderData.price.includes('MOK') &&
+            !orderData.price.includes('ATC') &&
+            !orderData.price.includes('MAK')) {
             const price = parseFloat(orderData.price.replace(/[,\s]/g, ''));
             if (isNaN(price) || price <= 0) {
                 errors.push(`Order ${index}: Invalid price: ${orderData.price}`);
@@ -365,10 +380,10 @@ export class DataConsistencyValidator {
         }
 
         // Numeric fields validation
-        const numericFields = ['quantity', 'avgPrice', 'currentPrice'];
+        const numericFields = ['avgPrice', 'currentPrice'];
         numericFields.forEach(field => {
             if (portfolioData[field]) {
-                const validation = NumberValidator.validateNumberFormat(
+                const validation = NumberValidator.validatePrice(
                     portfolioData[field],
                     `${field} for portfolio ${index}`
                 );
@@ -377,6 +392,17 @@ export class DataConsistencyValidator {
                 }
             }
         });
+
+        // Quantity validation
+        if (portfolioData.quantity) {
+            const quantityValidation = NumberValidator.validateQuantity(
+                portfolioData.quantity,
+                `Quantity for portfolio ${index}`
+            );
+            if (!quantityValidation.isValid) {
+                errors.push(...quantityValidation.errors);
+            }
+        }
 
         // Percentage validation
         if (portfolioData.percentage) {
