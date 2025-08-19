@@ -5,12 +5,13 @@ import MatrixPage from './MatrixPage';
 import OrderBook from './OrderBook';
 import PortfolioPage from './PorfolioPage';
 import { FormUtils } from '../../helpers/uiUtils';
+import { expectElementContainsText, expectElementText } from '../../helpers/assertions';
 
 // Interface definitions for better type safety
 interface OrderFormData {
     stockCode: string;
-    quantity: string;
-    price?: string;
+    quantity: number;
+    price?: number | string;
 }
 
 interface MessageVerification {
@@ -29,6 +30,12 @@ interface OrderPageElements {
         priceCeil: Locator;
         priceFloor: Locator;
         priceReference: Locator;
+        ATO: Locator;
+        ATC: Locator;
+        MTL: Locator;
+        PLO: Locator;
+        MOK: Locator;
+        MAK: Locator;
         placeOrderButton: Locator;
         confirmOrderButton: Locator;
     };
@@ -50,7 +57,7 @@ class OrderPage extends BasePage {
     portfolioPage: PortfolioPage;
 
     // Constants
-    private static readonly DEFAULT_QUANTITY = '1';
+    private static readonly DEFAULT_QUANTITY = 1;
     private static readonly NAVIGATION_TIMEOUT = 3000;
     private static readonly MATRIX_TIMEOUT = 5000;
     private static readonly MESSAGE_TIMEOUT = 3000;
@@ -81,6 +88,12 @@ class OrderPage extends BasePage {
                 priceCeil: page.locator('span.cursor-pointer.c').first(),
                 priceFloor: page.locator('span.cursor-pointer.f').first(),
                 priceReference: page.locator('span.cursor-pointer.r').first(),
+                ATO: page.locator('.btn.btn-info', { hasText: 'ATO' }),
+                ATC: page.locator('.btn.btn-info', { hasText: 'ATC' }),
+                MTL: page.locator('.btn.btn-info', { hasText: 'MTL' }),
+                PLO: page.locator('.btn.btn-info', { hasText: 'PLO' }),
+                MOK: page.locator('.btn.btn-info', { hasText: 'MOK' }),
+                MAK: page.locator('.btn.btn-info', { hasText: 'MAK' }),
                 placeOrderButton: page.getByRole('button', { name: 'Đặt lệnh' }),
                 confirmOrderButton: page.getByRole('button', { name: 'Xác nhận' })
             },
@@ -113,6 +126,12 @@ class OrderPage extends BasePage {
         this.priceCeil = this.elements.form.priceCeil;
         this.priceFloor = this.elements.form.priceFloor;
         this.priceReference = this.elements.form.priceReference;
+        this.ATO = this.elements.form.ATO;
+        this.ATC = this.elements.form.ATC;
+        this.MTL = this.elements.form.MTL;
+        this.PLO = this.elements.form.PLO;
+        this.MOK = this.elements.form.MOK;
+        this.MAK = this.elements.form.MAK;
         this.placeOrderButton = this.elements.form.placeOrderButton;
         this.confirmOrderButton = this.elements.form.confirmOrderButton;
 
@@ -134,6 +153,12 @@ class OrderPage extends BasePage {
     priceCeil!: Locator;
     priceFloor!: Locator;
     priceReference!: Locator;
+    ATO!: Locator;
+    ATC!: Locator;
+    MTL!: Locator;
+    PLO!: Locator;
+    MOK!: Locator;
+    MAK!: Locator;
     placeOrderButton!: Locator;
     confirmOrderButton!: Locator;
     orderIndayTab!: Locator;
@@ -180,7 +205,7 @@ class OrderPage extends BasePage {
     /**
      * Fill quantity in the form
      */
-    async fillQuantity(quantity: string): Promise<void> {
+    async fillQuantity(quantity: number): Promise<void> {
         try {
             await FormUtils.fillField(this.quantityInput, quantity);
         } catch (error) {
@@ -208,10 +233,30 @@ class OrderPage extends BasePage {
         }
     }
 
+    async selectMarketPrice(priceType: 'ATO' | 'ATC' | 'MTL' | 'PLO' | 'MOK' | 'MAK'): Promise<void> {
+        try {
+            const priceElements = {
+                ATO: this.ATO,
+                ATC: this.ATC,
+                MTL: this.MTL,
+                PLO: this.PLO,
+                MOK: this.MOK,
+                MAK: this.MAK
+            };
+
+            const selectedElement = priceElements[priceType];
+            await this.priceInput.focus();
+
+            await expect(selectedElement).toBeVisible();
+            await selectedElement.click();
+        } catch (error) {
+            throw new Error(`Failed to select market price: ${error}`);
+        }
+    }
     /**
      * Set custom price
      */
-    async setCustomPrice(price: string): Promise<void> {
+    async setCustomPrice(price: number | string): Promise<void> {
         try {
             await FormUtils.fillField(this.priceInput, price);
         } catch (error) {
@@ -289,6 +334,20 @@ class OrderPage extends BasePage {
         }
     }
 
+    async placeSellOrderFromPorfolio(orderData?: Partial<OrderFormData>): Promise<string> {
+        const {
+            quantity = OrderPage.DEFAULT_QUANTITY
+        } = orderData || {};
+        await this.portfolioPage.navigateToPortfolio();
+        await this.portfolioPage.clickPorfolioRowByQuantity(quantity);
+
+        const usedStockCode = await this.priceInput.textContent();
+        await this.fillQuantity(quantity);
+        await this.submitOrder();
+
+        return usedStockCode || '';
+    }
+
     /**
      * Place order with custom price
      */
@@ -324,15 +383,17 @@ class OrderPage extends BasePage {
     async placeMarketOrder(orderData?: Partial<OrderFormData>): Promise<string> {
         const {
             stockCode,
-            quantity = OrderPage.DEFAULT_QUANTITY
+            quantity = OrderPage.DEFAULT_QUANTITY,
+            price
         } = orderData || {};
 
         try {
             // Fill stock code
             const usedStockCode = await this.fillStockCode(stockCode);
+            const priceType = price as 'ATO' | 'ATC' | 'MTL' | 'PLO' | 'MOK' | 'MAK';
 
             // Select reference price for market order
-            await this.selectPriceOption('reference');
+            await this.selectMarketPrice(priceType);
 
             // Fill quantity
             await this.fillQuantity(quantity);
@@ -351,24 +412,21 @@ class OrderPage extends BasePage {
     /**
      * Verify message with improved error handling and timeout
      */
-    async verifyMessage(expectedTitle: string, expectedDescription?: string): Promise<boolean> {
+    async verifyMessage(expectedTitle: string, expectedDescription?: string): Promise<void> {
         try {
-            await this.elements.messages.titleMessage.waitFor({
+            await this.titleMessage.waitFor({
                 state: 'visible',
                 timeout: OrderPage.MESSAGE_TIMEOUT
             });
 
-            const titleText = await this.elements.messages.titleMessage.textContent();
-            const descriptionText = await this.elements.messages.descriptionMessage.textContent();
+            await expectElementText(this.titleMessage, expectedTitle);
+            if (expectedDescription) {
+                await expectElementContainsText(this.descriptionMessage, expectedDescription);
+            }
 
-            const titleMatch = titleText?.trim() === expectedTitle;
-            const descriptionMatch = expectedDescription ?
-                (descriptionText?.trim().includes(expectedDescription) ?? false) : true;
-
-            return (titleMatch ?? false) && descriptionMatch;
         } catch (error) {
             console.log(`Message verification failed: ${error}`);
-            return false;
+            throw new Error(`Message verification failed: ${error}`);
         }
     }
 
@@ -377,13 +435,13 @@ class OrderPage extends BasePage {
      */
     async getCurrentMessage(): Promise<MessageVerification> {
         try {
-            await this.elements.messages.titleMessage.waitFor({
+            await this.titleMessage.waitFor({
                 state: 'visible',
                 timeout: OrderPage.MESSAGE_TIMEOUT
             });
 
-            const title = await this.elements.messages.titleMessage.textContent() || '';
-            const description = await this.elements.messages.descriptionMessage.textContent() || '';
+            const title = await this.titleMessage.textContent() || '';
+            const description = await this.descriptionMessage.textContent() || '';
 
             return {
                 title: title.trim(),
@@ -399,12 +457,12 @@ class OrderPage extends BasePage {
      */
     async waitForSuccessMessage(timeout: number = OrderPage.MESSAGE_TIMEOUT): Promise<boolean> {
         try {
-            await this.elements.messages.titleMessage.waitFor({
+            await this.titleMessage.waitFor({
                 state: 'visible',
                 timeout
             });
 
-            const titleText = await this.elements.messages.titleMessage.textContent();
+            const titleText = await this.titleMessage.textContent();
 
             // Common success message patterns
             const successPatterns = [
@@ -428,12 +486,12 @@ class OrderPage extends BasePage {
      */
     async waitForErrorMessage(timeout: number = OrderPage.MESSAGE_TIMEOUT): Promise<boolean> {
         try {
-            await this.elements.messages.titleMessage.waitFor({
+            await this.titleMessage.waitFor({
                 state: 'visible',
                 timeout
             });
 
-            const titleText = await this.elements.messages.titleMessage.textContent();
+            const titleText = await this.titleMessage.textContent();
 
             // Common error message patterns
             const errorPatterns = [
@@ -451,143 +509,6 @@ class OrderPage extends BasePage {
             console.log(`Error message not found: ${error}`);
             return false;
         }
-    }
-
-    // =================== FORM VALIDATION METHODS ===================
-
-    /**
-     * Validate form inputs before placing order
-     */
-    async validateOrderForm(): Promise<{ isValid: boolean; errors: string[] }> {
-        const errors: string[] = [];
-
-        try {
-            // Check stock code
-            const stockCode = await this.elements.form.stockCodeInput.inputValue();
-            if (!stockCode || stockCode.trim() === '') {
-                errors.push('Stock code is required');
-            } else if (!/^[A-Z]{3}$/.test(stockCode.trim())) {
-                errors.push('Stock code must be 3 uppercase letters');
-            }
-
-            // Check quantity
-            const quantity = await this.elements.form.quantityInput.inputValue();
-            if (!quantity || quantity.trim() === '') {
-                errors.push('Quantity is required');
-            } else {
-                const quantityNum = parseFloat(quantity);
-                if (isNaN(quantityNum) || quantityNum <= 0) {
-                    errors.push('Quantity must be a positive number');
-                }
-            }
-
-            // Check if price is set (either through price options or custom input)
-            const customPrice = await this.elements.form.priceInput.inputValue();
-            const hasPriceSelection = await this.checkPriceSelection();
-
-            if (!customPrice && !hasPriceSelection) {
-                errors.push('Price must be selected or entered');
-            }
-
-            // Check if buttons are enabled
-            const placeOrderEnabled = await this.elements.form.placeOrderButton.isEnabled();
-            if (!placeOrderEnabled) {
-                errors.push('Place order button is disabled');
-            }
-
-        } catch (error) {
-            errors.push(`Form validation error: ${error}`);
-        }
-
-        return {
-            isValid: errors.length === 0,
-            errors
-        };
-    }
-
-    /**
-     * Check if any price option is selected
-     */
-    private async checkPriceSelection(): Promise<boolean> {
-        try {
-            // This is a simplified check - in reality, you might need to check
-            // for visual indicators or class names that show selection state
-            const priceElements = [
-                this.elements.form.priceCeil,
-                this.elements.form.priceFloor,
-                this.elements.form.priceReference
-            ];
-
-            for (const element of priceElements) {
-                const classes = await element.getAttribute('class');
-                if (classes && (classes.includes('selected') || classes.includes('active'))) {
-                    return true;
-                }
-            }
-
-            return false;
-        } catch (error) {
-            console.log(`Error checking price selection: ${error}`);
-            return false;
-        }
-    }
-
-    /**
-     * Clear order form
-     */
-    async clearOrderForm(): Promise<void> {
-        try {
-            await this.elements.form.stockCodeInput.clear();
-            await this.elements.form.quantityInput.clear();
-            await this.elements.form.priceInput.clear();
-        } catch (error) {
-            throw new Error(`Failed to clear order form: ${error}`);
-        }
-    }
-
-    // =================== UTILITY METHODS ===================
-
-    /**
-     * Get form data
-     */
-    async getFormData(): Promise<OrderFormData> {
-        try {
-            const stockCode = await this.elements.form.stockCodeInput.inputValue();
-            const quantity = await this.elements.form.quantityInput.inputValue();
-            const price = await this.elements.form.priceInput.inputValue();
-
-            return {
-                stockCode: stockCode.trim(),
-                quantity: quantity.trim(),
-                price: price.trim() || undefined
-            };
-        } catch (error) {
-            throw new Error(`Failed to get form data: ${error}`);
-        }
-    }
-
-    /**
-     * Check if order form is ready for submission
-     */
-    async isFormReadyForSubmission(): Promise<boolean> {
-        const validation = await this.validateOrderForm();
-        return validation.isValid;
-    }
-
-    /**
-     * Wait for form to be ready
-     */
-    async waitForFormReady(timeout: number = 10000): Promise<boolean> {
-        const startTime = Date.now();
-
-        while (Date.now() - startTime < timeout) {
-            if (await this.isFormReadyForSubmission()) {
-                return true;
-            }
-            await this.page.waitForTimeout(500);
-        }
-
-        return false;
     }
 }
 

@@ -250,7 +250,7 @@ export class FormUtils {
      */
     static async fillField(
         field: Locator,
-        value: string,
+        value: string | number,
         options: RetryOptions = {}
     ): Promise<void> {
         const { maxAttempts = 3 } = options;
@@ -259,11 +259,11 @@ export class FormUtils {
             try {
                 await field.waitFor({ state: 'visible' });
                 await field.clear();
-                await field.fill(value);
+                await field.fill(String(value));
 
                 // Verify the value was set correctly
                 const inputValue = await field.inputValue();
-                if (inputValue === value) {
+                if (inputValue === String(value)) {
                     return;
                 }
             } catch (error) {

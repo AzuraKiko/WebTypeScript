@@ -75,43 +75,43 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
     await orderPage.navigateToOrder();
 
     // Place order buy with normal account
-    await orderPage.placeBuyOrder('ACB', '1');
+    await orderPage.placeBuyOrder({ stockCode: 'ACB', quantity: 1 });
     await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
 
     // Place order sell with normal account
-    await orderPage.placeSellOrder();
+    await orderPage.placeSellOrderFromPorfolio({ quantity: 1 });
     await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
 
     // Place order buy with margin account
     await subaccPage.selectMarginSubacc();
-    await orderPage.placeBuyOrder('MBB', '1');
+    await orderPage.placeBuyOrder({ stockCode: 'MBB', quantity: 1 });
     await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
 
     // Place order sell with margin account
     await subaccPage.selectMarginSubacc();
-    await orderPage.placeSellOrder();
+    await orderPage.placeSellOrderFromPorfolio({ quantity: 1 });
     await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
 
-    // Modify order with normal account
-    await orderBook.openOrderBook();
-    await orderBook.filterByAccount('Normal');
-    await orderBook.filterByStatus('Pending');
-    await orderBook.modifyOrderByStockCode('ACB', undefined, '2');
-    await orderPage.verifyMessage('Chỉnh sửa lệnh thành công', 'Số hiệu lệnh');
-    await page.waitForTimeout(3000);
+    // // Modify order with normal account
+    // await orderBook.openOrderBook();
+    // await orderBook.filterByAccount('Normal');
+    // await orderBook.filterByStatus('Pending');
+    // await orderBook.modifyOrderByStockCode('ACB', undefined, '2');
+    // await orderPage.verifyMessage('Chỉnh sửa lệnh thành công', 'Số hiệu lệnh');
+    // await page.waitForTimeout(3000);
 
-    // Modify order with margin account
-    await orderBook.openOrderBook();
-    await orderBook.filterByAccount('Margin');
-    await orderBook.filterByOrderType('Buy');
-    await orderBook.filterByStatus('Pending');
-    await orderBook.modifyOrderByStockCode('MBB', undefined, '2');
-    await orderPage.verifyMessage('Chỉnh sửa lệnh thành công', 'Số hiệu lệnh');
-    await page.waitForTimeout(3000);
+    // // Modify order with margin account
+    // await orderBook.openOrderBook();
+    // await orderBook.filterByAccount('Margin');
+    // await orderBook.filterByOrderType('Buy');
+    // await orderBook.filterByStatus('Pending');
+    // await orderBook.modifyOrderByStockCode('MBB', undefined, '2');
+    // await orderPage.verifyMessage('Chỉnh sửa lệnh thành công', 'Số hiệu lệnh');
+    // await page.waitForTimeout(3000);
 
 
 

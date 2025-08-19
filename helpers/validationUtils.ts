@@ -349,7 +349,7 @@ export class DataConsistencyValidator {
 
         // Price validation (excluding market orders)
         if (orderData.price &&
-            !orderData.price.includes('MP') &&
+            !orderData.price.includes('PLO') &&
             !orderData.price.includes('ATO') &&
             !orderData.price.includes('MTL') &&
             !orderData.price.includes('MOK') &&

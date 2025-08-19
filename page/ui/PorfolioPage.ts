@@ -263,7 +263,7 @@ class PortfolioPage extends BasePage {
     async clickPortfolioRow(rowIndex: number): Promise<void> {
         const row = this.portfolioTableRows.nth(rowIndex);
         await row.waitFor({ state: 'visible' });
-        await row.click();
+        await row.dblclick();
     }
 
     /**
@@ -278,7 +278,7 @@ class PortfolioPage extends BasePage {
                 const row = rows.nth(i);
                 const cellStockCode = await row.locator('td:nth-child(1)').textContent();
                 if (cellStockCode?.trim() === stockCode) {
-                    await row.click();
+                    await row.dblclick();
                     return;
                 }
             }
@@ -300,7 +300,7 @@ class PortfolioPage extends BasePage {
                     const row = this.portfolioTableRows.nth(i);
                     const cellStockCode = await row.locator('td:nth-child(1)').textContent();
                     if (cellStockCode?.trim() === stockCode) {
-                        await row.click();
+                        await row.dblclick();
                         found = true;
                         return;
                     }
@@ -332,7 +332,7 @@ class PortfolioPage extends BasePage {
             const quantity = parseInt(quantityText.replace(/,/g, ''), 10);
 
             if (quantity >= minQuantity) {
-                await row.click();
+                await row.dblclick();
                 await this.page.waitForTimeout(PortfolioPage.SCROLL_TIMEOUT);
                 break;
             }
