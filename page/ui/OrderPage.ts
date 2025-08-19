@@ -12,6 +12,7 @@ interface OrderFormData {
     stockCode: string;
     quantity: number;
     price?: number | string;
+    side: 'buy' | 'sell';
 }
 
 interface MessageVerification {
@@ -24,6 +25,8 @@ interface OrderPageElements {
         orderButton: Locator;
     };
     form: {
+        buyTab: Locator;
+        sellTab: Locator;
         stockCodeInput: Locator;
         quantityInput: Locator;
         priceInput: Locator;
@@ -82,6 +85,8 @@ class OrderPage extends BasePage {
                 orderButton: page.locator('.footer-btn:has(.iOrder)')
             },
             form: {
+                buyTab: page.locator('.order-button.order-buy'),
+                sellTab: page.locator('.order-button.order-sell'),
                 stockCodeInput: page.getByPlaceholder('Mã CK', { exact: true }),
                 priceInput: page.getByPlaceholder('Giá x1000'),
                 quantityInput: page.getByPlaceholder('KL x1'),
@@ -120,6 +125,8 @@ class OrderPage extends BasePage {
         this.orderButton = this.elements.navigation.orderButton;
 
         // Order Form
+        this.buyTab = this.elements.form.buyTab;
+        this.sellTab = this.elements.form.sellTab;
         this.stockCodeInput = this.elements.form.stockCodeInput;
         this.quantityInput = this.elements.form.quantityInput;
         this.priceInput = this.elements.form.priceInput;
@@ -147,6 +154,8 @@ class OrderPage extends BasePage {
 
     // Legacy property declarations for backward compatibility
     orderButton!: Locator;
+    buyTab!: Locator;
+    sellTab!: Locator;
     stockCodeInput!: Locator;
     quantityInput!: Locator;
     priceInput!: Locator;
@@ -288,6 +297,7 @@ class OrderPage extends BasePage {
         } = orderData || {};
 
         try {
+            await this.buyTab.click();
             // Fill stock code
             const usedStockCode = await this.fillStockCode(stockCode);
 
@@ -316,6 +326,7 @@ class OrderPage extends BasePage {
         } = orderData || {};
 
         try {
+            await this.sellTab.click();
             // Fill stock code
             const usedStockCode = await this.fillStockCode(stockCode);
 
@@ -338,10 +349,12 @@ class OrderPage extends BasePage {
         const {
             quantity = OrderPage.DEFAULT_QUANTITY
         } = orderData || {};
+        await this.sellTab.click();
         await this.portfolioPage.navigateToPortfolio();
         await this.portfolioPage.clickPorfolioRowByQuantity(quantity);
 
         const usedStockCode = await this.priceInput.textContent();
+        await this.selectPriceOption('ceil');
         await this.fillQuantity(quantity);
         await this.submitOrder();
 
@@ -352,13 +365,19 @@ class OrderPage extends BasePage {
      * Place order with custom price
      */
     async placeOrderWithCustomPrice(orderData: OrderFormData): Promise<string> {
-        const { stockCode, quantity, price } = orderData;
+        const { stockCode, quantity, price, side } = orderData;
 
         if (!price) {
             throw new Error('Custom price is required for this method');
         }
 
         try {
+            if (side === 'buy') {
+                await this.buyTab.click();
+            } else {
+                await this.sellTab.click();
+            }
+
             // Fill stock code
             const usedStockCode = await this.fillStockCode(stockCode);
 
@@ -384,10 +403,17 @@ class OrderPage extends BasePage {
         const {
             stockCode,
             quantity = OrderPage.DEFAULT_QUANTITY,
-            price
+            price,
+            side
         } = orderData || {};
 
         try {
+            if (side === 'buy') {
+                await this.buyTab.click();
+            } else {
+                await this.sellTab.click();
+            }
+
             // Fill stock code
             const usedStockCode = await this.fillStockCode(stockCode);
             const priceType = price as 'ATO' | 'ATC' | 'MTL' | 'PLO' | 'MOK' | 'MAK';

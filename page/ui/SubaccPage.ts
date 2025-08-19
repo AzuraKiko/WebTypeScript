@@ -20,14 +20,17 @@ class SelectSubacc {
     }
 
     async selectNormalSubacc() {
+        await this.openDropdownSubacc();
         await this.normalSubacc.click();
     }
 
     async selectMarginSubacc() {
+        await this.openDropdownSubacc();
         await this.marginSubacc.click();
     }
 
     async selectFutureSubacc() {
+        await this.openDropdownSubacc();
         await this.futureSubacc.click();
     }
 }

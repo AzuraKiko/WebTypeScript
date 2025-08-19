@@ -1,6 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import BasePage from './BasePage';
-import { ScrollUtils } from '../../helpers/uiUtils';
+import { ScrollUtils, TableUtils } from '../../helpers/uiUtils';
 import { NumberValidator, StockCodeValidator } from '../../helpers/validationUtils';
 
 // Interface definitions for better type safety
@@ -84,9 +84,7 @@ class PortfolioPage extends BasePage {
      * Get Portfolio table headers
      */
     async getPortfolioTableHeaders(): Promise<string[]> {
-        await this.portfolioTableHeaders.waitFor({ state: 'visible' });
-        const headers = await this.portfolioTableHeaders.allTextContents();
-        return headers.map((header: string) => header.trim());
+        return await TableUtils.getTableHeaders(this.portfolioTableHeaders);
     }
 
     /**
@@ -121,60 +119,9 @@ class PortfolioPage extends BasePage {
     /**
      * Get all Portfolio table data (with auto-scrolling to load all data)
      */
-    async getAllPortfolioData(autoScroll: boolean = true): Promise<PortfolioRowData[]> {
+    async getAllPortfolioData(useScrolling: boolean = true): Promise<PortfolioRowData[]> {
         await this.portfolioTableRows.first().waitFor({ state: 'visible' });
-
-        if (autoScroll) {
-            await ScrollUtils.loadAllData(this.page, this.portfolioTableScrollContainer);
-        }
-
-        const rowCount = await this.portfolioTableRows.count();
-        const allData: PortfolioRowData[] = [];
-
-        for (let i = 0; i < rowCount; i++) {
-            const rowData = await this.getPortfolioRowData(i);
-            allData.push(rowData);
-        }
-
-        return allData;
-    }
-
-    /**
-     * Get Portfolio table data with scrolling and collecting unique entries
-     */
-    async getAllPortfolioDataWithScrolling(): Promise<PortfolioRowData[]> {
-        await this.portfolioTableRows.first().waitFor({ state: 'visible' });
-        await this.scrollPortfolioTableToTop();
-
-        const allData: Map<string, PortfolioRowData> = new Map();
-        let canScrollMore = true;
-        let scrollAttempts = 0;
-
-        while (canScrollMore && scrollAttempts < PortfolioPage.MAX_SCROLL_ATTEMPTS) {
-            const rowCount = await this.portfolioTableRows.count();
-
-            for (let i = 0; i < rowCount; i++) {
-                try {
-                    const rowData = await this.getPortfolioRowData(i);
-                    if (rowData.stockCode) {
-                        allData.set(rowData.stockCode, rowData);
-                    }
-                } catch (error) {
-                    continue;
-                }
-            }
-
-            canScrollMore = await this.canScrollPortfolioTableDown();
-            if (canScrollMore) {
-                const scrolled = await this.scrollPortfolioTablePageDown();
-                if (!scrolled) break;
-                await this.page.waitForTimeout(PortfolioPage.SCROLL_TIMEOUT);
-            }
-
-            scrollAttempts++;
-        }
-
-        return Array.from(allData.values());
+        return await TableUtils.getAllTableData(this.page, this.portfolioTableRows, this.portfolioTableScrollContainer, this.getPortfolioRowData, useScrolling);
     }
 
     /**
@@ -212,7 +159,7 @@ class PortfolioPage extends BasePage {
             }
         }
 
-        const allData = await this.getAllPortfolioDataWithScrolling();
+        const allData = await this.getAllPortfolioData();
         return allData.length;
     }
 
@@ -222,37 +169,22 @@ class PortfolioPage extends BasePage {
      * Find Portfolio row by stock code (returns row data if found)
      */
     async findPortfolioRowByStockCode(stockCode: string): Promise<PortfolioRowDataWithIndex | null> {
-        await this.portfolioTableRows.first().waitFor({ state: 'visible' });
-        await this.scrollPortfolioTableToTop();
+        try {
+            await this.portfolioTableRows.first().waitFor({ state: 'visible' });
 
-        let canScrollMore = true;
-        let scrollAttempts = 0;
+            const result = await TableUtils.findRowWithScrolling(
+                this.page,
+                this.portfolioTableRows,
+                this.portfolioTableScrollContainer,
+                this.getPortfolioRowData,
+                rowData => rowData.stockCode === stockCode
+            );
 
-        while (canScrollMore && scrollAttempts < PortfolioPage.MAX_SCROLL_ATTEMPTS) {
-            const rowCount = await this.portfolioTableRows.count();
-
-            for (let i = 0; i < rowCount; i++) {
-                try {
-                    const rowData = await this.getPortfolioRowData(i);
-                    if (rowData.stockCode === stockCode) {
-                        return { ...rowData, rowIndex: i };
-                    }
-                } catch (error) {
-                    continue;
-                }
-            }
-
-            canScrollMore = await this.canScrollPortfolioTableDown();
-            if (canScrollMore) {
-                const scrolled = await this.scrollPortfolioTablePageDown();
-                if (!scrolled) break;
-                await this.page.waitForTimeout(PortfolioPage.SCROLL_TIMEOUT);
-            }
-
-            scrollAttempts++;
+            return result ? { ...result.data, rowIndex: result.index } : null;
+        } catch (error) {
+            console.error(`Error finding portfolio row by stock code: ${error}`);
+            return null;
         }
-
-        return null;
     }
 
     // =================== INTERACTION METHODS ===================
@@ -260,7 +192,13 @@ class PortfolioPage extends BasePage {
     /**
      * Click on a specific Portfolio table row
      */
+
     async clickPortfolioRow(rowIndex: number): Promise<void> {
+        await TableUtils.clickTableRow(this.portfolioTableRows, rowIndex);
+    }
+
+
+    async doubleClickPortfolioRow(rowIndex: number): Promise<void> {
         const row = this.portfolioTableRows.nth(rowIndex);
         await row.waitFor({ state: 'visible' });
         await row.dblclick();
@@ -463,8 +401,7 @@ class PortfolioPage extends BasePage {
 
     async verifyNoDataMessage(): Promise<boolean> {
         const message = this.portfolioTable.locator('.card-panel-body .table.table-bordered.border-top-0 .text-center');
-        const messageText = await message.textContent();
-        return messageText === 'Không có dữ liệu!';
+        return await TableUtils.verifyNoDataMessage(message);
     }
 
     /**

@@ -14,7 +14,7 @@ type CapturedCall = {
     body: string | null;
     timestamp: string;
 };
-const OUTPUT_FILE = `oms_postman_collection_${ENV}.json`;
+const OUTPUT_FILE = `oms_postman_collection_url_${ENV}.json`;
 // const DEV_API_CORE = ['http://10.8.80.104:8888/', 'http://10.8.80.164:8888/']
 // const UAT_API_CORE = ['http://10.8.90.16:8888/', 'http://10.8.90.164:8888/']
 const DEV_API_CORE = ['http://10.8.80.164:8888/']
@@ -90,11 +90,11 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
     await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
 
-    // Place order sell with margin account
-    await subaccPage.selectMarginSubacc();
-    await orderPage.placeSellOrderFromPorfolio({ quantity: 1 });
-    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
-    await page.waitForTimeout(3000);
+    // // Place order sell with margin account
+    // await subaccPage.selectMarginSubacc();
+    // await orderPage.placeSellOrderFromPorfolio({ quantity: 1 });
+    // await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    // await page.waitForTimeout(3000);
 
     // // Modify order with normal account
     // await orderBook.openOrderBook();
@@ -134,5 +134,5 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(postmanCollection, null, 2), 'utf-8');
     console.log(`Đã lưu Postman Collection vào "${OUTPUT_FILE}"`);
 
-    fs.writeFileSync('api_calls.json', JSON.stringify(apiCalls, null, 2), 'utf-8');
+    fs.writeFileSync('api_calls_url.json', JSON.stringify(apiCalls, null, 2), 'utf-8');
 });

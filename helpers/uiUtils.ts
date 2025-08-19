@@ -339,6 +339,13 @@ export class FormUtils {
  * Table interaction utilities
  */
 export class TableUtils {
+
+    static async getTableHeaders(tableHeaders: Locator): Promise<string[]> {
+        await tableHeaders.waitFor({ state: 'visible' });
+        const headers = await tableHeaders.allTextContents();
+        return headers.map((header: string) => header.trim());
+    }
+
     /**
      * Get all table data with scrolling support
      */
@@ -410,6 +417,18 @@ export class TableUtils {
         return null;
     }
 
+    static async verifyNoDataMessage(locator: Locator): Promise<boolean> {
+        const messageText = (await locator.textContent())?.trim() || '';
+
+        const noDataMessages = [
+            'Không có dữ liệu!',
+            'No data found!',
+        ];
+
+        return noDataMessages.some(msg => messageText.includes(msg));
+    }
+
+
     /**
      * Click table row with error handling
      */
@@ -418,7 +437,7 @@ export class TableUtils {
         rowIndex: number,
         options: RetryOptions = {}
     ): Promise<void> {
-        const { maxAttempts = 3 } = options;
+        const { maxAttempts = 2 } = options;
 
         for (let attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
