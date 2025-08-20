@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { expectElementText, expectElementContainsText } from './assertions';
 
 /**
  * Common UI interaction utilities for Playwright tests
@@ -33,6 +34,11 @@ export interface HealthCheckOptions {
     checkInteractivity?: boolean;
     checkDataIntegrity?: boolean;
     timeout?: number;
+}
+
+export interface MessageVerification {
+    title: string;
+    description?: string;
 }
 
 /**
@@ -245,6 +251,7 @@ export class WaitUtils {
  * Form interaction utilities
  */
 export class FormUtils {
+    private static readonly MESSAGE_TIMEOUT = 10000;
     /**
      * Fill form field with retry mechanism
      */
@@ -332,6 +339,116 @@ export class FormUtils {
                 console.log(`Failed to clear field: ${error}`);
             }
         }
+    }
+
+    /**
+     * Verify message with improved error handling and timeout
+     */
+    static async verifyMessage(expectedTitle: string, titleLocator: Locator, expectedDescription?: string, descriptionLocator?: Locator, timeout?: number): Promise<void> {
+        try {
+            await titleLocator.waitFor({
+                state: 'visible',
+                timeout: timeout ?? FormUtils.MESSAGE_TIMEOUT
+            });
+            await expectElementText(titleLocator, expectedTitle);
+            if (descriptionLocator && expectedDescription) {
+                await expectElementContainsText(descriptionLocator, expectedDescription);
+            }
+
+        } catch (error) {
+            console.log(`Message verification failed: ${error}`);
+            throw new Error(`Message verification failed: ${error}`);
+        }
+    }
+
+    /**
+     * Get current message content
+     */
+    static async getCurrentMessage(titleLocator: Locator, descriptionLocator: Locator, timeout: number = FormUtils.MESSAGE_TIMEOUT): Promise<MessageVerification> {
+        try {
+            await titleLocator.waitFor({
+                state: 'visible',
+                timeout: timeout
+            });
+
+            const title = await titleLocator.textContent() || '';
+            const description = await descriptionLocator.textContent() || '';
+
+            return {
+                title: title.trim(),
+                description: description.trim()
+            };
+        } catch (error) {
+            throw new Error(`Failed to get current message: ${error}`);
+        }
+    }
+
+    /**
+     * Wait for success message
+     */
+    static async waitForSuccessMessage(titleLocator: Locator, timeout: number = FormUtils.MESSAGE_TIMEOUT): Promise<boolean> {
+        try {
+            await titleLocator.waitFor({
+                state: 'visible',
+                timeout
+            });
+
+            const titleText = await titleLocator.textContent();
+
+            // Common success message patterns
+            const successPatterns = [
+                'Thành công',
+                'Đặt lệnh thành công',
+                'Success',
+                'Order placed successfully'
+            ];
+
+            return successPatterns.some(pattern =>
+                titleText?.toLowerCase().includes(pattern.toLowerCase())
+            );
+        } catch (error) {
+            console.log(`Success message not found: ${error}`);
+            return false;
+        }
+    }
+
+    /**
+     * Wait for error message
+     */
+    static async waitForErrorMessage(titleLocator: Locator, timeout: number = FormUtils.MESSAGE_TIMEOUT): Promise<boolean> {
+        try {
+            await titleLocator.waitFor({
+                state: 'visible',
+                timeout
+            });
+
+            const titleText = await titleLocator.textContent();
+
+            // Common error message patterns
+            const errorPatterns = [
+                'Order placed failed',
+                'Error',
+                'Failed',
+                'Thất bại',
+                'Đặt lệnh không thành công'
+            ];
+
+            return errorPatterns.some(pattern =>
+                titleText?.toLowerCase().includes(pattern.toLowerCase())
+            );
+        } catch (error) {
+            console.log(`Error message not found: ${error}`);
+            return false;
+        }
+    }
+
+    /**
+     * Verify toggle state
+     */
+    static async verifyToggle(toggleElement: Locator, expectedState: 'ON' | 'OFF'): Promise<boolean> {
+        await toggleElement.waitFor({ state: 'visible' });
+        const isChecked = await toggleElement.isChecked();
+        return isChecked === (expectedState === 'ON');
     }
 }
 

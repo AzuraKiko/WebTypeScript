@@ -1,5 +1,6 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import BasePage from './BasePage';
+import { TableUtils, FormUtils } from '../../helpers/uiUtils';
 
 // Interface definitions for better type safety
 interface OrderData {
@@ -157,7 +158,7 @@ class OrderBook extends BasePage {
         this.orderHistoryTab = page.locator('.panel-tab', { hasText: /Lịch sử lệnh/ });
         this.conditionalOrderTab = page.locator('.panel-tab', { hasText: /Lệnh điều kiện/ });
         this.putThroughOrderTab = page.locator('.panel-tab', { hasText: /Sổ lệnh thoả thuận/ });
-        this.reloadOrderBookButton = page.locator('.icon.iRefresh');
+        this.reloadOrderBookButton = page.locator('.btn-icon .icon.iRefresh');
         this.expandOrderBookButton = page.locator('.icon.iZoomIn');
         this.closeOrderBookButton = page.locator('.icon.iClose');
 
@@ -328,9 +329,7 @@ class OrderBook extends BasePage {
     }
 
     async getOrderbookTableHeader(): Promise<string[]> {
-        await this.tableHeaders.waitFor({ state: 'visible' });
-        const headers = await this.tableHeaders.allTextContents();
-        return headers.map((header: string) => header.trim());
+        return TableUtils.getTableHeaders(this.tableHeaders);
     }
 
     async getOrderTableData(): Promise<OrderData[]> {

@@ -5,7 +5,6 @@ import MatrixPage from './MatrixPage';
 import OrderBook from './OrderBook';
 import PortfolioPage from './PorfolioPage';
 import { FormUtils } from '../../helpers/uiUtils';
-import { expectElementContainsText, expectElementText } from '../../helpers/assertions';
 
 // Interface definitions for better type safety
 interface OrderFormData {
@@ -13,11 +12,6 @@ interface OrderFormData {
     quantity: number;
     price?: number | string;
     side: 'buy' | 'sell';
-}
-
-interface MessageVerification {
-    title: string;
-    description?: string;
 }
 
 interface OrderPageElements {
@@ -41,9 +35,13 @@ interface OrderPageElements {
         MAK: Locator;
         placeOrderButton: Locator;
         confirmOrderButton: Locator;
+        reloadPurchasePower: Locator;
+        closeOrderButton: Locator
     };
     orderBook: {
         orderIndayTab: Locator;
+        assetTab: Locator;
+        toggleWaitingMatch: Locator;
         cancelOrderButton: Locator;
         modifyOrderButton: Locator;
     };
@@ -100,10 +98,14 @@ class OrderPage extends BasePage {
                 MOK: page.locator('.btn.btn-info', { hasText: 'MOK' }),
                 MAK: page.locator('.btn.btn-info', { hasText: 'MAK' }),
                 placeOrderButton: page.getByRole('button', { name: 'Đặt lệnh' }),
-                confirmOrderButton: page.getByRole('button', { name: 'Xác nhận' })
+                confirmOrderButton: page.getByRole('button', { name: 'Xác nhận' }),
+                reloadPurchasePower: page.locator('.reset-order .iRefresh.icon'),
+                closeOrderButton: page.locator('.card-panel.order .icon.iClose')
             },
             orderBook: {
                 orderIndayTab: page.locator('.asset-panel .card-panel-header__title:nth-child(1)'),
+                assetTab: page.locator('.asset-panel .card-panel-header__title:nth-child(2)'),
+                toggleWaitingMatch: page.locator('.asset-panel .custom-checkbox'),
                 cancelOrderButton: page.locator('td:nth-child(14) > div > span:nth-child(2) > .icon').first(),
                 modifyOrderButton: page.locator('td:nth-child(14) > div > span:nth-child(2) > .icon').nth(1)
             },
@@ -141,9 +143,13 @@ class OrderPage extends BasePage {
         this.MAK = this.elements.form.MAK;
         this.placeOrderButton = this.elements.form.placeOrderButton;
         this.confirmOrderButton = this.elements.form.confirmOrderButton;
+        this.reloadPurchasePower = this.elements.form.reloadPurchasePower;
+        this.closeOrderButton = this.elements.form.closeOrderButton;
 
         // Order Book
         this.orderIndayTab = this.elements.orderBook.orderIndayTab;
+        this.assetTab = this.elements.orderBook.assetTab;
+        this.toggleWaitingMatch = this.elements.orderBook.toggleWaitingMatch;
         this.cancelOrderButton = this.elements.orderBook.cancelOrderButton;
         this.modifyOrderButton = this.elements.orderBook.modifyOrderButton;
 
@@ -170,7 +176,11 @@ class OrderPage extends BasePage {
     MAK!: Locator;
     placeOrderButton!: Locator;
     confirmOrderButton!: Locator;
+    reloadPurchasePower!: Locator;
+    closeOrderButton!: Locator;
     orderIndayTab!: Locator;
+    assetTab!: Locator;
+    toggleWaitingMatch!: Locator;
     cancelOrderButton!: Locator;
     modifyOrderButton!: Locator;
     titleMessage!: Locator;
@@ -438,103 +448,69 @@ class OrderPage extends BasePage {
     /**
      * Verify message with improved error handling and timeout
      */
-    async verifyMessage(expectedTitle: string, expectedDescription?: string): Promise<void> {
-        try {
-            await this.titleMessage.waitFor({
-                state: 'visible',
-                timeout: OrderPage.MESSAGE_TIMEOUT
-            });
-
-            await expectElementText(this.titleMessage, expectedTitle);
-            if (expectedDescription) {
-                await expectElementContainsText(this.descriptionMessage, expectedDescription);
-            }
-
-        } catch (error) {
-            console.log(`Message verification failed: ${error}`);
-            throw new Error(`Message verification failed: ${error}`);
-        }
+    async verifyMessageOrder(expectedTitle: string, expectedDescription?: string): Promise<void> {
+        await FormUtils.verifyMessage(expectedTitle, this.titleMessage, expectedDescription, this.descriptionMessage);
     }
 
     /**
      * Get current message content
      */
-    async getCurrentMessage(): Promise<MessageVerification> {
-        try {
-            await this.titleMessage.waitFor({
-                state: 'visible',
-                timeout: OrderPage.MESSAGE_TIMEOUT
-            });
-
-            const title = await this.titleMessage.textContent() || '';
-            const description = await this.descriptionMessage.textContent() || '';
-
-            return {
-                title: title.trim(),
-                description: description.trim()
-            };
-        } catch (error) {
-            throw new Error(`Failed to get current message: ${error}`);
-        }
+    async getCurrentMessageOrder(): Promise<void> {
+        await FormUtils.getCurrentMessage(this.titleMessage, this.descriptionMessage);
     }
 
     /**
      * Wait for success message
      */
-    async waitForSuccessMessage(timeout: number = OrderPage.MESSAGE_TIMEOUT): Promise<boolean> {
-        try {
-            await this.titleMessage.waitFor({
-                state: 'visible',
-                timeout
-            });
-
-            const titleText = await this.titleMessage.textContent();
-
-            // Common success message patterns
-            const successPatterns = [
-                'Thành công',
-                'Đặt lệnh thành công',
-                'Success',
-                'Order placed successfully'
-            ];
-
-            return successPatterns.some(pattern =>
-                titleText?.toLowerCase().includes(pattern.toLowerCase())
-            );
-        } catch (error) {
-            console.log(`Success message not found: ${error}`);
-            return false;
-        }
+    async waitForSuccessMessageOrder(timeout: number = OrderPage.MESSAGE_TIMEOUT): Promise<boolean> {
+        return FormUtils.waitForSuccessMessage(this.titleMessage, timeout);
     }
 
     /**
      * Wait for error message
      */
-    async waitForErrorMessage(timeout: number = OrderPage.MESSAGE_TIMEOUT): Promise<boolean> {
-        try {
-            await this.titleMessage.waitFor({
-                state: 'visible',
-                timeout
-            });
+    async waitForErrorMessageOrder(timeout: number = OrderPage.MESSAGE_TIMEOUT): Promise<boolean> {
+        return FormUtils.waitForErrorMessage(this.titleMessage, timeout);
+    }
 
-            const titleText = await this.titleMessage.textContent();
+    async updatePurchasePower(): Promise<void> {
+        await this.reloadPurchasePower.click();
+    }
 
-            // Common error message patterns
-            const errorPatterns = [
-                'Lỗi',
-                'Error',
-                'Failed',
-                'Thất bại',
-                'Không thành công'
-            ];
+    async closeOrder(): Promise<void> {
+        await this.closeOrderButton.click();
+    }
 
-            return errorPatterns.some(pattern =>
-                titleText?.toLowerCase().includes(pattern.toLowerCase())
-            );
-        } catch (error) {
-            console.log(`Error message not found: ${error}`);
-            return false;
-        }
+    // =================== ORDER IN DAY METHODS ===================
+
+    async openOrderInDayTab(): Promise<void> {
+        await this.orderIndayTab.click();
+    }
+
+    async switchToAssetTab(): Promise<void> {
+        await this.assetTab.click();
+    }
+
+    async reloadData(): Promise<void> {
+        await this.orderBook.reloadOrderBook();
+    }
+    async closeOrderInDay(): Promise<void> {
+        await this.page.locator('.card-panel.asset-panel .icon.iClose').click();
+    }
+    async verifyToggleWaitingMatchOn(): Promise<boolean> {
+        return await FormUtils.verifyToggle(this.toggleWaitingMatch, 'ON');
+    }
+
+    async verifyToggleWaitingMatchOff(): Promise<boolean> {
+        return await FormUtils.verifyToggle(this.toggleWaitingMatch, 'OFF');
+    }
+
+    async clickToggleWaitingMatch(): Promise<void> {
+        await this.toggleWaitingMatch.click();
+    }
+
+    async getOrderInDayData(): Promise<any> {
+        await this.orderIndayTab.waitFor({ state: 'visible' });
     }
 }
 
