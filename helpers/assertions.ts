@@ -69,6 +69,34 @@ export async function expectElementContainsText(element: Locator, textPart: stri
   await expect(element).toContainText(textPart, { timeout });
 }
 
+export async function expectElementTextContains(
+  element: Locator,
+  expectedText: string | string[],
+  timeout: number = 10000
+) {
+  // Handle both single and multiple elements
+  const count = await element.count();
+  let texts: string[] = [];
+
+  if (count === 0) {
+    throw new Error('No elements found');
+  } else if (count === 1) {
+    const text = await element.textContent();
+    texts = [text || ''];
+  } else {
+    texts = await element.allTextContents();
+  }
+
+  if (Array.isArray(expectedText)) {
+    const found = texts.some(t => expectedText.some(item => t.includes(item)));
+    expect(found).toBeTruthy();
+  } else {
+    const found = texts.some(t => t.includes(expectedText));
+    expect(found).toBeTruthy();
+  }
+}
+
+
 export async function expectInputValue(element: Locator, expectedValue: string, timeout: number = 10000) {
   await expect(element).toHaveValue(expectedValue, { timeout });
 }

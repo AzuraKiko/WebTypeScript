@@ -240,10 +240,10 @@ class OrderBook extends BasePage {
      * Get action button locators for specific row
      */
     private cancelOrderButton = (rowIndex: number): Locator =>
-        this.page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .icon-cancel, .table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .cancel-btn`);
+        this.page.locator(`.table tbody tr:nth-child(${rowIndex + 1}) .btn--delete`);
 
     private modifyOrderButton = (rowIndex: number): Locator =>
-        this.page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .icon-edit, .table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(14) .modify-btn`);
+        this.page.locator(`.table tbody tr:nth-child(${rowIndex + 1}) .btn--edit`);
 
     // =================== NAVIGATION METHODS ===================
 
@@ -480,17 +480,15 @@ class OrderBook extends BasePage {
         };
     }
 
-    async modifyOrderPrice(newPrice: string): Promise<void> {
-        await this.modifyOrderPriceInput.clear();
-        await this.modifyOrderPriceInput.fill(newPrice);
+    async modifyOrderPrice(newPrice: number): Promise<void> {
+        await FormUtils.fillField(this.modifyOrderPriceInput, newPrice);
     }
 
-    async modifyOrderQuantity(newQuantity: string): Promise<void> {
-        await this.modifyOrderQuantityInput.clear();
-        await this.modifyOrderQuantityInput.fill(newQuantity);
+    async modifyOrderQuantity(newQuantity: number): Promise<void> {
+        await FormUtils.fillField(this.modifyOrderQuantityInput, newQuantity);
     }
 
-    async modifyOrder(rowIndex: number = 0, newPrice?: string, newQuantity?: string): Promise<void> {
+    async modifyOrder(rowIndex: number = 0, newPrice?: number, newQuantity?: number): Promise<void> {
         await this.openModifyOrderModal(rowIndex);
 
         if (newPrice) {
@@ -512,7 +510,7 @@ class OrderBook extends BasePage {
         await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
 
-    async modifyOrderByOrderNumber(orderNumber: string, newPrice?: string, newQuantity?: string): Promise<void> {
+    async modifyOrderByOrderNumber(orderNumber: string, newPrice?: number, newQuantity?: number): Promise<void> {
         const orderIndex = await this.findOrderIndexByOrderNumber(orderNumber);
         if (orderIndex >= 0) {
             await this.modifyOrder(orderIndex, newPrice, newQuantity);
@@ -522,7 +520,7 @@ class OrderBook extends BasePage {
         }
     }
 
-    async modifyOrderByStockCode(stockCode: string, newPrice?: string, newQuantity?: string): Promise<void> {
+    async modifyOrderByStockCode(stockCode: string, newPrice?: number, newQuantity?: number): Promise<void> {
         const allOrders = await this.getOrderTableData();
         const orderIndex = allOrders.findIndex(order => order.stockCode.includes(stockCode));
 

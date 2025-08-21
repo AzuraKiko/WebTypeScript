@@ -86,18 +86,18 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
 
     // Place order buy with normal account
     await orderPage.placeBuyOrder({ stockCode: 'ACB', quantity: 1 });
-    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    await orderPage.verifyMessageOrder('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
 
     // Place order sell with normal account
     await orderPage.placeSellOrderFromPorfolio({ quantity: 1 });
-    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    await orderPage.verifyMessageOrder('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
 
     // Place order buy with margin account
     await subaccPage.selectMarginSubacc();
     await orderPage.placeBuyOrder({ stockCode: 'MBB', quantity: 1 });
-    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    await orderPage.verifyMessageOrder('Đặt lệnh thành công', 'Số hiệu lệnh');
     await page.waitForTimeout(3000);
 
     // // Place order sell with margin account

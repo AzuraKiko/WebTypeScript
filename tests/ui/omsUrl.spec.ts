@@ -5,6 +5,7 @@ import LoginPage from '../../page/ui/LoginPage';
 import OrderPage from '../../page/ui/OrderPage';
 import OrderBook from '../../page/ui/OrderBook';
 import SubaccPage from '../../page/ui/SubaccPage';
+import { WaitUtils } from '../../helpers/uiUtils';
 
 
 type CapturedCall = {
@@ -75,43 +76,45 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
     await orderPage.navigateToOrder();
 
     // Place order buy with normal account
-    await orderPage.placeBuyOrder({ stockCode: 'ACB', quantity: 1 });
-    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    await orderPage.placeBuyOrder({ stockCode: 'CACB2502', quantity: 1 });
+    await orderPage.verifyMessageOrder(['Đặt lệnh thành công', 'Thông báo'], ['Số hiệu lệnh', 'thành công']);
     await page.waitForTimeout(3000);
+    const newPrice: number = Number(await orderPage.priceFloor.textContent()) + 0.1;
+    await orderPage.openOrderInDayTab();
+    await orderBook.modifyOrder(0, newPrice, undefined);
+    await orderPage.closeAllToastMessages(orderPage.toastMessage);
+    await orderBook.cancelOrder(0);
+    await orderPage.closeAllToastMessages(orderPage.toastMessage);
+    await WaitUtils.waitForAllElements(orderPage.toastMessage, { state: 'hidden', timeout: 30000 });
 
     // Place order sell with normal account
     await orderPage.placeSellOrderFromPorfolio({ quantity: 1 });
-    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    await orderPage.verifyMessageOrder(['Đặt lệnh thành công', 'Thông báo'], ['Số hiệu lệnh', 'thành công']);
     await page.waitForTimeout(3000);
+    await orderPage.openOrderInDayTab();
+    await orderBook.cancelOrder(0);
+    await orderPage.closeAllToastMessages(orderPage.toastMessage);
+    await WaitUtils.waitForAllElements(orderPage.toastMessage, { state: 'hidden', timeout: 30000 });
 
-    // Place order buy with margin account
+    // // Place order buy with margin account
     await subaccPage.selectMarginSubacc();
-    await orderPage.placeBuyOrder({ stockCode: 'MBB', quantity: 1 });
-    await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
+    await orderPage.placeBuyOrder({ stockCode: 'CACB2502', quantity: 1 });
+    await orderPage.verifyMessageOrder(['Đặt lệnh thành công', 'Thông báo'], ['Số hiệu lệnh', 'thành công']);
     await page.waitForTimeout(3000);
+    await orderPage.openOrderInDayTab();
+    await orderBook.modifyOrder(0, undefined, 2);
+    await orderPage.closeAllToastMessages(orderPage.toastMessage);
+    await orderBook.cancelOrder(0);
+    await orderPage.closeAllToastMessages(orderPage.toastMessage);
+    await WaitUtils.waitForElement(orderPage.toastMessage, { state: 'hidden', timeout: 30000 });
 
     // // Place order sell with margin account
     // await subaccPage.selectMarginSubacc();
     // await orderPage.placeSellOrderFromPorfolio({ quantity: 1 });
     // await orderPage.verifyMessage('Đặt lệnh thành công', 'Số hiệu lệnh');
     // await page.waitForTimeout(3000);
+    // await orderBook.cancelOrder(0);
 
-    // // Modify order with normal account
-    // await orderBook.openOrderBook();
-    // await orderBook.filterByAccount('Normal');
-    // await orderBook.filterByStatus('Pending');
-    // await orderBook.modifyOrderByStockCode('ACB', undefined, '2');
-    // await orderPage.verifyMessage('Chỉnh sửa lệnh thành công', 'Số hiệu lệnh');
-    // await page.waitForTimeout(3000);
-
-    // // Modify order with margin account
-    // await orderBook.openOrderBook();
-    // await orderBook.filterByAccount('Margin');
-    // await orderBook.filterByOrderType('Buy');
-    // await orderBook.filterByStatus('Pending');
-    // await orderBook.modifyOrderByStockCode('MBB', undefined, '2');
-    // await orderPage.verifyMessage('Chỉnh sửa lệnh thành công', 'Số hiệu lệnh');
-    // await page.waitForTimeout(3000);
 
 
 

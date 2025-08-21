@@ -1,5 +1,5 @@
 import { Page, Locator } from '@playwright/test';
-import { expectElementText, expectElementContainsText } from './assertions';
+import { expectElementText, expectElementContainsText, expectElementTextContains } from './assertions';
 
 /**
  * Common UI interaction utilities for Playwright tests
@@ -169,6 +169,19 @@ export class WaitUtils {
         const { timeout = WaitUtils.DEFAULT_TIMEOUT, state = 'visible' } = options;
         await element.waitFor({ state, timeout });
     }
+
+    static async waitForAllElements(
+        elements: Locator,
+        options: WaitOptions = {}
+    ): Promise<void> {
+        const { timeout = WaitUtils.DEFAULT_TIMEOUT, state = 'visible' } = options;
+        const count = await elements.count();
+
+        for (let i = 0; i < count; i++) {
+            await elements.nth(i).waitFor({ state, timeout });
+        }
+    }
+
 
     /**
      * Wait for condition with retry mechanism
@@ -344,6 +357,23 @@ export class FormUtils {
     /**
      * Verify message with improved error handling and timeout
      */
+    static async verifyArrayMessage(expectedTitle: string | string[], titleLocator: Locator, expectedDescription?: string | string[], descriptionLocator?: Locator, timeout?: number): Promise<void> {
+        try {
+            // Wait for at least one element to be visible
+            await titleLocator.first().waitFor({
+                state: 'visible',
+                timeout: timeout ?? FormUtils.MESSAGE_TIMEOUT
+            });
+            await expectElementTextContains(titleLocator, expectedTitle);
+            if (descriptionLocator && expectedDescription) {
+                await expectElementTextContains(descriptionLocator, expectedDescription);
+            }
+        } catch (error) {
+            console.log(`Message verification failed: ${error}`);
+            throw new Error(`Message verification failed: ${error}`);
+        }
+    }
+
     static async verifyMessage(expectedTitle: string, titleLocator: Locator, expectedDescription?: string, descriptionLocator?: Locator, timeout?: number): Promise<void> {
         try {
             await titleLocator.waitFor({
@@ -354,7 +384,6 @@ export class FormUtils {
             if (descriptionLocator && expectedDescription) {
                 await expectElementContainsText(descriptionLocator, expectedDescription);
             }
-
         } catch (error) {
             console.log(`Message verification failed: ${error}`);
             throw new Error(`Message verification failed: ${error}`);
@@ -688,5 +717,6 @@ export const CommonSelectors = {
     CANCEL_BUTTON: '.btn-cancel, .btn-secondary, [data-testid="cancel"]',
     LOADING_SPINNER: '.loading, .spinner, [data-testid="loading"]',
     ERROR_MESSAGE: '.error, .alert-error, [data-testid="error"]',
-    SUCCESS_MESSAGE: '.success, .alert-success, [data-testid="success"]'
+    SUCCESS_MESSAGE: '.success, .alert-success, [data-testid="success"]',
+    SCROLL_TABLE: '.card-panel-body .scrollbar-container',
 };

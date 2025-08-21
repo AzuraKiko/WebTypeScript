@@ -4,7 +4,7 @@ import { getRandomStockCode } from '../../tests/utils/testConfig';
 import MatrixPage from './MatrixPage';
 import OrderBook from './OrderBook';
 import PortfolioPage from './PorfolioPage';
-import { FormUtils } from '../../helpers/uiUtils';
+import { FormUtils, TableUtils, CommonSelectors } from '../../helpers/uiUtils';
 
 // Interface definitions for better type safety
 interface OrderFormData {
@@ -44,10 +44,14 @@ interface OrderPageElements {
         toggleWaitingMatch: Locator;
         cancelOrderButton: Locator;
         modifyOrderButton: Locator;
+        switchQtyColumn: Locator;
+        dropdownQty: Locator;
     };
     messages: {
+        toastMessage: Locator;
         titleMessage: Locator;
         descriptionMessage: Locator;
+        closeToastMessage: Locator;
     };
 }
 
@@ -107,11 +111,15 @@ class OrderPage extends BasePage {
                 assetTab: page.locator('.asset-panel .card-panel-header__title:nth-child(2)'),
                 toggleWaitingMatch: page.locator('.asset-panel .custom-checkbox'),
                 cancelOrderButton: page.locator('td:nth-child(14) > div > span:nth-child(2) > .icon').first(),
-                modifyOrderButton: page.locator('td:nth-child(14) > div > span:nth-child(2) > .icon').nth(1)
+                modifyOrderButton: page.locator('td:nth-child(14) > div > span:nth-child(2) > .icon').nth(1),
+                switchQtyColumn: page.locator('.asset-panel .icon.i3Dots'),
+                dropdownQty: page.locator('.header-dropdown__items')
             },
             messages: {
+                toastMessage: page.locator('.notification.toast.top-right'),
                 titleMessage: page.locator('.toast-content .toast-title'),
-                descriptionMessage: page.locator('.toast-content .toast-description')
+                descriptionMessage: page.locator('.toast-content .toast-description'),
+                closeToastMessage: page.locator('.toast-action .icon.iClose')
             }
         };
 
@@ -152,10 +160,14 @@ class OrderPage extends BasePage {
         this.toggleWaitingMatch = this.elements.orderBook.toggleWaitingMatch;
         this.cancelOrderButton = this.elements.orderBook.cancelOrderButton;
         this.modifyOrderButton = this.elements.orderBook.modifyOrderButton;
+        this.switchQtyColumn = this.elements.orderBook.switchQtyColumn;
+        this.dropdownQty = this.elements.orderBook.dropdownQty;
 
         // Messages
+        this.toastMessage = this.elements.messages.toastMessage;
         this.titleMessage = this.elements.messages.titleMessage;
         this.descriptionMessage = this.elements.messages.descriptionMessage;
+        this.closeToastMessage = this.elements.messages.closeToastMessage;
     }
 
     // Legacy property declarations for backward compatibility
@@ -183,8 +195,13 @@ class OrderPage extends BasePage {
     toggleWaitingMatch!: Locator;
     cancelOrderButton!: Locator;
     modifyOrderButton!: Locator;
+    switchQtyColumn!: Locator;
+    dropdownQty!: Locator;
+
+    toastMessage!: Locator;
     titleMessage!: Locator;
     descriptionMessage!: Locator;
+    closeToastMessage!: Locator;
 
     // =================== NAVIGATION METHODS ===================
 
@@ -448,8 +465,20 @@ class OrderPage extends BasePage {
     /**
      * Verify message with improved error handling and timeout
      */
-    async verifyMessageOrder(expectedTitle: string, expectedDescription?: string): Promise<void> {
-        await FormUtils.verifyMessage(expectedTitle, this.titleMessage, expectedDescription, this.descriptionMessage);
+    async verifyMessageOrder(expectedTitle: string | string[], expectedDescription?: string | string[]): Promise<void> {
+        await FormUtils.verifyArrayMessage(expectedTitle, this.titleMessage, expectedDescription, this.descriptionMessage);
+    }
+
+    async closeToastMessageOrder(): Promise<void> {
+        await this.closeToastMessage.click();
+    }
+
+    async closeAllToastMessages(elements: Locator): Promise<void> {
+        const count = await elements.count();
+        for (let i = 0; i < count; i++) {
+            const iconClose = elements.nth(i).locator('.icon.iClose');
+            await iconClose.click();
+        }
     }
 
     /**
@@ -509,9 +538,43 @@ class OrderPage extends BasePage {
         await this.toggleWaitingMatch.click();
     }
 
-    async getOrderInDayData(): Promise<any> {
+    async getOrderInDayRowData(rowIndex: number): Promise<any> {
         await this.orderIndayTab.waitFor({ state: 'visible' });
+        const rows = await this.orderBook.tableRows.nth(rowIndex);
+        await rows.waitFor({ state: 'visible' });
+
+        const stockCode = await rows.locator('td:nth-child(1)').textContent();
+        const side = await rows.locator('td:nth-child(2)').textContent();
+        const price = await rows.locator('td:nth-child(3)').textContent();
+        const remainingQuantity = await rows.locator('td:nth-child(4)').textContent();
+        const status = await rows.locator('td:nth-child(5)').textContent();
+
+        await this.switchQtyColumn.click();
+        await FormUtils.selectOption(this.page, this.dropdownQty, this.dropdownQty, 'KL');
+
+        const quantity = await rows.locator('td:nth-child(4)').textContent();
+
+        await this.switchQtyColumn.click();
+        await FormUtils.selectOption(this.page, this.dropdownQty, this.dropdownQty, 'KL khớp');
+        const matchedQuantity = await rows.locator('td:nth-child(4)').textContent();
+
+        return {
+            stockCode,
+            side,
+            price,
+            quantity,
+            matchedQuantity,
+            remainingQuantity,
+            status
+        };
     }
+
+    async getAllOrderInDayData(useScrolling: boolean = true): Promise<any[]> {
+        await this.orderIndayTab.waitFor({ state: 'visible' });
+        return await TableUtils.getAllTableData(this.page, this.orderBook.tableRows, this.page.locator(CommonSelectors.SCROLL_TABLE), this.getOrderInDayRowData, useScrolling);
+    }
+
+
 }
 
 export default OrderPage;
