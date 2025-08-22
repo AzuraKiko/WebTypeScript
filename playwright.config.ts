@@ -11,7 +11,7 @@ export default defineConfig({
     /* Fail the build on CI if you accidentally left test.only in the source code. */
     forbidOnly: !!process.env.CI,
     /* Retry on CI only */
-    retries: process.env.CI ? 2 : 1,
+    retries: process.env.CI ? 0 : 0,
     /* Limit workers to avoid overwhelming server and account lockout */
     workers: process.env.CI ? 1 : 2, // Giới hạn 2 workers để tránh conflicts
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */

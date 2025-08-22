@@ -1,0 +1,8 @@
+{
+  "info": {
+    "name": "OMS Captured API - http://10.8.90.164:8888/ (UAT) - STREAMING",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "🔴 STREAMING CAPTURE - Updated: undefined. Environment: UAT. Total calls: 0. Real-time API streaming without batch delays."
+  },
+  "item": []
+}

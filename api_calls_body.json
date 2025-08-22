@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "environment": "UAT",
+    "startTime": "2025-08-22T04:11:15.727Z",
+    "status": "running",
+    "totalCalls": 9,
+    "lastUpdated": "2025-08-22T04:11:39.288Z"
+  },
+  "apiCalls": [
+    {
+      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "referer": "http://10.8.80.134:3009/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"w75jHNLEUP8QBni8c1LQcgSrL9dzVos6BPbkfUFiQ9RaBUXuu9hACQ7xNb8s8Z1T\",\"rqId\":\"449ae166-531b-412f-a6ae-f01dbf19a395\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
+      "timestamp": "2025-08-22T04:11:22.497Z"
+    },
+    {
+      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "referer": "http://10.8.80.134:3009/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"w75jHNLEUP8QBni8c1LQcgSrL9dzVos6BPbkfUFiQ9RaBUXuu9hACQ7xNb8s8Z1T\",\"cmd\":\"PurchasePower\",\"rqId\":\"a3c8d15e-ba3e-4981-9d4c-84d63dd3fd6e\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
+      "timestamp": "2025-08-22T04:11:27.244Z"
+    },
+    {
+      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "referer": "http://10.8.80.134:3009/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"w75jHNLEUP8QBni8c1LQcgSrL9dzVos6BPbkfUFiQ9RaBUXuu9hACQ7xNb8s8Z1T\",\"cmd\":\"PurchasePower\",\"rqId\":\"d2f646b4-5413-4484-b1ec-bbce0290fef0\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
+      "timestamp": "2025-08-22T04:11:27.259Z"
+    },
+    {
+      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "referer": "http://10.8.80.134:3009/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"w75jHNLEUP8QBni8c1LQcgSrL9dzVos6BPbkfUFiQ9RaBUXuu9hACQ7xNb8s8Z1T\",\"cmd\":\"PurchasePower\",\"rqId\":\"2218153a-6798-4489-b389-d27237e26019\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
+      "timestamp": "2025-08-22T04:11:27.265Z"
+    },
+    {
+      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "referer": "http://10.8.80.134:3009/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"w75jHNLEUP8QBni8c1LQcgSrL9dzVos6BPbkfUFiQ9RaBUXuu9hACQ7xNb8s8Z1T\",\"cmd\":\"PurchasePower\",\"rqId\":\"839d3bb7-d64c-4be4-a616-d98fdeeac126\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
+      "timestamp": "2025-08-22T04:11:27.271Z"
+    },
+    {
+      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "referer": "http://10.8.80.134:3009/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"w75jHNLEUP8QBni8c1LQcgSrL9dzVos6BPbkfUFiQ9RaBUXuu9hACQ7xNb8s8Z1T\",\"cmd\":\"PurchasePower\",\"rqId\":\"638e26b2-24e4-4f15-b7fc-b8381f3407e7\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4300\"}}",
+      "timestamp": "2025-08-22T04:11:37.593Z"
+    },
+    {
+      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "referer": "http://10.8.80.134:3009/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"w75jHNLEUP8QBni8c1LQcgSrL9dzVos6BPbkfUFiQ9RaBUXuu9hACQ7xNb8s8Z1T\",\"cmd\":\"PurchasePower\",\"rqId\":\"45d3668d-a93d-471e-8c11-b3140a080997\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"2460\"}}",
+      "timestamp": "2025-08-22T04:11:38.007Z"
+    },
+    {
+      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "referer": "http://10.8.80.134:3009/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"w75jHNLEUP8QBni8c1LQcgSrL9dzVos6BPbkfUFiQ9RaBUXuu9hACQ7xNb8s8Z1T\",\"cmd\":\"NewOrder\",\"rqId\":\"c1782f94-6aaa-469f-8910-f91f920b5232\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"CACB2510\",\"ordrQty\":\"1\",\"ordrUntprc\":\"2460\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"sREy9WWNJM4mYHSDz5WdYJIA/GMVa3woki+8volwlCc=\"}}",
+      "timestamp": "2025-08-22T04:11:39.081Z"
+    },
+    {
+      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "referer": "http://10.8.80.134:3009/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"w75jHNLEUP8QBni8c1LQcgSrL9dzVos6BPbkfUFiQ9RaBUXuu9hACQ7xNb8s8Z1T\",\"rqId\":\"2091094c-ecd3-42fb-bbea-94d1075a957d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
+      "timestamp": "2025-08-22T04:11:39.288Z"
+    }
+  ]
+}

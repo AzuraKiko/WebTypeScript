@@ -1,0 +1,51 @@
+{
+  "info": {
+    "name": "OMS Captured API - https://trade.pinetree.vn/ (PROD) - LIVE",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "🔴 LIVE CAPTURE - Updated: 2025-08-22T04:01:19.557Z. Environment: PROD. Total calls: 1"
+  },
+  "item": [
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"RFhTtRU3KczTpCSHmBTZuitLRaYKZtGDMGLzsgFaCgZ8Cz3XUPQKGB1htCSoucqy\",\"rqId\":\"bf0deb26-f37d-4249-a767-d2f5dee76ce3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": []
+    }
+  ]
+}

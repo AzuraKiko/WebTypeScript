@@ -473,11 +473,27 @@ class OrderPage extends BasePage {
         await this.closeToastMessage.click();
     }
 
-    async closeAllToastMessages(elements: Locator): Promise<void> {
-        const count = await elements.count();
-        for (let i = 0; i < count; i++) {
-            const iconClose = elements.nth(i).locator('.icon.iClose');
-            await iconClose.click();
+    async closeAllToastMessages(elements?: Locator): Promise<void> {
+        const toastElements = elements || this.page.locator('.notification.toast.toast-stacked.top-right, .notification.toast.top-right');
+        const count = await toastElements.count();
+
+        // If no toast messages found, skip silently
+        if (count === 0) {
+            return;
+        }
+
+        for (let i = count - 1; i >= 0; i--) {
+            const iconClose = toastElements.nth(i).locator('.toast-action .icon.iClose');
+
+            // Check if close button exists and is visible before clicking
+            if (await iconClose.isVisible({ timeout: 1000 }).catch(() => false)) {
+                try {
+                    await iconClose.click({ timeout: 2000 });
+                } catch (error) {
+                    // Skip silently if click fails
+                    continue;
+                }
+            }
         }
     }
 
