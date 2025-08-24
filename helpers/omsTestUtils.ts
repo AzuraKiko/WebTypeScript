@@ -84,8 +84,8 @@ export class OmsTestConfig {
 
     static readonly TEST_DATA = {
         STOCK_CODES: {
-            NORMAL_ACCOUNT: 'MBB',
-            MARGIN_ACCOUNT: 'MBB',
+            NORMAL_ACCOUNT: 'CACB2510',
+            MARGIN_ACCOUNT: 'CACB2510',
             ALTERNATIVE: 'ACB'
         },
         ORDER_QUANTITY: 1
@@ -332,10 +332,10 @@ export class ApiCallCapture {
                         body: call.body ? { mode: 'raw', raw: call.body } : undefined,
                         url: call.url
                     },
-                    response: call.responseData ? [{
+                    response: call.statusCode ? [{
                         name: 'Captured Response',
                         status: call.statusCode ? `${call.statusCode}` : 'Unknown',
-                        body: call.responseData
+                        // body: call.responseData
                     }] : []
                 }))
             };
@@ -407,15 +407,15 @@ export class ApiCallCapture {
 
                     // Capture response data with size limit
                     try {
-                        const responseData = await response.text();
+                        // const responseData = await response.text();
 
-                        // Limit response data size to prevent memory issues
-                        if (responseData.length > this.MAX_RESPONSE_SIZE) {
-                            matchingCall.responseData = responseData.substring(0, this.MAX_RESPONSE_SIZE) +
-                                `\n\n... [TRUNCATED - Original size: ${responseData.length} bytes]`;
-                        } else {
-                            matchingCall.responseData = responseData;
-                        }
+                        // // Limit response data size to prevent memory issues
+                        // if (responseData.length > this.MAX_RESPONSE_SIZE) {
+                        //     matchingCall.responseData = responseData.substring(0, this.MAX_RESPONSE_SIZE) +
+                        //         `\n\n... [TRUNCATED - Original size: ${responseData.length} bytes]`;
+                        // } else {
+                        //     matchingCall.responseData = responseData;
+                        // }
 
                         // Stream updated call immediately
                         this.streamApiCall(matchingCall);
@@ -424,6 +424,8 @@ export class ApiCallCapture {
                     } catch (error) {
                         console.warn(`Failed to capture response data for ${url}:`, error);
                         matchingCall.responseData = null;
+                        // Still stream the call even if response data capture fails
+                        this.streamApiCall(matchingCall);
                     }
                 }
             }
@@ -576,9 +578,20 @@ export async function executeOrderWorkflow(params: OrderWorkflowParams): Promise
             ['Số hiệu lệnh', 'thành công']
         );
         apiCapture.addTestStep(`${side} order placed successfully`);
+        // Update purchase power for normal account buy orders
+        if (accountType === 'normal' && side === 'buy') {
+            await orderPage.updatePurchasePower();
+            apiCapture.addTestStep('Purchase power updated');
+        }
 
         // Handle toast messages after order placement
         await handleToastMessages(page, orderPage, apiCapture, 'order placement');
+
+        // Update purchase power for normal account buy orders
+        if (accountType === 'normal' && side === 'buy') {
+            await orderPage.updatePurchasePower();
+            apiCapture.addTestStep('Purchase power updated');
+        }
 
         if (enableModify) {
             // Get current price for modification
@@ -612,11 +625,6 @@ export async function executeOrderWorkflow(params: OrderWorkflowParams): Promise
         // Handle toast messages after order cancellation
         await handleToastMessages(page, orderPage, apiCapture, 'order cancellation');
 
-        // Update purchase power for normal account buy orders
-        if (accountType === 'normal' && side === 'buy') {
-            await orderPage.updatePurchasePower();
-            apiCapture.addTestStep('Purchase power updated');
-        }
 
         apiCapture.addTestStep(`${side} order workflow completed successfully (${workflowId})`);
 

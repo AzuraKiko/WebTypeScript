@@ -2,19 +2,17 @@ import { Page, Locator, expect } from '@playwright/test';
 import BasePage from './BasePage';
 import { getRandomStockCode } from '../../tests/utils/testConfig';
 import MatrixPage from './MatrixPage';
-import OrderBook from './OrderBook';
-import PortfolioPage from './PorfolioPage';
 import { FormUtils, TableUtils, CommonSelectors } from '../../helpers/uiUtils';
 
 // Interface definitions for better type safety
-interface OrderFormData {
+interface OrderDerivativeFormData {
     stockCode: string;
     quantity: number;
     price?: number | string;
-    side: 'buy' | 'sell';
+    side: 'long' | 'short';
 }
 
-interface OrderPageElements {
+interface DerivativePageElements {
     navigation: {
         orderButton: Locator;
     };
@@ -55,11 +53,10 @@ interface OrderPageElements {
     };
 }
 
-class OrderPage extends BasePage {
+class DerivativePage extends BasePage {
     // Dependencies
     matrixPage: MatrixPage;
-    orderBook: OrderBook;
-    portfolioPage: PortfolioPage;
+
 
     // Constants
     private static readonly DEFAULT_QUANTITY = 1;
@@ -73,8 +70,6 @@ class OrderPage extends BasePage {
     constructor(page: Page) {
         super(page);
         this.matrixPage = new MatrixPage(page);
-        this.orderBook = new OrderBook(page);
-        this.portfolioPage = new PortfolioPage(page);
         this.initializeElements(page);
     }
 
@@ -592,4 +587,4 @@ class OrderPage extends BasePage {
 
 }
 
-export default OrderPage;
+export default DerivativePage;

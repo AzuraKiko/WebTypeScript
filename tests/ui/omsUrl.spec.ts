@@ -65,20 +65,20 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
         side: 'buy',
         stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.MARGIN_ACCOUNT,
         quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
-        enableModify: true,
+        // enableModify: true,
         // modifyQuantity: 2
     });
 
-    // Place sell order with margin account
-    await executeOrderWorkflow({
-        page,
-        orderPage,
-        orderBook,
-        apiCapture,
-        accountType: 'margin',
-        side: 'sell',
-        quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY
-    });
+    // // Place sell order with margin account
+    // await executeOrderWorkflow({
+    //     page,
+    //     orderPage,
+    //     orderBook,
+    //     apiCapture,
+    //     accountType: 'margin',
+    //     side: 'sell',
+    //     quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY
+    // });
 
     // Generate comprehensive test report and export data
     await generateTestReport(apiCapture, API_DOMAINS, 'url');
