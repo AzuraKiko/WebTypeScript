@@ -9,6 +9,7 @@ import {
     switchToMarginAccount,
     OmsTestConfig
 } from '../../helpers/omsTestUtils';
+import { WaitUtils } from '../../helpers/uiUtils';
 
 const API_DOMAINS = OmsTestConfig.getApiDomains();
 
@@ -38,7 +39,7 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
         side: 'buy',
         stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.NORMAL_ACCOUNT,
         quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
-        // enableModify: true,
+        enableModify: true,
     });
 
     // Place sell order with normal account
@@ -52,6 +53,7 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
         quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY
     });
 
+    await WaitUtils.delay(3000);
     // Switch to margin account using shared utility
     await switchToMarginAccount(subaccPage, apiCapture);
 
@@ -65,20 +67,20 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
         side: 'buy',
         stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.MARGIN_ACCOUNT,
         quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
-        // enableModify: true,
-        // modifyQuantity: 2
+        enableModify: true,
+        modifyQuantity: 2
     });
 
-    // // Place sell order with margin account
-    // await executeOrderWorkflow({
-    //     page,
-    //     orderPage,
-    //     orderBook,
-    //     apiCapture,
-    //     accountType: 'margin',
-    //     side: 'sell',
-    //     quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY
-    // });
+    // Place sell order with margin account
+    await executeOrderWorkflow({
+        page,
+        orderPage,
+        orderBook,
+        apiCapture,
+        accountType: 'margin',
+        side: 'sell',
+        quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY
+    });
 
     // Generate comprehensive test report and export data
     await generateTestReport(apiCapture, API_DOMAINS, 'url');

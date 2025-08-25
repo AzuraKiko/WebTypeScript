@@ -2,7 +2,7 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
     testDir: './tests', //testDir: Đường dẫn đến thư mục chứa các file test. Trong trường hợp này, Playwright sẽ tìm và chạy các test trong thư mục ./tests
-    timeout: 60000, //Thời gian tối đa cho mỗi test (60 giây) thay vì unlimited để tránh test treo
+    timeout: 300000, //Thời gian tối đa cho mỗi test (120 giây)
     expect: {
         timeout: 10000 //Tăng timeout cho assertions lên 10 giây để tránh flaky tests
     },

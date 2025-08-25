@@ -5,7 +5,6 @@ import LoginPage from '../page/ui/LoginPage';
 import OrderPage from '../page/ui/OrderPage';
 import OrderBook from '../page/ui/OrderBook';
 import SubaccPage from '../page/ui/SubaccPage';
-import { WaitUtils } from './uiUtils';
 
 /**
  * Enhanced types for OMS test utilities
@@ -69,23 +68,22 @@ export interface OrderWorkflowParams {
 export class OmsTestConfig {
     // Environment-specific API domains with fallback handling
     private static readonly API_DOMAINS_CONFIG = {
-        DEV: ['http://10.8.80.164:8888/'],
-        UAT: ['http://10.8.90.164:8888/'],
+        DEV: ['http://10.8.80.164:8888/', 'http://10.8.80.104:8888/'],
+        UAT: ['http://10.8.90.164:8888/', 'http://10.8.90.16:8888/'],
         PROD: ['https://trade.pinetree.vn/']
     } as const;
 
     // Test configuration constants
     static readonly TIMEOUTS = {
-        DEFAULT_WAIT: 3000,
-        LONG_WAIT: 10000,
-        MESSAGE_WAIT: 60000,
-        API_RESPONSE: 5000
+        DEFAULT_WAIT: 2000,
+        LONG_WAIT: 8000,
+        API_RESPONSE: 3000,
     } as const;
 
     static readonly TEST_DATA = {
         STOCK_CODES: {
-            NORMAL_ACCOUNT: 'CACB2510',
-            MARGIN_ACCOUNT: 'CACB2510',
+            NORMAL_ACCOUNT: 'MBB',
+            MARGIN_ACCOUNT: 'MBB',
             ALTERNATIVE: 'ACB'
         },
         ORDER_QUANTITY: 1
@@ -521,20 +519,20 @@ async function handleToastMessages(page: any, orderPage: OrderPage, apiCapture: 
         // Try to close all toast messages
         await orderPage.closeAllToastMessages(orderPage.toastMessage);
 
-        // Wait for toast messages to disappear with a more flexible approach
-        try {
-            // Use first() to handle multiple elements gracefully
-            const firstToast = orderPage.toastMessage.first();
-            await WaitUtils.waitForElement(firstToast, {
-                state: 'hidden',
-                timeout: OmsTestConfig.TIMEOUTS.MESSAGE_WAIT
-            });
-        } catch (waitError) {
-            console.warn(`Toast message wait failed for ${action}, continuing anyway:`, waitError);
-            // Continue execution even if toast wait fails
-        }
+        // // Wait for toast messages to disappear with a more flexible approach
+        // try {
+        //     // Use first() to handle multiple elements gracefully
+        //     const firstToast = orderPage.toastMessage.first();
+        //     await WaitUtils.waitForElement(firstToast, {
+        //         state: 'hidden',
+        //         timeout: OmsTestConfig.TIMEOUTS.MESSAGE_WAIT
+        //     });
+        // } catch (waitError) {
+        //     console.warn(`Toast message wait failed for ${action}, continuing anyway:`, waitError);
+        //     // Continue execution even if toast wait fails
+        // }
 
-        apiCapture.addTestStep(`Toast messages handled successfully for: ${action}`);
+        // apiCapture.addTestStep(`Toast messages handled successfully for: ${action}`);
     } catch (error) {
         console.warn(`Toast message handling failed for ${action}:`, error);
         apiCapture.addTestStep(`Toast message handling failed for: ${action} - ${error}`);
@@ -577,23 +575,20 @@ export async function executeOrderWorkflow(params: OrderWorkflowParams): Promise
             ['Đặt lệnh thành công', 'Thông báo'],
             ['Số hiệu lệnh', 'thành công']
         );
+
+        // Handle toast messages after order placement
+        await handleToastMessages(page, orderPage, apiCapture, 'order placement');
+
         apiCapture.addTestStep(`${side} order placed successfully`);
         // Update purchase power for normal account buy orders
         if (accountType === 'normal' && side === 'buy') {
             await orderPage.updatePurchasePower();
             apiCapture.addTestStep('Purchase power updated');
-        }
-
-        // Handle toast messages after order placement
-        await handleToastMessages(page, orderPage, apiCapture, 'order placement');
-
-        // Update purchase power for normal account buy orders
-        if (accountType === 'normal' && side === 'buy') {
-            await orderPage.updatePurchasePower();
-            apiCapture.addTestStep('Purchase power updated');
+            await orderPage.fillStockCode(stockCode);
         }
 
         if (enableModify) {
+            await orderPage.openOrderInDayTab();
             // Get current price for modification
             let newPrice = modifyPrice;
             if (!newPrice) {
@@ -601,7 +596,7 @@ export async function executeOrderWorkflow(params: OrderWorkflowParams): Promise
                 newPrice = Number(priceText) + 0.1;
             }
 
-            await orderPage.openOrderInDayTab();
+
             await orderBook.modifyOrder(0, newPrice, undefined);
             apiCapture.addTestStep(`Order modified - Price: ${newPrice}}`);
 
@@ -610,6 +605,7 @@ export async function executeOrderWorkflow(params: OrderWorkflowParams): Promise
         }
 
         if (enableModify && modifyQuantity) {
+            await orderPage.openOrderInDayTab();
             await orderBook.modifyOrder(0, undefined, modifyQuantity);
             apiCapture.addTestStep(`Order modified - Quantity: ${modifyQuantity}`);
         }

@@ -486,9 +486,9 @@ class OrderPage extends BasePage {
             const iconClose = toastElements.nth(i).locator('.toast-action .icon.iClose');
 
             // Check if close button exists and is visible before clicking
-            if (await iconClose.isVisible({ timeout: 1000 }).catch(() => false)) {
+            if (await iconClose.isVisible()) {
                 try {
-                    await iconClose.click({ timeout: 2000 });
+                    await iconClose.click();
                 } catch (error) {
                     // Skip silently if click fails
                     continue;
