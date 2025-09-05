@@ -2,17 +2,17 @@
   "info": {
     "name": "OMS Captured API - https://trade.pinetree.vn/ (PROD) - STREAMING",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "🔴 STREAMING CAPTURE - Updated: 2025-08-22T16:31:02.951Z. Environment: PROD. Total calls: 35. Real-time API streaming without batch delays."
+    "description": "🔴 STREAMING CAPTURE - Updated: 2025-08-29T07:06:50.325Z. Environment: PROD. Total calls: 82. Real-time API streaming without batch delays."
   },
   "item": [
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 2ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 90ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -20,11 +20,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -41,7 +41,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"7bf6df61-2676-459c-b7d3-a52ebd1a9e5c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"a6c7b2e1-76e4-435e-af8a-aa6f76e95d2e\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -53,13 +53,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 5ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 123ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -67,11 +67,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -88,7 +88,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"PurchasePower\",\"rqId\":\"0792e9e9-7ed7-4674-b78c-d7826c3c7587\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"55b83f38-bbc5-45a6-b679-0ca2d5a1929a\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -100,13 +100,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 15ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 85ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -114,11 +114,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -135,7 +135,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"PurchasePower\",\"rqId\":\"2854564b-ba51-4fb8-8d99-08c0415c9928\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"f90b26d3-bff0-4ea3-b2b6-7b501b187231\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -147,13 +147,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 61ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 331ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -161,11 +161,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -182,7 +182,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"PurchasePower\",\"rqId\":\"89442cb8-30a9-48cf-8536-a438fec8df43\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"2840\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"1224a698-8b61-46f7-b92d-30fa98adef5c\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -194,13 +194,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 5ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 478ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -208,11 +208,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -229,7 +229,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"NewOrder\",\"rqId\":\"cc1c5bc1-8a06-4bed-af47-ede6fde5bc0b\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"9VmhPFcJNqAP0rfKaQ1CkBCIqnrN+nzDB0RrkTRh4lo=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrQty\":\"1\",\"ordrUntprc\":\"2840\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"4Yye2PVy2LxcAjB7Ar72HKime5Muo07at11gDvuJaWQ=\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"8992f9f0-1db2-4fe0-bb98-d831109359b1\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"2630\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -241,13 +241,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 35ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 175ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -255,11 +255,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -276,7 +276,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"019b3b37-1ffb-4a6b-84c9-1922e1519f59\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"NewOrder\",\"rqId\":\"061aa469-20d6-4513-8554-42630d0a0888\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrQty\":\"1\",\"ordrUntprc\":\"2630\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"mrc6sQQSgg3XJ/9CeuVtXhoyZkR2X1/eMWmhQwzWLjw=\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -288,13 +288,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 51ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 227ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -302,11 +302,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -323,7 +323,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"PurchasePower\",\"rqId\":\"6cb19ac9-5394-483b-9fa4-39c4054d6eec\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4740\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"c69fd48d-8ed7-4ba9-80ca-9479f9bd84ad\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -335,13 +335,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 26ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 235ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -349,11 +349,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -370,7 +370,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"32b45199-2021-4376-970d-765ef124aa11\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"87f8dbf7-d381-44fe-ac99-08ba7db589b6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -382,13 +382,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 11ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 702ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -396,11 +396,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -417,7 +417,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"c448e06b-ca83-4691-8753-73912e356408\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"702376c2-cdbb-4ee2-8fe9-e9319ce7745c\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -429,13 +429,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 30ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 199ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -443,11 +443,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -464,7 +464,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"3d0c590f-d19c-44e3-826e-c77a7b924876\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"20d7f769-1d21-4b46-9259-e46c021be3b9\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -476,13 +476,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 74ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 86ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -490,11 +490,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -511,7 +511,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"9VmhPFcJNqAP0rfKaQ1CkBCIqnrN+nzDB0RrkTRh4lo=\",\"rqId\":\"a36c527f-d94e-4534-82aa-938a1c90bc07\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"460\",\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"a9666869-13b8-4aa0-85a2-5aa0bf2e950d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -523,13 +523,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 4ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 43ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -537,11 +537,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -558,7 +558,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"78c28ea1-cc47-4b4e-bb3f-9fb1d050a6a0\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"4e81eaa2-4b28-43e0-8584-394c6275b00c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -570,13 +570,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 109ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 153ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -584,11 +584,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -605,7 +605,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"3a73c9ef-4a22-4f92-823e-d4d265f97b17\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"31ba5ac0-19f6-44b6-97a7-be8c9b2835d3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -617,13 +617,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 13ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 171ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -631,11 +631,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -652,7 +652,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"NewOrder\",\"rqId\":\"bc5fad32-46c4-42bc-b40e-12e9b475c654\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"9VmhPFcJNqAP0rfKaQ1CkBCIqnrN+nzDB0RrkTRh4lo=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"MBB\",\"ordrQty\":\"1\",\"ordrUntprc\":\"28750\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"2\",\"oddOrdrYn\":\"N\",\"signStr\":\"dP0cXIyUtdvAXH59iG6aGaTpQOQC30Zr+ha8y3gsjZg=\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"722ef5fe-4be6-44f4-b9e7-425d34489db0\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -664,13 +664,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 1ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 68ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -678,11 +678,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -699,7 +699,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"074e404c-2686-41cc-8f26-b6178f89c0fe\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"9069cb2c-8aea-4edd-bde3-b03ceee18958\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -711,13 +711,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 30ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 269ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -725,11 +725,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -746,7 +746,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"6ba75687-7591-4a53-80a7-99c93d3a24c6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"8b39fe00-e249-4b3e-b451-bf70201d10bb\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"21959\",\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"ordrQty\":1,\"ordrUntprc\":\"2730\",\"ordrTrdTp\":\"01\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -758,13 +758,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 9ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 105ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -772,11 +772,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -793,7 +793,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"4fecc962-0d7c-49db-a88b-28dc4614c691\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"791827fe-ab93-476a-beb1-6351911491d9\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -805,13 +805,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 3ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 18ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -819,11 +819,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -840,7 +840,242 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"c9fb0f80-d979-43d7-b54e-1a05c09c5900\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"15f2594c-1a65-4253-9bcb-4640bed42112\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 290ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"c1795e45-c0a3-446e-9f0a-2cf31e1bb011\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 186ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"fbfd1f6e-2df2-4b1a-a599-55b67a54c24f\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 7ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"298c456a-2f4b-4673-af82-8d3a1b610a70\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"21975\",\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 80ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"bf027396-1347-45ab-9d7e-49991f43f934\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 28ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"NewOrder\",\"rqId\":\"29405802-5b04-47da-83df-008c77dc251e\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"MBB\",\"ordrQty\":\"1\",\"ordrUntprc\":\"29100\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"2\",\"oddOrdrYn\":\"N\",\"signStr\":\"fmdG3/vf7hwfPThAqfFrjOkRkSBaVGR04nn2Qka8Glo=\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -858,7 +1093,7 @@
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -866,11 +1101,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -887,7 +1122,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"10ed3240-5eac-492b-addd-c526a8a86c8d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"61733f9a-0104-43ff-bbb8-79153b0eb87a\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -899,13 +1134,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 42ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 50ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -913,11 +1148,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -934,7 +1169,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"9VmhPFcJNqAP0rfKaQ1CkBCIqnrN+nzDB0RrkTRh4lo=\",\"rqId\":\"b070632a-1ac8-42b2-a2ef-d55dca4df6b9\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"461\",\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"b6b4f261-8a89-4024-b055-8ddd9e8d10d5\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -946,13 +1181,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 2ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 35ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -960,11 +1195,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -981,7 +1216,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"4c0d2dc3-a52c-4283-b7a3-7d49255ab1e9\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"5a9f4d16-5b45-47a0-abab-2e6231d0feae\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -993,13 +1228,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 1ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 35ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1007,11 +1242,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1028,7 +1263,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"6376b37c-b646-4c53-b9ca-394d7b4806a8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"5c07e734-8a3c-4c4b-b282-b5cd5a40496d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1040,13 +1275,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 49ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 157ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1054,11 +1289,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1075,7 +1310,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"af7b011f-49ea-4233-a365-e6db73577729\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"8ab59638-8d7c-4718-ac97-fc51b5d31329\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1087,13 +1322,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 20ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 52ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1101,11 +1336,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1122,7 +1357,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"PurchasePower\",\"rqId\":\"a5696aed-da08-44b2-8032-6c38d1ca6181\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"MBB\",\"ordrUntprc\":\"28750\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"b3dc73e2-7dcc-4ad6-b032-f7b84084a06b\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1134,13 +1369,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 37ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 435ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1148,11 +1383,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1169,7 +1404,101 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"PurchasePower\",\"rqId\":\"7bc76bfe-934b-461d-add2-9cbda90c5185\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"2840\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"53cf7ee1-3516-47cf-926c-601882ead44f\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"21997\",\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 18ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"5b95e37c-a913-4bb4-9fdc-fc06dda1a59c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 184ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"1e935b59-70bc-4356-8343-3907309af27a\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1187,7 +1516,7 @@
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1195,11 +1524,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1216,7 +1545,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"NewOrder\",\"rqId\":\"91356c54-2d75-4183-b9c4-7421a9377775\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"9VmhPFcJNqAP0rfKaQ1CkBCIqnrN+nzDB0RrkTRh4lo=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrQty\":\"1\",\"ordrUntprc\":\"2840\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"1rLbmLXd6FeQ+iuBo+7Yq8S6jIe5lGVd5Ye7ZRxLD7I=\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"93e56719-a94c-4250-980a-aa3874025ff6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1228,13 +1557,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 27ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 104ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1242,11 +1571,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1263,7 +1592,1276 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"48ebf713-5b8a-43ab-aa1a-a044783598cc\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"134c4c5d-401f-4681-8351-378f4bfdbb2b\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 35ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"0343b95d-af3c-461e-abd2-69c022aa18aa\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"MBB\",\"ordrUntprc\":\"29100\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 118ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"71eb49fb-d5e1-4c2b-b88c-592fc8b689b4\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 22ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"45293769-3415-47a4-8f86-e6294126e529\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"2630\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 643ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"NewOrder\",\"rqId\":\"a1ec43e2-d87f-4ddd-8c9f-d4f9056de46f\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrQty\":\"1\",\"ordrUntprc\":\"2630\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"gmwtkkbmHpTdGdtR9qv6VPEm9TNE1a86lZLgpb/jLFk=\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 58ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"a2561e7a-1988-472b-9f26-33c3d85fd2c9\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 277ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"733b0604-5f67-4f00-b6a8-5670f67842c1\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 139ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"5fe5f77d-10f1-4372-be5a-23f59dc3814d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 521ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"346d3c8e-429f-4f13-9d1c-5efcb05e1dd3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 417ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"d9b013c2-7da3-438a-ac39-fdea4073d7a4\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 321ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"9f2aa3fc-8d8e-4521-bfe7-a7e2cc2d41b6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 1751ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"cc353477-b818-44f2-abb2-4ee93d97a0ac\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 562ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"a7b5dbf7-31b3-4ed5-b7da-9f34fc14929e\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 610ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"dced9213-14c1-4562-af37-ebcb07202710\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 892ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"4b52d96f-56f2-4509-b35b-eb24c62428ec\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 544ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"68eb320f-6bd3-4be9-991a-dadab3b3fb8f\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"22044\",\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"ordrQty\":1,\"ordrUntprc\":\"2730\",\"ordrTrdTp\":\"01\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 512ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"2dc69266-a4a8-4e6a-88e3-e0f4370d9ff4\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 528ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"e581aa20-f43e-4cef-aa99-092509d6b733\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 966ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"8f0aec89-29bf-424f-bd19-e6216866e717\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 493ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"80917a2b-a057-4cbb-b635-7459a110655c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 272ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"47610a53-6efe-4d3b-bc40-90985175cadd\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 19ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"54b4ef9e-5876-47c1-8d85-3361fe78ccfc\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 875ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"0204371e-8b2d-4692-ae93-04751f145e03\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 1350ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"258ca29a-0a67-4c58-83e4-9b8310a91ab3\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"22067\",\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"ordrQty\":2,\"ordrUntprc\":\"2730\",\"ordrTrdTp\":\"01\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 381ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"dc24a800-cde9-4136-a58a-4920350e0003\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 677ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"cfa5f856-7eba-44cf-aad2-60af5cce4a07\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 31ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"4e9d4c2f-288a-4e6f-9aab-9ca0fa1b6754\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 40ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"ce0bc22b-9bea-4bac-a315-f34205d854b8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1281,7 +2879,7 @@
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1289,11 +2887,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1310,7 +2908,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"PurchasePower\",\"rqId\":\"db02ed98-2c80-4436-ad0f-a0b17ddafcf0\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4740\"}}"
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"9733eea4-b079-4188-a1b4-a845a3cf73a7\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"22104\",\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1322,13 +2920,13 @@
       ]
     },
     {
-      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 3ms",
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 16ms",
       "request": {
         "method": "POST",
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1336,11 +2934,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1357,7 +2955,289 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"2f5f643f-3ac6-4297-9c6c-cf7ba68e5e6e\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"0409c75c-9edd-47e3-8fa2-d1a9b1ca43e4\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 102ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"7dcea6fb-727f-4986-83e9-dfeac585d777\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 265ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"d24214de-3362-4cb0-928b-3dafe8494ef8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 79ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"8d51320c-7c51-48e4-85b3-b4b26917fba7\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 396ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"3aab0327-208e-401a-b583-7df75848daa8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 646ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"NewOrder\",\"rqId\":\"36c50c0e-41dd-42dc-9487-c74ca81cebac\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"ACB\",\"ordrQty\":\"1\",\"ordrUntprc\":\"29450\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"2\",\"oddOrdrYn\":\"N\",\"signStr\":\"kwdF+ul6eO5LSL0kP6GDjEouCQbzoTkX/iES/q4NO7U=\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt (200) - 351ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"51953bb4-5bf2-47c9-ae5c-862c9024a80d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1375,7 +3255,7 @@
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1383,11 +3263,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1404,7 +3284,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"0c59b6a6-4caa-418b-b7b9-0c261297ea26\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"7a6afa9d-5b30-47e0-a665-d33d1f05a05f\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1417,7 +3297,7 @@
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1425,11 +3305,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1446,7 +3326,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"da90cecd-4d54-4392-b48b-c73de60391fd\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"0100961a-2bc8-40eb-9192-f1eae14887e2\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1459,7 +3339,7 @@
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1467,11 +3347,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1488,7 +3368,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"7e76739c-27a2-4134-aa6d-ee4336f09d73\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"de731e96-026a-4809-aa19-243aa6824b9c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1501,7 +3381,7 @@
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1509,11 +3389,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1530,7 +3410,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"9VmhPFcJNqAP0rfKaQ1CkBCIqnrN+nzDB0RrkTRh4lo=\",\"rqId\":\"f0b06d92-d068-4952-b880-03419b8107d1\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"462\",\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"17e89154-8655-48c1-b5a1-b9df328d6b89\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1543,7 +3423,7 @@
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1551,11 +3431,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1572,7 +3452,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"e0bfd736-97d8-40cb-8c01-9fbade7d4b5d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"89d070df-3603-4172-9c7b-4629166354a7\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },
@@ -1585,7 +3465,7 @@
         "header": [
           {
             "key": "sec-ch-ua-platform",
-            "value": "\"Windows\""
+            "value": "\"macOS\""
           },
           {
             "key": "referer",
@@ -1593,11 +3473,11 @@
           },
           {
             "key": "user-agent",
-            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/134.0.6998.35 Safari/537.36"
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
           },
           {
             "key": "sec-ch-ua",
-            "value": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"HeadlessChrome\";v=\"134\""
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
           },
           {
             "key": "content-type",
@@ -1614,7 +3494,301 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"R8TUttxdjGQ6bgUpmV45P2CRxp2YmVbqFw43iEVnZ61kvsQwo9fGRZ7k58Gp6zB8\",\"rqId\":\"89933afd-ba24-403f-9032-8c4fee700da7\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"18b8255b-bcf4-4c60-8160-93b112cd274b\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"35286960-e1ef-4b4e-98cb-a281cbe285d3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"59f9e4c0-d7a2-451d-a7a0-b7a33e1a9146\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"22168\",\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"b5b88fd5-e898-4d3e-a99e-d4f5f8a96c0a\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"37606783-2ef2-4bac-a54d-0720fb044737\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"4a04a93d-f733-4f96-842e-efd46b93af75\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"9cf05ef6-87e9-4d91-8d8f-25aa4dbd1063\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}"
+        },
+        "url": "https://trade.pinetree.vn/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST https://trade.pinetree.vn/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "referer",
+            "value": "https://trade.pinetree.vn/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\""
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"575054e2-6fd7-4355-befb-15a8372658c5\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
         },
         "url": "https://trade.pinetree.vn/CoreServlet.pt"
       },

@@ -1,608 +1,1423 @@
 {
   "metadata": {
-    "environment": "UAT",
-    "startTime": "2025-08-25T07:16:27.823Z",
+    "environment": "PROD",
+    "startTime": "2025-08-29T07:02:25.648Z",
     "status": "completed",
-    "totalCalls": 43,
-    "lastUpdated": "2025-08-25T07:17:36.189Z",
-    "endTime": "2025-08-25T07:17:39.475Z",
-    "performanceSummary": "Test execution: 71652ms, API calls: 43, Avg response time: 124.23ms",
+    "totalCalls": 82,
+    "lastUpdated": "2025-08-29T07:06:50.325Z",
+    "endTime": "2025-08-29T07:07:12.251Z",
+    "performanceSummary": "Test execution: 286603ms, API calls: 82, Avg response time: 292.64ms",
     "testSteps": [
-      "2025-08-25T07:16:27.848Z: Test started - API capture initialized with body filtering",
-      "2025-08-25T07:16:27.854Z: Page objects initialized",
-      "2025-08-25T07:16:27.854Z: Starting login process",
-      "2025-08-25T07:16:37.983Z: Login successful",
-      "2025-08-25T07:16:37.983Z: Navigating to order page",
-      "2025-08-25T07:16:48.470Z: Order page navigation completed",
-      "2025-08-25T07:16:48.471Z: Switching to margin account",
-      "2025-08-25T07:16:51.140Z: Margin account selected",
-      "2025-08-25T07:16:51.141Z: Starting buy order workflow for margin account (buy-margin-1756106211141)",
-      "2025-08-25T07:16:56.395Z: Handling toast messages for: order placement",
-      "2025-08-25T07:16:59.404Z: buy order placed successfully",
-      "2025-08-25T07:17:04.734Z: Order modified - Price: 21.85}",
-      "2025-08-25T07:17:04.734Z: Handling toast messages for: order modification",
-      "2025-08-25T07:17:12.436Z: Order modified - Quantity: 2",
-      "2025-08-25T07:17:16.328Z: Order cancelled successfully",
-      "2025-08-25T07:17:16.328Z: Handling toast messages for: order cancellation",
-      "2025-08-25T07:17:19.544Z: buy order workflow completed successfully (buy-margin-1756106211141)",
-      "2025-08-25T07:17:19.544Z: Starting sell order workflow for margin account (sell-margin-1756106239544)",
-      "2025-08-25T07:17:29.580Z: Handling toast messages for: order placement",
-      "2025-08-25T07:17:32.612Z: sell order placed successfully",
-      "2025-08-25T07:17:36.466Z: Order cancelled successfully",
-      "2025-08-25T07:17:36.466Z: Handling toast messages for: order cancellation",
-      "2025-08-25T07:17:39.474Z: sell order workflow completed successfully (sell-margin-1756106239544)",
-      "2025-08-25T07:17:39.474Z: Finalizing test report and files"
+      "2025-08-29T07:02:25.684Z: Test started - API capture initialized with body filtering",
+      "2025-08-29T07:02:25.689Z: Page objects initialized",
+      "2025-08-29T07:02:25.690Z: Starting login process",
+      "2025-08-29T07:02:36.584Z: Login successful",
+      "2025-08-29T07:02:36.584Z: Navigating to order page",
+      "2025-08-29T07:02:47.300Z: Order page navigation completed",
+      "2025-08-29T07:02:47.300Z: Starting buy order workflow for normal account (buy-normal-1756450967300)",
+      "2025-08-29T07:02:57.222Z: Handling toast messages for: order placement",
+      "2025-08-29T07:02:59.927Z: buy order placed successfully",
+      "2025-08-29T07:03:00.240Z: Purchase power updated",
+      "2025-08-29T07:03:07.537Z: Order modified - Price: 2.73}",
+      "2025-08-29T07:03:07.538Z: Handling toast messages for: order modification",
+      "2025-08-29T07:03:13.412Z: Order cancelled successfully",
+      "2025-08-29T07:03:13.412Z: Handling toast messages for: order cancellation",
+      "2025-08-29T07:03:15.500Z: buy order workflow completed successfully (buy-normal-1756450967300)",
+      "2025-08-29T07:03:15.500Z: Starting sell order workflow for normal account (sell-normal-1756450995500)",
+      "2025-08-29T07:03:29.885Z: Handling toast messages for: order placement",
+      "2025-08-29T07:03:32.011Z: sell order placed successfully",
+      "2025-08-29T07:03:41.000Z: Order cancelled successfully",
+      "2025-08-29T07:03:41.000Z: Handling toast messages for: order cancellation",
+      "2025-08-29T07:03:43.297Z: sell order workflow completed successfully (sell-normal-1756450995500)",
+      "2025-08-29T07:03:46.301Z: Switching to margin account",
+      "2025-08-29T07:03:52.110Z: Margin account selected",
+      "2025-08-29T07:03:52.110Z: Starting buy order workflow for margin account (buy-margin-1756451032110)",
+      "2025-08-29T07:04:07.206Z: Handling toast messages for: order placement",
+      "2025-08-29T07:04:09.317Z: buy order placed successfully",
+      "2025-08-29T07:04:23.251Z: Order modified - Price: 2.73}",
+      "2025-08-29T07:04:23.251Z: Handling toast messages for: order modification",
+      "2025-08-29T07:04:54.723Z: Order modified - Quantity: 2",
+      "2025-08-29T07:05:21.769Z: Order cancelled successfully",
+      "2025-08-29T07:05:21.769Z: Handling toast messages for: order cancellation",
+      "2025-08-29T07:05:24.781Z: buy order workflow completed successfully (buy-margin-1756451032110)",
+      "2025-08-29T07:05:24.782Z: Starting sell order workflow for margin account (sell-margin-1756451124782)",
+      "2025-08-29T07:05:55.001Z: Handling toast messages for: order placement",
+      "2025-08-29T07:06:27.829Z: sell order placed successfully",
+      "2025-08-29T07:06:37.973Z: Order cancelled successfully",
+      "2025-08-29T07:06:37.973Z: Handling toast messages for: order cancellation",
+      "2025-08-29T07:07:12.172Z: sell order workflow completed successfully (sell-margin-1756451124782)",
+      "2025-08-29T07:07:12.174Z: Finalizing test report and files"
     ],
     "errors": []
   },
   "apiCalls": [
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"95ae76d8-273b-419d-b1c7-6f5bb166d216\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:34.556Z",
-      "responseTime": 16,
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"a6c7b2e1-76e4-435e-af8a-aa6f76e95d2e\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:02:33.208Z",
+      "responseTime": 90,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"28375bdd-421f-473e-bfe4-91b8ebe99987\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:39.061Z",
-      "responseTime": 53,
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"55b83f38-bbc5-45a6-b679-0ca2d5a1929a\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
+      "timestamp": "2025-08-29T07:02:37.818Z",
+      "responseTime": 123,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"5ab51bd1-de1a-4409-a6c3-a81d9911664f\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:39.064Z",
-      "responseTime": 21,
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"f90b26d3-bff0-4ea3-b2b6-7b501b187231\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
+      "timestamp": "2025-08-29T07:02:37.841Z",
+      "responseTime": 85,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"58de675c-7871-40d8-a71b-296e2ab5ce84\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:39.067Z",
-      "responseTime": 534,
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"1224a698-8b61-46f7-b92d-30fa98adef5c\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}",
+      "timestamp": "2025-08-29T07:02:49.796Z",
+      "responseTime": 331,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"b40f4666-20bc-4588-967d-01f650c6a2c5\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:39.072Z",
-      "responseTime": 15,
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"8992f9f0-1db2-4fe0-bb98-d831109359b1\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"2630\"}}",
+      "timestamp": "2025-08-29T07:02:52.098Z",
+      "responseTime": 478,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"38ddf3e2-c610-4591-9750-434fe6128695\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:50.109Z",
-      "responseTime": 31,
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"NewOrder\",\"rqId\":\"061aa469-20d6-4513-8554-42630d0a0888\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrQty\":\"1\",\"ordrUntprc\":\"2630\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"mrc6sQQSgg3XJ/9CeuVtXhoyZkR2X1/eMWmhQwzWLjw=\"}}",
+      "timestamp": "2025-08-29T07:02:54.503Z",
+      "responseTime": 175,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"5c5a5aa4-7ba9-4e74-9de6-3c6060609fb1\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:50.121Z",
-      "responseTime": 42,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"510015c0-61a9-44f8-aa71-398502272084\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"MBB\",\"ordrUntprc\":\"24950\"}}",
-      "timestamp": "2025-08-25T07:16:51.774Z",
-      "responseTime": 5,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"b81a5800-769e-40ee-afa4-172e6325dfdf\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"MBB\",\"ordrUntprc\":\"21750\"}}",
-      "timestamp": "2025-08-25T07:16:52.741Z",
-      "responseTime": 24,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"NewOrder\",\"rqId\":\"cd7e4cab-4a9e-4739-804d-f9a6b35e47d8\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"MBB\",\"ordrQty\":\"1\",\"ordrUntprc\":\"21750\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"Ul2kkbCIvIhVxO7Zq/WhmrTN0VdQy2vDnZhdht3OsAI=\"}}",
-      "timestamp": "2025-08-25T07:16:54.764Z",
-      "responseTime": 71,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"c90c0d29-30e7-4be4-ba0c-97bed596de24\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:55.321Z",
-      "responseTime": 48,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"a9fa7725-1627-43d5-8b8e-0bd456a7e947\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"MBB\",\"ordrUntprc\":\"24950\"}}",
-      "timestamp": "2025-08-25T07:16:55.323Z",
-      "responseTime": 165,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"0070e39f-1304-48c2-bfff-997856489a7c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:59.511Z",
-      "responseTime": 1125,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"5ad5bfc6-d33e-482f-a039-a2bdb19b3e71\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:59.513Z",
-      "responseTime": 32,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"d296ac6b-6803-4fbc-aefa-906a34076cd3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:16:59.516Z",
-      "responseTime": 54,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"03f2149a-8570-4035-82ff-7aebdfd8fd4f\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"MBB\",\"ordrUntprc\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:00.289Z",
-      "responseTime": 45,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"52a6527f-3e60-4c63-b7ef-0bcec10b97bb\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"MBB\",\"ordrUntprc\":\"24950\"}}",
-      "timestamp": "2025-08-25T07:17:00.596Z",
-      "responseTime": 380,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"rqId\":\"3c1398c2-f2bf-4d0c-928b-39c33bebd64e\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"90000123\",\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"ordrQty\":1,\"ordrUntprc\":\"21850\",\"ordrTrdTp\":\"01\"}}",
-      "timestamp": "2025-08-25T07:17:02.814Z",
-      "responseTime": 81,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"68601c58-64aa-499b-9f51-827bd5b39bcd\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:03.595Z",
-      "responseTime": 43,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"889032a6-604a-4f1c-b92b-caabc13bc61f\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:03.595Z",
-      "responseTime": 3,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"cb37633a-e676-48fe-8513-ef500ff89bf5\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:03.800Z",
-      "responseTime": 28,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"6cc09a7b-9526-47ed-b6f4-58ad6bc97cb9\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"MBB\",\"ordrUntprc\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:08.198Z",
-      "responseTime": 42,
-      "statusCode": 200
-    },
-    {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
-      "method": "POST",
-      "headers": {
-        "referer": "http://10.8.80.134:3009/",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
-      },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"PurchasePower\",\"rqId\":\"c32686b5-554b-417b-a0ea-503496313a5f\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"MBB\",\"ordrUntprc\":\"24950\"}}",
-      "timestamp": "2025-08-25T07:17:08.621Z",
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"c69fd48d-8ed7-4ba9-80ca-9479f9bd84ad\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:02:55.202Z",
       "responseTime": 227,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"3af7d508-8b13-4d1c-9a5b-76e8bebbf63b\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:08.870Z",
-      "responseTime": 39,
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"87f8dbf7-d381-44fe-ac99-08ba7db589b6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:02:55.731Z",
+      "responseTime": 235,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"rqId\":\"00e8cfa5-5bf8-42c9-856d-be83f99ec3d9\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"90000124\",\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"ordrQty\":2,\"ordrUntprc\":\"21850\",\"ordrTrdTp\":\"01\"}}",
-      "timestamp": "2025-08-25T07:17:10.141Z",
-      "responseTime": 59,
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"702376c2-cdbb-4ee2-8fe9-e9319ce7745c\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}",
+      "timestamp": "2025-08-29T07:02:56.307Z",
+      "responseTime": 702,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"3f94c474-ebbf-41a0-b2a0-102985ff54c7\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:11.416Z",
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"20d7f769-1d21-4b46-9259-e46c021be3b9\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}",
+      "timestamp": "2025-08-29T07:03:01.851Z",
+      "responseTime": 199,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"a9666869-13b8-4aa0-85a2-5aa0bf2e950d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:02.282Z",
+      "responseTime": 86,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"4e81eaa2-4b28-43e0-8584-394c6275b00c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:02.282Z",
+      "responseTime": 43,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"31ba5ac0-19f6-44b6-97a7-be8c9b2835d3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:02.283Z",
+      "responseTime": 153,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"722ef5fe-4be6-44f4-b9e7-425d34489db0\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:02.284Z",
+      "responseTime": 171,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"9069cb2c-8aea-4edd-bde3-b03ceee18958\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}",
+      "timestamp": "2025-08-29T07:03:04.137Z",
+      "responseTime": 68,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"8b39fe00-e249-4b3e-b451-bf70201d10bb\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"21959\",\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"ordrQty\":1,\"ordrUntprc\":\"2730\",\"ordrTrdTp\":\"01\"}}",
+      "timestamp": "2025-08-29T07:03:06.004Z",
+      "responseTime": 269,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"791827fe-ab93-476a-beb1-6351911491d9\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:06.415Z",
+      "responseTime": 105,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"15f2594c-1a65-4253-9bcb-4640bed42112\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:03:06.416Z",
+      "responseTime": 18,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"c1795e45-c0a3-446e-9f0a-2cf31e1bb011\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:06.500Z",
+      "responseTime": 290,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"fbfd1f6e-2df2-4b1a-a599-55b67a54c24f\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:03:06.501Z",
+      "responseTime": 186,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"298c456a-2f4b-4673-af82-8d3a1b610a70\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"21975\",\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\"}}",
+      "timestamp": "2025-08-29T07:03:12.127Z",
+      "responseTime": 7,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"bf027396-1347-45ab-9d7e-49991f43f934\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:12.480Z",
+      "responseTime": 80,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"NewOrder\",\"rqId\":\"29405802-5b04-47da-83df-008c77dc251e\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\",\"symbol\":\"MBB\",\"ordrQty\":\"1\",\"ordrUntprc\":\"29100\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"2\",\"oddOrdrYn\":\"N\",\"signStr\":\"fmdG3/vf7hwfPThAqfFrjOkRkSBaVGR04nn2Qka8Glo=\"}}",
+      "timestamp": "2025-08-29T07:03:25.654Z",
+      "responseTime": 28,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"61733f9a-0104-43ff-bbb8-79153b0eb87a\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:03:26.228Z",
+      "responseTime": 8,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"b6b4f261-8a89-4024-b055-8ddd9e8d10d5\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:32.372Z",
+      "responseTime": 50,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"5a9f4d16-5b45-47a0-abab-2e6231d0feae\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:32.389Z",
+      "responseTime": 35,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"5c07e734-8a3c-4c4b-b282-b5cd5a40496d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:32.390Z",
+      "responseTime": 35,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"8ab59638-8d7c-4718-ac97-fc51b5d31329\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:32.398Z",
+      "responseTime": 157,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"b3dc73e2-7dcc-4ad6-b032-f7b84084a06b\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:32.399Z",
+      "responseTime": 52,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"53cf7ee1-3516-47cf-926c-601882ead44f\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"21997\",\"acntNo\":\"00189935\",\"subAcntNo\":\"N00189939\"}}",
+      "timestamp": "2025-08-29T07:03:38.661Z",
+      "responseTime": 435,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"5b95e37c-a913-4bb4-9fdc-fc06dda1a59c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:39.151Z",
+      "responseTime": 18,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"1e935b59-70bc-4356-8343-3907309af27a\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:03:39.154Z",
+      "responseTime": 184,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"93e56719-a94c-4250-980a-aa3874025ff6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:03:42.506Z",
       "responseTime": 47,
       "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"434885fe-1170-4777-a7b9-337159b1130b\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:11.418Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"134c4c5d-401f-4681-8351-378f4bfdbb2b\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:03:48.643Z",
+      "responseTime": 104,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"rqId\":\"967850a3-8438-417f-ae82-0db9120b3a79\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"90000125\",\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\"}}",
-      "timestamp": "2025-08-25T07:17:14.160Z"
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"0343b95d-af3c-461e-abd2-69c022aa18aa\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"MBB\",\"ordrUntprc\":\"29100\"}}",
+      "timestamp": "2025-08-29T07:03:53.932Z",
+      "responseTime": 35,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"a3f1a198-8666-44f2-806c-f65afb2d1f12\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:14.643Z"
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"71eb49fb-d5e1-4c2b-b88c-592fc8b689b4\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}",
+      "timestamp": "2025-08-29T07:03:57.186Z",
+      "responseTime": 118,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"4982c130-22e9-482c-a713-4aad8c3487ab\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:14.646Z"
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"45293769-3415-47a4-8f86-e6294126e529\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"2630\"}}",
+      "timestamp": "2025-08-29T07:03:58.182Z",
+      "responseTime": 22,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"7bcceae2-8c38-40fb-9e65-b358b9a362ff\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:14.653Z"
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"NewOrder\",\"rqId\":\"a1ec43e2-d87f-4ddd-8c9f-d4f9056de46f\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrQty\":\"1\",\"ordrUntprc\":\"2630\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"gmwtkkbmHpTdGdtR9qv6VPEm9TNE1a86lZLgpb/jLFk=\"}}",
+      "timestamp": "2025-08-29T07:04:01.985Z",
+      "responseTime": 643,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"9d3b7a1b-2433-47cd-ae7b-ca5e4f35aa88\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:19.264Z"
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"a2561e7a-1988-472b-9f26-33c3d85fd2c9\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}",
+      "timestamp": "2025-08-29T07:04:03.686Z",
+      "responseTime": 58,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"NewOrder\",\"rqId\":\"9f03ac15-37c4-4131-8ed0-615aae578278\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\",\"symbol\":\"AAA\",\"ordrQty\":\"1\",\"ordrUntprc\":\"8570\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"2\",\"oddOrdrYn\":\"N\",\"signStr\":\"GvWF5APoTFWIQe8+9YSc3ooWa9xHUf/FUwnXBpElJoo=\"}}",
-      "timestamp": "2025-08-25T07:17:27.239Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"733b0604-5f67-4f00-b6a8-5670f67842c1\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:04:04.102Z",
+      "responseTime": 277,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"46144e04-a701-476a-b5ad-43c2f9b46c55\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:27.628Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"5fe5f77d-10f1-4372-be5a-23f59dc3814d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:11.852Z",
+      "responseTime": 139,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"e295cefc-eafb-4d16-92ce-eb13670cb8aa\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:32.750Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"346d3c8e-429f-4f13-9d1c-5efcb05e1dd3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:11.854Z",
+      "responseTime": 521,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"045e6d8b-a7ba-4cc9-840f-0494addb135b\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:32.751Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"d9b013c2-7da3-438a-ac39-fdea4073d7a4\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:11.858Z",
+      "responseTime": 417,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"03ed77a8-c165-419a-a841-776e09d8f24c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:32.753Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"9f2aa3fc-8d8e-4521-bfe7-a7e2cc2d41b6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:11.865Z",
+      "responseTime": 321,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"eacccabd-585d-462b-a15b-1828ab0d3841\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:32.755Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"cc353477-b818-44f2-abb2-4ee93d97a0ac\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:11.868Z",
+      "responseTime": 1751,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"19ab4c20-70da-45e3-949a-57abd38c4ac6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:32.763Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"a7b5dbf7-31b3-4ed5-b7da-9f34fc14929e\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:11.875Z",
+      "responseTime": 562,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"rqId\":\"31d40fc5-47bc-4d21-abd6-31ebf523732d\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"90000127\",\"acntNo\":\"00000187\",\"subAcntNo\":\"M00000022\"}}",
-      "timestamp": "2025-08-25T07:17:34.650Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"dced9213-14c1-4562-af37-ebcb07202710\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:12.938Z",
+      "responseTime": 610,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"eca0e546-34f6-4a8a-a57a-77212d295a52\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:35.132Z"
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"4b52d96f-56f2-4509-b35b-eb24c62428ec\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}",
+      "timestamp": "2025-08-29T07:04:14.180Z",
+      "responseTime": 892,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"01aad3b1-38f7-4416-8ad8-4256e29607e3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:35.134Z"
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"68eb320f-6bd3-4be9-991a-dadab3b3fb8f\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"22044\",\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"ordrQty\":1,\"ordrUntprc\":\"2730\",\"ordrTrdTp\":\"01\"}}",
+      "timestamp": "2025-08-29T07:04:18.277Z",
+      "responseTime": 544,
+      "statusCode": 200
     },
     {
-      "url": "http://10.8.90.164:8888/CoreServlet.pt",
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
       "method": "POST",
       "headers": {
-        "referer": "http://10.8.80.134:3009/",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-        "accept-language": "en-US",
-        "content-type": "application/json; charset=UTF-8"
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
       },
-      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"ckMjfAhBzRfnpxLuJmdRWnN8H76uQ4fwY32Abfp1is2eZDipp9DNRkqJzkmuGNak\",\"rqId\":\"59542fad-b83a-44f7-9454-29fa630acd16\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
-      "timestamp": "2025-08-25T07:17:35.140Z"
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"2dc69266-a4a8-4e6a-88e3-e0f4370d9ff4\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:19.580Z",
+      "responseTime": 512,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"e581aa20-f43e-4cef-aa99-092509d6b733\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:04:19.591Z",
+      "responseTime": 528,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"8f0aec89-29bf-424f-bd19-e6216866e717\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:22.075Z",
+      "responseTime": 966,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"80917a2b-a057-4cbb-b635-7459a110655c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:04:22.076Z",
+      "responseTime": 493,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"47610a53-6efe-4d3b-bc40-90985175cadd\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:32.746Z",
+      "responseTime": 272,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"PurchasePower\",\"rqId\":\"54b4ef9e-5876-47c1-8d85-3361fe78ccfc\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"CACB2510\",\"ordrUntprc\":\"4530\"}}",
+      "timestamp": "2025-08-29T07:04:37.080Z",
+      "responseTime": 19,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"0204371e-8b2d-4692-ae93-04751f145e03\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:44.104Z",
+      "responseTime": 875,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"258ca29a-0a67-4c58-83e4-9b8310a91ab3\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"22067\",\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"ordrQty\":2,\"ordrUntprc\":\"2730\",\"ordrTrdTp\":\"01\"}}",
+      "timestamp": "2025-08-29T07:04:47.679Z",
+      "responseTime": 1350,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"dc24a800-cde9-4136-a58a-4920350e0003\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:49.063Z",
+      "responseTime": 381,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"cfa5f856-7eba-44cf-aad2-60af5cce4a07\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:04:49.072Z",
+      "responseTime": 677,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"4e9d4c2f-288a-4e6f-9aab-9ca0fa1b6754\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:04:51.651Z",
+      "responseTime": 31,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"ce0bc22b-9bea-4bac-a315-f34205d854b8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:04:51.653Z",
+      "responseTime": 40,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"9733eea4-b079-4188-a1b4-a845a3cf73a7\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"22104\",\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\"}}",
+      "timestamp": "2025-08-29T07:05:16.727Z",
+      "responseTime": 9,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"0409c75c-9edd-47e3-8fa2-d1a9b1ca43e4\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:05:17.250Z",
+      "responseTime": 16,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"7dcea6fb-727f-4986-83e9-dfeac585d777\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:05:18.428Z",
+      "responseTime": 102,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"d24214de-3362-4cb0-928b-3dafe8494ef8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:05:18.435Z",
+      "responseTime": 265,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"8d51320c-7c51-48e4-85b3-b4b26917fba7\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:05:19.495Z",
+      "responseTime": 79,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"3aab0327-208e-401a-b583-7df75848daa8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:05:19.495Z",
+      "responseTime": 396,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"NewOrder\",\"rqId\":\"36c50c0e-41dd-42dc-9487-c74ca81cebac\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"data\":{\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\",\"symbol\":\"ACB\",\"ordrQty\":\"1\",\"ordrUntprc\":\"29450\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"2\",\"oddOrdrYn\":\"N\",\"signStr\":\"kwdF+ul6eO5LSL0kP6GDjEouCQbzoTkX/iES/q4NO7U=\"}}",
+      "timestamp": "2025-08-29T07:05:52.067Z",
+      "responseTime": 646,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"51953bb4-5bf2-47c9-ae5c-862c9024a80d\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:05:52.587Z",
+      "responseTime": 351,
+      "statusCode": 200
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"7a6afa9d-5b30-47e0-a665-d33d1f05a05f\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:05:53.151Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"0100961a-2bc8-40eb-9192-f1eae14887e2\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:06:31.507Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"de731e96-026a-4809-aa19-243aa6824b9c\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:06:31.508Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"17e89154-8655-48c1-b5a1-b9df328d6b89\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:06:31.508Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"89d070df-3603-4172-9c7b-4629166354a7\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:06:31.509Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"18b8255b-bcf4-4c60-8160-93b112cd274b\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:06:31.510Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"35286960-e1ef-4b4e-98cb-a281cbe285d3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:06:31.510Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"IlxMaMuLgM3E2cEREyhxCzIBj5gUAVcIR/tlURfZt58=\",\"rqId\":\"59f9e4c0-d7a2-451d-a7a0-b7a33e1a9146\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"22168\",\"acntNo\":\"00189935\",\"subAcntNo\":\"M00011199\"}}",
+      "timestamp": "2025-08-29T07:06:34.530Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"b5b88fd5-e898-4d3e-a99e-d4f5f8a96c0a\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:06:35.267Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"37606783-2ef2-4bac-a54d-0720fb044737\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:06:35.268Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"4a04a93d-f733-4f96-842e-efd46b93af75\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:06:36.457Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"9cf05ef6-87e9-4d91-8d8f-25aa4dbd1063\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\"}}",
+      "timestamp": "2025-08-29T07:06:36.473Z"
+    },
+    {
+      "url": "https://trade.pinetree.vn/CoreServlet.pt",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"macOS\"",
+        "referer": "https://trade.pinetree.vn/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "sec-ch-ua-mobile": "?0",
+        "accept-language": "en-US"
+      },
+      "body": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"0342175656\",\"session\":\"KZv3dSBUP3iyer3zNJe7sDcUqQvmMq8aHtu5VDAnm2Y1ugf3B4YJ32LCNEn5SuKK\",\"rqId\":\"575054e2-6fd7-4355-befb-15a8372658c5\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00246950\",\"subAcntNo\":\"\",\"symbol\":\"\"}}",
+      "timestamp": "2025-08-29T07:06:48.956Z"
     }
   ]
 }
