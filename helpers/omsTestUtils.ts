@@ -82,8 +82,8 @@ export class OmsTestConfig {
 
     static readonly TEST_DATA = {
         STOCK_CODES: {
-            NORMAL_ACCOUNT: 'MBB',
-            MARGIN_ACCOUNT: 'MBB',
+            NORMAL_ACCOUNT: 'CACB2510',
+            MARGIN_ACCOUNT: 'CACB2510',
             ALTERNATIVE: 'ACB'
         },
         ORDER_QUANTITY: 1
