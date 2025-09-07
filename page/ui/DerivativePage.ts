@@ -3,6 +3,7 @@ import BasePage from './BasePage';
 import { getRandomStockCode } from '../../tests/utils/testConfig';
 import MatrixPage from './MatrixPage';
 import { FormUtils, TableUtils, CommonSelectors } from '../../helpers/uiUtils';
+import SelectSubacc from './SubaccPage';
 
 // Interface definitions for better type safety
 interface OrderDerivativeFormData {
@@ -17,18 +18,16 @@ interface DerivativePageElements {
         orderButton: Locator;
     };
     form: {
-        buyTab: Locator;
-        sellTab: Locator;
         stockCodeInput: Locator;
         quantityInput: Locator;
         priceInput: Locator;
         priceCeil: Locator;
         priceFloor: Locator;
         priceReference: Locator;
+        LO: Locator,
         ATO: Locator;
         ATC: Locator;
         MTL: Locator;
-        PLO: Locator;
         MOK: Locator;
         MAK: Locator;
         placeOrderButton: Locator;
@@ -56,6 +55,7 @@ interface DerivativePageElements {
 class DerivativePage extends BasePage {
     // Dependencies
     matrixPage: MatrixPage;
+    subaccPage: SelectSubacc;
 
 
     // Constants
@@ -70,6 +70,7 @@ class DerivativePage extends BasePage {
     constructor(page: Page) {
         super(page);
         this.matrixPage = new MatrixPage(page);
+        this.subaccPage = new SelectSubacc(page);
         this.initializeElements(page);
     }
 
@@ -203,16 +204,19 @@ class DerivativePage extends BasePage {
     /**
      * Navigate to order page and handle matrix if needed
      */
-    async navigateToOrder(): Promise<void> {
+    async navigateToDerivativeOrder(): Promise<void> {
         try {
             await this.orderButton.click();
-            await this.page.waitForTimeout(OrderPage.NAVIGATION_TIMEOUT);
+            await this.page.waitForTimeout(DerivativePage.NAVIGATION_TIMEOUT);
 
             if (await this.matrixPage.isMatrixVisible()) {
                 await this.matrixPage.enterMatrixValid();
             }
 
-            await this.page.waitForTimeout(OrderPage.MATRIX_TIMEOUT);
+            await this.page.waitForTimeout(DerivativePage.MATRIX_TIMEOUT);
+            await this.subaccPage.selectFutureSubacc();
+            await this.orderButton.click();
+
         } catch (error) {
             throw new Error(`Failed to navigate to order page: ${error}`);
         }
