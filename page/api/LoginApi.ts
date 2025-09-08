@@ -153,7 +153,10 @@ export default class LoginApi {
         let cif: string = "";
         let token: string = "";
         let acntNo: string = "";
-        let subAcntNo: string = "";
+        let subAcntNormal: string = "";
+        let subAcntMargin: string = "";
+        let subAcntDerivative: string = "";
+        let subAcntFolio: string = "";
         typeAuth = typeAuth;
 
         const loginResponse = await this.loginApi(
@@ -169,7 +172,19 @@ export default class LoginApi {
             if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
                 const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("N"));
                 acntNo = account?.acntNo;
-                subAcntNo = account?.subAcntNo;
+                subAcntNormal = account?.subAcntNo;
+            }
+            if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
+                const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("M"));
+                subAcntMargin = account?.subAcntNo;
+            }
+            if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
+                const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("D"));
+                subAcntDerivative = account?.subAcntNo;
+            }
+            if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
+                const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("P"));
+                subAcntFolio = account?.subAcntNo;
             }
         } else {
             throw new Error("Login failed, no data returned.");
@@ -216,6 +231,6 @@ export default class LoginApi {
                 }
             }
         }
-        return { session, cif, token, acntNo, subAcntNo };
+        return { session, cif, token, acntNo, subAcntNormal, subAcntMargin, subAcntDerivative, subAcntFolio };
     }
 }

@@ -2,7 +2,7 @@ import apiHelper from "../../helpers/ApiHelper";
 import { WaitUtils } from "../../helpers/uiUtils";
 
 // Interface definitions for better type safety
-interface AssetPayload {
+interface PositionsPayload {
     group: string;
     user: string;
     session: string;
