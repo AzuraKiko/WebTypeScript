@@ -1,22 +1,20 @@
 import { test, expect } from "@playwright/test";
 import { v4 as uuidv4 } from "uuid";
 import AssetApi from "../../page/api/AssetApi";
+import PositionsApi from "../../page/api/Positions";
 import LoginApi from "../../page/api/LoginApi";
 import { TEST_CONFIG } from "../utils/testConfig";
-import { NumberValidator } from "../../helpers/validationUtils";
-
-// Helper function to format percentage with 2 decimal places (standard rounding)
-function formatPercentage(value: number): string {
-    return value.toFixed(2);
-}
+import { ApiTestUtils } from "../../helpers/apiTestUtils";
 
 test.describe("AssetApi Tests", () => {
     test.describe.configure({ mode: "serial" });
     let loginApi: LoginApi;
     let assetApi: AssetApi;
+    let positionsApi: PositionsApi;
     let loginResponse: any;
 
     assetApi = new AssetApi({ baseUrl: TEST_CONFIG.WEB_LOGIN_URL });
+    positionsApi = new PositionsApi({ baseUrl: TEST_CONFIG.WEB_LOGIN_URL });
     loginApi = new LoginApi(TEST_CONFIG.WEB_LOGIN_URL);
 
     test.beforeAll(async () => {
@@ -30,97 +28,97 @@ test.describe("AssetApi Tests", () => {
 
     test.describe("getTotalAssetAll method", () => {
         test("1. should successfully get total asset all", async () => {
-            const response = await assetApi.getTotalAssetAll({
+            const baseParams = {
                 user: TEST_CONFIG.TEST_USER,
                 session: loginResponse.session,
                 acntNo: loginResponse.acntNo,
+            };
+
+            // Get main asset data
+            const response = await assetApi.getTotalAssetAll({
+                ...baseParams,
                 subAcntNo: "null",
                 rqId: uuidv4(),
             });
+
             expect(response).toBeDefined();
             expect(response.status).toBe(200);
-            const result: any = {};
-            // Format money values with comma separators
-            result.totalAsset = NumberValidator.formatNumberWithCommas(response.data.data.totAsst);
-            result.widthdrawable = NumberValidator.formatNumberWithCommas(response.data.data.wdrawAvail);
-            result.nav = NumberValidator.formatNumberWithCommas(response.data.data.realAsst);
-            result.cash = NumberValidator.formatNumberWithCommas(response.data.data.cash);
-            result.stock = NumberValidator.formatNumberWithCommas(response.data.data.stockValue);
-            result.dividend = NumberValidator.formatNumberWithCommas(response.data.data.cashDiv);
-            result.PineB = NumberValidator.formatNumberWithCommas(response.data.data.pineBndValue);
 
-            // Calculate and format percentages with 2 decimal places
-            result.percentCash = formatPercentage((response.data.data.cash / response.data.data.totAsst) * 100);
-            result.percentStock = formatPercentage((response.data.data.stockValue / response.data.data.totAsst) * 100);
-            result.percentDividend = formatPercentage((response.data.data.cashDiv / response.data.data.totAsst) * 100);
-            result.percentPineB = formatPercentage((response.data.data.pineBndValue / response.data.data.totAsst) * 100);
+            const data = response.data.data;
+            const result: any = {
+                ...ApiTestUtils.formatAssetData(data),
+                ...ApiTestUtils.calculatePercentages(data),
+            };
 
-            // Format debt and fee values with comma separators
-            result.debt = NumberValidator.formatNumberWithCommas(response.data.data.debt);
-            result.fee = NumberValidator.formatNumberWithCommas(response.data.data.fee);
-            result.marginDebt = NumberValidator.formatNumberWithCommas(response.data.data.mgDebt);
-
-            // Calculate and format fee and margin debt percentages with 2 decimal places
-            result.percentFee = formatPercentage((response.data.data.fee / response.data.data.totAsst) * 100);
-            result.percentMarginDebt = formatPercentage((response.data.data.mgDebt / response.data.data.totAsst) * 100);
-
-            const responseNormalAccount = await assetApi.getTotalAssetAll({
-                user: TEST_CONFIG.TEST_USER,
-                session: loginResponse.session,
-                acntNo: loginResponse.acntNo,
-                subAcntNo: loginResponse.subAcntNormal,
-                rqId: uuidv4(),
-            });
-
-            // Format account values with comma separators
-            result.normalAccount = NumberValidator.formatNumberWithCommas(responseNormalAccount.data.data.realAsst);
-            result.percentNormalAccount = formatPercentage((responseNormalAccount.data.data.realAsst / response.data.data.realAsst) * 100);
-
-            const responseMarginAccount = await assetApi.getTotalAssetAll({
-                user: TEST_CONFIG.TEST_USER,
-                session: loginResponse.session,
-                acntNo: loginResponse.acntNo,
-                subAcntNo: loginResponse.subAcntMargin,
-                rqId: uuidv4(),
-            });
-
-            result.marginAccount = NumberValidator.formatNumberWithCommas(responseMarginAccount.data.data.realAsst);
-            result.percentMarginAccount = formatPercentage((responseMarginAccount.data.data.realAsst / response.data.data.realAsst) * 100);
+            // Prepare account lists for parallel processing
+            const baseAccounts = [loginResponse.subAcntNormal, loginResponse.subAcntMargin];
+            const optionalAccounts = [];
 
             if (loginResponse.subAcntDerivative) {
-
-                const responseDerivativeAccount = await assetApi.getTotalAssetAll({
-                    user: TEST_CONFIG.TEST_USER,
-                    session: loginResponse.session,
-                    acntNo: loginResponse.acntNo,
-                    subAcntNo: loginResponse.subAcntDerivative,
-                    rqId: uuidv4(),
-                });
-
-                result.derivativeAccount = NumberValidator.formatNumberWithCommas(responseDerivativeAccount.data.data.realAsst);
-                result.percentDerivativeAccount = formatPercentage((responseDerivativeAccount.data.data.realAsst / response.data.data.realAsst) * 100);
+                optionalAccounts.push(loginResponse.subAcntDerivative);
             }
-            else {
+            if (loginResponse.subAcntFolio) {
+                optionalAccounts.push(loginResponse.subAcntFolio);
+            }
+
+            const allAccounts = [...baseAccounts, ...optionalAccounts];
+            const allPositionAccounts = ["", ...allAccounts];
+
+            // Process all accounts and positions in parallel
+            const [accountResults, positionResults] = await Promise.all([
+                ApiTestUtils.processMultipleAccounts(assetApi, baseParams, allAccounts, data.realAsst),
+                ApiTestUtils.processMultiplePositions(positionsApi, baseParams, allPositionAccounts)
+            ]);
+
+            // Assign account results
+            result.normalAccount = accountResults[0].account;
+            result.percentNormalAccount = accountResults[0].percent;
+            result.marginAccount = accountResults[1].account;
+            result.percentMarginAccount = accountResults[1].percent;
+
+            let accountIndex = 2;
+            if (loginResponse.subAcntDerivative) {
+                result.derivativeAccount = accountResults[accountIndex].account;
+                result.percentDerivativeAccount = accountResults[accountIndex].percent;
+                accountIndex++;
+            } else {
                 console.log("No derivative account");
             }
 
             if (loginResponse.subAcntFolio) {
-                const responseFolioAccount = await assetApi.getTotalAssetAll({
-                    user: TEST_CONFIG.TEST_USER,
-                    session: loginResponse.session,
-                    acntNo: loginResponse.acntNo,
-                    subAcntNo: loginResponse.subAcntFolio,
-                    rqId: uuidv4(),
-                });
-
-                result.folioAccount = NumberValidator.formatNumberWithCommas(responseFolioAccount.data.data.realAsst);
-                result.percentFolioAccount = formatPercentage((responseFolioAccount.data.data.realAsst / response.data.data.realAsst) * 100);
-            }
-            else {
+                result.folioAccount = accountResults[accountIndex].account;
+                result.percentFolioAccount = accountResults[accountIndex].percent;
+            } else {
                 console.log("No folio account");
             }
 
-            console.log(result);
+            // Assign position results
+            result.gainLoss = positionResults[0].gainLoss;
+            result.percentGainLoss = positionResults[0].percentGainLoss;
+            result.gainLossNormal = positionResults[1].gainLoss;
+            result.percentGainLossNormal = positionResults[1].percentGainLoss;
+            result.gainLossMargin = positionResults[2].gainLoss;
+            result.percentGainLossMargin = positionResults[2].percentGainLoss;
+
+            let positionIndex = 3;
+            if (loginResponse.subAcntDerivative) {
+                result.gainLossDerivative = positionResults[positionIndex].gainLoss;
+                result.percentGainLossDerivative = positionResults[positionIndex].percentGainLoss;
+                positionIndex++;
+            } else {
+                console.log("No derivative account");
+            }
+
+            if (loginResponse.subAcntFolio) {
+                result.gainLossFolio = positionResults[positionIndex].gainLoss;
+                result.percentGainLossFolio = positionResults[positionIndex].percentGainLoss;
+            } else {
+                console.log("No folio account");
+            }
+
+            // Build and log card data
+            const cardData = ApiTestUtils.buildCardData(result);
+            ApiTestUtils.logCardData(cardData);
         });
     });
 });
