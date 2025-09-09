@@ -148,5 +148,33 @@ test.describe("AssetApi Tests", () => {
             console.log(result);
 
         });
+
+        test("3. get info Margin account", async () => {
+            const baseParams = {
+                user: TEST_CONFIG.TEST_USER,
+                session: loginResponse.session,
+                acntNo: loginResponse.acntNo,
+            };
+
+            const response = await assetApi.getTotalAssetAll({
+                ...baseParams,
+                subAcntNo: loginResponse.subAcntMargin,
+                rqId: uuidv4(),
+            });
+
+            expect(response).toBeDefined();
+            expect(response.status).toBe(200);
+
+            const data = response.data.data;
+            const result: any = ApiTestUtils.marginAccountData(data);
+
+            const positionResults = await ApiTestUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntMargin);
+            result.gainLossMargin = positionResults.gainLoss;
+            result.percentGainLossMargin = positionResults.percentGainLoss;
+
+            console.log("--------------------------------");
+            console.log(result);
+
+        });
     });
 });

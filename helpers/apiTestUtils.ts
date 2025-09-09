@@ -34,6 +34,8 @@ export interface AssetData {
     sellT0: number | string;
     smsFee: number | string;
     depoFee: number | string;
+    prinDebt?: number | string;
+    intDebt?: number | string;
 }
 
 export interface FormattedAssetData {
@@ -112,6 +114,52 @@ export interface NormalAccountResult {
     percentFeeVSD: string;
 }
 
+export interface MarginAccountResult {
+    navMargin: string;
+    totalAssetMargin: string;
+    gainLossMargin: string;
+    percentGainLossMargin: string;
+    widthdrawableMargin: string;
+    cashMargin: string;
+    percentCash: string;
+    balance: string;
+    advanceAvail: string;
+    maxAdvanceAvail: string;
+    haveAdvanceAvail: string;
+    dividendAndProfitBond: string;
+    totalBuyWaitMatch: string;
+    buyWaitMatchByCash: string;
+    buyWaitMatchByLoan: string;
+    cashBuyNotMatchT0: string;
+    cashTichLuy: string;
+    taxFeePSWaitT0: string;
+
+    stockMargin: string;
+    percentStock: string;
+    totalValueStock: string;
+    availableStock: string;
+    waitTradingStock: string;
+    retrictStock: string;
+    restrictStockWaitTrading: string;
+    dividendStock: string;
+    stockBuyWaitReturn: string;
+    sellMatchT0: string;
+
+    totalDebtMargin: string;
+    totalMargin: string;
+    percentTotalMargin: string;
+    originMargin: string;
+    interestMargin: string;
+
+    totalFeeTrading: string;
+    percentTotalFeeTrading: string;
+    feeSMS: string;
+    feeVSD: string;
+
+    expectedDisbursement: string;
+    percentExpectedDisbursement: string;
+}
+
 export interface BaseApiParams {
     user: string;
     session: string;
@@ -154,6 +202,7 @@ export class ApiTestUtils {
             gainLossNormal: "0",
             percentGainLossNormal: "0",
             widthdrawableNormal: NumberValidator.formatNumberWithCommas(Number(data.wdrawAvail)),
+
             totalAssetNormal: NumberValidator.formatNumberWithCommas(Number(data.totAsst)),
             cashNormal: NumberValidator.formatNumberWithCommas(Number(data.cash)),
             percentCash: this.formatPercentage((Number(data.cash) / Number(data.totAsst)) * 100),
@@ -192,6 +241,56 @@ export class ApiTestUtils {
             feeVSD: NumberValidator.formatNumberWithCommas(Number(data.depoFee)),
             percentFeeVSD: this.formatPercentage((Number(data.depoFee) / Number(data.debt)) * 100),
         };
+    }
+
+    static marginAccountData(data: AssetData): MarginAccountResult {
+        return {
+            navMargin: NumberValidator.formatNumberWithCommas(Number(data.realAsst)),
+            gainLossMargin: "0",
+            percentGainLossMargin: "0",
+            widthdrawableMargin: NumberValidator.formatNumberWithCommas(Number(data.wdrawAvail)),
+
+            totalAssetMargin: NumberValidator.formatNumberWithCommas(Number(data.totAsst)),
+            cashMargin: NumberValidator.formatNumberWithCommas(Number(data.cash)),
+            percentCash: this.formatPercentage((Number(data.cash) / Number(data.totAsst)) * 100),
+            balance: NumberValidator.formatNumberWithCommas(Number(data.balance)),
+            advanceAvail: NumberValidator.formatNumberWithCommas(Number(data.advanceAvail)),
+            maxAdvanceAvail: NumberValidator.formatNumberWithCommas(Number(data.receiveAmt)),
+            haveAdvanceAvail: NumberValidator.formatNumberWithCommas(Number(data.advanceLoan)),
+            dividendAndProfitBond: NumberValidator.formatNumberWithCommas(Number(data.cashDiv)),
+            totalBuyWaitMatch: NumberValidator.formatNumberWithCommas(Number(data.buyT0)),
+            buyWaitMatchByCash: NumberValidator.formatNumberWithCommas(Number(data.buyT0) - Number(data.exptDisbm)),
+            buyWaitMatchByLoan: NumberValidator.formatNumberWithCommas(Number(data.exptDisbm)),
+            cashBuyNotMatchT0: NumberValidator.formatNumberWithCommas(Number(data.tdtBuyAmtNotMatch)),
+            cashTichLuy: NumberValidator.formatNumberWithCommas(Number(data.ipCash)),
+            taxFeePSWaitT0: NumberValidator.formatNumberWithCommas(Number(data.drvtOdFee)),
+
+            stockMargin: NumberValidator.formatNumberWithCommas(Number(data.stockValue)),
+            percentStock: this.formatPercentage((Number(data.stockValue) / Number(data.totAsst)) * 100),
+            totalValueStock: NumberValidator.formatNumberWithCommas(Number(data.totalStock)),
+            availableStock: NumberValidator.formatNumberWithCommas(Number(data.tavlStockValue)),
+            waitTradingStock: NumberValidator.formatNumberWithCommas(Number(data.ptavlStockValue)),
+            retrictStock: NumberValidator.formatNumberWithCommas(Number(data.tartStockValue)),
+            restrictStockWaitTrading: NumberValidator.formatNumberWithCommas(Number(data.ptartStockValue)),
+            dividendStock: NumberValidator.formatNumberWithCommas(Number(data.righStockValue)),
+            stockBuyWaitReturn: NumberValidator.formatNumberWithCommas(Number(data.rcvStockValue)),
+            sellMatchT0: NumberValidator.formatNumberWithCommas(Number(data.sellT0)),
+
+
+            totalDebtMargin: NumberValidator.formatNumberWithCommas(Number(data.debt)),
+            totalMargin: NumberValidator.formatNumberWithCommas(Number(data.mgDebt)),
+            percentTotalMargin: this.formatPercentage((Number(data.mgDebt) / Number(data.debt)) * 100),
+            originMargin: NumberValidator.formatNumberWithCommas(Number(data.prinDebt)),
+            interestMargin: NumberValidator.formatNumberWithCommas(Number(data.intDebt)),
+
+            totalFeeTrading: NumberValidator.formatNumberWithCommas(Number(data.fee)),
+            percentTotalFeeTrading: this.formatPercentage((Number(data.fee) / Number(data.debt)) * 100),
+            feeSMS: NumberValidator.formatNumberWithCommas(Number(data.smsFee)),
+            feeVSD: NumberValidator.formatNumberWithCommas(Number(data.depoFee)),
+
+            expectedDisbursement: NumberValidator.formatNumberWithCommas(Number(data.exptDisbm)),
+            percentExpectedDisbursement: this.formatPercentage((Number(data.exptDisbm) / Number(data.debt)) * 100),
+        }
     }
 
     /**
