@@ -5,16 +5,35 @@ import { NumberValidator } from "./validationUtils";
 
 // Type definitions for better type safety
 export interface AssetData {
-    totAsst: number;
-    wdrawAvail: number;
-    realAsst: number;
-    cash: number;
-    stockValue: number;
-    cashDiv: number;
-    pineBndValue: number;
-    debt: number;
-    fee: number;
-    mgDebt: number;
+    totAsst: number | string;
+    wdrawAvail: number | string;
+    realAsst: number | string;
+    cash: number | string;
+    stockValue: number | string;
+    righStockValue: number | string;
+    cashDiv: number | string;
+    pineBndValue: number | string;
+    debt: number | string;
+    fee: number | string;
+    mgDebt: number | string;
+    exptDisbm: number | string;
+    balance: number | string;
+    advanceAvail: number | string;
+    receiveAmt: number | string;
+    advanceLoan: number | string;
+    buyT0: number | string;
+    tdtBuyAmtNotMatch: number | string;
+    drvtOdFee: number | string;
+    ipCash: number | string;
+    totalStock: number | string;
+    tavlStockValue: number | string;
+    ptavlStockValue: number | string;
+    tartStockValue: number | string;
+    ptartStockValue: number | string;
+    rcvStockValue: number | string;
+    sellT0: number | string;
+    smsFee: number | string;
+    depoFee: number | string;
 }
 
 export interface FormattedAssetData {
@@ -49,6 +68,50 @@ export interface PositionResult {
     percentGainLoss: string | number;
 }
 
+export interface NormalAccountResult {
+    navNormal: string;
+    gainLossNormal: string;
+    percentGainLossNormal: string;
+    widthdrawableNormal: string;
+    totalAssetNormal: string;
+    cashNormal: string;
+    percentCash: string;
+    balance: string;
+    advanceAvail: string;
+    maxAdvanceAvail: string;
+    haveAdvanceAvail: string;
+    dividendAndProfitBond: string;
+    totalBuyWaitMatch: string;
+    buyWaitMatchByCash: string;
+    buyWaitMatchByLoan: string;
+    cashBuyNotMatchT0: string;
+    cashTichLuy: string;
+    taxFeePSWaitT0: string;
+
+    stockNormal: string;
+    percentStock: string;
+    totalValueStock: string;
+    availableStock: string;
+    waitTradingStock: string;
+    retrictStock: string;
+    restrictStockWaitTrading: string;
+    dividendStock: string;
+    stockBuyWaitReturn: string;
+    sellMatchT0: string;
+    pineB: string;
+    pineBPercent: string;
+    originInvest: string;
+    traiTucDaNhan: string;
+    traiTucSeNhan: string;
+    tienNhanDaoHan: string;
+
+    debtNormal: string;
+    feeSMS: string;
+    percentFeeSMS: string;
+    feeVSD: string;
+    percentFeeVSD: string;
+}
+
 export interface BaseApiParams {
     user: string;
     session: string;
@@ -72,16 +135,62 @@ export class ApiTestUtils {
      */
     static formatAssetData(data: AssetData): FormattedAssetData {
         return {
-            totalAsset: NumberValidator.formatNumberWithCommas(data.totAsst),
-            widthdrawable: NumberValidator.formatNumberWithCommas(data.wdrawAvail),
-            nav: NumberValidator.formatNumberWithCommas(data.realAsst),
-            cash: NumberValidator.formatNumberWithCommas(data.cash),
-            stock: NumberValidator.formatNumberWithCommas(data.stockValue),
-            dividend: NumberValidator.formatNumberWithCommas(data.cashDiv),
-            PineB: NumberValidator.formatNumberWithCommas(data.pineBndValue),
-            debt: NumberValidator.formatNumberWithCommas(data.debt),
-            fee: NumberValidator.formatNumberWithCommas(data.fee),
-            marginDebt: NumberValidator.formatNumberWithCommas(data.mgDebt),
+            totalAsset: NumberValidator.formatNumberWithCommas(Number(data.totAsst)),
+            widthdrawable: NumberValidator.formatNumberWithCommas(Number(data.wdrawAvail)),
+            nav: NumberValidator.formatNumberWithCommas(Number(data.realAsst)),
+            cash: NumberValidator.formatNumberWithCommas(Number(data.cash) - Number(data.cashDiv)),
+            stock: NumberValidator.formatNumberWithCommas(Number(data.stockValue) - Number(data.righStockValue)),
+            dividend: NumberValidator.formatNumberWithCommas(Number(data.cashDiv) + Number(data.righStockValue)),
+            PineB: NumberValidator.formatNumberWithCommas(Number(data.pineBndValue)),
+            debt: NumberValidator.formatNumberWithCommas(Number(data.debt)),
+            fee: NumberValidator.formatNumberWithCommas(Number(data.fee)),
+            marginDebt: NumberValidator.formatNumberWithCommas(Number(data.mgDebt) + Number(data.exptDisbm)),
+        };
+    }
+
+    static normalAccountData(data: AssetData): NormalAccountResult {
+        return {
+            navNormal: NumberValidator.formatNumberWithCommas(Number(data.realAsst)),
+            gainLossNormal: "0",
+            percentGainLossNormal: "0",
+            widthdrawableNormal: NumberValidator.formatNumberWithCommas(Number(data.wdrawAvail)),
+            totalAssetNormal: NumberValidator.formatNumberWithCommas(Number(data.totAsst)),
+            cashNormal: NumberValidator.formatNumberWithCommas(Number(data.cash)),
+            percentCash: this.formatPercentage((Number(data.cash) / Number(data.totAsst)) * 100),
+            balance: NumberValidator.formatNumberWithCommas(Number(data.balance)),
+            advanceAvail: NumberValidator.formatNumberWithCommas(Number(data.advanceAvail)),
+            maxAdvanceAvail: NumberValidator.formatNumberWithCommas(Number(data.receiveAmt)),
+            haveAdvanceAvail: NumberValidator.formatNumberWithCommas(Number(data.advanceLoan)),
+            dividendAndProfitBond: NumberValidator.formatNumberWithCommas(Number(data.cashDiv)),
+            totalBuyWaitMatch: NumberValidator.formatNumberWithCommas(Number(data.buyT0)),
+            buyWaitMatchByCash: NumberValidator.formatNumberWithCommas(Number(data.buyT0) - Number(data.exptDisbm)),
+            buyWaitMatchByLoan: NumberValidator.formatNumberWithCommas(Number(data.exptDisbm)),
+            cashBuyNotMatchT0: NumberValidator.formatNumberWithCommas(Number(data.tdtBuyAmtNotMatch)),
+            cashTichLuy: NumberValidator.formatNumberWithCommas(Number(data.ipCash)),
+            taxFeePSWaitT0: NumberValidator.formatNumberWithCommas(Number(data.drvtOdFee)),
+
+            stockNormal: NumberValidator.formatNumberWithCommas(Number(data.stockValue)),
+            percentStock: this.formatPercentage((Number(data.stockValue) / Number(data.totAsst)) * 100),
+            totalValueStock: NumberValidator.formatNumberWithCommas(Number(data.totalStock)),
+            availableStock: NumberValidator.formatNumberWithCommas(Number(data.tavlStockValue)),
+            waitTradingStock: NumberValidator.formatNumberWithCommas(Number(data.ptavlStockValue)),
+            retrictStock: NumberValidator.formatNumberWithCommas(Number(data.tartStockValue)),
+            restrictStockWaitTrading: NumberValidator.formatNumberWithCommas(Number(data.ptartStockValue)),
+            dividendStock: NumberValidator.formatNumberWithCommas(Number(data.righStockValue)),
+            stockBuyWaitReturn: NumberValidator.formatNumberWithCommas(Number(data.rcvStockValue)),
+            sellMatchT0: NumberValidator.formatNumberWithCommas(Number(data.sellT0)),
+            pineB: NumberValidator.formatNumberWithCommas(Number(data.pineBndValue)),
+            pineBPercent: this.formatPercentage((Number(data.pineBndValue) / Number(data.totAsst)) * 100),
+            originInvest: "0",
+            traiTucDaNhan: "0",
+            traiTucSeNhan: "0",
+            tienNhanDaoHan: "0",
+
+            debtNormal: NumberValidator.formatNumberWithCommas(Number(data.debt)),
+            feeSMS: NumberValidator.formatNumberWithCommas(Number(data.smsFee)),
+            percentFeeSMS: this.formatPercentage((Number(data.smsFee) / Number(data.debt)) * 100),
+            feeVSD: NumberValidator.formatNumberWithCommas(Number(data.depoFee)),
+            percentFeeVSD: this.formatPercentage((Number(data.depoFee) / Number(data.debt)) * 100),
         };
     }
 
@@ -90,12 +199,12 @@ export class ApiTestUtils {
      */
     static calculatePercentages(data: AssetData): PercentageData {
         return {
-            percentCash: this.formatPercentage((data.cash / data.totAsst) * 100),
-            percentStock: this.formatPercentage((data.stockValue / data.totAsst) * 100),
-            percentDividend: this.formatPercentage((data.cashDiv / data.totAsst) * 100),
-            percentPineB: this.formatPercentage((data.pineBndValue / data.totAsst) * 100),
-            percentFee: this.formatPercentage((data.fee / data.debt) * 100),
-            percentMarginDebt: this.formatPercentage((data.mgDebt / data.debt) * 100),
+            percentCash: this.formatPercentage((Number(data.cash) / Number(data.totAsst)) * 100),
+            percentStock: this.formatPercentage((Number(data.stockValue) / Number(data.totAsst)) * 100),
+            percentDividend: this.formatPercentage((Number(data.cashDiv) / Number(data.totAsst)) * 100),
+            percentPineB: this.formatPercentage((Number(data.pineBndValue) / Number(data.totAsst)) * 100),
+            percentFee: this.formatPercentage((Number(data.fee) / Number(data.debt)) * 100),
+            percentMarginDebt: this.formatPercentage((Number(data.mgDebt) / Number(data.debt)) * 100),
         };
     }
 
@@ -115,7 +224,7 @@ export class ApiTestUtils {
         });
 
         return {
-            account: NumberValidator.formatNumberWithCommas(response.data.data.realAsst),
+            account: NumberValidator.formatNumberWithCommas(Number(response.data.data.realAsst)),
             percent: this.formatPercentage((response.data.data.realAsst / baseRealAsst) * 100),
         };
     }
@@ -140,7 +249,7 @@ export class ApiTestUtils {
             const totalPosition = response.data.data.find((position: any) => position.symbol === "TOTAL");
             if (totalPosition) {
                 return {
-                    gainLoss: NumberValidator.formatNumberWithCommas(totalPosition.gainLoss),
+                    gainLoss: NumberValidator.formatNumberWithCommas(Number(totalPosition.gainLoss)),
                     percentGainLoss: this.formatPercentage(Number(totalPosition.gainLossPc)),
                 };
             }
@@ -207,6 +316,7 @@ export class ApiTestUtils {
                 percentGainLossFolio: result.percentGainLossFolio,
             },
             card2Chart: {
+                nav: result.nav,
                 normalAccount: result.normalAccount,
                 percentNormalAccount: result.percentNormalAccount,
                 marginAccount: result.marginAccount,

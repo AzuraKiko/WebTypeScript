@@ -120,5 +120,33 @@ test.describe("AssetApi Tests", () => {
             const cardData = ApiTestUtils.buildCardData(result);
             ApiTestUtils.logCardData(cardData);
         });
+
+        test("2. get info Normal account", async () => {
+            const baseParams = {
+                user: TEST_CONFIG.TEST_USER,
+                session: loginResponse.session,
+                acntNo: loginResponse.acntNo,
+            };
+
+            const response = await assetApi.getTotalAssetAll({
+                ...baseParams,
+                subAcntNo: loginResponse.subAcntNormal,
+                rqId: uuidv4(),
+            });
+
+            expect(response).toBeDefined();
+            expect(response.status).toBe(200);
+
+            const data = response.data.data;
+            const result: any = ApiTestUtils.normalAccountData(data);
+            const positionResults = await ApiTestUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntNormal);
+
+            result.gainLossNormal = positionResults.gainLoss;
+            result.percentGainLossNormal = positionResults.percentGainLoss;
+
+            console.log("--------------------------------");
+            console.log(result);
+
+        });
     });
 });
