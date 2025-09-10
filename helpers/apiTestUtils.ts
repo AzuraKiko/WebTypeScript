@@ -36,6 +36,7 @@ export interface AssetData {
     depoFee: number | string;
     prinDebt?: number | string;
     intDebt?: number | string;
+    marginRatio?: number | string;
 }
 
 export interface FormattedAssetData {
@@ -68,6 +69,16 @@ export interface AccountResult {
 export interface PositionResult {
     gainLoss: string | number;
     percentGainLoss: string | number;
+}
+
+export interface HoldStockResult {
+    symbol: string;
+    marketValue: string;
+    capitalValue: string;
+    qty: string;
+    capitalPrice: string;
+    gainLoss: string;
+    percentGainLoss: string;
 }
 
 export interface NormalAccountResult {
@@ -120,6 +131,9 @@ export interface MarginAccountResult {
     gainLossMargin: string;
     percentGainLossMargin: string;
     widthdrawableMargin: string;
+    rtt: string;
+
+
     cashMargin: string;
     percentCash: string;
     balance: string;
@@ -175,7 +189,7 @@ export class ApiTestUtils {
      * Format percentage with 2 decimal places
      */
     static formatPercentage(value: number): string {
-        return value.toFixed(2);
+        return (Math.round((value + Number.EPSILON) * 100) / 100).toFixed(2);
     }
 
     /**
@@ -249,6 +263,7 @@ export class ApiTestUtils {
             gainLossMargin: "0",
             percentGainLossMargin: "0",
             widthdrawableMargin: NumberValidator.formatNumberWithCommas(Number(data.wdrawAvail)),
+            rtt: this.formatPercentage(Number(data.marginRatio)),
 
             totalAssetMargin: NumberValidator.formatNumberWithCommas(Number(data.totAsst)),
             cashMargin: NumberValidator.formatNumberWithCommas(Number(data.cash)),
@@ -298,7 +313,7 @@ export class ApiTestUtils {
      */
     static calculatePercentages(data: AssetData): PercentageData {
         return {
-            percentCash: this.formatPercentage((Number(data.cash) / Number(data.totAsst)) * 100),
+            percentCash: this.formatPercentage(((Number(data.cash) - Number(data.cashDiv)) / Number(data.totAsst)) * 100),
             percentStock: this.formatPercentage((Number(data.stockValue) / Number(data.totAsst)) * 100),
             percentDividend: this.formatPercentage((Number(data.cashDiv) / Number(data.totAsst)) * 100),
             percentPineB: this.formatPercentage((Number(data.pineBndValue) / Number(data.totAsst)) * 100),
@@ -356,6 +371,36 @@ export class ApiTestUtils {
 
         console.log(`No total position found for subAccount: ${subAcntNo}`);
         return { gainLoss: 0, percentGainLoss: 0 };
+    }
+
+
+    static async getHoldStockData(
+        positionsApi: PositionsApi,
+        params: BaseApiParams,
+        subAcntNo: string
+    ): Promise<HoldStockResult[]> {
+        const response = await positionsApi.getPositionsAll({
+            ...params,
+            subAcntNo,
+            rqId: uuidv4(),
+            getBondQty: "Y",
+            AorN: "S",
+        });
+
+        if (response.data.data.length > 0) {
+            return response.data.data.map((position: any) => ({
+                symbol: position.symbol,
+                marketValue: NumberValidator.formatNumberWithCommas(Number(position.totCurAmt)),
+                capitalValue: NumberValidator.formatNumberWithCommas(Number(position.totBuyAmt)),
+                qty: NumberValidator.formatNumberWithCommas(Number(position.balQty)),
+                capitalPrice: this.formatPercentage(Number(position.avgPrice)),
+                gainLoss: NumberValidator.formatNumberWithCommas(Number(position.gainLoss)),
+                percentGainLoss: this.formatPercentage(Number(position.gainLossPc)),
+            }));
+        }
+
+        console.log(`No hold stock data found for subAccount: ${subAcntNo}`);
+        return [];
     }
 
     /**

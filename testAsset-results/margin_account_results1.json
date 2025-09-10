@@ -1,0 +1,175 @@
+{
+  "timestamp": "2025-09-10T07:37:20.169Z",
+  "data": {
+    "navMargin": "2,502,931,876",
+    "gainLossMargin": "443,110,990",
+    "percentGainLossMargin": "24.39",
+    "widthdrawableMargin": "241,338,746",
+    "rtt": "100.00",
+    "totalAssetMargin": "2,503,024,974",
+    "cashMargin": "242,981,414",
+    "percentCash": "9.71",
+    "balance": "241,671,124",
+    "advanceAvail": "0",
+    "maxAdvanceAvail": "0",
+    "haveAdvanceAvail": "0",
+    "dividendAndProfitBond": "3,914,190",
+    "totalBuyWaitMatch": "2,603,900",
+    "buyWaitMatchByCash": "2,603,900",
+    "buyWaitMatchByLoan": "0",
+    "cashBuyNotMatchT0": "0",
+    "cashTichLuy": "0",
+    "taxFeePSWaitT0": "0",
+    "stockMargin": "2,260,043,560",
+    "percentStock": "90.29",
+    "totalValueStock": "2,310,043,560",
+    "availableStock": "2,310,043,560",
+    "waitTradingStock": "0",
+    "retrictStock": "0",
+    "restrictStockWaitTrading": "0",
+    "dividendStock": "0",
+    "stockBuyWaitReturn": "0",
+    "sellMatchT0": "0",
+
+    
+    "totalDebtMargin": "93,098",
+    "totalMargin": "1",
+    "percentTotalMargin": "0.00",
+    "originMargin": "0",
+    "interestMargin": "1",
+    "totalFeeTrading": "93,097",
+    "percentTotalFeeTrading": "100.00",
+    "feeSMS": "40,480",
+    "feeVSD": "52,617",
+    "expectedDisbursement": "0",
+    "percentExpectedDisbursement": "0.00",
+    "holdStock": [
+      {
+        "symbol": "ACB",
+        "marketValue": "229,270,000",
+        "capitalValue": "262,993,900",
+        "qty": "10,100",
+        "capitalPrice": "26.04",
+        "gainLoss": "-33,723,900",
+        "percentGainLoss": "-12.82"
+      },
+      {
+        "symbol": "CEO",
+        "marketValue": "1,816,000",
+        "capitalValue": "1,749,777",
+        "qty": "80",
+        "capitalPrice": "21.87",
+        "gainLoss": "66,223",
+        "percentGainLoss": "3.78"
+      },
+      {
+        "symbol": "DIG",
+        "marketValue": "108,409,600",
+        "capitalValue": "97,164,258",
+        "qty": "5,212",
+        "capitalPrice": "18.64",
+        "gainLoss": "11,245,342",
+        "percentGainLoss": "11.57"
+      },
+      {
+        "symbol": "HCM",
+        "marketValue": "250,182,400",
+        "capitalValue": "262,363,186",
+        "qty": "10,088",
+        "capitalPrice": "26.01",
+        "gainLoss": "-12,180,786",
+        "percentGainLoss": "-4.64"
+      },
+      {
+        "symbol": "HHV",
+        "marketValue": "117,450",
+        "capitalValue": "137,323",
+        "qty": "9",
+        "capitalPrice": "15.26",
+        "gainLoss": "-19,873",
+        "percentGainLoss": "-14.47"
+      },
+      {
+        "symbol": "HPG",
+        "marketValue": "907,800",
+        "capitalValue": "1,152,461",
+        "qty": "34",
+        "capitalPrice": "33.90",
+        "gainLoss": "-244,661",
+        "percentGainLoss": "-21.23"
+      },
+      {
+        "symbol": "ITD",
+        "marketValue": "1,177,250",
+        "capitalValue": "848,940",
+        "qty": "85",
+        "capitalPrice": "9.99",
+        "gainLoss": "328,310",
+        "percentGainLoss": "38.67"
+      },
+      {
+        "symbol": "LDG",
+        "marketValue": "137,760",
+        "capitalValue": "169,171",
+        "qty": "21",
+        "capitalPrice": "8.06",
+        "gainLoss": "-31,411",
+        "percentGainLoss": "-18.57"
+      },
+      {
+        "symbol": "MBB",
+        "marketValue": "5,918,400",
+        "capitalValue": "2,866,053",
+        "qty": "216",
+        "capitalPrice": "13.27",
+        "gainLoss": "3,052,347",
+        "percentGainLoss": "106.50"
+      },
+      {
+        "symbol": "MBS",
+        "marketValue": "4,439,400",
+        "capitalValue": "2,400,221",
+        "qty": "147",
+        "capitalPrice": "16.33",
+        "gainLoss": "2,039,179",
+        "percentGainLoss": "84.96"
+      },
+      {
+        "symbol": "SSI",
+        "marketValue": "174,667,500",
+        "capitalValue": "136,601,031",
+        "qty": "5,545",
+        "capitalPrice": "24.63",
+        "gainLoss": "38,066,469",
+        "percentGainLoss": "27.87"
+      },
+      {
+        "symbol": "STB",
+        "marketValue": "1,480,900,000",
+        "capitalValue": "1,046,685,709",
+        "qty": "30,618",
+        "capitalPrice": "35.34",
+        "gainLoss": "434,214,291",
+        "percentGainLoss": "41.48"
+      },
+      {
+        "symbol": "TNG",
+        "marketValue": "2,100,000",
+        "capitalValue": "1,800,540",
+        "qty": "100",
+        "capitalPrice": "18.01",
+        "gainLoss": "299,460",
+        "percentGainLoss": "16.63"
+      },
+      {
+        "symbol": "TOTAL",
+        "marketValue": "2,260,043,560",
+        "capitalValue": "1,816,932,570",
+        "qty": "NaN",
+        "capitalPrice": "NaN",
+        "gainLoss": "443,110,990",
+        "percentGainLoss": "24.39"
+      }
+    ]
+  }
+}

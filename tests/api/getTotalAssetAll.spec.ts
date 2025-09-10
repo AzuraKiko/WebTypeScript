@@ -1,10 +1,33 @@
 import { test, expect } from "@playwright/test";
 import { v4 as uuidv4 } from "uuid";
+import * as fs from "fs";
+import * as path from "path";
 import AssetApi from "../../page/api/AssetApi";
 import PositionsApi from "../../page/api/Positions";
 import LoginApi from "../../page/api/LoginApi";
 import { TEST_CONFIG } from "../utils/testConfig";
 import { ApiTestUtils } from "../../helpers/apiTestUtils";
+
+// Helper function to save data to JSON file
+function saveToJsonFile(data: any, filename: string) {
+    try {
+        const resultsDir = path.join(__dirname, "../../testAsset-results");
+        if (!fs.existsSync(resultsDir)) {
+            fs.mkdirSync(resultsDir, { recursive: true });
+        }
+
+        const filePath = path.join(resultsDir, filename);
+        const jsonData = {
+            timestamp: new Date().toISOString(),
+            data: data
+        };
+
+        fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2), "utf-8");
+        console.log(`Results saved to: ${filePath}`);
+    } catch (error) {
+        console.error("Error saving to JSON file:", error);
+    }
+}
 
 test.describe("AssetApi Tests", () => {
     test.describe.configure({ mode: "serial" });
@@ -119,6 +142,9 @@ test.describe("AssetApi Tests", () => {
             // Build and log card data
             const cardData = ApiTestUtils.buildCardData(result);
             ApiTestUtils.logCardData(cardData);
+
+            // Save results to JSON file
+            saveToJsonFile(cardData, "total_asset_all_results1.json");
         });
 
         test("2. get info Normal account", async () => {
@@ -147,6 +173,12 @@ test.describe("AssetApi Tests", () => {
             console.log("--------------------------------");
             console.log(result);
 
+            const holdStockResults = await ApiTestUtils.getHoldStockData(positionsApi, baseParams, loginResponse.subAcntNormal);
+            result.holdStock = holdStockResults;
+
+            // Save results to JSON file
+            saveToJsonFile(result, "normal_account_results1.json");
+
         });
 
         test("3. get info Margin account", async () => {
@@ -174,6 +206,12 @@ test.describe("AssetApi Tests", () => {
 
             console.log("--------------------------------");
             console.log(result);
+
+            const holdStockResults = await ApiTestUtils.getHoldStockData(positionsApi, baseParams, loginResponse.subAcntMargin);
+            result.holdStock = holdStockResults;
+
+            // Save results to JSON file
+            saveToJsonFile(result, "margin_account_results1.json");
 
         });
     });

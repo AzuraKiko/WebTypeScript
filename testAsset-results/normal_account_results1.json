@@ -1,0 +1,82 @@
+{
+  "timestamp": "2025-09-10T07:37:20.063Z",
+  "data": {
+    "navNormal": "12,198,175,511",
+    "gainLossNormal": "607,156",
+    "percentGainLossNormal": "3.56",
+    "widthdrawableNormal": "12,176,527,379",
+    "totalAssetNormal": "12,198,187,153",
+    "cashNormal": "12,179,479,903",
+    "percentCash": "99.85",
+    "balance": "12,177,270,271",
+    "advanceAvail": "2,209,632",
+    "maxAdvanceAvail": "3,210,790",
+    "haveAdvanceAvail": "1,000,550",
+    "dividendAndProfitBond": "0",
+    "totalBuyWaitMatch": "0",
+    "buyWaitMatchByCash": "0",
+    "buyWaitMatchByLoan": "0",
+    "cashBuyNotMatchT0": "2,940,882",
+    "cashTichLuy": "0",
+    "taxFeePSWaitT0": "0",
+    "stockNormal": "17,650,000",
+    "percentStock": "0.14",
+    "totalValueStock": "26,230,000",
+    "availableStock": "26,230,000",
+    "waitTradingStock": "0",
+    "retrictStock": "0",
+    "restrictStockWaitTrading": "0",
+    "dividendStock": "0",
+    "stockBuyWaitReturn": "4,540,000",
+    "sellMatchT0": "0",
+    "pineB": "1,057,250",
+    "pineBPercent": "0.01",
+    "originInvest": "0",
+    "traiTucDaNhan": "0",
+    "traiTucSeNhan": "0",
+    "tienNhanDaoHan": "0",
+    "debtNormal": "11,642",
+    "feeSMS": "11,440",
+    "percentFeeSMS": "98.26",
+    "feeVSD": "202",
+    "percentFeeVSD": "1.74",
+    "holdStock": [
+      {
+        "symbol": "ACB",
+        "marketValue": "2,270,000",
+        "capitalValue": "2,240,672",
+        "qty": "300",
+        "capitalPrice": "22.41",
+        "gainLoss": "29,328",
+        "percentGainLoss": "1.31"
+      },
+      {
+        "symbol": "BID",
+        "marketValue": "15,380,000",
+        "capitalValue": "14,802,172",
+        "qty": "400",
+        "capitalPrice": "37.01",
+        "gainLoss": "577,828",
+        "percentGainLoss": "3.90"
+      },
+      {
+        "symbol": "VPB",
+        "marketValue": "0",
+        "capitalValue": "0",
+        "qty": "400",
+        "capitalPrice": "0.00",
+        "gainLoss": "0",
+        "percentGainLoss": "0.00"
+      },
+      {
+        "symbol": "TOTAL",
+        "marketValue": "17,650,000",
+        "capitalValue": "17,042,844",
+        "qty": "NaN",
+        "capitalPrice": "NaN",
+        "gainLoss": "607,156",
+        "percentGainLoss": "3.56"
+      }
+    ]
+  }
+}
