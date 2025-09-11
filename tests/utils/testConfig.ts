@@ -3,6 +3,7 @@ import { expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
 dotenv.config({ path: '.env' });
+import { UAT_CONFIGS, PROD_CONFIGS } from '../../helpers/env';
 
 /**
  * UAT Configuration Interface
@@ -12,7 +13,6 @@ export interface ENVConfig {
     user: string;
     pass: string;
     pass_encrypt: string;
-    name?: string; // Optional name for the configuration
 }
 
 /**
@@ -20,8 +20,8 @@ export interface ENVConfig {
  * Centralizes environment variable handling across all tests
  */
 export const getEnvironment = () => {
-    let env = process.env.NODE_ENV?.toUpperCase() || 'UAT';
-    if (env === 'PRODUCTION') env = 'UAT';
+    let env = process.env.NODE_ENV?.toUpperCase() || 'PROD';
+    if (env === 'PRODUCTION') env = 'PROD';
     return env;
 };
 
@@ -31,41 +31,15 @@ export const ENV = getEnvironment();
  * Supports both single config and array of configs
  */
 const parseENVConfigs = (): ENVConfig[] => {
-    const envConfigs: ENVConfig[] = [];
-
-    // Check if ENV_CONFIGS is set (JSON array)
-    const envConfigsJson = process.env[`${ENV}_CONFIGS`];
-    if (envConfigsJson) {
-        try {
-            const parsed = JSON.parse(envConfigsJson);
-            if (Array.isArray(parsed)) {
-                return parsed.map((config, index) => ({
-                    url: config.url,
-                    user: config.user,
-                    pass: config.pass,
-                    pass_encrypt: config.pass_encrypt,
-                    name: config.name || `${ENV}_config_${index + 1}`
-                }));
-            }
-        } catch (error) {
-            console.warn('Failed to parse UAT_CONFIGS JSON:', error);
-        }
-    }
-
-    // Fallback to individual environment variables
-    const url = process.env[`${ENV}_WEB_LOGIN_URL`];
-    const user = process.env[`${ENV}_TEST_USER`];
-    const pass = process.env[`${ENV}_TEST_PASS`];
-    const passEncrypt = process.env[`${ENV}_TEST_PASS_ENCRYPT`];
-
-    if (url && user && pass && passEncrypt) {
-        return [{
-            url,
-            user,
-            pass,
-            pass_encrypt: passEncrypt,
-            name: 'default_uat'
-        }];
+    // Check if ENV_CONFIGS is set (already parsed objects)
+    const envConfigsJson: any = ENV === 'UAT' ? UAT_CONFIGS : PROD_CONFIGS;
+    if (envConfigsJson && Array.isArray(envConfigsJson)) {
+        return envConfigsJson.map((config) => ({
+            url: config.url,
+            user: config.user,
+            pass: config.pass,
+            pass_encrypt: config.pass_encrypt,
+        }));
     }
 
     return [];
@@ -88,7 +62,7 @@ export const saveUserResults = (user: string, results: any, testType?: string): 
     }
 
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `${user}_${testType}_results_${timestamp}.json`;
+    const filename = `${user}_${testType}_${timestamp}.json`;
     const filepath = path.join(resultsDir, filename);
 
     try {
@@ -100,15 +74,14 @@ export const saveUserResults = (user: string, results: any, testType?: string): 
 };
 
 /**
- * Save UAT configuration results
+ * Save configuration results
  */
 export const saveENVResults = (config: ENVConfig, results: any, testType?: string): void => {
-    const user = config.name || config.user;
+    const user = config.user;
     saveUserResults(user, {
         config: {
             url: config.url,
             user: config.user,
-            name: config.name
         },
         results,
         timestamp: new Date().toISOString(),
