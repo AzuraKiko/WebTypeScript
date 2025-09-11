@@ -1,53 +1,53 @@
 {
-  "timestamp": "2025-09-10T07:36:44.381Z",
+  "timestamp": "2025-09-11T07:05:18.622Z",
   "data": {
     "card1": {
-      "nav": "1,141,478,055",
-      "gainLoss": "12,477,011",
-      "percentGainLoss": "17.92",
-      "widthdrawable": "981,411,799"
+      "nav": "25,201,439,279",
+      "gainLoss": "247,204,719",
+      "percentGainLoss": "8.37",
+      "widthdrawable": "22,840,291,049"
     },
     "card2Data": {
-      "normalAccount": "891,890,919",
-      "gainLossNormal": "2,975,411",
-      "percentGainLossNormal": "19.45",
-      "marginAccount": "0",
-      "gainLossMargin": 0,
-      "percentGainLossMargin": 0,
-      "derivativeAccount": "2,000,000",
+      "normalAccount": "12,200,095,166",
+      "gainLossNormal": "1,526,274",
+      "percentGainLossNormal": "7.64",
+      "marginAccount": "2,305,498,709",
+      "gainLossMargin": "245,678,445",
+      "percentGainLossMargin": "8.38",
+      "derivativeAccount": "10,657,393,654",
       "gainLossDerivative": 0,
       "percentGainLossDerivative": 0,
-      "folioAccount": "247,587,136",
-      "gainLossFolio": "9,501,600",
-      "percentGainLossFolio": "17.50"
+      "folioAccount": "38,451,750",
+      "gainLossFolio": 0,
+      "percentGainLossFolio": 0
     },
     "card2Chart": {
-      "nav": "1,141,478,055",
-      "normalAccount": "891,890,919",
-      "percentNormalAccount": "78.13",
-      "marginAccount": "0",
-      "percentMarginAccount": "0.00",
-      "derivativeAccount": "2,000,000",
-      "percentDerivativeAccount": "0.18",
-      "folioAccount": "247,587,136",
-      "percentFolioAccount": "21.69"
+      "nav": "25,201,439,279",
+      "normalAccount": "12,200,095,166",
+      "percentNormalAccount": "48.41",
+      "marginAccount": "2,305,498,709",
+      "percentMarginAccount": "9.15",
+      "derivativeAccount": "10,657,393,654",
+      "percentDerivativeAccount": "42.29",
+      "folioAccount": "38,451,750",
+      "percentFolioAccount": "0.15"
     },
     "card3Asset": {
-      "totalAsset": "1,141,481,931",
-      "cash": "985,816,395",
-      "percentCash": "86.36",
-      "stock": "129,285,000",
-      "percentStock": "11.33",
-      "dividend": "0",
-      "percentDividend": "0.00",
-      "PineB": "26,380,536",
-      "percentPineB": "2.31"
+      "totalAsset": "26,077,961,972",
+      "cash": "22,842,407,672",
+      "percentCash": "87.59",
+      "stock": "3,199,605,560",
+      "percentStock": "12.27",
+      "dividend": "3,914,190",
+      "percentDividend": "0.02",
+      "PineB": "1,057,250",
+      "percentPineB": "0.00"
     },
     "card3Debt": {
-      "debt": "3,876",
-      "fee": "3,876",
-      "percentFee": "100.00",
-      "marginDebt": "0",
+      "debt": "876,622,693",
+      "fee": "205,371",
+      "percentFee": "0.02",
+      "marginDebt": "876,417,322",
       "percentMarginDebt": "0.00"
     }
   }

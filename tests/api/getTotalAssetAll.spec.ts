@@ -144,7 +144,7 @@ test.describe("AssetApi Tests", () => {
             ApiTestUtils.logCardData(cardData);
 
             // Save results to JSON file
-            saveToJsonFile(cardData, "total_asset_all_results1.json");
+            saveToJsonFile(cardData, "total_asset_all_results.json");
         });
 
         test("2. get info Normal account", async () => {
@@ -177,7 +177,7 @@ test.describe("AssetApi Tests", () => {
             result.holdStock = holdStockResults;
 
             // Save results to JSON file
-            saveToJsonFile(result, "normal_account_results1.json");
+            saveToJsonFile(result, "normal_account_results.json");
 
         });
 
@@ -211,7 +211,7 @@ test.describe("AssetApi Tests", () => {
             result.holdStock = holdStockResults;
 
             // Save results to JSON file
-            saveToJsonFile(result, "margin_account_results1.json");
+            saveToJsonFile(result, "margin_account_results.json");
 
         });
     });
