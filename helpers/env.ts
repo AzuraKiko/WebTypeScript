@@ -27,10 +27,10 @@ export const PROD_CONFIGS: any = [
         "pass": "Thao@12345",
         "pass_encrypt": "VOIH8LO/9il90QPw1OZoLU0ccjZPq5buv9Yt60xxLfw="
     },
-    {
-        "url": "https://trade.pinetree.vn",
-        "user": "thunvt",
-        "pass": "Thethu#4",
-        "pass_encrypt": "2s4rh+KXQ5l/9aPI5UFzE3vZsa/CB0NkMIDjuH6yAAQ="
-    }
+    //     {
+    //         "url": "https://trade.pinetree.vn",
+    //         "user": "thunvt",
+    //         "pass": "Thethu#4",
+    //         "pass_encrypt": "2s4rh+KXQ5l/9aPI5UFzE3vZsa/CB0NkMIDjuH6yAAQ="
+    //     }
 ]

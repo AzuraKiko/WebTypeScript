@@ -76,6 +76,40 @@ async function processAssetData(
         console.log("No folio account");
     }
 
+    // Calculate total account sum based on available sub-accounts
+    const calculateTotalAccountValue = (result: any, loginResponse: any): number => {
+        const baseAccounts = [
+            ApiAssetUtils.safeNumber(result.normalAccount),
+            ApiAssetUtils.safeNumber(result.marginAccount)
+        ];
+
+        const optionalAccounts = [];
+        if (loginResponse.subAcntDerivative) {
+            optionalAccounts.push(ApiAssetUtils.safeNumber(result.derivativeAccount));
+        }
+        if (loginResponse.subAcntFolio) {
+            optionalAccounts.push(ApiAssetUtils.safeNumber(result.folioAccount));
+        }
+
+        return baseAccounts.concat(optionalAccounts).reduce((sum, value) => sum + value, 0);
+    };
+
+    const totalAccountValue = calculateTotalAccountValue(data, loginResponse);
+    const expectedNAV = ApiAssetUtils.safeNumber(data.nav);
+    expect(totalAccountValue).toEqual(expectedNAV);
+
+    const sumAsset = ApiAssetUtils.safeNumber(data.cash) - ApiAssetUtils.safeNumber(data.cashDiv) +
+        (ApiAssetUtils.safeNumber(data.stockValue) - ApiAssetUtils.safeNumber(data.righStockValue)) +
+        (ApiAssetUtils.safeNumber(data.cashDiv) + ApiAssetUtils.safeNumber(data.righStockValue)) +
+        ApiAssetUtils.safeNumber(data.pineBndValue);
+    const expectedTotalAsset = ApiAssetUtils.safeNumber(data.totAsst);
+    expect(sumAsset).toEqual(expectedTotalAsset);
+
+    const sumDebt = ApiAssetUtils.safeNumber(data.fee) +
+        (ApiAssetUtils.safeNumber(data.mgDebt) + ApiAssetUtils.safeNumber(data.exptDisbm));
+    const expectedTotalDebt = ApiAssetUtils.safeNumber(data.debt);
+    expect(sumDebt).toEqual(expectedTotalDebt);
+
     // Assign position results
     result.gainLoss = positionResults[0].gainLoss;
     result.percentGainLoss = positionResults[0].percentGainLoss;
@@ -150,6 +184,38 @@ async function runAssetTestsForUser(userConfig: ENVConfig) {
         const normalData = normalResponse.data.data;
         const normalResult: any = ApiAssetUtils.normalAccountData(normalData);
         const normalPositionResults = await ApiAssetUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntNormal);
+
+        // Fix: Use raw numeric values from API response instead of formatted strings
+        const sumNormalAsset = (ApiAssetUtils.safeNumber(normalData.cash) - ApiAssetUtils.safeNumber(normalData.cashDiv)) +
+            (ApiAssetUtils.safeNumber(normalData.stockValue) - ApiAssetUtils.safeNumber(normalData.righStockValue)) +
+            ApiAssetUtils.safeNumber(normalData.pineBndValue);
+        const expectedTotalNormalAsset = ApiAssetUtils.safeNumber(normalData.totAsst);
+        expect(sumNormalAsset).toEqual(expectedTotalNormalAsset);
+
+        const sumCash = ApiAssetUtils.safeNumber(normalData.cash) +
+            ApiAssetUtils.safeNumber(normalData.advanceAvail) +
+            ApiAssetUtils.safeNumber(normalData.cashDiv) -
+            ApiAssetUtils.safeNumber(normalData.buyT0) +
+            ApiAssetUtils.safeNumber(normalData.ipCash) -
+            ApiAssetUtils.safeNumber(normalData.drvtOdFee);
+        const expectedTotalCash = ApiAssetUtils.safeNumber(normalData.cash) - ApiAssetUtils.safeNumber(normalData.cashDiv);
+        expect(sumCash).toEqual(expectedTotalCash);
+
+        const sumStock = ApiAssetUtils.safeNumber(normalData.tavlStockValue) +
+            ApiAssetUtils.safeNumber(normalData.ptavlStockValue) +
+            ApiAssetUtils.safeNumber(normalData.tartStockValue) +
+            ApiAssetUtils.safeNumber(normalData.ptartStockValue) +
+            ApiAssetUtils.safeNumber(normalData.righStockValue) +
+            ApiAssetUtils.safeNumber(normalData.rcvStockValue);
+        const expectedTotalStock = ApiAssetUtils.safeNumber(normalData.stockValue) - ApiAssetUtils.safeNumber(normalData.righStockValue);
+        expect(sumStock).toEqual(expectedTotalStock);
+
+        const expectedTotalPineB = ApiAssetUtils.safeNumber(normalData.pineBndValue);
+        expect(expectedTotalPineB).toBeGreaterThanOrEqual(0); // Basic validation
+
+        const sumDebt = ApiAssetUtils.safeNumber(normalData.smsFee) + ApiAssetUtils.safeNumber(normalData.depoFee);
+        const expectedTotalDebt = ApiAssetUtils.safeNumber(normalData.debt);
+        expect(sumDebt).toEqual(expectedTotalDebt);
 
         normalResult.gainLossNormal = normalPositionResults.gainLoss;
         normalResult.percentGainLossNormal = normalPositionResults.percentGainLoss;

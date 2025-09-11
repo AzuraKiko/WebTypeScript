@@ -127,6 +127,7 @@ export interface NormalAccountResult {
     gainLossNormal: string;
     percentGainLossNormal: string;
     widthdrawableNormal: string;
+
     totalAssetNormal: string;
     cashNormal: string;
     percentCash: string;
@@ -175,7 +176,6 @@ export interface MarginAccountResult {
     percentGainLossMargin: string;
     widthdrawableMargin: string;
     rtt: string;
-
 
     cashMargin: string;
     percentCash: string;
