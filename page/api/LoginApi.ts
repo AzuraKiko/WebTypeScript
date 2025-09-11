@@ -3,7 +3,7 @@ import OrderApi from "./OrderApi";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from 'uuid';
 import { getMatrixCodes } from "./Matrix";
-import { TEST_CONFIG, ENV } from "../../tests/utils/testConfig";
+import { TEST_CONFIG, ENV, ENVConfig, saveENVResults } from "../../tests/utils/testConfig";
 
 dotenv.config({ path: ".env" });
 
@@ -232,5 +232,145 @@ export default class LoginApi {
             }
         }
         return { session, cif, token, acntNo, subAcntNormal, subAcntMargin, subAcntDerivative, subAcntFolio };
+    }
+
+    /**
+     * Login with multiple UAT configurations sequentially
+     */
+    async loginWithMultipleUATConfigs(typeAuth: string = "Matrix") {
+        const results: any[] = [];
+
+        if (!TEST_CONFIG.ENV_CONFIGS || TEST_CONFIG.ENV_CONFIGS.length === 0) {
+            console.log("No ENV configurations found");
+            return results;
+        }
+
+        console.log(`Found ${TEST_CONFIG.ENV_CONFIGS.length} ENV configurations to process`);
+
+        for (let i = 0; i < TEST_CONFIG.ENV_CONFIGS.length; i++) {
+            const config = TEST_CONFIG.ENV_CONFIGS[i];
+            console.log(`Processing ENV config ${i + 1}/${TEST_CONFIG.ENV_CONFIGS.length}: ${config.name || config.user}`);
+
+            try {
+                // Create new instance with the specific URL
+                const loginApi = new LoginApi(config.url);
+                const orderApi = new OrderApi(config.url);
+
+                let session: string = "";
+                let cif: string = "";
+                let token: string = "";
+                let acntNo: string = "";
+                let subAcntNormal: string = "";
+                let subAcntMargin: string = "";
+                let subAcntDerivative: string = "";
+                let subAcntFolio: string = "";
+
+                // Perform login with this configuration
+                const loginResponse = await loginApi.loginApi(
+                    config.user,
+                    config.pass_encrypt,
+                    config.user
+                );
+
+                if (loginResponse.data) {
+                    session = loginResponse.data.session;
+                    cif = loginResponse.data.cif;
+
+                    // Get account information
+                    if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
+                        const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("N"));
+                        acntNo = account?.acntNo;
+                        subAcntNormal = account?.subAcntNo;
+                    }
+                    if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
+                        const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("M"));
+                        subAcntMargin = account?.subAcntNo;
+                    }
+                    if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
+                        const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("D"));
+                        subAcntDerivative = account?.subAcntNo;
+                    }
+                    if (loginResponse.data.custInfo?.normal && loginResponse.data.custInfo.normal.length > 0) {
+                        const account: any = loginResponse.data.custInfo.normal.find((it: any) => it.subAcntNo.includes("P"));
+                        subAcntFolio = account?.subAcntNo;
+                    }
+                } else {
+                    console.error(`Login failed for user ${config.user}`);
+                    continue;
+                }
+
+                let tokenResponse: any;
+                // Generate auth and get token
+                if (typeAuth === "OTP") {
+                    tokenResponse = await loginApi.getToken(
+                        config.user,
+                        session,
+                        cif,
+                        uuidv4(),
+                        OTP,
+                        typeAuth
+                    );
+                    if (tokenResponse.rc === 1 && tokenResponse.data?.token) {
+                        token = tokenResponse.data.token;
+                    }
+                } else if (typeAuth === "Matrix") {
+                    const authResponse = await loginApi.generateAuth(config.user, session);
+                    console.log('authResponse:', authResponse.data);
+
+                    if (authResponse.rc === 1) {
+                        const matrixGen: string[] = Object.values(authResponse.data);
+                        console.log('matrixGen:', matrixGen);
+                        let matrixAuth: string = getMatrixCodes(matrixGen).join('');
+                        let value: string = "";
+                        if (ENV === "PROD") {
+                            value = orderApi.genMatrixAuth(matrixAuth);
+                        } else if (ENV === "UAT") {
+                            value = "9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=";
+                        }
+                        tokenResponse = await loginApi.getToken(
+                            config.user,
+                            session,
+                            cif,
+                            uuidv4(),
+                            value,
+                            typeAuth
+                        );
+                        if (tokenResponse.rc === 1 && tokenResponse.data?.token) {
+                            token = tokenResponse.data.token;
+                        }
+                    }
+                }
+
+                const result = {
+                    session,
+                    cif,
+                    token,
+                    acntNo,
+                    subAcntNormal,
+                    subAcntMargin,
+                    subAcntDerivative,
+                    subAcntFolio,
+                    loginResponse,
+                    tokenResponse
+                };
+
+                results.push(result);
+
+                console.log(`Successfully processed config for user ${config.user}`);
+
+                // Add delay between configurations to avoid overwhelming the server
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+            } catch (error) {
+                console.error(`Error processing UAT config for user ${config.user}:`, error);
+                results.push({
+                    user: config.user,
+                    error: error instanceof Error ? error.message : String(error),
+                    config: config
+                });
+            }
+        }
+
+        return results;
     }
 }

@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import AssetApi from "../page/api/AssetApi";
-import PositionsApi from "../page/api/Positions";
+import PositionsApi from "../page/api/PositionsAPI";
 import { NumberValidator } from "./validationUtils";
 
 // Type definitions for better type safety

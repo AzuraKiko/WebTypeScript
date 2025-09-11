@@ -1,12 +1,16 @@
 {
-  "timestamp": "2025-09-11T07:05:18.789Z",
+  "timestamp": "2025-09-11T10:05:57.007Z",
+  "user": {
+    "name": "default_uat",
+    "url": "http://10.8.90.17:8888"
+  },
   "data": {
-    "navMargin": "2,305,498,709",
-    "gainLossMargin": "245,678,445",
-    "percentGainLossMargin": "8.38",
+    "navMargin": "2,323,261,509",
+    "gainLossMargin": "263,441,245",
+    "percentGainLossMargin": "8.98",
     "widthdrawableMargin": "95,029",
     "rtt": "71.03",
-    "totalAssetMargin": "3,182,009,750",
+    "totalAssetMargin": "3,199,772,550",
     "cashMargin": "3,914,190",
     "percentCash": "0.12",
     "balance": "241,671,124",
@@ -20,10 +24,10 @@
     "cashBuyNotMatchT0": "0",
     "cashTichLuy": "0",
     "taxFeePSWaitT0": "0",
-    "stockMargin": "3,178,095,560",
+    "stockMargin": "3,195,858,360",
     "percentStock": "99.88",
-    "totalValueStock": "1,900,395,560",
-    "availableStock": "1,900,395,560",
+    "totalValueStock": "1,918,758,360",
+    "availableStock": "1,918,758,360",
     "waitTradingStock": "0",
     "retrictStock": "0",
     "restrictStockWaitTrading": "0",
@@ -53,12 +57,12 @@
       },
       {
         "symbol": "CEO",
-        "marketValue": "1,400,000",
+        "marketValue": "1,392,000",
         "capitalValue": "1,749,777",
         "qty": "80",
         "capitalPrice": "21.87",
-        "gainLoss": "-349,777",
-        "percentGainLoss": "-19.99"
+        "gainLoss": "-357,777",
+        "percentGainLoss": "-20.45"
       },
       {
         "symbol": "DIG",
@@ -143,12 +147,12 @@
       },
       {
         "symbol": "STB",
-        "marketValue": "1,078,095,200",
+        "marketValue": "1,095,866,000",
         "capitalValue": "1,046,685,709",
         "qty": "30,618",
         "capitalPrice": "35.34",
-        "gainLoss": "31,409,491",
-        "percentGainLoss": "3.00"
+        "gainLoss": "49,180,291",
+        "percentGainLoss": "4.70"
       },
       {
         "symbol": "TNG",
@@ -161,12 +165,12 @@
       },
       {
         "symbol": "TOTAL",
-        "marketValue": "3,178,095,560",
+        "marketValue": "3,195,858,360",
         "capitalValue": "2,932,417,115",
         "qty": "NaN",
         "capitalPrice": "NaN",
-        "gainLoss": "245,678,445",
-        "percentGainLoss": "8.38"
+        "gainLoss": "263,441,245",
+        "percentGainLoss": "8.98"
       }
     ]
   }

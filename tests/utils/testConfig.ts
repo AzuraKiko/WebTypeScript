@@ -1,6 +1,19 @@
 import dotenv from 'dotenv';
 import { expect } from '@playwright/test';
+import * as fs from 'fs';
+import * as path from 'path';
 dotenv.config({ path: '.env' });
+
+/**
+ * UAT Configuration Interface
+ */
+export interface ENVConfig {
+    url: string;
+    user: string;
+    pass: string;
+    pass_encrypt: string;
+    name?: string; // Optional name for the configuration
+}
 
 /**
  * Environment Configuration Utility
@@ -15,6 +28,95 @@ export const getEnvironment = () => {
 export const ENV = getEnvironment();
 
 /**
+ * Supports both single config and array of configs
+ */
+const parseENVConfigs = (): ENVConfig[] => {
+    const envConfigs: ENVConfig[] = [];
+
+    // Check if ENV_CONFIGS is set (JSON array)
+    const envConfigsJson = process.env[`${ENV}_CONFIGS`];
+    if (envConfigsJson) {
+        try {
+            const parsed = JSON.parse(envConfigsJson);
+            if (Array.isArray(parsed)) {
+                return parsed.map((config, index) => ({
+                    url: config.url,
+                    user: config.user,
+                    pass: config.pass,
+                    pass_encrypt: config.pass_encrypt,
+                    name: config.name || `${ENV}_config_${index + 1}`
+                }));
+            }
+        } catch (error) {
+            console.warn('Failed to parse UAT_CONFIGS JSON:', error);
+        }
+    }
+
+    // Fallback to individual environment variables
+    const url = process.env[`${ENV}_WEB_LOGIN_URL`];
+    const user = process.env[`${ENV}_TEST_USER`];
+    const pass = process.env[`${ENV}_TEST_PASS`];
+    const passEncrypt = process.env[`${ENV}_TEST_PASS_ENCRYPT`];
+
+    if (url && user && pass && passEncrypt) {
+        return [{
+            url,
+            user,
+            pass,
+            pass_encrypt: passEncrypt,
+            name: 'default_uat'
+        }];
+    }
+
+    return [];
+};
+
+/**
+ * Get UAT configurations
+ */
+export const getENVConfigs = (): ENVConfig[] => {
+    return parseENVConfigs();
+};
+
+/**
+ * Save JSON results for a specific user
+ */
+export const saveUserResults = (user: string, results: any, testType?: string): void => {
+    const resultsDir = path.join(process.cwd(), `test-results-${ENV}`);
+    if (!fs.existsSync(resultsDir)) {
+        fs.mkdirSync(resultsDir, { recursive: true });
+    }
+
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const filename = `${user}_${testType}_results_${timestamp}.json`;
+    const filepath = path.join(resultsDir, filename);
+
+    try {
+        fs.writeFileSync(filepath, JSON.stringify(results, null, 2));
+        console.log(`Results saved to: ${filepath}`);
+    } catch (error) {
+        console.error(`Failed to save results for user ${user}:`, error);
+    }
+};
+
+/**
+ * Save UAT configuration results
+ */
+export const saveENVResults = (config: ENVConfig, results: any, testType?: string): void => {
+    const user = config.name || config.user;
+    saveUserResults(user, {
+        config: {
+            url: config.url,
+            user: config.user,
+            name: config.name
+        },
+        results,
+        timestamp: new Date().toISOString(),
+        testType
+    }, testType);
+};
+
+/**
  * Test Configuration Constants
  * Centralized configuration for all test files
  */
@@ -24,6 +126,7 @@ export const TEST_CONFIG = {
     TEST_PASS: process.env[`${ENV}_TEST_PASS`] as string,
     TEST_PASS_ENCRYPT: process.env[`${ENV}_TEST_PASS_ENCRYPT`] as string,
     ENV,
+    ENV_CONFIGS: getENVConfigs(),
 } as const;
 
 /**

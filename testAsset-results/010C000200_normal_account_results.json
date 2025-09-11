@@ -1,14 +1,18 @@
 {
-  "timestamp": "2025-09-11T07:05:18.707Z",
+  "timestamp": "2025-09-11T10:05:56.927Z",
+  "user": {
+    "name": "default_uat",
+    "url": "http://10.8.90.17:8888"
+  },
   "data": {
-    "navNormal": "12,200,095,166",
-    "gainLossNormal": "1,526,274",
-    "percentGainLossNormal": "7.64",
-    "widthdrawableNormal": "12,177,527,916",
-    "totalAssetNormal": "12,200,106,818",
-    "cashNormal": "12,177,539,568",
-    "percentCash": "99.82",
-    "balance": "12,180,480,450",
+    "navNormal": "12,200,475,166",
+    "gainLossNormal": "1,606,274",
+    "percentGainLossNormal": "8.04",
+    "widthdrawableNormal": "12,177,827,916",
+    "totalAssetNormal": "12,200,486,818",
+    "cashNormal": "12,177,839,568",
+    "percentCash": "99.81",
+    "balance": "12,180,780,450",
     "advanceAvail": "0",
     "maxAdvanceAvail": "0",
     "haveAdvanceAvail": "0",
@@ -19,10 +23,10 @@
     "cashBuyNotMatchT0": "0",
     "cashTichLuy": "0",
     "taxFeePSWaitT0": "0",
-    "stockNormal": "21,510,000",
+    "stockNormal": "21,590,000",
     "percentStock": "0.18",
-    "totalValueStock": "27,140,000",
-    "availableStock": "27,140,000",
+    "totalValueStock": "27,460,000",
+    "availableStock": "27,460,000",
     "waitTradingStock": "0",
     "retrictStock": "0",
     "restrictStockWaitTrading": "0",
@@ -52,12 +56,12 @@
       },
       {
         "symbol": "BID",
-        "marketValue": "15,720,000",
+        "marketValue": "15,800,000",
         "capitalValue": "14,802,172",
         "qty": "400",
         "capitalPrice": "37.01",
-        "gainLoss": "917,828",
-        "percentGainLoss": "6.20"
+        "gainLoss": "997,828",
+        "percentGainLoss": "6.74"
       },
       {
         "symbol": "HVN",
@@ -79,12 +83,12 @@
       },
       {
         "symbol": "TOTAL",
-        "marketValue": "21,510,000",
+        "marketValue": "21,590,000",
         "capitalValue": "19,983,726",
         "qty": "NaN",
         "capitalPrice": "NaN",
-        "gainLoss": "1,526,274",
-        "percentGainLoss": "7.64"
+        "gainLoss": "1,606,274",
+        "percentGainLoss": "8.04"
       }
     ]
   }
