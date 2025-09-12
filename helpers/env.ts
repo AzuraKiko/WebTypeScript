@@ -8,16 +8,28 @@ export const TEST_PASS = 'test@123';
 export const UAT_CONFIGS: any = [
     {
         "url": "http://10.8.90.17:8888",
+        "user": "010C479688",
+        "pass": "123456",
+        "pass_encrypt": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI="
+    },
+    {
+        "url": "http://10.8.90.17:8888",
         "user": "010C000200",
         "pass": "123456",
         "pass_encrypt": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI="
     },
     {
         "url": "http://10.8.90.17:8888",
-        "user": "010C000289",
+        "user": "trang2601",
         "pass": "123456",
         "pass_encrypt": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI="
-    }
+    },
+    {
+        "url": "http://10.8.90.17:8888",
+        "user": "010C467888",
+        "pass": "123456",
+        "pass_encrypt": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI="
+    },
 ]
 
 export const PROD_CONFIGS: any = [

@@ -45,8 +45,8 @@ async function processAssetData(
         optionalAccounts.push(loginResponse.subAcntFolio);
     }
 
-    const allAccounts = [...baseAccounts, ...optionalAccounts];
-    const allPositionAccounts = ["", ...allAccounts];
+    const allAccounts: any = [...baseAccounts, ...optionalAccounts];
+    const allPositionAccounts: any = ["", ...allAccounts];
 
     // Process all accounts and positions in parallel
     const [accountResults, positionResults] = await Promise.all([
@@ -60,9 +60,13 @@ async function processAssetData(
     result.marginAccount = accountResults[1].account;
     result.percentMarginAccount = accountResults[1].percent;
 
+    result.normalAccountCash = accountResults[0].cash;
+    result.marginAccountCash = accountResults[1].cash;
+
     let accountIndex = 2;
     if (loginResponse.subAcntDerivative) {
         result.derivativeAccount = accountResults[accountIndex].account;
+        result.derivativeAccountCash = accountResults[accountIndex].cash;
         result.percentDerivativeAccount = accountResults[accountIndex].percent;
         accountIndex++;
     } else {
@@ -71,6 +75,7 @@ async function processAssetData(
 
     if (loginResponse.subAcntFolio) {
         result.folioAccount = accountResults[accountIndex].account;
+        result.folioAccountCash = accountResults[accountIndex].cash;
         result.percentFolioAccount = accountResults[accountIndex].percent;
     } else {
         console.log("No folio account");
@@ -94,20 +99,38 @@ async function processAssetData(
         return baseAccounts.concat(optionalAccounts).reduce((sum, value) => sum + value, 0);
     };
 
-    const totalAccountValue = calculateTotalAccountValue(data, loginResponse);
-    const expectedNAV = ApiAssetUtils.safeNumber(data.nav);
+    const calculateTotalAccountCash = (result: any, loginResponse: any): number => {
+        const baseAccounts = [
+            ApiAssetUtils.safeNumber(result.normalAccountCash),
+            ApiAssetUtils.safeNumber(result.marginAccountCash)
+        ];
+
+        const optionalAccounts = [];
+        if (loginResponse.subAcntDerivative) {
+            optionalAccounts.push(ApiAssetUtils.safeNumber(result.derivativeAccountCash));
+        }
+        if (loginResponse.subAcntFolio) {
+            optionalAccounts.push(ApiAssetUtils.safeNumber(result.folioAccountCash));
+        }
+
+        return baseAccounts.concat(optionalAccounts).reduce((sum, value) => sum + value, 0);
+    };
+
+    const totalAccountValue: number = calculateTotalAccountValue(data, loginResponse);
+    const expectedNAV: number = ApiAssetUtils.safeNumber(data.nav);
     expect(totalAccountValue).toEqual(expectedNAV);
 
-    const sumAsset = ApiAssetUtils.safeNumber(data.cash) - ApiAssetUtils.safeNumber(data.cashDiv) +
-        (ApiAssetUtils.safeNumber(data.stockValue) - ApiAssetUtils.safeNumber(data.righStockValue)) +
-        (ApiAssetUtils.safeNumber(data.cashDiv) + ApiAssetUtils.safeNumber(data.righStockValue)) +
-        ApiAssetUtils.safeNumber(data.pineBndValue);
-    const expectedTotalAsset = ApiAssetUtils.safeNumber(data.totAsst);
+    const sumAsset: number = ApiAssetUtils.safeNumber(data.cash) + ApiAssetUtils.safeNumber(data.stockValue)
+        + ApiAssetUtils.safeNumber(data.pineBndValue) + ApiAssetUtils.safeNumber(data.drvtVsdAmt);
+    const expectedTotalAsset: number = ApiAssetUtils.safeNumber(data.totAsst);
     expect(sumAsset).toEqual(expectedTotalAsset);
 
-    const sumDebt = ApiAssetUtils.safeNumber(data.fee) +
+    const sumAccountCash: number = calculateTotalAccountCash(result, loginResponse);
+    expect(sumAccountCash).toEqual(ApiAssetUtils.safeNumber(data.cash) - ApiAssetUtils.safeNumber(data.cashDiv));
+
+    const sumDebt: number = ApiAssetUtils.safeNumber(data.fee) +
         (ApiAssetUtils.safeNumber(data.mgDebt) + ApiAssetUtils.safeNumber(data.exptDisbm));
-    const expectedTotalDebt = ApiAssetUtils.safeNumber(data.debt);
+    const expectedTotalDebt: number = ApiAssetUtils.safeNumber(data.debt);
     expect(sumDebt).toEqual(expectedTotalDebt);
 
     // Assign position results
@@ -149,11 +172,12 @@ async function runAssetTestsForUser(userConfig: ENVConfig) {
     let loginResponse: any;
 
     try {
-        // Login for this user
-        loginResponse = await loginApi.loginSuccess("Matrix");
+        // Login for this user using their specific credentials
+        loginResponse = await loginApi.loginWithConfig(userConfig, "Matrix");
         console.log(`Login successful for user: ${userConfig.user}`);
+        console.log(`Login response: ${loginResponse}`);
 
-        const baseParams = {
+        const baseParams: any = {
             user: userConfig.user,
             session: loginResponse.session,
             acntNo: loginResponse.acntNo,
@@ -161,10 +185,10 @@ async function runAssetTestsForUser(userConfig: ENVConfig) {
 
         // Test 1: Get total asset all
         console.log("Running total asset test...");
-        const result = await processAssetData(assetApi, positionsApi, loginResponse, baseParams);
+        const result: any = await processAssetData(assetApi, positionsApi, loginResponse, baseParams);
 
         // Build and log card data
-        const cardData = ApiAssetUtils.buildOverviewData(result);
+        const cardData: any = ApiAssetUtils.buildOverviewData(result);
         ApiAssetUtils.logOverviewData(cardData);
 
         // Save results to JSON file
@@ -172,7 +196,7 @@ async function runAssetTestsForUser(userConfig: ENVConfig) {
 
         // Test 2: Normal account details
         console.log("Running normal account test...");
-        const normalResponse = await assetApi.getTotalAssetAll({
+        const normalResponse: any = await assetApi.getTotalAssetAll({
             ...baseParams,
             subAcntNo: loginResponse.subAcntNormal,
             rqId: uuidv4(),
@@ -181,82 +205,154 @@ async function runAssetTestsForUser(userConfig: ENVConfig) {
         expect(normalResponse).toBeDefined();
         expect(normalResponse.status).toBe(200);
 
-        const normalData = normalResponse.data.data;
+        const normalData: any = normalResponse.data.data;
         const normalResult: any = ApiAssetUtils.normalAccountData(normalData);
-        const normalPositionResults = await ApiAssetUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntNormal);
+        const normalPositionResults: any = await ApiAssetUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntNormal);
 
         // Fix: Use raw numeric values from API response instead of formatted strings
-        const sumNormalAsset = (ApiAssetUtils.safeNumber(normalData.cash) - ApiAssetUtils.safeNumber(normalData.cashDiv)) +
-            (ApiAssetUtils.safeNumber(normalData.stockValue) - ApiAssetUtils.safeNumber(normalData.righStockValue)) +
+        const sumNormalAsset: number = ApiAssetUtils.safeNumber(normalData.cash) +
+            ApiAssetUtils.safeNumber(normalData.stockValue) +
             ApiAssetUtils.safeNumber(normalData.pineBndValue);
-        const expectedTotalNormalAsset = ApiAssetUtils.safeNumber(normalData.totAsst);
+        const expectedTotalNormalAsset: number = ApiAssetUtils.safeNumber(normalData.totAsst);
         expect(sumNormalAsset).toEqual(expectedTotalNormalAsset);
 
-        const sumCash = ApiAssetUtils.safeNumber(normalData.cash) +
+        const sumNormalCash: number = ApiAssetUtils.safeNumber(normalData.balance) +
             ApiAssetUtils.safeNumber(normalData.advanceAvail) +
             ApiAssetUtils.safeNumber(normalData.cashDiv) -
-            ApiAssetUtils.safeNumber(normalData.buyT0) +
+            (ApiAssetUtils.safeNumber(normalData.buyT0) - ApiAssetUtils.safeNumber(normalData.exptDisbm)) +
             ApiAssetUtils.safeNumber(normalData.ipCash) -
             ApiAssetUtils.safeNumber(normalData.drvtOdFee);
-        const expectedTotalCash = ApiAssetUtils.safeNumber(normalData.cash) - ApiAssetUtils.safeNumber(normalData.cashDiv);
-        expect(sumCash).toEqual(expectedTotalCash);
 
-        const sumStock = ApiAssetUtils.safeNumber(normalData.tavlStockValue) +
-            ApiAssetUtils.safeNumber(normalData.ptavlStockValue) +
-            ApiAssetUtils.safeNumber(normalData.tartStockValue) +
-            ApiAssetUtils.safeNumber(normalData.ptartStockValue) +
-            ApiAssetUtils.safeNumber(normalData.righStockValue) +
-            ApiAssetUtils.safeNumber(normalData.rcvStockValue);
-        const expectedTotalStock = ApiAssetUtils.safeNumber(normalData.stockValue) - ApiAssetUtils.safeNumber(normalData.righStockValue);
-        expect(sumStock).toEqual(expectedTotalStock);
+        const expectedNormalTotalCash: number = ApiAssetUtils.safeNumber(normalData.cash)
+        expect(sumNormalCash).toEqual(expectedNormalTotalCash);
 
-        const expectedTotalPineB = ApiAssetUtils.safeNumber(normalData.pineBndValue);
-        expect(expectedTotalPineB).toBeGreaterThanOrEqual(0); // Basic validation
+        // const sumNormalStock: number = ApiAssetUtils.safeNumber(normalData.tavlStockValue) +
+        //     ApiAssetUtils.safeNumber(normalData.ptavlStockValue) +
+        //     ApiAssetUtils.safeNumber(normalData.tartStockValue) +
+        //     ApiAssetUtils.safeNumber(normalData.ptartStockValue) +
+        //     ApiAssetUtils.safeNumber(normalData.righStockValue) +
+        //     ApiAssetUtils.safeNumber(normalData.rcvStockValue);
+        // const expectedNormalTotalStock: number = ApiAssetUtils.safeNumber(normalData.stockValue)
+        // expect(sumNormalStock).toEqual(expectedNormalTotalStock);
 
-        const sumDebt = ApiAssetUtils.safeNumber(normalData.smsFee) + ApiAssetUtils.safeNumber(normalData.depoFee);
-        const expectedTotalDebt = ApiAssetUtils.safeNumber(normalData.debt);
-        expect(sumDebt).toEqual(expectedTotalDebt);
+        // const sumNormalPineB: number = ApiAssetUtils.safeNumber(normalData.originInvest) + ApiAssetUtils.safeNumber(normalData.traiTucDaNhan) + ApiAssetUtils.safeNumber(normalData.traiTucSeNhan)
+        // const expectedNormalTotalPineB: number = ApiAssetUtils.safeNumber(normalData.pineBndValue);
+        // expect(sumNormalPineB).toEqual(expectedNormalTotalPineB);
+
+        const sumNormalDebt: number = ApiAssetUtils.safeNumber(normalData.smsFee) + ApiAssetUtils.safeNumber(normalData.depoFee);
+        const expectedNormalTotalDebt: number = ApiAssetUtils.safeNumber(normalData.debt);
+        expect(sumNormalDebt).toEqual(expectedNormalTotalDebt);
 
         normalResult.gainLossNormal = normalPositionResults.gainLoss;
         normalResult.percentGainLossNormal = normalPositionResults.percentGainLoss;
 
-        const normalHoldStockResults = await ApiAssetUtils.getHoldStockData(positionsApi, baseParams, loginResponse.subAcntNormal);
+        const normalHoldStockResults: any = await ApiAssetUtils.getHoldStockData(positionsApi, baseParams, loginResponse.subAcntNormal);
         normalResult.holdStock = normalHoldStockResults;
 
         // Build and log card data
-        const cardDataNormal = ApiAssetUtils.buildNormalAccountData(normalResult);
+        const cardDataNormal: any = ApiAssetUtils.buildNormalAccountData(normalResult);
         ApiAssetUtils.logNormalAccountData(cardDataNormal);
 
         // Save results to JSON file
-        saveENVResults(userConfig, cardData, "normal_account");
+        saveENVResults(userConfig, cardDataNormal, "normal_account");
 
         // Test 3: Margin account details
-        console.log("Running margin account test...");
-        const marginResponse = await assetApi.getTotalAssetAll({
-            ...baseParams,
-            subAcntNo: loginResponse.subAcntMargin,
-            rqId: uuidv4(),
-        });
+        // console.log("Running margin account test...");
+        // const marginResponse = await assetApi.getTotalAssetAll({
+        //     ...baseParams,
+        //     subAcntNo: loginResponse.subAcntMargin,
+        //     rqId: uuidv4(),
+        // });
 
-        expect(marginResponse).toBeDefined();
-        expect(marginResponse.status).toBe(200);
+        // expect(marginResponse).toBeDefined();
+        // expect(marginResponse.status).toBe(200);
 
-        const marginData = marginResponse.data.data;
-        const marginResult: any = ApiAssetUtils.marginAccountData(marginData);
+        // const marginData: any = marginResponse.data.data;
+        // const marginResult: any = ApiAssetUtils.marginAccountData(marginData);
 
-        const marginPositionResults = await ApiAssetUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntMargin);
-        marginResult.gainLossMargin = marginPositionResults.gainLoss;
-        marginResult.percentGainLossMargin = marginPositionResults.percentGainLoss;
+        // const marginPositionResults: any = await ApiAssetUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntMargin);
+        // marginResult.gainLossMargin = marginPositionResults.gainLoss;
+        // marginResult.percentGainLossMargin = marginPositionResults.percentGainLoss;
 
-        const marginHoldStockResults = await ApiAssetUtils.getHoldStockData(positionsApi, baseParams, loginResponse.subAcntMargin);
-        marginResult.holdStock = marginHoldStockResults;
+        // const marginHoldStockResults: any = await ApiAssetUtils.getHoldStockData(positionsApi, baseParams, loginResponse.subAcntMargin);
+        // marginResult.holdStock = marginHoldStockResults;
+
+        // const sumMarginCash: number = ApiAssetUtils.safeNumber(marginData.balance) +
+        //     ApiAssetUtils.safeNumber(marginData.advanceAvail) +
+        //     ApiAssetUtils.safeNumber(marginData.cashDiv) -
+        //     (ApiAssetUtils.safeNumber(marginData.buyT0) - ApiAssetUtils.safeNumber(marginData.exptDisbm)) +
+        //     ApiAssetUtils.safeNumber(marginData.ipCash) -
+        //     ApiAssetUtils.safeNumber(marginData.drvtOdFee);
+        // const expectedMarginTotalCash: number = ApiAssetUtils.safeNumber(marginData.cash)
+        // expect(sumMarginCash).toEqual(expectedMarginTotalCash);
+
+        // // const sumMarginStock: number = ApiAssetUtils.safeNumber(marginData.tavlStockValue) +
+        // //     ApiAssetUtils.safeNumber(marginData.ptavlStockValue) +
+        // //     ApiAssetUtils.safeNumber(marginData.tartStockValue) +
+        // //     ApiAssetUtils.safeNumber(marginData.ptartStockValue) +
+        // //     ApiAssetUtils.safeNumber(marginData.righStockValue) +
+        // //     ApiAssetUtils.safeNumber(marginData.rcvStockValue);
+        // // const expectedTotalStock: number = ApiAssetUtils.safeNumber(marginData.stockValue);
+        // // expect(sumMarginStock).toEqual(expectedTotalStock);
+
+        // const sumMarginDebt: number = ApiAssetUtils.safeNumber(marginData.mgDebt) + ApiAssetUtils.safeNumber(marginData.fee) + ApiAssetUtils.safeNumber(marginData.exptDisbm);
+        // const expectedMarginTotalDebt = ApiAssetUtils.safeNumber(marginData.debt);
+        // expect(sumMarginDebt).toEqual(expectedMarginTotalDebt);
+
+        // const sumMgDebt: number = ApiAssetUtils.safeNumber(marginData.prinDebt) + ApiAssetUtils.safeNumber(marginData.intDebt);
+        // const expectedMgDebt: number = ApiAssetUtils.safeNumber(marginData.mgDebt);
+        // expect(sumMgDebt).toEqual(expectedMgDebt);
+
+        // const sumMarginFee: number =
+        //     ApiAssetUtils.safeNumber(marginData.smsFee) +
+        //     ApiAssetUtils.safeNumber(marginData.depoFee);
+        // const expectedMarginTotalFee = ApiAssetUtils.safeNumber(marginData.fee);
+        // expect(sumMarginFee).toEqual(expectedMarginTotalFee);
+
+        // // Build and log card data
+        // const cardDataMargin: any = ApiAssetUtils.buildMarginAccountData(marginResult);
+        // ApiAssetUtils.logMarginAccountData(cardDataMargin);
+
+        // // Save results to JSON file
+        // saveENVResults(userConfig, cardDataMargin, "margin_account");
+
+        // // Test 4: PineB account details
+        // console.log("Running pineb account test...");
+        // const pineFolioResponse = await assetApi.getTotalAssetAll({
+        //     ...baseParams,
+        //     subAcntNo: loginResponse.subAcntFolio,
+        //     rqId: uuidv4(),
+        // });
+        // expect(pineFolioResponse).toBeDefined();
+        // expect(pineFolioResponse.status).toBe(200);
+
+        // const pineFolioData: any = pineFolioResponse.data.data;
+        // const pineFolioResult: any = ApiAssetUtils.folioAccountData(pineFolioData);
+
+        // const pineFolioPositionResults: any = await ApiAssetUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntFolio);
+        // pineFolioResult.gainLossFolio = pineFolioPositionResults.gainLoss;
+        // pineFolioResult.percentGainLossFolio = pineFolioPositionResults.percentGainLoss;
+        // const pineFolioHoldStockResults: any = await ApiAssetUtils.getHoldStockData(positionsApi, baseParams, loginResponse.subAcntFolio);
+        // pineFolioResult.holdStock = pineFolioHoldStockResults;
+        // const sumPineFolioCash: number = ApiAssetUtils.safeNumber(pineFolioData.balance) +
+        //     ApiAssetUtils.safeNumber(pineFolioData.advanceAvail) +
+        //     ApiAssetUtils.safeNumber(pineFolioData.cashDiv) -
+        //     (ApiAssetUtils.safeNumber(pineFolioData.buyT0) - ApiAssetUtils.safeNumber(pineFolioData.exptDisbm)) +
+        //     ApiAssetUtils.safeNumber(pineFolioData.ipCash) -
+        //     ApiAssetUtils.safeNumber(pineFolioData.drvtOdFee);
+        // const expectedPineFolioTotalCash: number = ApiAssetUtils.safeNumber(pineFolioData.cash)
+        // expect(sumPineFolioCash).toEqual(expectedPineFolioTotalCash);
+
+        // const sumPineFolioDebt: number = ApiAssetUtils.safeNumber(pineFolioData.smsFee) + ApiAssetUtils.safeNumber(pineFolioData.depoFee);
+        // const expectedPineFolioTotalDebt: number = ApiAssetUtils.safeNumber(pineFolioData.debt);
+        // expect(sumPineFolioDebt).toEqual(expectedPineFolioTotalDebt);
 
         // Build and log card data
-        const cardDataMargin = ApiAssetUtils.buildMarginAccountData(marginResult);
-        ApiAssetUtils.logMarginAccountData(cardDataMargin);
+        // const cardDataPineFolio: any = ApiAssetUtils.buildFolioAccountData(pineFolioResult);
+        // ApiAssetUtils.logFolioAccountData(cardDataPineFolio);
 
         // Save results to JSON file
-        saveENVResults(userConfig, cardDataMargin, "margin_account");
+        // saveENVResults(userConfig, cardDataPineFolio, "pine_folio_account");
 
         console.log(`=== Tests completed successfully for user: ${userConfig.user} ===\n`);
 

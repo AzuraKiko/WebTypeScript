@@ -42,6 +42,7 @@ export interface AssetData {
     prinDebt?: number | string;
     intDebt?: number | string;
     marginRatio?: number | string;
+    drvtVsdAmt?: number | string;
 }
 
 export interface FormattedAssetData {
@@ -55,6 +56,7 @@ export interface FormattedAssetData {
     debt: string;
     fee: string;
     marginDebt: string;
+    drvtVsdAmt: string;
 }
 
 export interface PercentageData {
@@ -105,6 +107,7 @@ export interface CommonAccountData {
 export interface AccountResult {
     account: string;
     percent: string;
+    cash: string | number;
 }
 
 export interface PositionResult {
@@ -219,6 +222,53 @@ export interface MarginAccountResult {
     holdStock: HoldStockResult[];
 }
 
+export interface FolioAccountResult {
+    navFolio: string;
+    gainLossFolio: string;
+    percentGainLossFolio: string;
+    widthdrawableFolio: string;
+
+    totalAssetFolio: string;
+    cashFolio: string;
+    percentCash: string;
+    balance: string;
+    advanceAvail: string;
+    maxAdvanceAvail: string;
+    haveAdvanceAvail: string;
+    dividendAndProfitBond: string;
+    totalBuyWaitMatch: string;
+    buyWaitMatchByCash: string;
+    buyWaitMatchByLoan: string;
+    cashBuyNotMatchT0: string;
+    cashTichLuy: string;
+    taxFeePSWaitT0: string;
+
+    stockNormal: string;
+    percentStock: string;
+    totalValueStock: string;
+    availableStock: string;
+    waitTradingStock: string;
+    retrictStock: string;
+    restrictStockWaitTrading: string;
+    dividendStock: string;
+    stockBuyWaitReturn: string;
+    sellMatchT0: string;
+    pineB: string;
+    pineBPercent: string;
+    originInvest: string;
+    traiTucDaNhan: string;
+    traiTucSeNhan: string;
+    tienNhanDaoHan: string;
+
+    debtNormal: string;
+    feeSMS: string;
+    percentFeeSMS: string;
+    feeVSD: string;
+    percentFeeVSD: string;
+
+    holdStock: HoldStockResult[];
+}
+
 export interface BaseApiParams {
     user: string;
     session: string;
@@ -245,9 +295,18 @@ export class ApiAssetUtils {
      */
     static safeNumber(value: number | string | undefined): number {
         if (value === undefined || value === null) return 0;
-        const num = typeof value === 'string' ? parseFloat(value) : value;
+
+        let strValue: string;
+        if (typeof value === 'string') {
+            strValue = value.includes(',') ? value.replace(/,/g, '') : value;
+        } else {
+            strValue = value.toString();
+        }
+
+        const num = parseFloat(strValue);
         return isNaN(num) || !isFinite(num) ? 0 : num;
     }
+
 
     /**
      * Format number with commas using safe conversion
@@ -323,6 +382,7 @@ export class ApiAssetUtils {
             debt: this.formatWithCommas(data.debt),
             fee: this.formatWithCommas(data.fee),
             marginDebt: this.formatWithCommas(this.safeNumber(data.mgDebt) + this.safeNumber(data.exptDisbm)),
+            drvtVsdAmt: this.formatWithCommas(data.drvtVsdAmt),
         };
     }
 
@@ -475,16 +535,19 @@ export class ApiAssetUtils {
             }
 
             const realAsst = this.safeNumber(response.data.data.realAsst);
+            const cash = this.safeNumber(response.data.data.cash) - this.safeNumber(response.data.data.cashDiv);
 
             return {
                 account: this.formatWithCommas(realAsst),
                 percent: this.calculatePercentage(realAsst, baseRealAsst),
+                cash: cash,
             };
         } catch (error) {
             console.error(`Error processing account data for ${subAcntNo}:`, error);
             return {
                 account: DEFAULT_ZERO_VALUE,
                 percent: DEFAULT_ZERO_VALUE,
+                cash: DEFAULT_ZERO_VALUE,
             };
         }
     }

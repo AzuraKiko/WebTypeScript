@@ -1,0 +1,59 @@
+{
+  "config": {
+    "url": "http://10.8.90.17:8888",
+    "user": "trang2601"
+  },
+  "results": {
+    "card1": {
+      "nav": "9,035,655,997",
+      "gainLoss": "124,348,648",
+      "percentGainLoss": "4.56",
+      "widthdrawable": "5,505,465,845"
+    },
+    "card2Data": {
+      "normalAccount": "5,514,574,407",
+      "gainLossNormal": "44,091,994",
+      "percentGainLossNormal": "7.66",
+      "marginAccount": "2,707,239,134",
+      "gainLossMargin": "72,580,834",
+      "percentGainLossMargin": "3.39",
+      "derivativeAccount": "737,259,066",
+      "gainLossDerivative": "0",
+      "percentGainLossDerivative": "0",
+      "folioAccount": "76,583,390",
+      "gainLossFolio": "7,675,820",
+      "percentGainLossFolio": "79.88"
+    },
+    "card2Chart": {
+      "nav": "9,035,655,997",
+      "normalAccount": "5,514,574,407",
+      "percentNormalAccount": "61.03",
+      "marginAccount": "2,707,239,134",
+      "percentMarginAccount": "29.96",
+      "derivativeAccount": "737,259,066",
+      "percentDerivativeAccount": "8.16",
+      "folioAccount": "76,583,390",
+      "percentFolioAccount": "0.85"
+    },
+    "card3Asset": {
+      "totalAsset": "9,035,831,893",
+      "cash": "6,666,965,793",
+      "percentCash": "73.78",
+      "stock": "2,852,717,300",
+      "percentStock": "31.57",
+      "dividend": "0",
+      "percentDividend": "0.00",
+      "PineB": "0",
+      "percentPineB": "0.00"
+    },
+    "card3Debt": {
+      "debt": "282,068",
+      "fee": "282,067",
+      "percentFee": "100.00",
+      "marginDebt": "1",
+      "percentMarginDebt": "0.00"
+    }
+  },
+  "timestamp": "2025-09-12T09:34:26.273Z",
+  "testType": "total_asset_all"
+}

@@ -1,0 +1,58 @@
+{
+  "config": {
+    "url": "http://10.8.90.17:8888",
+    "user": "010C000200"
+  },
+  "results": {
+    "card1": {
+      "navMargin": "2,726,447,987",
+      "gainLossMargin": "666,868,645",
+      "percentGainLossMargin": "22.74",
+      "widthdrawableMargin": "0",
+      "rtt": "71.02"
+    },
+    "cardCashData": {
+      "totalAssetMargin": "3,603,199,950",
+      "cashMargin": "3,914,190",
+      "percentCash": "0.11",
+      "balance": "0",
+      "advanceAvail": "0",
+      "maxAdvanceAvail": "0",
+      "haveAdvanceAvail": "0",
+      "dividendAndProfitBond": "3,914,190",
+      "totalBuyWaitMatch": "2,603,900",
+      "buyWaitMatchByCash": "0",
+      "buyWaitMatchByLoan": "2,603,900",
+      "cashBuyNotMatchT0": "0",
+      "cashTichLuy": "0",
+      "taxFeePSWaitT0": "0"
+    },
+    "cardStockData": {
+      "stockMargin": "3,599,285,760",
+      "percentStock": "99.89",
+      "totalValueStock": "2,337,085,760",
+      "availableStock": "2,337,085,760",
+      "waitTradingStock": "0",
+      "retrictStock": "0",
+      "restrictStockWaitTrading": "0",
+      "dividendStock": "0",
+      "stockBuyWaitReturn": "1,312,900,000",
+      "sellMatchT0": "0"
+    },
+    "cardDebtData": {
+      "totalDebtMargin": "876,751,963",
+      "totalMargin": "874,053,721",
+      "percentTotalMargin": "99.69",
+      "originMargin": "873,813,421",
+      "interestMargin": "240,300",
+      "totalFeeTrading": "94,342",
+      "percentTotalFeeTrading": "0.01",
+      "feeSMS": "40,480",
+      "feeVSD": "53,862",
+      "expectedDisbursement": "2,603,900",
+      "percentExpectedDisbursement": "0.30"
+    }
+  },
+  "timestamp": "2025-09-12T09:34:25.851Z",
+  "testType": "margin_account"
+}

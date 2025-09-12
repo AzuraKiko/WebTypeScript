@@ -236,3 +236,4 @@ When adding new tests:
 - uuid
 
 npm install qs
+npm run test:uat:chrome tests/api/getTotalAssetAll.spec.ts
