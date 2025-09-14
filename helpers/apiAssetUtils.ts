@@ -43,6 +43,10 @@ export interface AssetData {
     intDebt?: number | string;
     marginRatio?: number | string;
     drvtVsdAmt?: number | string;
+    drvtCIm?: number | string;
+    drvtCdtPnlVM?: number | string;
+    drvtCdtLossVM?: number | string;
+
 }
 
 export interface FormattedAssetData {
@@ -57,6 +61,10 @@ export interface FormattedAssetData {
     fee: string;
     marginDebt: string;
     drvtVsdAmt: string;
+    cashVsd: string;
+    gainVM: string;
+    lossVM: string;
+
 }
 
 export interface PercentageData {
@@ -66,6 +74,7 @@ export interface PercentageData {
     percentPineB: string;
     percentFee: string;
     percentMarginDebt: string;
+    percentDrvtVsdAmt: string;
 }
 
 export interface CommonAccountData {
@@ -243,7 +252,7 @@ export interface FolioAccountResult {
     cashTichLuy: string;
     taxFeePSWaitT0: string;
 
-    stockNormal: string;
+    stockFolio: string;
     percentStock: string;
     totalValueStock: string;
     availableStock: string;
@@ -253,14 +262,8 @@ export interface FolioAccountResult {
     dividendStock: string;
     stockBuyWaitReturn: string;
     sellMatchT0: string;
-    pineB: string;
-    pineBPercent: string;
-    originInvest: string;
-    traiTucDaNhan: string;
-    traiTucSeNhan: string;
-    tienNhanDaoHan: string;
 
-    debtNormal: string;
+    debtFolio: string;
     feeSMS: string;
     percentFeeSMS: string;
     feeVSD: string;
@@ -383,6 +386,9 @@ export class ApiAssetUtils {
             fee: this.formatWithCommas(data.fee),
             marginDebt: this.formatWithCommas(this.safeNumber(data.mgDebt) + this.safeNumber(data.exptDisbm)),
             drvtVsdAmt: this.formatWithCommas(data.drvtVsdAmt),
+            cashVsd: this.formatWithCommas(data.drvtCIm),
+            gainVM: this.formatWithCommas(data.drvtCdtPnlVM),
+            lossVM: this.formatWithCommas(data.drvtCdtLossVM),
         };
     }
 
@@ -432,6 +438,51 @@ export class ApiAssetUtils {
             tienNhanDaoHan: DEFAULT_ZERO_VALUE,
 
             debtNormal: this.formatWithCommas(data.debt),
+            feeSMS: commonData.feeSMS,
+            percentFeeSMS: this.calculatePercentage(data.smsFee, data.debt),
+            feeVSD: commonData.feeVSD,
+            percentFeeVSD: this.calculatePercentage(data.depoFee, data.debt),
+
+            holdStock: [],
+        };
+    }
+
+    static follioAccountData(data: AssetData): FolioAccountResult {
+        const commonData = this.generateCommonAccountData(data);
+
+        return {
+            navFolio: commonData.nav,
+            gainLossFolio: commonData.gainLoss,
+            percentGainLossFolio: commonData.percentGainLoss,
+            widthdrawableFolio: commonData.widthdrawable,
+
+            totalAssetFolio: commonData.totalAsset,
+            cashFolio: commonData.cash,
+            percentCash: commonData.percentCash,
+            balance: commonData.balance,
+            advanceAvail: commonData.advanceAvail,
+            maxAdvanceAvail: commonData.maxAdvanceAvail,
+            haveAdvanceAvail: commonData.haveAdvanceAvail,
+            dividendAndProfitBond: commonData.dividendAndProfitBond,
+            totalBuyWaitMatch: commonData.totalBuyWaitMatch,
+            buyWaitMatchByCash: commonData.buyWaitMatchByCash,
+            buyWaitMatchByLoan: commonData.buyWaitMatchByLoan,
+            cashBuyNotMatchT0: commonData.cashBuyNotMatchT0,
+            cashTichLuy: commonData.cashTichLuy,
+            taxFeePSWaitT0: commonData.taxFeePSWaitT0,
+
+            stockFolio: commonData.stock,
+            percentStock: commonData.percentStock,
+            totalValueStock: commonData.totalValueStock,
+            availableStock: commonData.availableStock,
+            waitTradingStock: commonData.waitTradingStock,
+            retrictStock: commonData.retrictStock,
+            restrictStockWaitTrading: commonData.restrictStockWaitTrading,
+            dividendStock: commonData.dividendStock,
+            stockBuyWaitReturn: commonData.stockBuyWaitReturn,
+            sellMatchT0: commonData.sellMatchT0,
+
+            debtFolio: this.formatWithCommas(data.debt),
             feeSMS: commonData.feeSMS,
             percentFeeSMS: this.calculatePercentage(data.smsFee, data.debt),
             feeVSD: commonData.feeVSD,
@@ -509,6 +560,7 @@ export class ApiAssetUtils {
             percentStock: this.calculatePercentage(data.stockValue, data.totAsst),
             percentDividend: this.calculatePercentage(data.cashDiv, data.totAsst),
             percentPineB: this.calculatePercentage(data.pineBndValue, data.totAsst),
+            percentDrvtVsdAmt: this.calculatePercentage(data.drvtVsdAmt, data.totAsst),
             percentFee: this.calculatePercentage(data.fee, data.debt),
             percentMarginDebt: this.calculatePercentage(data.mgDebt, data.debt),
         };
@@ -720,6 +772,8 @@ export class ApiAssetUtils {
                 percentDividend: safeExtract('percentDividend'),
                 PineB: safeExtract('PineB'),
                 percentPineB: safeExtract('percentPineB'),
+                drvtVsdAmt: safeExtract('drvtVsdAmt'),
+                percentDrvtVsdAmt: safeExtract('percentDrvtVsdAmt'),
             },
             card3Debt: {
                 debt: safeExtract('debt'),
@@ -788,8 +842,7 @@ export class ApiAssetUtils {
                 percentFeeVSD: safeExtract('percentFeeVSD'),
             },
 
-            cardHoldStockData: {
-            },
+            cardHoldStockData: safeExtract('holdStock'),
         }
     }
 
@@ -848,6 +901,57 @@ export class ApiAssetUtils {
                 expectedDisbursement: safeExtract('expectedDisbursement'),
                 percentExpectedDisbursement: safeExtract('percentExpectedDisbursement'),
             },
+            cardHoldStockData: safeExtract('holdStock'),
+        }
+    }
+
+    static buildFolioAccountData(result: any) {
+        // Helper function to safely extract values
+        const safeExtract = (key: string, defaultValue: string = DEFAULT_ZERO_VALUE) =>
+            result[key] ?? defaultValue;
+        return {
+            card1: {
+                navFolio: safeExtract('navFolio'),
+                gainLossFolio: safeExtract('gainLossFolio'),
+                percentGainLossFolio: safeExtract('percentGainLossFolio'),
+                widthdrawableFolio: safeExtract('widthdrawableFolio'),
+            },
+            cardCashData: {
+                totalAssetFolio: safeExtract('totalAssetFolio'),
+                cashFolio: safeExtract('cashFolio'),
+                percentCash: safeExtract('percentCash'),
+                balance: safeExtract('balance'),
+                advanceAvail: safeExtract('advanceAvail'),
+                maxAdvanceAvail: safeExtract('maxAdvanceAvail'),
+                haveAdvanceAvail: safeExtract('haveAdvanceAvail'),
+                dividendAndProfitBond: safeExtract('dividendAndProfitBond'),
+                totalBuyWaitMatch: safeExtract('totalBuyWaitMatch'),
+                buyWaitMatchByCash: safeExtract('buyWaitMatchByCash'),
+                buyWaitMatchByLoan: safeExtract('buyWaitMatchByLoan'),
+                cashBuyNotMatchT0: safeExtract('cashBuyNotMatchT0'),
+                cashTichLuy: safeExtract('cashTichLuy'),
+                taxFeePSWaitT0: safeExtract('taxFeePSWaitT0'),
+            },
+            cardStockData: {
+                stockFolio: safeExtract('stockFolio'),
+                percentStock: safeExtract('percentStock'),
+                totalValueStock: safeExtract('totalValueStock'),
+                availableStock: safeExtract('availableStock'),
+                waitTradingStock: safeExtract('waitTradingStock'),
+                retrictStock: safeExtract('retrictStock'),
+                restrictStockWaitTrading: safeExtract('restrictStockWaitTrading'),
+                dividendStock: safeExtract('dividendStock'),
+                stockBuyWaitReturn: safeExtract('stockBuyWaitReturn'),
+                sellMatchT0: safeExtract('sellMatchT0'),
+            },
+            cardDebtData: {
+                debtFolio: safeExtract('debtFolio'),
+                feeSMS: safeExtract('feeSMS'),
+                percentFeeSMS: safeExtract('percentFeeSMS'),
+                feeVSD: safeExtract('feeVSD'),
+                percentFeeVSD: safeExtract('percentFeeVSD'),
+            },
+            cardHoldStockData: safeExtract('holdStock'),
         }
     }
 
@@ -913,6 +1017,16 @@ export class ApiAssetUtils {
     }
 
     static logMarginAccountData(cardData: any): void {
+        console.log(cardData.card1);
+        console.log("--------------------------------");
+        console.log(cardData.cardCashData);
+        console.log("--------------------------------");
+        console.log(cardData.cardStockData);
+        console.log("--------------------------------");
+        console.log(cardData.cardDebtData);
+    }
+
+    static logFollioAccountData(cardData: any): void {
         console.log(cardData.card1);
         console.log("--------------------------------");
         console.log(cardData.cardCashData);

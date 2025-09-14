@@ -1,15 +1,18 @@
 import { test, expect } from '@playwright/test';
 import LoginPage from '../../page/ui/LoginPage';
 import OrderPage from '../../page/ui/OrderPage';
+import OrderBook from '../../page/ui/OrderBook';
 import { TEST_DATA, getRandomStockCode } from '../utils/testConfig';
 
 test.describe('Order Management Tests', () => {
   let loginPage: LoginPage;
   let orderPage: OrderPage;
+  let orderBook: OrderBook;
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     orderPage = new OrderPage(page);
+    orderBook = new OrderBook(page);
 
     // Login before each test
     await loginPage.loginSuccess();
@@ -21,19 +24,13 @@ test.describe('Order Management Tests', () => {
     console.log(`Testing with stock code: ${stockCode}`);
 
     // Execute complete order flow
-    const result = await orderPage.completeOrderFlow(stockCode, '1');
+    await orderPage.placeBuyOrder({ stockCode, quantity: 1 });
+    await orderPage.verifyMessageOrder(['Đặt lệnh thành công', 'Thông báo'], ['Số hiệu lệnh', 'thành công']);
 
-    // Assert based on result
-    if (result.success) {
-      console.log('✅ Order placed and cancelled successfully');
-      expect(result.success).toBe(true);
-      expect(result.message).toContain('successfully');
-    } else {
-      console.log(`❌ Order failed: ${result.message}`);
-      // This is also a valid scenario - order might fail due to market conditions
-      expect(result.success).toBe(false);
-      expect(result.message).toBeTruthy();
-    }
+    await orderPage.openOrderInDayTab();
+    await orderBook.cancelOrder(0);
+    await orderPage.verifyMessageOrder(['Hủy lệnh thành công', 'Thông báo'], ['Số hiệu lệnh', 'thành công']);
+
   });
 
   test('should handle order placement with invalid stock code', async ({ page }) => {
@@ -43,8 +40,8 @@ test.describe('Order Management Tests', () => {
 
     // Try to place order with invalid stock code
     try {
-      await orderPage.placeBuyOrder(invalidStockCode, '1');
-      const isSuccessful = await orderPage.isOrderSuccessful();
+      await orderPage.placeBuyOrder({ stockCode: invalidStockCode, quantity: 1 });
+      const isSuccessful = await orderPage.verifyMessageOrder(['Đặt lệnh thành công', 'Thông báo'], ['Số hiệu lệnh', 'thành công']);
 
       // Order should fail with invalid stock code
       expect(isSuccessful).toBe(false);
@@ -68,30 +65,4 @@ test.describe('Order Management Tests', () => {
     // const isPopupCorrect = await orderPage.verifyChange2FAPopup();
     // expect(isPopupCorrect).toBe(true);
   });
-});
-
-// Separate test for specific stock codes if needed
-test.describe('Order Tests with Specific Stock Codes', () => {
-  let loginPage: LoginPage;
-  let orderPage: OrderPage;
-
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    orderPage = new OrderPage(page);
-    await loginPage.loginSuccess();
-  });
-
-  // Test with each stock code from the configuration
-  for (const stockCode of TEST_DATA.STOCK_CODES) {
-    test(`should handle order flow for stock ${stockCode}`, async ({ page }) => {
-      const result = await orderPage.completeOrderFlow(stockCode, '1');
-
-      // Log result for monitoring
-      console.log(`Stock ${stockCode} result:`, result);
-
-      // Both success and failure are valid outcomes
-      expect(typeof result.success).toBe('boolean');
-      expect(result.message).toBeTruthy();
-    });
-  }
 });

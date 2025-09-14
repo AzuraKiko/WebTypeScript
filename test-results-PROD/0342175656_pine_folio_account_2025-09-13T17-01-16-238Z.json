@@ -1,19 +1,18 @@
 {
   "config": {
-    "url": "http://10.8.90.17:8888",
-    "user": "010C479688"
+    "url": "https://trade.pinetree.vn",
+    "user": "0342175656"
   },
   "results": {
     "card1": {
-      "navMargin": "0",
-      "gainLossMargin": "0",
-      "percentGainLossMargin": "0",
-      "widthdrawableMargin": "0",
-      "rtt": "100.00"
+      "navFolio": "0",
+      "gainLossFolio": "0",
+      "percentGainLossFolio": "0",
+      "widthdrawableFolio": "0"
     },
     "cardCashData": {
-      "totalAssetMargin": "0",
-      "cashMargin": "0",
+      "totalAssetFolio": "0",
+      "cashFolio": "0",
       "percentCash": "0",
       "balance": "0",
       "advanceAvail": "0",
@@ -28,7 +27,7 @@
       "taxFeePSWaitT0": "0"
     },
     "cardStockData": {
-      "stockMargin": "0",
+      "stockFolio": "0",
       "percentStock": "0",
       "totalValueStock": "0",
       "availableStock": "0",
@@ -40,19 +39,14 @@
       "sellMatchT0": "0"
     },
     "cardDebtData": {
-      "totalDebtMargin": "0",
-      "totalMargin": "0",
-      "percentTotalMargin": "0",
-      "originMargin": "0",
-      "interestMargin": "0",
-      "totalFeeTrading": "0",
-      "percentTotalFeeTrading": "0",
+      "debtFolio": "0",
       "feeSMS": "0",
+      "percentFeeSMS": "0",
       "feeVSD": "0",
-      "expectedDisbursement": "0",
-      "percentExpectedDisbursement": "0"
-    }
+      "percentFeeVSD": "0"
+    },
+    "cardHoldStockData": []
   },
-  "timestamp": "2025-09-12T09:34:25.252Z",
-  "testType": "margin_account"
+  "timestamp": "2025-09-13T17:01:16.238Z",
+  "testType": "pine_folio_account"
 }

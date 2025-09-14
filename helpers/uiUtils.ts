@@ -1,6 +1,11 @@
 import { Page, Locator } from '@playwright/test';
 import { expectElementText, expectElementContainsText, expectElementTextContains } from './assertions';
 
+// Simple logger implementation
+const logger = {
+    error: (message: string, error?: any) => console.error(`[ERROR] ${message}`, error)
+};
+
 /**
  * Common UI interaction utilities for Playwright tests
  */
@@ -323,6 +328,161 @@ export class FormUtils {
                 await WaitUtils.delay(500);
             }
         }
+    }
+
+
+    /**
+     * Select a random value from a dropdown
+     * @param page - Playwright Page instance
+     * @param dropdownSelector - Selector for the dropdown element
+     * @param optionsSelector - Selector for the dropdown options
+     * @returns The text of the randomly selected option
+     */
+    static async selectRandomValueFromDropdown(page: Page, dropdownSelector: string, optionsSelector: string): Promise<string> {
+        const dropdownLocator = page.locator(dropdownSelector);
+        const optionsLocator = page.locator(optionsSelector);
+
+        await dropdownLocator.waitFor({ state: 'visible' });
+        await dropdownLocator.scrollIntoViewIfNeeded();
+        await dropdownLocator.click();
+
+        await page.locator(optionsSelector).waitFor({ state: 'visible' });
+
+        const count = await optionsLocator.count();
+        if (count === 0) throw new Error("Dropdown is empty!");
+
+        const randomIndex = Math.floor(Math.random() * count);
+        const randomOption = optionsLocator.nth(randomIndex);
+        const randomValue = await randomOption.textContent();
+
+        await page.waitForTimeout(500);
+        await randomOption.click();
+        await page.waitForTimeout(500);
+
+        return randomValue?.trim() || "";
+    }
+
+    /**
+     * Select a value from dropdown by index
+     * @param page - Playwright Page instance
+     * @param dropdownSelector - Selector for the dropdown element
+     * @param optionsSelector - Selector for the dropdown options
+     * @param index - Index of the option to select (0-based)
+     * @returns The text of the selected option
+     */
+    static async selectValueFromDropdownByIndex(
+        page: Page,
+        dropdownSelector: string,
+        optionsSelector: string,
+        index: number
+    ): Promise<string> {
+        const dropdownLocator = page.locator(dropdownSelector);
+        const optionsLocator = page.locator(optionsSelector);
+
+        await dropdownLocator.waitFor({ state: 'visible' });
+        await dropdownLocator.scrollIntoViewIfNeeded();
+        await dropdownLocator.click();
+
+        await page.locator(optionsSelector).waitFor({ state: 'visible' });
+
+        const count = await optionsLocator.count();
+        if (count === 0) throw new Error("Dropdown is empty!");
+        if (index >= count)
+            throw new Error(`Index out of range! Max index: ${count - 1}`);
+
+        const selectedOption = optionsLocator.nth(index);
+        const selectedValue = await selectedOption.textContent();
+
+        await page.waitForTimeout(500);
+        await selectedOption.click();
+
+        return selectedValue?.trim() || "";
+    }
+
+    /**
+     * Select a fixed value from dropdown
+     * @param page - Playwright Page instance
+     * @param dropdownSelector - Selector for the dropdown element
+     * @param valueSelector - Selector for the specific value to select
+     */
+    static async selectFixedValueFromDropdown(page: Page, dropdownSelector: string, valueSelector: string): Promise<void> {
+        const dropdownLocator = page.locator(dropdownSelector);
+        const valueLocator = page.locator(valueSelector);
+
+        await dropdownLocator.waitFor({ state: 'visible' });
+        await dropdownLocator.scrollIntoViewIfNeeded();
+        await dropdownLocator.click();
+
+        await page.locator(valueSelector).waitFor({ state: 'visible' });
+
+        await page.waitForTimeout(500);
+        await valueLocator.click();
+        await page.waitForTimeout(500);
+    }
+
+    /**
+     * Select a value from dropdown by searching through options
+     * @param page - Playwright Page instance
+     * @param dropdownSelector - Selector for the dropdown element
+     * @param valueDisplaySelector - Selector for the element showing current value
+     * @param expectedValue - Value to select
+     */
+    static async selectValueFromDropdown(
+        page: Page,
+        dropdownSelector: string,
+        valueDisplaySelector: string,
+        expectedValue: string
+    ): Promise<void> {
+        const dropdownLocator = page.locator(dropdownSelector);
+        const valueDisplayLocator = page.locator(valueDisplaySelector);
+
+        await dropdownLocator.click();
+        await page.waitForTimeout(500);
+
+        let currentValue = await valueDisplayLocator.textContent() || "";
+        let attempts = 0;
+        const maxAttempts = 20; // Prevent infinite loops
+
+        while (!currentValue.includes(expectedValue) && attempts < maxAttempts) {
+            await dropdownLocator.press("ArrowDown");
+            await dropdownLocator.press("Enter");
+            await page.waitForTimeout(200);
+
+            currentValue = await valueDisplayLocator.textContent() || "";
+            attempts++;
+        }
+
+        if (!currentValue.includes(expectedValue)) {
+            throw new Error(
+                `Could not find value "${expectedValue}" in dropdown after ${maxAttempts} attempts`
+            );
+        }
+
+        await valueDisplayLocator.click();
+    }
+
+    // Get all list value from dropdown
+    static async getListValueFromDropdown(page: Page, dropdownSelector: string, optionsSelector: string): Promise<string[]> {
+        const dropdownLocator = page.locator(dropdownSelector);
+        const optionsLocator = page.locator(optionsSelector);
+
+        await dropdownLocator.waitFor({ state: 'visible' });
+        await dropdownLocator.scrollIntoViewIfNeeded();
+        await dropdownLocator.click();
+
+        await page.locator(optionsSelector).waitFor({ state: 'visible' });
+
+        const count = await optionsLocator.count();
+        if (count === 0) throw new Error("Dropdown is empty!");
+
+        const listValue: string[] = [];
+        for (let i = 0; i < count; i++) {
+            const option = optionsLocator.nth(i);
+            const value = await option.textContent();
+            listValue.push(value?.trim() || "");
+        }
+
+        return listValue;
     }
 
     /**

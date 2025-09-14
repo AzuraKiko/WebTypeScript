@@ -18,31 +18,27 @@ interface DerivativePageElements {
         orderButton: Locator;
     };
     form: {
-        stockCodeInput: Locator;
+        iconSearchStock: Locator;
+        inputSearchStock: Locator;
+        optionSearchStock: Locator;
         quantityInput: Locator;
         priceInput: Locator;
         priceCeil: Locator;
         priceFloor: Locator;
         priceReference: Locator;
+
         LO: Locator,
         ATO: Locator;
         ATC: Locator;
         MTL: Locator;
         MOK: Locator;
         MAK: Locator;
-        placeOrderButton: Locator;
+
+        longButton: Locator;
+        shortButton: Locator;
+
         confirmOrderButton: Locator;
-        reloadPurchasePower: Locator;
         closeOrderButton: Locator
-    };
-    orderBook: {
-        orderIndayTab: Locator;
-        assetTab: Locator;
-        toggleWaitingMatch: Locator;
-        cancelOrderButton: Locator;
-        modifyOrderButton: Locator;
-        switchQtyColumn: Locator;
-        dropdownQty: Locator;
     };
     messages: {
         toastMessage: Locator;
@@ -65,7 +61,7 @@ class DerivativePage extends BasePage {
     private static readonly MESSAGE_TIMEOUT = 3000;
 
     // Element groups for better organization
-    private elements!: OrderPageElements;
+    private elements!: DerivativePageElements;
 
     constructor(page: Page) {
         super(page);
@@ -83,33 +79,26 @@ class DerivativePage extends BasePage {
                 orderButton: page.locator('.footer-btn:has(.iOrder)')
             },
             form: {
-                buyTab: page.locator('.order-button.order-buy'),
-                sellTab: page.locator('.order-button.order-sell'),
-                stockCodeInput: page.getByPlaceholder('Mã CK', { exact: true }),
+                iconSearchStock: page.locator('.icon.iEdit'),
+                inputSearchStock: page.getByPlaceholder('Mã hợp đồng', { exact: true }),
+                optionSearchStock: page.locator('.list-unstyled'),
                 priceInput: page.getByPlaceholder('Giá x1000'),
-                quantityInput: page.getByPlaceholder('KL x1'),
-                priceCeil: page.locator('span.cursor-pointer.c').first(),
-                priceFloor: page.locator('span.cursor-pointer.f').first(),
-                priceReference: page.locator('span.cursor-pointer.r').first(),
-                ATO: page.locator('.btn.btn-info', { hasText: 'ATO' }),
-                ATC: page.locator('.btn.btn-info', { hasText: 'ATC' }),
-                MTL: page.locator('.btn.btn-info', { hasText: 'MTL' }),
-                PLO: page.locator('.btn.btn-info', { hasText: 'PLO' }),
-                MOK: page.locator('.btn.btn-info', { hasText: 'MOK' }),
-                MAK: page.locator('.btn.btn-info', { hasText: 'MAK' }),
-                placeOrderButton: page.getByRole('button', { name: 'Đặt lệnh' }),
-                confirmOrderButton: page.getByRole('button', { name: 'Xác nhận' }),
-                reloadPurchasePower: page.locator('.reset-order .iRefresh.icon'),
-                closeOrderButton: page.locator('.card-panel.order .icon.iClose')
-            },
-            orderBook: {
-                orderIndayTab: page.locator('.asset-panel .card-panel-header__title:nth-child(1)'),
-                assetTab: page.locator('.asset-panel .card-panel-header__title:nth-child(2)'),
-                toggleWaitingMatch: page.locator('.asset-panel .custom-checkbox'),
-                cancelOrderButton: page.locator('td:nth-child(14) > div > span:nth-child(2) > .icon').first(),
-                modifyOrderButton: page.locator('td:nth-child(14) > div > span:nth-child(2) > .icon').nth(1),
-                switchQtyColumn: page.locator('.asset-panel .icon.i3Dots'),
-                dropdownQty: page.locator('.header-dropdown__items')
+                quantityInput: page.locator('input.order-quantity'),
+                priceCeil: page.locator('span.c.text.text--sm').first(),
+                priceFloor: page.locator('span.f.text.text--sm').first(),
+                priceReference: page.locator('span.r.text.text--sm').first(),
+
+                LO: page.locator('.type.btn.btn--dark  ', { hasText: 'LO' }),
+                ATO: page.locator('.type.btn.btn--dark  ', { hasText: 'ATO' }),
+                ATC: page.locator('.type.btn.btn--dark  ', { hasText: 'ATC' }),
+                MTL: page.locator('.type.btn.btn--dark  ', { hasText: 'MTL' }),
+                MOK: page.locator('.type.btn.btn--dark  ', { hasText: 'MOK' }),
+                MAK: page.locator('.type.btn.btn--dark  ', { hasText: 'MAK' }),
+
+                longButton: page.locator('.btn.btn--buy:nth-child(1)'),
+                shortButton: page.locator('.btn.btn--buy:nth-child(2)'),
+                confirmOrderButton: page.locator('.btn-confirm'),
+                closeOrderButton: page.locator('.btn--cancel')
             },
             messages: {
                 toastMessage: page.locator('.notification.toast.top-right'),
@@ -131,33 +120,26 @@ class DerivativePage extends BasePage {
         this.orderButton = this.elements.navigation.orderButton;
 
         // Order Form
-        this.buyTab = this.elements.form.buyTab;
-        this.sellTab = this.elements.form.sellTab;
-        this.stockCodeInput = this.elements.form.stockCodeInput;
+        this.iconSearchStock = this.elements.form.iconSearchStock;
+        this.inputSearchStock = this.elements.form.inputSearchStock;
+        this.optionSearchStock = this.elements.form.optionSearchStock;
         this.quantityInput = this.elements.form.quantityInput;
         this.priceInput = this.elements.form.priceInput;
         this.priceCeil = this.elements.form.priceCeil;
         this.priceFloor = this.elements.form.priceFloor;
         this.priceReference = this.elements.form.priceReference;
+
+        this.LO = this.elements.form.LO;
         this.ATO = this.elements.form.ATO;
         this.ATC = this.elements.form.ATC;
         this.MTL = this.elements.form.MTL;
-        this.PLO = this.elements.form.PLO;
         this.MOK = this.elements.form.MOK;
         this.MAK = this.elements.form.MAK;
-        this.placeOrderButton = this.elements.form.placeOrderButton;
-        this.confirmOrderButton = this.elements.form.confirmOrderButton;
-        this.reloadPurchasePower = this.elements.form.reloadPurchasePower;
-        this.closeOrderButton = this.elements.form.closeOrderButton;
 
-        // Order Book
-        this.orderIndayTab = this.elements.orderBook.orderIndayTab;
-        this.assetTab = this.elements.orderBook.assetTab;
-        this.toggleWaitingMatch = this.elements.orderBook.toggleWaitingMatch;
-        this.cancelOrderButton = this.elements.orderBook.cancelOrderButton;
-        this.modifyOrderButton = this.elements.orderBook.modifyOrderButton;
-        this.switchQtyColumn = this.elements.orderBook.switchQtyColumn;
-        this.dropdownQty = this.elements.orderBook.dropdownQty;
+        this.longButton = this.elements.form.longButton;
+        this.shortButton = this.elements.form.shortButton;
+        this.confirmOrderButton = this.elements.form.confirmOrderButton;
+        this.closeOrderButton = this.elements.form.closeOrderButton;
 
         // Messages
         this.toastMessage = this.elements.messages.toastMessage;
@@ -168,31 +150,27 @@ class DerivativePage extends BasePage {
 
     // Legacy property declarations for backward compatibility
     orderButton!: Locator;
-    buyTab!: Locator;
-    sellTab!: Locator;
-    stockCodeInput!: Locator;
+    iconSearchStock!: Locator;
+    inputSearchStock!: Locator;
+    optionSearchStock!: Locator;
     quantityInput!: Locator;
     priceInput!: Locator;
     priceCeil!: Locator;
     priceFloor!: Locator;
     priceReference!: Locator;
+
+    LO!: Locator;
     ATO!: Locator;
     ATC!: Locator;
     MTL!: Locator;
-    PLO!: Locator;
     MOK!: Locator;
     MAK!: Locator;
-    placeOrderButton!: Locator;
+
+    longButton!: Locator;
+    shortButton!: Locator;
+
     confirmOrderButton!: Locator;
-    reloadPurchasePower!: Locator;
     closeOrderButton!: Locator;
-    orderIndayTab!: Locator;
-    assetTab!: Locator;
-    toggleWaitingMatch!: Locator;
-    cancelOrderButton!: Locator;
-    modifyOrderButton!: Locator;
-    switchQtyColumn!: Locator;
-    dropdownQty!: Locator;
 
     toastMessage!: Locator;
     titleMessage!: Locator;
@@ -225,12 +203,13 @@ class DerivativePage extends BasePage {
     // =================== ORDER FORM METHODS ===================
 
     /**
-     * Fill stock code in the form
+     * Select stock code in the form
      */
-    async fillStockCode(stockCode?: string): Promise<string> {
-        const code = stockCode || getRandomStockCode();
+    async selectStockCode(stockCode: string): Promise<string> {
+        const code: string = stockCode;
         try {
-            await FormUtils.fillField(this.stockCodeInput, code);
+            await FormUtils.selectOption(this.page, this.iconSearchStock, this.optionSearchStock, code);
+            await this.page.waitForTimeout(500);
             return code;
         } catch (error) {
             throw new Error(`Failed to fill stock code: ${error}`);
@@ -268,20 +247,17 @@ class DerivativePage extends BasePage {
         }
     }
 
-    async selectMarketPrice(priceType: 'ATO' | 'ATC' | 'MTL' | 'PLO' | 'MOK' | 'MAK'): Promise<void> {
+    async selectMarketPrice(priceType: 'ATO' | 'ATC' | 'MTL' | 'MOK' | 'MAK'): Promise<void> {
         try {
             const priceElements = {
                 ATO: this.ATO,
                 ATC: this.ATC,
                 MTL: this.MTL,
-                PLO: this.PLO,
                 MOK: this.MOK,
                 MAK: this.MAK
             };
 
             const selectedElement = priceElements[priceType];
-            await this.priceInput.focus();
-
             await expect(selectedElement).toBeVisible();
             await selectedElement.click();
         } catch (error) {
@@ -302,9 +278,13 @@ class DerivativePage extends BasePage {
     /**
      * Submit order form
      */
-    async submitOrder(): Promise<void> {
+    async submitOrder(side: 'long' | 'short'): Promise<void> {
         try {
-            await this.placeOrderButton.click();
+            if (side === 'long') {
+                await this.longButton.click();
+            } else {
+                await this.shortButton.click();
+            }
             await this.confirmOrderButton.click();
         } catch (error) {
             throw new Error(`Failed to submit order: ${error}`);
@@ -316,81 +296,52 @@ class DerivativePage extends BasePage {
     /**
      * Place a buy order with enhanced error handling
      */
-    async placeBuyOrder(orderData?: Partial<OrderFormData>): Promise<string> {
+    async placeOrder(side: 'long' | 'short', orderData?: Partial<OrderDerivativeFormData>): Promise<string> {
         const {
             stockCode,
-            quantity = OrderPage.DEFAULT_QUANTITY
+            quantity = DerivativePage.DEFAULT_QUANTITY
         } = orderData || {};
 
         try {
-            await this.buyTab.click();
             // Fill stock code
-            const usedStockCode = await this.fillStockCode(stockCode);
+            const usedStockCode: string = await this.selectStockCode(stockCode!);
 
-            // Select price (default to floor for buy orders)
-            await this.selectPriceOption('floor');
+            // Select price based on side: floor for long, ceil for short
+            const priceType = side === 'long' ? 'floor' : 'ceil';
+            await this.selectPriceOption(priceType);
 
             // Fill quantity
             await this.fillQuantity(quantity);
 
             // Submit order
-            await this.submitOrder();
+            await this.submitOrder(side);
 
             return usedStockCode;
         } catch (error) {
-            throw new Error(`Failed to place buy order: ${error}`);
+            throw new Error(`Failed to place ${side} order: ${error}`);
         }
     }
 
-    /**
-     * Place a sell order with enhanced error handling
-     */
-    async placeSellOrder(orderData?: Partial<OrderFormData>): Promise<string> {
-        const {
-            stockCode,
-            quantity = OrderPage.DEFAULT_QUANTITY
-        } = orderData || {};
 
-        try {
-            await this.sellTab.click();
-            // Fill stock code
-            const usedStockCode = await this.fillStockCode(stockCode);
+    // async placeSellOrderFromPorfolio(orderData?: Partial<OrderDerivativeFormData>): Promise<string> {
+    //     const {
+    //         quantity = DerivativePage.DEFAULT_QUANTITY
+    //     } = orderData || {};
+    //     await this.portfolioPage.navigateToPortfolio();
+    //     await this.portfolioPage.clickPorfolioRowByQuantity(quantity);
 
-            // Select price (default to ceil for sell orders)
-            await this.selectPriceOption('ceil');
+    //     const usedStockCode = await this.priceInput.textContent();
+    //     await this.selectPriceOption('ceil');
+    //     await this.fillQuantity(quantity);
+    //     await this.submitOrder('short');
 
-            // Fill quantity
-            await this.fillQuantity(quantity);
-
-            // Submit order
-            await this.submitOrder();
-
-            return usedStockCode;
-        } catch (error) {
-            throw new Error(`Failed to place sell order: ${error}`);
-        }
-    }
-
-    async placeSellOrderFromPorfolio(orderData?: Partial<OrderFormData>): Promise<string> {
-        const {
-            quantity = OrderPage.DEFAULT_QUANTITY
-        } = orderData || {};
-        await this.sellTab.click();
-        await this.portfolioPage.navigateToPortfolio();
-        await this.portfolioPage.clickPorfolioRowByQuantity(quantity);
-
-        const usedStockCode = await this.priceInput.textContent();
-        await this.selectPriceOption('ceil');
-        await this.fillQuantity(quantity);
-        await this.submitOrder();
-
-        return usedStockCode || '';
-    }
+    //     return usedStockCode || '';
+    // }
 
     /**
      * Place order with custom price
      */
-    async placeOrderWithCustomPrice(orderData: OrderFormData): Promise<string> {
+    async placeOrderWithCustomPrice(orderData: OrderDerivativeFormData): Promise<string> {
         const { stockCode, quantity, price, side } = orderData;
 
         if (!price) {
@@ -398,14 +349,7 @@ class DerivativePage extends BasePage {
         }
 
         try {
-            if (side === 'buy') {
-                await this.buyTab.click();
-            } else {
-                await this.sellTab.click();
-            }
-
-            // Fill stock code
-            const usedStockCode = await this.fillStockCode(stockCode);
+            const usedStockCode: string = await this.selectStockCode(stockCode!);
 
             // Set custom price
             await this.setCustomPrice(price);
@@ -413,8 +357,13 @@ class DerivativePage extends BasePage {
             // Fill quantity
             await this.fillQuantity(quantity);
 
-            // Submit order
-            await this.submitOrder();
+
+            if (side === 'long') {
+                await this.longButton.click();
+            } else {
+                await this.shortButton.click();
+            }
+            await this.submitOrder(side);
 
             return usedStockCode;
         } catch (error) {
@@ -425,24 +374,18 @@ class DerivativePage extends BasePage {
     /**
      * Place market order (using reference price)
      */
-    async placeMarketOrder(orderData?: Partial<OrderFormData>): Promise<string> {
+    async placeMarketOrder(orderData?: Partial<OrderDerivativeFormData>): Promise<string> {
         const {
             stockCode,
-            quantity = OrderPage.DEFAULT_QUANTITY,
+            quantity = DerivativePage.DEFAULT_QUANTITY,
             price,
             side
         } = orderData || {};
 
         try {
-            if (side === 'buy') {
-                await this.buyTab.click();
-            } else {
-                await this.sellTab.click();
-            }
-
             // Fill stock code
-            const usedStockCode = await this.fillStockCode(stockCode);
-            const priceType = price as 'ATO' | 'ATC' | 'MTL' | 'PLO' | 'MOK' | 'MAK';
+            const usedStockCode = await this.selectStockCode(stockCode!);
+            const priceType = price as 'ATO' | 'ATC' | 'MTL' | 'MOK' | 'MAK';
 
             // Select reference price for market order
             await this.selectMarketPrice(priceType);
@@ -450,145 +393,18 @@ class DerivativePage extends BasePage {
             // Fill quantity
             await this.fillQuantity(quantity);
 
-            // Submit order
-            await this.submitOrder();
+            if (side === 'long') {
+                await this.longButton.click();
+            } else {
+                await this.shortButton.click();
+            }
+            await this.submitOrder(side!);
 
             return usedStockCode;
         } catch (error) {
             throw new Error(`Failed to place market order: ${error}`);
         }
     }
-
-    // =================== MESSAGE VERIFICATION METHODS ===================
-
-    /**
-     * Verify message with improved error handling and timeout
-     */
-    async verifyMessageOrder(expectedTitle: string | string[], expectedDescription?: string | string[]): Promise<void> {
-        await FormUtils.verifyArrayMessage(expectedTitle, this.titleMessage, expectedDescription, this.descriptionMessage);
-    }
-
-    async closeToastMessageOrder(): Promise<void> {
-        await this.closeToastMessage.click();
-    }
-
-    async closeAllToastMessages(elements?: Locator): Promise<void> {
-        const toastElements = elements || this.page.locator('.notification.toast.toast-stacked.top-right, .notification.toast.top-right');
-        const count = await toastElements.count();
-
-        // If no toast messages found, skip silently
-        if (count === 0) {
-            return;
-        }
-
-        for (let i = count - 1; i >= 0; i--) {
-            const iconClose = toastElements.nth(i).locator('.toast-action .icon.iClose');
-
-            // Check if close button exists and is visible before clicking
-            if (await iconClose.isVisible({ timeout: 1000 }).catch(() => false)) {
-                try {
-                    await iconClose.click({ timeout: 2000 });
-                } catch (error) {
-                    // Skip silently if click fails
-                    continue;
-                }
-            }
-        }
-    }
-
-    /**
-     * Get current message content
-     */
-    async getCurrentMessageOrder(): Promise<void> {
-        await FormUtils.getCurrentMessage(this.titleMessage, this.descriptionMessage);
-    }
-
-    /**
-     * Wait for success message
-     */
-    async waitForSuccessMessageOrder(timeout: number = OrderPage.MESSAGE_TIMEOUT): Promise<boolean> {
-        return FormUtils.waitForSuccessMessage(this.titleMessage, timeout);
-    }
-
-    /**
-     * Wait for error message
-     */
-    async waitForErrorMessageOrder(timeout: number = OrderPage.MESSAGE_TIMEOUT): Promise<boolean> {
-        return FormUtils.waitForErrorMessage(this.titleMessage, timeout);
-    }
-
-    async updatePurchasePower(): Promise<void> {
-        await this.reloadPurchasePower.click();
-    }
-
-    async closeOrder(): Promise<void> {
-        await this.closeOrderButton.click();
-    }
-
-    // =================== ORDER IN DAY METHODS ===================
-
-    async openOrderInDayTab(): Promise<void> {
-        await this.orderIndayTab.click();
-    }
-
-    async switchToAssetTab(): Promise<void> {
-        await this.assetTab.click();
-    }
-
-    async reloadData(): Promise<void> {
-        await this.orderBook.reloadOrderBook();
-    }
-    async closeOrderInDay(): Promise<void> {
-        await this.page.locator('.card-panel.asset-panel .icon.iClose').click();
-    }
-    async verifyToggleWaitingMatchOn(): Promise<boolean> {
-        return await FormUtils.verifyToggle(this.toggleWaitingMatch, 'ON');
-    }
-
-    async verifyToggleWaitingMatchOff(): Promise<boolean> {
-        return await FormUtils.verifyToggle(this.toggleWaitingMatch, 'OFF');
-    }
-
-    async clickToggleWaitingMatch(): Promise<void> {
-        await this.toggleWaitingMatch.click();
-    }
-
-    async getOrderInDayRowData(rowIndex: number): Promise<any> {
-        await this.orderIndayTab.waitFor({ state: 'visible' });
-        const rows = await this.orderBook.tableRows.nth(rowIndex);
-        await rows.waitFor({ state: 'visible' });
-
-        const stockCode = await rows.locator('td:nth-child(1)').textContent();
-        const side = await rows.locator('td:nth-child(2)').textContent();
-        const price = await rows.locator('td:nth-child(3)').textContent();
-        const remainingQuantity = await rows.locator('td:nth-child(4)').textContent();
-        const status = await rows.locator('td:nth-child(5)').textContent();
-
-        await this.switchQtyColumn.click();
-        await FormUtils.selectOption(this.page, this.dropdownQty, this.dropdownQty, 'KL');
-
-        const quantity = await rows.locator('td:nth-child(4)').textContent();
-
-        await this.switchQtyColumn.click();
-        await FormUtils.selectOption(this.page, this.dropdownQty, this.dropdownQty, 'KL khớp');
-        const matchedQuantity = await rows.locator('td:nth-child(4)').textContent();
-
-        return {
-            stockCode,
-            side,
-            price,
-            quantity,
-            matchedQuantity,
-            remainingQuantity,
-            status
-        };
-    }
-
-    async getAllOrderInDayData(useScrolling: boolean = true): Promise<any[]> {
-        await this.orderIndayTab.waitFor({ state: 'visible' });
-        return await TableUtils.getAllTableData(this.page, this.orderBook.tableRows, this.page.locator(CommonSelectors.SCROLL_TABLE), this.getOrderInDayRowData, useScrolling);
-    }
-
 }
 
 export default DerivativePage;

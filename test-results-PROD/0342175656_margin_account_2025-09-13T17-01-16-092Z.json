@@ -51,8 +51,9 @@
       "feeVSD": "1",
       "expectedDisbursement": "0",
       "percentExpectedDisbursement": "0.00"
-    }
+    },
+    "cardHoldStockData": []
   },
-  "timestamp": "2025-09-11T18:28:54.845Z",
+  "timestamp": "2025-09-13T17:01:16.092Z",
   "testType": "margin_account"
 }

@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 import LoginPage from '../../page/ui/LoginPage';
 import OrderBook from '../../page/ui/OrderBook';
 import { attachScreenshot } from '../../helpers/reporterHelper';
-import { TEST_CONFIG } from '../utils/testConfig';
 
 test.describe('OrderBook Functionality Tests', () => {
     let loginPage: LoginPage;
@@ -134,8 +133,9 @@ test.describe('OrderBook Functionality Tests', () => {
 
         if (hasData) {
             // Check if cancel and modify buttons are visible for first order
-            const cancelButtonExists = await orderBook.cancelOrderButton(0).isVisible();
-            const modifyButtonExists = await orderBook.modifyOrderButton(0).isVisible();
+            const actionButtons = await orderBook.hasActionButtons(0);
+            const cancelButtonExists = actionButtons.hasCancel;
+            const modifyButtonExists = actionButtons.hasModify;
 
             console.log(`Cancel button visible: ${cancelButtonExists}`);
             console.log(`Modify button visible: ${modifyButtonExists}`);

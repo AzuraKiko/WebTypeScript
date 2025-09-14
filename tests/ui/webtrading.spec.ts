@@ -1,5 +1,4 @@
 import { test, expect, Page } from '@playwright/test';
-import { wait } from '../../helpers/testUtils';
 
 // Constants
 const URL = 'https://trade.pinetree.vn/#/home/bang-gia/vn30';
@@ -45,7 +44,7 @@ async function login(page: Page) {
   await page.fill(SELECTORS.passwordInput, LOGIN_CREDENTIALS.password);
   await page.click(SELECTORS.buttonSubmit);
   await page.waitForTimeout(10000);
-  
+
   // Handle 2FA dialog if present
   const dialogSpan = page.locator(SELECTORS.closeDialog);
   if (await dialogSpan.isVisible()) {
@@ -62,11 +61,11 @@ function getMatrixCode(coord: string) {
 async function handleMatrixOTP(page: Page) {
   const coords = await page.locator('p.fw-500').allTextContents();
   const values = coords.map((coord: string) => getMatrixCode(coord.trim()));
-  
+
   for (let i = 0; i < values.length; i++) {
     await page.locator(`input[name="inputEl${i + 1}"]`).fill(values[i]);
   }
-  
+
   await page.click(SELECTORS.confirmButton);
 }
 
@@ -82,20 +81,20 @@ test.describe('Web Trading daily test', () => {
     // Place order
     const randomCode = STOCK_CODES[Math.floor(Math.random() * STOCK_CODES.length)];
     await page.fill(SELECTORS.stockCodeInput, randomCode);
-    
+
     const target = page.locator('span.cursor-pointer.f');
     await expect(target).toHaveCount(1);
     await target.scrollIntoViewIfNeeded();
     await expect(target).toBeVisible();
     await target.dblclick();
-    
+
     await page.fill(SELECTORS.quantityInput, '1');
     await page.click(SELECTORS.orderButton);
     await page.click(SELECTORS.confirmButton);
 
     // Handle error message or cancel order
-    const messageError = page.locator('#root div').filter({ 
-      hasText: 'Đặt lệnh không thành côngError: Hệ thống sẽ nhận lệnh cho ngày giao dịch tiếp' 
+    const messageError = page.locator('#root div').filter({
+      hasText: 'Đặt lệnh không thành côngError: Hệ thống sẽ nhận lệnh cho ngày giao dịch tiếp'
     }).nth(2);
 
     if (await messageError.isVisible()) {
@@ -111,7 +110,7 @@ test.describe('Web Trading daily test', () => {
     // Verify market info
     await expect(page.getByRole('cell', { name: 'ACB' }).locator('div')).toBeVisible();
     await expect(page.getByRole('cell', { name: 'BID' }).locator('div')).toBeVisible();
-    
+
     // Verify market indices
     await expect(page.getByText('VNI')).toBeVisible();
     await expect(page.locator('span').filter({ hasText: 'HNX' })).toBeVisible();

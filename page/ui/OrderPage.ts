@@ -589,7 +589,6 @@ class OrderPage extends BasePage {
         await this.orderIndayTab.waitFor({ state: 'visible' });
         return await TableUtils.getAllTableData(this.page, this.orderBook.tableRows, this.page.locator(CommonSelectors.SCROLL_TABLE), this.getOrderInDayRowData, useScrolling);
     }
-
 }
 
 export default OrderPage;

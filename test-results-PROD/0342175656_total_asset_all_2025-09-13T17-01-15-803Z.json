@@ -5,15 +5,15 @@
   },
   "results": {
     "card1": {
-      "nav": "92,543",
-      "gainLoss": "-2,832",
-      "percentGainLoss": "-7.65",
+      "nav": "92,783",
+      "gainLoss": "-2,592",
+      "percentGainLoss": "-7.00",
       "widthdrawable": "58,363"
     },
     "card2Data": {
-      "normalAccount": "72,545",
-      "gainLossNormal": "-2,832",
-      "percentGainLossNormal": "-7.65",
+      "normalAccount": "72,785",
+      "gainLossNormal": "-2,592",
+      "percentGainLossNormal": "-7.00",
       "marginAccount": "19,998",
       "gainLossMargin": "0",
       "percentGainLossMargin": "0",
@@ -25,26 +25,28 @@
       "percentGainLossFolio": "0"
     },
     "card2Chart": {
-      "nav": "92,543",
-      "normalAccount": "72,545",
-      "percentNormalAccount": "78.39",
+      "nav": "92,783",
+      "normalAccount": "72,785",
+      "percentNormalAccount": "78.45",
       "marginAccount": "19,998",
-      "percentMarginAccount": "21.61",
+      "percentMarginAccount": "21.55",
       "derivativeAccount": "0",
       "percentDerivativeAccount": "0.00",
       "folioAccount": "0",
       "percentFolioAccount": "0.00"
     },
     "card3Asset": {
-      "totalAsset": "92,545",
+      "totalAsset": "92,785",
       "cash": "58,365",
-      "percentCash": "63.07",
-      "stock": "34,180",
-      "percentStock": "36.93",
+      "percentCash": "62.90",
+      "stock": "34,420",
+      "percentStock": "37.10",
       "dividend": "0",
       "percentDividend": "0.00",
       "PineB": "0",
-      "percentPineB": "0.00"
+      "percentPineB": "0.00",
+      "drvtVsdAmt": "0",
+      "percentDrvtVsdAmt": "0.00"
     },
     "card3Debt": {
       "debt": "2",
@@ -54,6 +56,6 @@
       "percentMarginDebt": "0.00"
     }
   },
-  "timestamp": "2025-09-11T18:28:54.455Z",
+  "timestamp": "2025-09-13T17:01:15.802Z",
   "testType": "total_asset_all"
 }

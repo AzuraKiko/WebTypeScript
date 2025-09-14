@@ -708,6 +708,14 @@ class OrderBook extends BasePage {
         }
     }
 
+    async isOrderBookVisible(): Promise<boolean> {
+        try {
+            return await this.orderIndayTab.isVisible({ timeout: OrderBook.SHORT_TIMEOUT });
+        } catch {
+            return false;
+        }
+    }
+
     async isTabActive(tabName: TabName): Promise<boolean> {
         const tabMap = {
             inday: this.orderIndayTab,
