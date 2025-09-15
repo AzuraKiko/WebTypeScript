@@ -1,0 +1,87 @@
+{
+  "config": {
+    "url": "http://10.8.90.17:8888",
+    "user": "010C467888"
+  },
+  "results": {
+    "card1": {
+      "navMargin": "5,845,782,835",
+      "gainLossMargin": "-1,521,658,128",
+      "percentGainLossMargin": "-20.12",
+      "widthdrawableMargin": "0",
+      "rtt": "95.30"
+    },
+    "cardCashData": {
+      "totalAssetMargin": "6,041,000,000",
+      "cashMargin": "0",
+      "percentCash": "0.00",
+      "balance": "0",
+      "advanceAvail": "0",
+      "maxAdvanceAvail": "0",
+      "haveAdvanceAvail": "0",
+      "dividendAndProfitBond": "0",
+      "totalBuyWaitMatch": "0",
+      "buyWaitMatchByCash": "0",
+      "buyWaitMatchByLoan": "0",
+      "cashBuyNotMatchT0": "0",
+      "cashTichLuy": "0",
+      "taxFeePSWaitT0": "0"
+    },
+    "cardStockData": {
+      "stockMargin": "6,041,000,000",
+      "percentStock": "100.00",
+      "totalValueStock": "6,041,000,000",
+      "availableStock": "6,041,000,000",
+      "waitTradingStock": "0",
+      "retrictStock": "0",
+      "restrictStockWaitTrading": "0",
+      "dividendStock": "0",
+      "stockBuyWaitReturn": "0",
+      "sellMatchT0": "0"
+    },
+    "cardDebtData": {
+      "totalDebtMargin": "195,217,165",
+      "totalMargin": "194,916,385",
+      "percentTotalMargin": "99.85",
+      "originMargin": "188,288,625",
+      "interestMargin": "6,627,760",
+      "totalFeeTrading": "300,780",
+      "percentTotalFeeTrading": "0.15",
+      "feeSMS": "9,680",
+      "feeVSD": "291,100",
+      "expectedDisbursement": "0",
+      "percentExpectedDisbursement": "0.00"
+    },
+    "cardHoldStockData": [
+      {
+        "symbol": "PVD",
+        "marketValue": "4,028,000,000",
+        "capitalValue": "5,541,051,828",
+        "qty": "190,000",
+        "capitalPrice": "29.16",
+        "gainLoss": "-1,513,051,828",
+        "percentGainLoss": "-27.31"
+      },
+      {
+        "symbol": "SCS",
+        "marketValue": "2,013,000,000",
+        "capitalValue": "2,021,606,300",
+        "qty": "30,000",
+        "capitalPrice": "67.39",
+        "gainLoss": "-8,606,300",
+        "percentGainLoss": "-0.43"
+      },
+      {
+        "symbol": "TOTAL",
+        "marketValue": "6,041,000,000",
+        "capitalValue": "7,562,658,128",
+        "qty": "0",
+        "capitalPrice": "0.00",
+        "gainLoss": "-1,521,658,128",
+        "percentGainLoss": "-20.12"
+      }
+    ]
+  },
+  "timestamp": "2025-09-15T07:48:16.364Z",
+  "testType": "margin_account"
+}
