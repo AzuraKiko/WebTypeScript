@@ -1,0 +1,150 @@
+{
+  "config": {
+    "url": "http://10.8.90.17:8888",
+    "user": "trang2601"
+  },
+  "results": {
+    "card1": {
+      "navMargin": "2,312,269,097",
+      "gainLossMargin": "-322,389,166",
+      "percentGainLossMargin": "-15.04",
+      "widthdrawableMargin": "492,228,247",
+      "rtt": "100.00"
+    },
+    "cardCashData": {
+      "totalAssetMargin": "2,312,278,552",
+      "cashMargin": "491,758,552",
+      "percentCash": "21.27",
+      "balance": "1,521,907,504",
+      "advanceAvail": "0",
+      "maxAdvanceAvail": "0",
+      "haveAdvanceAvail": "0",
+      "dividendAndProfitBond": "0",
+      "totalBuyWaitMatch": "1,030,148,952",
+      "buyWaitMatchByCash": "1,030,148,952",
+      "buyWaitMatchByLoan": "0",
+      "cashBuyNotMatchT0": "0",
+      "cashTichLuy": "0",
+      "taxFeePSWaitT0": "0"
+    },
+    "cardStockData": {
+      "stockMargin": "1,820,520,000",
+      "percentStock": "78.73",
+      "totalValueStock": "104,465,000",
+      "availableStock": "104,465,000",
+      "waitTradingStock": "0",
+      "retrictStock": "0",
+      "restrictStockWaitTrading": "0",
+      "dividendStock": "0",
+      "stockBuyWaitReturn": "0",
+      "sellMatchT0": "0"
+    },
+    "cardDebtData": {
+      "totalDebtMargin": "9,455",
+      "totalMargin": "1",
+      "percentTotalMargin": "0.01",
+      "originMargin": "0",
+      "interestMargin": "1",
+      "totalFeeTrading": "9,454",
+      "percentTotalFeeTrading": "99.99",
+      "feeSMS": "6,160",
+      "feeVSD": "3,294",
+      "expectedDisbursement": "0",
+      "percentExpectedDisbursement": "0.00"
+    },
+    "cardHoldStockData": [
+      {
+        "symbol": "ANV",
+        "marketValue": "2,290,000",
+        "capitalValue": "1,400,420",
+        "qty": "100",
+        "capitalPrice": "14.00",
+        "gainLoss": "889,580",
+        "percentGainLoss": "63.52"
+      },
+      {
+        "symbol": "ASG",
+        "marketValue": "5,220,000",
+        "capitalValue": "4,901,470",
+        "qty": "300",
+        "capitalPrice": "16.34",
+        "gainLoss": "318,530",
+        "percentGainLoss": "6.50"
+      },
+      {
+        "symbol": "CEO",
+        "marketValue": "1,910,000",
+        "capitalValue": "1,350,405",
+        "qty": "100",
+        "capitalPrice": "13.50",
+        "gainLoss": "559,595",
+        "percentGainLoss": "41.44"
+      },
+      {
+        "symbol": "GKM",
+        "marketValue": "440,000",
+        "capitalValue": "360,108",
+        "qty": "100",
+        "capitalPrice": "3.60",
+        "gainLoss": "79,892",
+        "percentGainLoss": "22.19"
+      },
+      {
+        "symbol": "HDB",
+        "marketValue": "44,190,000",
+        "capitalValue": "36,566,851",
+        "qty": "1,700",
+        "capitalPrice": "20.31",
+        "gainLoss": "7,623,149",
+        "percentGainLoss": "20.85"
+      },
+      {
+        "symbol": "LPB",
+        "marketValue": "70,000",
+        "capitalValue": "60,619",
+        "qty": "2",
+        "capitalPrice": "30.31",
+        "gainLoss": "9,381",
+        "percentGainLoss": "15.48"
+      },
+      {
+        "symbol": "SSI",
+        "marketValue": "38,400,000",
+        "capitalValue": "27,068,119",
+        "qty": "1,200",
+        "capitalPrice": "22.56",
+        "gainLoss": "11,331,881",
+        "percentGainLoss": "41.86"
+      },
+      {
+        "symbol": "VCB",
+        "marketValue": "1,713,600,000",
+        "capitalValue": "2,060,297,904",
+        "qty": "0",
+        "capitalPrice": "61.32",
+        "gainLoss": "-346,697,904",
+        "percentGainLoss": "-16.83"
+      },
+      {
+        "symbol": "VHM",
+        "marketValue": "14,400,000",
+        "capitalValue": "10,903,270",
+        "qty": "200",
+        "capitalPrice": "54.52",
+        "gainLoss": "3,496,730",
+        "percentGainLoss": "32.07"
+      },
+      {
+        "symbol": "TOTAL",
+        "marketValue": "1,820,520,000",
+        "capitalValue": "2,142,909,166",
+        "qty": "0",
+        "capitalPrice": "0.00",
+        "gainLoss": "-322,389,166",
+        "percentGainLoss": "-15.04"
+      }
+    ]
+  },
+  "timestamp": "2025-09-15T07:48:15.802Z",
+  "testType": "margin_account"
+}

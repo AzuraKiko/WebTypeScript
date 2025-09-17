@@ -1,0 +1,60 @@
+{
+  "config": {
+    "url": "http://10.8.90.17:8888",
+    "user": "010C467888"
+  },
+  "results": {
+    "card1": {
+      "navNormal": "0",
+      "gainLossNormal": "0",
+      "percentGainLossNormal": "0",
+      "widthdrawableNormal": "0"
+    },
+    "cardCashData": {
+      "totalAssetNormal": "0",
+      "cashNormal": "0",
+      "percentCash": "0",
+      "balance": "0",
+      "advanceAvail": "0",
+      "maxAdvanceAvail": "0",
+      "haveAdvanceAvail": "0",
+      "dividendAndProfitBond": "0",
+      "totalBuyWaitMatch": "0",
+      "buyWaitMatchByCash": "0",
+      "buyWaitMatchByLoan": "0",
+      "cashBuyNotMatchT0": "0",
+      "cashTichLuy": "0",
+      "taxFeePSWaitT0": "0"
+    },
+    "cardStockData": {
+      "stockNormal": "0",
+      "percentStock": "0",
+      "totalValueStock": "0",
+      "availableStock": "0",
+      "waitTradingStock": "0",
+      "retrictStock": "0",
+      "restrictStockWaitTrading": "0",
+      "dividendStock": "0",
+      "stockBuyWaitReturn": "0",
+      "sellMatchT0": "0"
+    },
+    "cardPineBData": {
+      "pineB": "0",
+      "pineBPercent": "0",
+      "originInvest": "0",
+      "traiTucDaNhan": "0",
+      "traiTucSeNhan": "0",
+      "tienNhanDaoHan": "0"
+    },
+    "cardDebtData": {
+      "debtNormal": "0",
+      "feeSMS": "0",
+      "percentFeeSMS": "0",
+      "feeVSD": "0",
+      "percentFeeVSD": "0"
+    },
+    "cardHoldStockData": []
+  },
+  "timestamp": "2025-09-15T07:48:16.300Z",
+  "testType": "normal_account"
+}

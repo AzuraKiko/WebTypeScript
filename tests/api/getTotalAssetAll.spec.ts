@@ -321,42 +321,46 @@ async function runAssetTestsForUser(userConfig: ENVConfig) {
 
         //--------------------------------------------------------------------------------------------------------------------------
         // Test 4: Folio account details
-        console.log("Running folio account test...");
-        const folioResponse = await assetApi.getTotalAssetAll({
-            ...baseParams,
-            subAcntNo: loginResponse.subAcntFolio,
-            rqId: uuidv4(),
-        });
-        expect(folioResponse).toBeDefined();
-        expect(folioResponse.status).toBe(200);
+        if (loginResponse.subAcntFolio) {
+            console.log("Running folio account test...");
+            const folioResponse = await assetApi.getTotalAssetAll({
+                ...baseParams,
+                subAcntNo: loginResponse.subAcntFolio,
+                rqId: uuidv4(),
+            });
+            expect(folioResponse).toBeDefined();
+            expect(folioResponse.status).toBe(200);
 
-        const pineFolioData: any = folioResponse.data.data;
-        const pineFolioResult: any = ApiAssetUtils.follioAccountData(pineFolioData);
+            const pineFolioData: any = folioResponse.data.data;
+            const pineFolioResult: any = ApiAssetUtils.follioAccountData(pineFolioData);
 
-        const pineFolioPositionResults: any = await ApiAssetUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntFolio);
-        pineFolioResult.gainLossFolio = pineFolioPositionResults.gainLoss;
-        pineFolioResult.percentGainLossFolio = pineFolioPositionResults.percentGainLoss;
-        const pineFolioHoldStockResults: any = await ApiAssetUtils.getHoldStockData(positionsApi, baseParams, loginResponse.subAcntFolio);
-        pineFolioResult.holdStock = pineFolioHoldStockResults;
-        const sumPineFolioCash: number = ApiAssetUtils.safeNumber(pineFolioData.balance) +
-            ApiAssetUtils.safeNumber(pineFolioData.advanceAvail) +
-            ApiAssetUtils.safeNumber(pineFolioData.cashDiv) -
-            (ApiAssetUtils.safeNumber(pineFolioData.buyT0) - ApiAssetUtils.safeNumber(pineFolioData.exptDisbm)) +
-            ApiAssetUtils.safeNumber(pineFolioData.ipCash) -
-            ApiAssetUtils.safeNumber(pineFolioData.drvtOdFee);
-        const expectedPineFolioTotalCash: number = ApiAssetUtils.safeNumber(pineFolioData.cash)
-        expect(sumPineFolioCash).toEqual(expectedPineFolioTotalCash);
+            const pineFolioPositionResults: any = await ApiAssetUtils.processPositionData(positionsApi, baseParams, loginResponse.subAcntFolio);
+            pineFolioResult.gainLossFolio = pineFolioPositionResults.gainLoss;
+            pineFolioResult.percentGainLossFolio = pineFolioPositionResults.percentGainLoss;
+            const pineFolioHoldStockResults: any = await ApiAssetUtils.getHoldStockData(positionsApi, baseParams, loginResponse.subAcntFolio);
+            pineFolioResult.holdStock = pineFolioHoldStockResults;
+            const sumPineFolioCash: number = ApiAssetUtils.safeNumber(pineFolioData.balance) +
+                ApiAssetUtils.safeNumber(pineFolioData.advanceAvail) +
+                ApiAssetUtils.safeNumber(pineFolioData.cashDiv) -
+                (ApiAssetUtils.safeNumber(pineFolioData.buyT0) - ApiAssetUtils.safeNumber(pineFolioData.exptDisbm)) +
+                ApiAssetUtils.safeNumber(pineFolioData.ipCash) -
+                ApiAssetUtils.safeNumber(pineFolioData.drvtOdFee);
+            const expectedPineFolioTotalCash: number = ApiAssetUtils.safeNumber(pineFolioData.cash)
+            expect(sumPineFolioCash).toEqual(expectedPineFolioTotalCash);
 
-        const sumPineFolioDebt: number = ApiAssetUtils.safeNumber(pineFolioData.smsFee) + ApiAssetUtils.safeNumber(pineFolioData.depoFee);
-        const expectedPineFolioTotalDebt: number = ApiAssetUtils.safeNumber(pineFolioData.debt);
-        expect(sumPineFolioDebt).toEqual(expectedPineFolioTotalDebt);
+            const sumPineFolioDebt: number = ApiAssetUtils.safeNumber(pineFolioData.smsFee) + ApiAssetUtils.safeNumber(pineFolioData.depoFee);
+            const expectedPineFolioTotalDebt: number = ApiAssetUtils.safeNumber(pineFolioData.debt);
+            expect(sumPineFolioDebt).toEqual(expectedPineFolioTotalDebt);
 
-        // Build and log card data
-        const cardDataPineFolio: any = ApiAssetUtils.buildFolioAccountData(pineFolioResult);
-        ApiAssetUtils.logFollioAccountData(cardDataPineFolio);
+            // Build and log card data
+            const cardDataPineFolio: any = ApiAssetUtils.buildFolioAccountData(pineFolioResult);
+            ApiAssetUtils.logFollioAccountData(cardDataPineFolio);
 
-        // Save results to JSON file
-        saveENVResults(userConfig, cardDataPineFolio, "pine_folio_account");
+            // Save results to JSON file
+            saveENVResults(userConfig, cardDataPineFolio, "pine_folio_account");
+        } else {
+            console.log("No folio account");
+        }
 
         console.log(`=== Tests completed successfully for user: ${userConfig.user} ===\n`);
 
