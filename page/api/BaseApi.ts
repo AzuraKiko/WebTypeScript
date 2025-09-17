@@ -13,6 +13,7 @@ export interface BaseRequestParams {
     acntNo: string;
     subAcntNo: string | null;
     rqId: string;
+    cif?: string;
 }
 
 export interface ApiResponse {
@@ -32,6 +33,17 @@ export interface BasePayload {
     data: {
         acntNo: string;
         subAcntNo: string | null;
+        [key: string]: any;
+    };
+}
+
+export interface BasePayloadNotLogin {
+    group: string;
+    cmd: string;
+    rqId: string;
+    channel: string;
+    data: {
+        langTp: string;
         [key: string]: any;
     };
 }
@@ -92,7 +104,7 @@ export abstract class BaseApi {
      * @param payload - Request payload
      * @returns Promise<any> - API response
      */
-    protected async makeRequest(payload: BasePayload): Promise<any> {
+    protected async makeRequest(payload: BasePayload | BasePayloadNotLogin): Promise<any> {
         try {
             const response = await this.apiHelper.post(
                 BaseApi.SERVLET_ENDPOINT,
@@ -114,7 +126,7 @@ export abstract class BaseApi {
      * @param payload - Request payload
      * @returns Promise<ApiResponse> - Standardized API response
      */
-    protected async executeApiCall(payload: BasePayload): Promise<ApiResponse> {
+    protected async executeApiCall(payload: BasePayload | BasePayloadNotLogin): Promise<ApiResponse> {
         try {
             const response = await this.makeRequest(payload);
 
@@ -161,4 +173,22 @@ export abstract class BaseApi {
             },
         };
     }
+
+    protected buildBasePayloadNotLogin(
+        params: BaseRequestParams,
+        cmd: string,
+        additionalData: Record<string, any> = {}
+    ): BasePayloadNotLogin {
+        return {
+            data: {
+                langTp: "vi",
+                ...additionalData,
+            },
+            group: BaseApi.DEFAULT_GROUP,
+            cmd: cmd,
+            rqId: params.rqId,
+            channel: BaseApi.DEFAULT_CHANNEL,
+        };
+    }
 }
+
