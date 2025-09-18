@@ -10,6 +10,7 @@ import BondLmtValApi from "../page/api/getBondLmtVal";
 import BondProRtApi from "../page/api/getBondProRt";
 import BondTermsApi from "../page/api/getBondTerms";
 import BondDetailApi from "../page/api/getBondDetail";
+import BondGuaranteeApi from "../page/api/getBondGuarantee";
 import { NumberValidator } from "./validationUtils";
 
 // Constants for calculations and formatting
@@ -22,39 +23,68 @@ export interface BondListData {
     bondCode: string; // mã trái phiếu
     issuerNm: string; // tổ chức phát hành
     issuesTypeNm: string; // hình thức phát hành (Public, Private)
+    listTpNm?: string; // Listed/ Private Bond
     proInvtYN: string; // nhà đầu tư chuyên nghiệp
     productTp: string; // loại trái phiếu ( 1-Fix, 2-Flex, 3-Growth)
     guaranteeYN: string; // có bảo lãnh không
     termName: string; // thời hạn
-    remainTenor: number; // tính từ ngày hiện tại đến đáo hạn (tháng)
     intRate: number; // lãi suất dự kiến
     leg1Prc: number; // giá mua trái phiếu
     leg2Prc: number; // giá bán trái phiếu
     selRemain: number; // KL có sẵn
-
-
-    cpnrt: number; // Coupon hiện tại
-    url: string; // url document bond
-    freq: number; // tần suất coupon (1 time/year)
-    parValue: number; // mệnh giá
-    maxInvtQtyPerCust: number; // số lượng tối đa đầu tư cho mỗi khách hàng
-    minInvtQtyPerOrdr: number; // số lượng tối thiểu đầu tư cho mỗi lệnh
-    issudt: string; // ngày phát hành
-    exprdt: string; // ngày đáo hạn
+    url?: string; // url document bond
+    maxInvtQtyPerCust?: number; // số lượng tối đa đầu tư cho mỗi khách hàng
+    minInvtQtyPerOrdr?: number; // số lượng tối thiểu đầu tư cho mỗi lệnh
 }
 
 export interface BondDetailData {
+    remainTenor: number; // tính từ ngày hiện tại đến đáo hạn (tháng)
+    cpnrt: number; // Coupon hiện tại
+    freq: number; // tần suất coupon (1 time/year)
+    parValue: number; // mệnh giá
+    issudt: string; // ngày phát hành
+    exprdt: string; // ngày đáo hạn
+
     bondCode: string; // mã trái phiếu
     issuerNm: string; // tổ chức phát hành
     issuesTypeNm: string; // hình thức phát hành (Public, Private)
     proInvtYN: string; // nhà đầu tư chuyên nghiệp
-    productTp: string; // loại trái phiếu ( 1-Fix, 2-Flex, 3-Growth)
+    grntdYn: string; // có bảo lãnh không
 }
 
 export interface BaseApiParams {
     user: string;
     session: string;
     acntNo: string;
+}
+
+export interface BondPromotionNAV {
+    frNav?: number;
+    toNav?: number;
+    proRt: number;
+}
+
+export interface BondTerms {
+    label?: string;
+    value?: string;
+}
+
+export interface BondIssuer {
+    id?: string;
+    item?: string;
+}
+
+export interface BondLimitVal {
+    buyLmt: number; // Hạn mức mua tối đa
+    buyLmtRm: number; // Hạn mức mua còn lại
+    pineBondVal?: number; // Giá trị Pine Bond
+}
+
+export interface BondGuarantee {
+    assetTp: string;
+    valDate: string;
+    rate: number;
+    valAmt: number;
 }
 
 /**

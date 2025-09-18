@@ -12,12 +12,12 @@ export const UAT_CONFIGS: any = [
         "pass": "123456",
         "pass_encrypt": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI="
     },
-    // {
-    //     "url": "http://10.8.90.17:8888",
-    //     "user": "010C000200",
-    //     "pass": "123456",
-    //     "pass_encrypt": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI="
-    // },
+    {
+        "url": "http://10.8.90.17:8888",
+        "user": "010C000200",
+        "pass": "123456",
+        "pass_encrypt": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI="
+    },
     {
         "url": "http://10.8.90.17:8888",
         "user": "trang2601",
@@ -27,6 +27,12 @@ export const UAT_CONFIGS: any = [
     {
         "url": "http://10.8.90.17:8888",
         "user": "010C467888",
+        "pass": "123456",
+        "pass_encrypt": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI="
+    },
+    {
+        "url": "http://10.8.90.17:8888",
+        "user": "Tiendev",
         "pass": "123456",
         "pass_encrypt": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI="
     },
