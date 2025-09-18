@@ -9,6 +9,7 @@ import BondIssuerListApi from "../page/api/getBondIssuerList";
 import BondLmtValApi from "../page/api/getBondLmtVal";
 import BondProRtApi from "../page/api/getBondProRt";
 import BondTermsApi from "../page/api/getBondTerms";
+import BondDetailApi from "../page/api/getBondDetail";
 import { NumberValidator } from "./validationUtils";
 
 // Constants for calculations and formatting
@@ -18,8 +19,38 @@ const PERCENTAGE_MULTIPLIER = 100;
 
 // Type definitions for better type safety
 export interface BondListData {
+    bondCode: string; // mã trái phiếu
+    issuerNm: string; // tổ chức phát hành
+    issuesTypeNm: string; // hình thức phát hành (Public, Private)
+    proInvtYN: string; // nhà đầu tư chuyên nghiệp
+    productTp: string; // loại trái phiếu ( 1-Fix, 2-Flex, 3-Growth)
+    guaranteeYN: string; // có bảo lãnh không
+    termName: string; // thời hạn
+    remainTenor: number; // tính từ ngày hiện tại đến đáo hạn (tháng)
+    intRate: number; // lãi suất dự kiến
+    leg1Prc: number; // giá mua trái phiếu
+    leg2Prc: number; // giá bán trái phiếu
+    selRemain: number; // KL có sẵn
 
+
+    cpnrt: number; // Coupon hiện tại
+    url: string; // url document bond
+    freq: number; // tần suất coupon (1 time/year)
+    parValue: number; // mệnh giá
+    maxInvtQtyPerCust: number; // số lượng tối đa đầu tư cho mỗi khách hàng
+    minInvtQtyPerOrdr: number; // số lượng tối thiểu đầu tư cho mỗi lệnh
+    issudt: string; // ngày phát hành
+    exprdt: string; // ngày đáo hạn
 }
+
+export interface BondDetailData {
+    bondCode: string; // mã trái phiếu
+    issuerNm: string; // tổ chức phát hành
+    issuesTypeNm: string; // hình thức phát hành (Public, Private)
+    proInvtYN: string; // nhà đầu tư chuyên nghiệp
+    productTp: string; // loại trái phiếu ( 1-Fix, 2-Flex, 3-Growth)
+}
+
 export interface BaseApiParams {
     user: string;
     session: string;
@@ -69,65 +100,32 @@ export class ApiAssetUtils {
     /**
      * Generate common account calculations
      */
-    private static generateCommonAccountData(data: AssetData): CommonAccountData {
+    private static getBondInfo(data: BondListData): BondListData {
         return {
-            nav: this.formatWithCommas(data.realAsst),
-            gainLoss: DEFAULT_ZERO_VALUE,
-            percentGainLoss: DEFAULT_ZERO_VALUE,
-            widthdrawable: this.formatWithCommas(data.wdrawAvail),
+            bondCode: data.bondCode,
+            issuerNm: data.issuerNm,
+            issuesTypeNm: data.issuesTypeNm,
+            proInvtYN: data.proInvtYN,
+            productTp: data.productTp,
+            guaranteeYN: data.guaranteeYN,
+            termName: data.termName,
+            remainTenor: data.remainTenor,
+            intRate: data.intRate,
+            leg1Prc: data.leg1Prc,
+            leg2Prc: data.leg2Prc,
+            selRemain: data.selRemain,
 
-            totalAsset: this.formatWithCommas(data.totAsst),
-            cash: this.formatWithCommas(data.cash),
-            percentCash: this.calculatePercentage(data.cash, data.totAsst),
-            balance: this.formatWithCommas(data.balance),
-            advanceAvail: this.formatWithCommas(data.advanceAvail),
-            maxAdvanceAvail: this.formatWithCommas(data.receiveAmt),
-            haveAdvanceAvail: this.formatWithCommas(data.advanceLoan),
-            dividendAndProfitBond: this.formatWithCommas(data.cashDiv),
-            totalBuyWaitMatch: this.formatWithCommas(data.buyT0),
-            buyWaitMatchByCash: this.formatWithCommas(this.safeNumber(data.buyT0) - this.safeNumber(data.exptDisbm)),
-            buyWaitMatchByLoan: this.formatWithCommas(data.exptDisbm),
-            cashBuyNotMatchT0: this.formatWithCommas(data.tdtBuyAmtNotMatch),
-            cashTichLuy: this.formatWithCommas(data.ipCash),
-            taxFeePSWaitT0: this.formatWithCommas(data.drvtOdFee),
-
-            stock: this.formatWithCommas(data.stockValue),
-            percentStock: this.calculatePercentage(data.stockValue, data.totAsst),
-            totalValueStock: this.formatWithCommas(data.totalStock),
-            availableStock: this.formatWithCommas(data.tavlStockValue),
-            waitTradingStock: this.formatWithCommas(data.ptavlStockValue),
-            retrictStock: this.formatWithCommas(data.tartStockValue),
-            restrictStockWaitTrading: this.formatWithCommas(data.ptartStockValue),
-            dividendStock: this.formatWithCommas(data.righStockValue),
-            stockBuyWaitReturn: this.formatWithCommas(data.rcvStockValue),
-            sellMatchT0: this.formatWithCommas(data.sellT0),
-
-            feeSMS: this.formatWithCommas(data.smsFee),
-            feeVSD: this.formatWithCommas(data.depoFee),
+            cpnrt: data.cpnrt,
+            url: data.url,
+            freq: data.freq,
+            parValue: data.parValue,
+            maxInvtQtyPerCust: data.maxInvtQtyPerCust,
+            minInvtQtyPerOrdr: data.minInvtQtyPerOrdr,
+            issudt: data.issudt,
+            exprdt: data.exprdt,
         };
     }
 
-    /**
-     * Format asset data with comma separators (optimized)
-     */
-    static formatAssetData(data: AssetData): FormattedAssetData {
-        return {
-            totalAsset: this.formatWithCommas(data.totAsst),
-            widthdrawable: this.formatWithCommas(data.wdrawAvail),
-            nav: this.formatWithCommas(data.realAsst),
-            cash: this.formatWithCommas(this.safeNumber(data.cash) - this.safeNumber(data.cashDiv)),
-            stock: this.formatWithCommas(this.safeNumber(data.stockValue) - this.safeNumber(data.righStockValue)),
-            dividend: this.formatWithCommas(this.safeNumber(data.cashDiv) + this.safeNumber(data.righStockValue)),
-            PineB: this.formatWithCommas(data.pineBndValue),
-            debt: this.formatWithCommas(data.debt),
-            fee: this.formatWithCommas(data.fee),
-            marginDebt: this.formatWithCommas(this.safeNumber(data.mgDebt) + this.safeNumber(data.exptDisbm)),
-            drvtVsdAmt: this.formatWithCommas(data.drvtVsdAmt),
-            cashVsd: this.formatWithCommas(data.drvtCIm),
-            gainVM: this.formatWithCommas(data.drvtCdtPnlVM),
-            lossVM: this.formatWithCommas(data.drvtCdtLossVM),
-        };
-    }
 
     /**
      * Process account data for a specific sub-account (with error handling)
@@ -214,36 +212,9 @@ export class ApiAssetUtils {
 
 
 
-    /**
-    * Process multiple accounts in parallel
-    */
-    static async processMultipleAccounts(
-        assetApi: AssetApi,
-        baseParams: BaseApiParams,
-        subAccounts: string[],
-        baseRealAsst: number
-    ): Promise<AccountResult[]> {
-        const promises = subAccounts.map(subAcnt =>
-            this.processAccountData(assetApi, baseParams, subAcnt, baseRealAsst)
-        );
 
-        return Promise.all(promises);
-    }
 
-    /**
-     * Process multiple positions in parallel
-     */
-    static async processMultiplePositions(
-        positionsApi: PositionsApi,
-        baseParams: BaseApiParams,
-        subAccounts: string[]
-    ): Promise<PositionResult[]> {
-        const promises = subAccounts.map(subAcnt =>
-            this.processPositionData(positionsApi, baseParams, subAcnt)
-        );
 
-        return Promise.all(promises);
-    }
 
     /**
      * Build card data structures for reporting (optimized with validation)
