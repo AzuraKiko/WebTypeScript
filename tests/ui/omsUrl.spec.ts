@@ -89,7 +89,7 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
         apiCapture,
         accountType: 'margin',
         side: 'sell',
-        quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY
+        quantity: OmsTestConfig.TEST_DATA.ODD_QUANTITY
     });
 
     await switchToOddTab(orderPage, apiCapture);

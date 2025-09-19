@@ -157,7 +157,7 @@ class OrderBook extends BasePage {
         this.orderIndayTab = page.locator('.panel-tab', { hasText: /Lệnh trong ngày/ });
         this.orderHistoryTab = page.locator('.panel-tab', { hasText: /Lịch sử lệnh/ });
         this.conditionalOrderTab = page.locator('.panel-tab', { hasText: /Lệnh điều kiện/ });
-        this.putThroughOrderTab = page.locator('.panel-tab', { hasText: /Sổ lệnh thoả thuận/ });
+        this.putThroughOrderTab = page.locator('.panel-tab', { hasText: /Sổ lệnh thỏa thuận/ });
         this.reloadOrderBookButton = page.locator('.btn-icon .icon.iRefresh');
         this.expandOrderBookButton = page.locator('.icon.iZoomIn');
         this.closeOrderBookButton = page.locator('.icon.iClose');

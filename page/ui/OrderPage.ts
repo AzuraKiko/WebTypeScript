@@ -787,6 +787,19 @@ class OrderPage extends BasePage {
         }
     }
 
+    // async placeTakeProfitOrder(orderData?: Partial<ConditionalOrderFormData>): Promise<string> {
+    //     const {
+    //         stockCodeConditional,
+    //         quantityConditional,
+    //         sideConditional = 'sell',
+    //     } = orderData || {};
+    //     try {
+
+    //     } catch (error) {
+    //         throw new Error(`Failed to place take profit order: ${error}`);
+    //     }
+    // }
+
 
     // =================== MESSAGE VERIFICATION METHODS ===================
 
