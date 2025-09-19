@@ -95,7 +95,7 @@ export class OmsTestConfig {
         'NewOrder', //Đặt lệnh cơ sở	
         'CancelOrder', //Hủy lệnh cơ sở	
         'EditOrder', //Sửa lệnh cơ sở	
-        'getPreOrder', //Lấy phí dự tính của lệnh	
+        'getPreOrder', //Lấy phí dự tính của lệnh	(WTS ko sd)
 
         'getDvxPP', //Lấy sức mua	
         'newDvxOrder', //Đặt lệnh	
