@@ -7,7 +7,11 @@ import {
     performLogin,
     navigateToOrderPage,
     switchToMarginAccount,
-    OmsTestConfig
+    OmsTestConfig,
+    switchToOddTab,
+    openOrderBook,
+    switchToOrderBookTab,
+    closeOrderBook
 } from '../../helpers/omsTestUtils';
 import { WaitUtils } from '../../helpers/uiUtils';
 
@@ -25,6 +29,12 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
 
     // Enhanced login with retry mechanism
     await performLogin(loginPage, apiCapture);
+
+    await openOrderBook(orderBook, apiCapture);
+    await switchToOrderBookTab(orderBook, apiCapture, 'history');
+    await switchToOrderBookTab(orderBook, apiCapture, 'conditional');
+    await switchToOrderBookTab(orderBook, apiCapture, 'putthrough');
+    await closeOrderBook(orderBook, apiCapture);
 
     // Navigate to order page with validation
     await navigateToOrderPage(orderPage, apiCapture);
@@ -68,7 +78,7 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
         stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.MARGIN_ACCOUNT,
         quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
         enableModify: true,
-        modifyQuantity: 2
+        modifyQuantity: 200
     });
 
     // Place sell order with margin account
@@ -80,6 +90,20 @@ test('OMS - capture API calls to domain during trading flow', async ({ page }) =
         accountType: 'margin',
         side: 'sell',
         quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY
+    });
+
+    await switchToOddTab(orderPage, apiCapture);
+    await WaitUtils.delay(3000);
+
+    await executeOrderWorkflow({
+        page,
+        orderPage,
+        orderBook,
+        apiCapture,
+        accountType: 'margin',
+        side: 'buy',
+        stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.MARGIN_ACCOUNT,
+        quantity: OmsTestConfig.TEST_DATA.ODD_QUANTITY,
     });
 
     // Generate comprehensive test report and export data

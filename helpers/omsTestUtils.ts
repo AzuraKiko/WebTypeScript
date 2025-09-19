@@ -86,7 +86,8 @@ export class OmsTestConfig {
             MARGIN_ACCOUNT: 'CACB2510',
             ALTERNATIVE: 'ACB'
         },
-        ORDER_QUANTITY: 1
+        ORDER_QUANTITY: 100,
+        ODD_QUANTITY: 1
     } as const;
 
     static readonly FUNCTION_TESTS = [
@@ -706,6 +707,52 @@ export async function switchToMarginAccount(subaccPage: SubaccPage, apiCapture: 
     } catch (error) {
         apiCapture.addTestStep(`Margin account selection failed: ${error}`);
         throw new Error(`Failed to select margin account: ${error}`);
+    }
+}
+
+export async function switchToOddTab(orderPage: OrderPage, apiCapture: ApiCallCapture): Promise<void> {
+    try {
+        apiCapture.addTestStep('Switching to odd tab');
+        await orderPage.switchToOddTab();
+        apiCapture.addTestStep('Odd tab selected');
+    } catch (error) {
+        apiCapture.addTestStep(`Odd tab selection failed: ${error}`);
+        throw new Error(`Failed to select odd tab: ${error}`);
+    }
+}
+
+// Order book
+export async function openOrderBook(orderBook: OrderBook, apiCapture: ApiCallCapture): Promise<void> {
+    try {
+        apiCapture.addTestStep('Opening order book');
+        await orderBook.openOrderBook();
+        apiCapture.addTestStep('Order book opened');
+    } catch (error) {
+        apiCapture.addTestStep(`Order book opening failed: ${error}`);
+        throw new Error(`Failed to open order book: ${error}`);
+    }
+}
+
+export type OrderBookTab = 'inday' | 'history' | 'conditional' | 'putthrough';
+export async function switchToOrderBookTab(orderBook: OrderBook, apiCapture: ApiCallCapture, tab: OrderBookTab): Promise<void> {
+    try {
+        apiCapture.addTestStep(`Switching to ${tab} tab`);
+        await orderBook.switchToTab(tab);
+        apiCapture.addTestStep(`${tab} tab selected`);
+    } catch (error) {
+        apiCapture.addTestStep(`${tab} tab selection failed: ${error}`);
+        throw new Error(`Failed to select ${tab} tab: ${error}`);
+    }
+}
+
+export async function closeOrderBook(orderBook: OrderBook, apiCapture: ApiCallCapture): Promise<void> {
+    try {
+        apiCapture.addTestStep('Closing order book');
+        await orderBook.closeOrderBook();
+        apiCapture.addTestStep('Order book closed');
+    } catch (error) {
+        apiCapture.addTestStep(`Order book closing failed: ${error}`);
+        throw new Error(`Failed to close order book: ${error}`);
     }
 }
 

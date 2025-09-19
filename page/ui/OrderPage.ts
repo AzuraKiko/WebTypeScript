@@ -17,6 +17,9 @@ interface OrderFormData {
 interface OrderPageElements {
     navigation: {
         orderButton: Locator;
+        normalTab: Locator;
+        conditionalTab: Locator;
+        oddTab: Locator;
     };
     form: {
         buyTab: Locator;
@@ -55,6 +58,52 @@ interface OrderPageElements {
     };
 }
 
+interface ConditionalOrderFormData {
+    navigationConditional: 'outTime' | 'trend' | 'takeProfit' | 'stopLoss' | 'purchase';
+    stockCodeConditional: string;
+    quantityConditional: number;
+    sideConditional: 'buy' | 'sell';
+    triggerPrice: number | string;
+    orderPrice: number | string;
+    pauseValue: number | string;
+    differenceTP: number | string;
+    differenceBQ: number | string;
+    lowestPrice: number | string;
+}
+
+interface ConditionalOrderPageElements {
+    navigationConditional: {
+        outTimeTab: Locator;
+        trendTab: Locator;
+        takeProfitTab: Locator;
+        stopLossTab: Locator;
+        purchaseTab: Locator;
+    };
+    formConditional: {
+        stockCodeConditionalInput: Locator;
+        quantityConditionalInput: Locator;
+        buyTabConditional: Locator;
+        sellTabConditional: Locator;
+        triggerPriceInput: Locator;
+        orderPriceInput: Locator;
+        pauseValueInput: Locator;
+        differenceTPInput: Locator;
+        differenceBQInput: Locator;
+        lowestPriceInput: Locator;
+        cancelConditionalButton: Locator;
+        placeConditionalButton: Locator;
+        priceCeilConditional: Locator;
+        priceFloorConditional: Locator;
+        priceReferenceConditional: Locator;
+    };
+    messagesConditional: {
+        toastMessageConditional: Locator;
+        titleMessageConditional: Locator;
+        descriptionMessageConditional: Locator;
+        closeToastMessageConditional: Locator;
+    };
+}
+
 class OrderPage extends BasePage {
     // Dependencies
     matrixPage: MatrixPage;
@@ -69,6 +118,7 @@ class OrderPage extends BasePage {
 
     // Element groups for better organization
     private elements!: OrderPageElements;
+    private conditionalElements!: ConditionalOrderPageElements;
 
     constructor(page: Page) {
         super(page);
@@ -76,6 +126,7 @@ class OrderPage extends BasePage {
         this.orderBook = new OrderBook(page);
         this.portfolioPage = new PortfolioPage(page);
         this.initializeElements(page);
+        this.initializeConditionalElements(page);
     }
 
     /**
@@ -84,7 +135,10 @@ class OrderPage extends BasePage {
     private initializeElements(page: Page): void {
         this.elements = {
             navigation: {
-                orderButton: page.locator('.footer-btn:has(.iOrder)')
+                orderButton: page.locator('.footer-btn:has(.iOrder)'),
+                normalTab: page.locator('.card-panel .order .card-panel-header__left:nth-child(1)'),
+                conditionalTab: page.locator('.card-panel .order .card-panel-header__left:nth-child(2)'),
+                oddTab: page.locator('.card-panel .order .card-panel-header__left:nth-child(3)')
             },
             form: {
                 buyTab: page.locator('.order-button.order-buy'),
@@ -127,12 +181,53 @@ class OrderPage extends BasePage {
         this.createLegacyReferences();
     }
 
+    private initializeConditionalElements(page: Page): void {
+        this.conditionalElements = {
+            navigationConditional: {
+                outTimeTab: page.locator('a[data-rb-event-key="lenhngoaigio"]'),
+                trendTab: page.locator('a[data-rb-event-key="lenhxuhuong"]'),
+                takeProfitTab: page.locator('a[data-rb-event-key="lenhchotloi"]'),
+                stopLossTab: page.locator('a[data-rb-event-key="lenhcatlo"]'),
+                purchaseTab: page.locator('a[data-rb-event-key="dualenh"]'),
+            },
+
+            formConditional: {
+                stockCodeConditionalInput: page.locator('input[name="orderSymbol"]'),
+                quantityConditionalInput: page.locator('input[name="orderVolume"]'),
+                buyTabConditional: page.locator('.btn-type-trade.text-uppercase.buy'),
+                sellTabConditional: page.locator('.btn-type-trade.text-uppercase.sell'),
+                triggerPriceInput: page.locator('input[name="refPrice"]'),
+                orderPriceInput: page.locator('input[name="orderPrice"]'),
+                pauseValueInput: page.locator('input[name="dungTheoGiaTri"]'),
+                differenceTPInput: page.locator('input[name="giaChenhTp"]'),
+                lowestPriceInput: page.locator('input[name="giaMuaThapNhat"]'),
+                differenceBQInput: page.locator('input[name="chenhGiaBQ"]'),
+                cancelConditionalButton: page.locator('.btn-order.btn.btn-primary:nth-child(1)'),
+                placeConditionalButton: page.locator('button[type="submit"]'),
+                priceCeilConditional: page.locator('div.d-flex span.c').first(),
+                priceFloorConditional: page.locator('div.d-flex span.f').first(),
+                priceReferenceConditional: page.locator('div.d-flex span.r').first(),
+            },
+            messagesConditional: {
+                toastMessageConditional: page.locator('.notification.toast.top-right'),
+                titleMessageConditional: page.locator('.toast-content .toast-title'),
+                descriptionMessageConditional: page.locator('.toast-content .toast-description'),
+                closeToastMessageConditional: page.locator('.toast-action .icon.iClose')
+            }
+        };
+
+        // Create legacy property references for backward compatibility
+        this.createConditionalLegacyReferences();
+    }
     /**
      * Create legacy property references for backward compatibility
      */
     private createLegacyReferences(): void {
         // Navigation
         this.orderButton = this.elements.navigation.orderButton;
+        this.normalTab = this.elements.navigation.normalTab;
+        this.conditionalTab = this.elements.navigation.conditionalTab;
+        this.oddTab = this.elements.navigation.oddTab;
 
         // Order Form
         this.buyTab = this.elements.form.buyTab;
@@ -170,8 +265,44 @@ class OrderPage extends BasePage {
         this.closeToastMessage = this.elements.messages.closeToastMessage;
     }
 
+    private createConditionalLegacyReferences(): void {
+        // Navigation
+        this.outTimeTab = this.conditionalElements.navigationConditional.outTimeTab;
+        this.trendTab = this.conditionalElements.navigationConditional.trendTab;
+        this.takeProfitTab = this.conditionalElements.navigationConditional.takeProfitTab;
+        this.stopLossTab = this.conditionalElements.navigationConditional.stopLossTab;
+        this.purchaseTab = this.conditionalElements.navigationConditional.purchaseTab;
+
+        // Form
+        this.stockCodeConditionalInput = this.conditionalElements.formConditional.stockCodeConditionalInput;
+        this.quantityConditionalInput = this.conditionalElements.formConditional.quantityConditionalInput;
+        this.buyTabConditional = this.conditionalElements.formConditional.buyTabConditional;
+        this.sellTabConditional = this.conditionalElements.formConditional.sellTabConditional;
+        this.triggerPriceInput = this.conditionalElements.formConditional.triggerPriceInput;
+        this.orderPriceInput = this.conditionalElements.formConditional.orderPriceInput;
+        this.pauseValueInput = this.conditionalElements.formConditional.pauseValueInput;
+        this.differenceTPInput = this.conditionalElements.formConditional.differenceTPInput;
+        this.differenceBQInput = this.conditionalElements.formConditional.differenceBQInput;
+        this.lowestPriceInput = this.conditionalElements.formConditional.lowestPriceInput;
+        this.cancelConditionalButton = this.conditionalElements.formConditional.cancelConditionalButton;
+        this.placeConditionalButton = this.conditionalElements.formConditional.placeConditionalButton;
+        this.priceCeilConditional = this.conditionalElements.formConditional.priceCeilConditional;
+        this.priceFloorConditional = this.conditionalElements.formConditional.priceFloorConditional;
+        this.priceReferenceConditional = this.conditionalElements.formConditional.priceReferenceConditional;
+
+        // Messages
+        this.toastMessageConditional = this.conditionalElements.messagesConditional.toastMessageConditional;
+        this.titleMessageConditional = this.conditionalElements.messagesConditional.titleMessageConditional;
+        this.descriptionMessageConditional = this.conditionalElements.messagesConditional.descriptionMessageConditional;
+        this.closeToastMessageConditional = this.conditionalElements.messagesConditional.closeToastMessageConditional;
+    }
+
     // Legacy property declarations for backward compatibility
     orderButton!: Locator;
+    normalTab!: Locator;
+    conditionalTab!: Locator;
+    oddTab!: Locator;
+
     buyTab!: Locator;
     sellTab!: Locator;
     stockCodeInput!: Locator;
@@ -203,6 +334,33 @@ class OrderPage extends BasePage {
     descriptionMessage!: Locator;
     closeToastMessage!: Locator;
 
+    outTimeTab!: Locator;
+    trendTab!: Locator;
+    takeProfitTab!: Locator;
+    stopLossTab!: Locator;
+    purchaseTab!: Locator;
+
+    stockCodeConditionalInput!: Locator;
+    quantityConditionalInput!: Locator;
+    buyTabConditional!: Locator;
+    sellTabConditional!: Locator;
+    triggerPriceInput!: Locator;
+    orderPriceInput!: Locator;
+    pauseValueInput!: Locator;
+    differenceTPInput!: Locator;
+    differenceBQInput!: Locator;
+    lowestPriceInput!: Locator;
+    cancelConditionalButton!: Locator;
+    placeConditionalButton!: Locator;
+    priceCeilConditional!: Locator;
+    priceFloorConditional!: Locator;
+    priceReferenceConditional!: Locator;
+
+    toastMessageConditional!: Locator;
+    titleMessageConditional!: Locator;
+    descriptionMessageConditional!: Locator;
+    closeToastMessageConditional!: Locator;
+
     // =================== NAVIGATION METHODS ===================
 
     /**
@@ -222,6 +380,31 @@ class OrderPage extends BasePage {
             throw new Error(`Failed to navigate to order page: ${error}`);
         }
     }
+
+    async switchToNormalTab(): Promise<void> {
+        await this.normalTab.click();
+    }
+
+    async switchToConditionalTab(): Promise<void> {
+        await this.conditionalTab.click();
+    }
+
+    async switchToOddTab(): Promise<void> {
+        await this.oddTab.click();
+    }
+
+    // Conditional Navigation
+    async switchConditionalTab(tabName: ConditionalOrderFormData['navigationConditional']): Promise<void> {
+        const tabMap = {
+            outTime: this.outTimeTab,
+            trend: this.trendTab,
+            takeProfit: this.takeProfitTab,
+            stopLoss: this.stopLossTab,
+            purchase: this.purchaseTab
+        };
+        await tabMap[tabName].click();
+    }
+
 
     // =================== ORDER FORM METHODS ===================
 
@@ -309,6 +492,90 @@ class OrderPage extends BasePage {
             await this.confirmOrderButton.click();
         } catch (error) {
             throw new Error(`Failed to submit order: ${error}`);
+        }
+    }
+
+    // =================== CONDITIONAL ORDER FORM METHODS ===================
+    async fillStockCodeConditional(stockCode?: string): Promise<string> {
+        const code = stockCode || getRandomStockCode();
+        try {
+            await FormUtils.fillField(this.stockCodeConditionalInput, code);
+            return code;
+        } catch (error) {
+            throw new Error(`Failed to fill stock code: ${error}`);
+        }
+    }
+    async fillQuantityConditional(quantity: number = 100): Promise<void> {
+        try {
+            await FormUtils.fillField(this.quantityConditionalInput, quantity);
+        } catch (error) {
+            throw new Error(`Failed to fill quantity: ${error}`);
+        }
+    }
+
+    async fillOrderPriceConditional(price: number | string): Promise<void> {
+        try {
+            await FormUtils.fillField(this.orderPriceInput, price);
+        } catch (error) {
+            throw new Error(`Failed to set custom price: ${error}`);
+        }
+    }
+
+    async selectPriceOptionConditional(priceType: 'floor' | 'ceil' | 'reference'): Promise<void> {
+        try {
+            const priceElements = {
+                floor: this.priceFloorConditional,
+                ceil: this.priceCeilConditional,
+                reference: this.priceReferenceConditional
+            };
+            const selectedElement = priceElements[priceType];
+            await expect(selectedElement).toBeVisible();
+            const price: number | string = await selectedElement.textContent() || 0;
+            await this.fillOrderPriceConditional(price);
+        } catch (error) {
+            throw new Error(`Failed to select ${priceType} price: ${error}`);
+        }
+    }
+
+    async fillTriggerPriceConditional(price: number | string): Promise<void> {
+        try {
+            await FormUtils.fillField(this.triggerPriceInput, price);
+        } catch (error) {
+            throw new Error(`Failed to fill trigger price: ${error}`);
+        }
+    }
+
+    async fillPauseValueConditional(value: number | string = 1): Promise<void> {
+        try {
+            await FormUtils.fillField(this.pauseValueInput, value);
+        } catch (error) {
+            throw new Error(`Failed to fill pause value: ${error}`);
+        }
+    }
+
+    async fillDifferenceTPConditional(value: number | string = 1000): Promise<void> {
+        try {
+            await FormUtils.fillField(this.differenceTPInput, value);
+        } catch (error) {
+            throw new Error(`Failed to fill difference TP: ${error}`);
+        }
+    }
+    async fillDifferenceBQConditional(value: number | string = 1000): Promise<void> {
+        try {
+            await FormUtils.fillField(this.differenceBQInput, value);
+        } catch (error) {
+            throw new Error(`Failed to fill difference BQ: ${error}`);
+        }
+    }
+
+    async fillLowestPriceConditional(value?: number | string): Promise<void> {
+        try {
+            if (!value) {
+                value = await this.priceFloorConditional.textContent() || 0;
+            }
+            await FormUtils.fillField(this.lowestPriceInput, value);
+        } catch (error) {
+            throw new Error(`Failed to fill lowest price: ${error}`);
         }
     }
 
@@ -459,6 +726,67 @@ class OrderPage extends BasePage {
             throw new Error(`Failed to place market order: ${error}`);
         }
     }
+
+    async placeOutTimeOrder(orderData?: Partial<ConditionalOrderFormData>): Promise<string> {
+        const {
+            stockCodeConditional,
+            quantityConditional,
+            sideConditional
+        } = orderData || {};
+
+        try {
+            if (sideConditional === 'buy') {
+                await this.buyTabConditional.click();
+            } else {
+                await this.sellTabConditional.click();
+            }
+            await this.switchConditionalTab('outTime');
+            await this.fillStockCodeConditional(stockCodeConditional);
+            await this.fillQuantityConditional(quantityConditional);
+            if (sideConditional === 'buy') {
+                await this.selectPriceOptionConditional('floor');
+            } else {
+                await this.selectPriceOptionConditional('ceil');
+            }
+            await this.placeConditionalButton.click();
+            return stockCodeConditional || '';
+        } catch (error) {
+            throw new Error(`Failed to place out time order: ${error}`);
+        }
+    }
+
+    async placeTrendOrder(orderData?: Partial<ConditionalOrderFormData>): Promise<string> {
+        const {
+            stockCodeConditional,
+            quantityConditional,
+            pauseValue,
+            sideConditional,
+            differenceTP,
+            lowestPrice
+        } = orderData || {};
+        try {
+            if (sideConditional === 'buy') {
+                await this.buyTabConditional.click();
+            } else {
+                await this.sellTabConditional.click();
+            }
+            await this.switchConditionalTab('trend');
+            await this.fillStockCodeConditional(stockCodeConditional);
+            await this.fillQuantityConditional(quantityConditional);
+            await this.fillPauseValueConditional(pauseValue!);
+            await this.fillDifferenceTPConditional(differenceTP!);
+            if (lowestPrice) {
+                await this.fillLowestPriceConditional(lowestPrice);
+            } else {
+                await this.fillLowestPriceConditional();
+            }
+            await this.placeConditionalButton.click();
+            return stockCodeConditional || '';
+        } catch (error) {
+            throw new Error(`Failed to place trend order: ${error}`);
+        }
+    }
+
 
     // =================== MESSAGE VERIFICATION METHODS ===================
 
