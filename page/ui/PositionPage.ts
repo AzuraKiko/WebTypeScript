@@ -3,143 +3,51 @@ import BasePage from './BasePage';
 import { TableUtils, FormUtils } from '../../helpers/uiUtils';
 
 // Interface definitions for better type safety
-interface PositionOpenData {
+interface OpenPositionData {
     contractCode: string;
-    Position: string;
+    position: string;
     quantityOpen: string;
     longPending: string;
     shortPending: string;
     avgPrice: string;
-    status: string;
     marketPrice: string;
     profitLossPercent: string;
     profitLoss: string;
 }
 
-interface PositionModalInfo {
-    stockCode: string;
-    orderType: string;
-    orderNumber: string;
-}
 
-interface ModifyOrderModalInfo {
-    orderNumber: string;
-    account: string;
-    orderType: string;
-    symbol: string;
-    currentPrice: string;
-    currentQuantity: string;
-}
+type TabName = 'openPosition' | 'orderList' | 'history' | 'conditionalOrderList' | 'closedPosition' | 'PLReport' | 'Asset';
 
-interface ActionButtonsAvailability {
-    hasCancel: boolean;
-    hasModify: boolean;
-}
-
-interface SearchVerificationResult {
-    success: boolean;
-    filteredCount: number;
-    originalCount: number;
-}
-
-interface TableStructureValidation {
-    hasHeaders: boolean;
-    hasRows: boolean;
-    columnCount: number;
-}
-
-interface AvailableFilters {
-    status: boolean;
-    account: boolean;
-    orderType: boolean;
-}
-
-interface OrderSummaryStats {
-    totalOrders: number;
-    uniqueStocks: number;
-    uniqueStatuses: number;
-    avgOrderQuantity?: number;
-    hasMatches: boolean;
-}
-
-interface DataValidationResult {
-    isValid: boolean;
-    errors: string[];
-}
-
-interface PerformanceMetrics {
-    orderLoadTime: number;
-    tableRenderTime: number;
-    searchResponseTime: number;
-}
-
-interface HealthCheckResult {
-    overall: 'healthy' | 'warning' | 'error';
-    checks: {
-        tableStructure: boolean;
-        dataIntegrity: boolean;
-        filtersWorking: boolean;
-        searchWorking: boolean;
-        tabsWorking: boolean;
-    };
-    issues: string[];
-}
-
-type TabName = 'inday' | 'history' | 'conditional' | 'putthrough';
-
-class OrderBook extends BasePage {
+class PositionPage extends BasePage {
     // Constants
     private static readonly DEFAULT_TIMEOUT = 10000;
     private static readonly SHORT_TIMEOUT = 1000;
     private static readonly POLLING_INTERVAL = 500;
 
     // Navigation Elements
-    orderBookButton!: Locator;
-    orderIndayTab!: Locator;
-    orderHistoryTab!: Locator;
-    conditionalOrderTab!: Locator;
-    putThroughOrderTab!: Locator;
-    reloadOrderBookButton!: Locator;
-    expandOrderBookButton!: Locator;
-    closeOrderBookButton!: Locator;
+    positionButton!: Locator;
+    openPositionTab!: Locator;
+    orderListTab!: Locator;
+    historyTab!: Locator;
+    conditionalOrderListTab!: Locator;
+    closedPositionTab!: Locator;
+    PLReportTab!: Locator;
+    AssetTab!: Locator;
+    expandPositionButton!: Locator;
+    closePositionButton!: Locator;
+    closeAllPositionButton!: Locator;
 
-    // Filter and Search Elements
-    cancelAllOrderButton!: Locator;
-    searchInput!: Locator;
-    statusSelect!: Locator;
-    accountSelect!: Locator;
-    orderTypeSelect!: Locator;
 
-    // Table Elements
-    orderTable!: Locator;
+    // Open Position Table Elements
+    positionTable!: Locator;
     tableHeaders!: Locator;
     tableRows!: Locator;
-    totalOrder!: Locator;
 
-    // Table Column Locators (using functions for dynamic row selection)
-    checkboxHeaderAll!: Locator;
+    closeAllPositionModal!: Locator;
+    closeAllPositionConfirmButton!: Locator;
+    closeAllPositionModalCloseButton!: Locator;
 
-    // Modal Elements
-    cancelAllModal!: Locator;
-    cancelAllModalHeader!: Locator;
-    cancelAllModalTable!: Locator;
-    cancelAllConfirmButton!: Locator;
-    cancelAllModalCloseButton!: Locator;
-    deleteOrderModal!: Locator;
-    deleteOrderStockCode!: Locator;
-    deleteOrderType!: Locator;
-    deleteOrderNumber!: Locator;
-    deleteOrderConfirmButton!: Locator;
-    deleteOrderCancelButton!: Locator;
-    modifyOrderModal!: Locator;
-    modifyOrderNumber!: Locator;
-    modifyOrderAccount!: Locator;
-    modifyOrderType!: Locator;
-    modifyOrderSymbol!: Locator;
-    modifyOrderPriceInput!: Locator;
-    modifyOrderQuantityInput!: Locator;
-    modifyOrderConfirmButton!: Locator;
-    modifyOrderCancelButton!: Locator;
+    // Order List Table Elements
 
     constructor(page: Page) {
         super(page);
@@ -151,28 +59,22 @@ class OrderBook extends BasePage {
      */
     private initializeLocators(page: Page): void {
         // Navigation Elements
-        this.orderBookButton = page.locator('.footer-btn:has(.iOrderList)');
-        this.orderIndayTab = page.locator('.panel-tab', { hasText: /Lệnh trong ngày/ });
-        this.orderHistoryTab = page.locator('.panel-tab', { hasText: /Lịch sử lệnh/ });
-        this.conditionalOrderTab = page.locator('.panel-tab', { hasText: /Lệnh điều kiện/ });
-        this.putThroughOrderTab = page.locator('.panel-tab', { hasText: /Sổ lệnh thoả thuận/ });
-        this.reloadOrderBookButton = page.locator('.btn-icon .icon.iRefresh');
-        this.expandOrderBookButton = page.locator('.icon.iZoomIn');
-        this.closeOrderBookButton = page.locator('.icon.iClose');
+        this.positionButton = page.locator('.footer-btn:has(.iOrderList)');
+        this.openPositionTab = page.locator('.panel-tab', { hasText: /Vị thế mở/ });
+        this.orderListTab = page.locator('.panel-tab', { hasText: /Sổ lệnh/ });
+        this.historyTab = page.locator('.panel-tab', { hasText: /Lịch sử lệnh/ });
+        this.conditionalOrderListTab = page.locator('.panel-tab', { hasText: /Sổ lệnh điều kiện/ });
+        this.closedPositionTab = page.locator('.panel-tab', { hasText: /Vị thế đóng/ });
+        this.PLReportTab = page.locator('.panel-tab', { hasText: /Báo cáo Lãi/ });
+        this.AssetTab = page.locator('.panel-tab', { hasText: /Tài sản/ });
+        this.expandPositionButton = page.locator('.panel-header .icon.iZoomOut');
+        this.closePositionButton = page.locator('.panel-header .icon.iClose');
+        this.closeAllPositionButton = page.locator('.btn--cancel.btn-icon');
 
-        // Filter and Search Elements
-        this.cancelAllOrderButton = page.locator('.btn-icon--sell2.cursor-pointer');
-        this.searchInput = page.locator('.input-text-search .form-control');
-        this.statusSelect = page.locator('.filter-control-select__control').nth(0);
-        this.accountSelect = page.locator('.filter-control-select__control').nth(1);
-        this.orderTypeSelect = page.locator('.filter-control-select__control').nth(2);
-
-        // Table Elements
-        this.totalOrder = page.locator('.card-panel-header__label');
-        this.orderTable = page.locator('.table.table-bordered.tbl-list');
-        this.tableHeaders = page.locator('.table-bordered.tbl-list thead th');
-        this.tableRows = page.locator('.table-bordered.tbl-list tbody tr');
-        this.checkboxHeaderAll = page.locator('.table-bordered.tbl-list thead th:nth-child(1) span');
+        // Open Position Table Elements
+        this.positionTable = page.locator('.derivative__postion');
+        this.tableHeaders = page.locator('.derivative__postion thead th');
+        this.tableRows = page.locator('.derivative__postion tbody tr');
 
         // Modal Elements
         this.initializeModalLocators(page);
@@ -182,31 +84,11 @@ class OrderBook extends BasePage {
      * Initialize modal locators separately for better organization
      */
     private initializeModalLocators(page: Page): void {
-        // Cancel All Orders Modal
-        this.cancelAllModal = page.locator('.wts-modal', { hasText: /Xác nhận hủy lệnh/ });
-        this.cancelAllModalHeader = page.locator('.wts-modal__header', { hasText: /Xác nhận hủy lệnh/ });
-        this.cancelAllModalTable = page.locator('.wts-modal .table.table-bordered.table-fix');
-        this.cancelAllConfirmButton = page.locator('.wts-modal .btn.btn--primary');
-        this.cancelAllModalCloseButton = page.locator('.wts-modal .btn-close');
+        // Close All Position Modal
+        this.closeAllPositionModal = page.locator('.wts-modal', { hasText: /Xác nhận đóng vị thế/ });
+        this.closeAllPositionConfirmButton = page.locator('.wts-modal .btn.btn--primary');
+        this.closeAllPositionModalCloseButton = page.locator('.wts-modal .btn-close');
 
-        // Individual Order Cancel Modal
-        this.deleteOrderModal = page.locator('.delete-order');
-        this.deleteOrderStockCode = page.locator('.delete-order-body__infor-value p').nth(0);
-        this.deleteOrderType = page.locator('.delete-order-body__infor-value p').nth(1);
-        this.deleteOrderNumber = page.locator('.delete-order-body__infor-value p').nth(2);
-        this.deleteOrderConfirmButton = page.locator('.delete-order .btn-confirm');
-        this.deleteOrderCancelButton = page.locator('.delete-order .btn-cancel');
-
-        // Modify Order Modal
-        this.modifyOrderModal = page.locator('.confirm-order');
-        this.modifyOrderNumber = page.locator('.confirm-order-body__infor-value p').nth(0);
-        this.modifyOrderAccount = page.locator('.confirm-order-body__infor-value p').nth(1);
-        this.modifyOrderType = page.locator('.confirm-order-body__detail .order-type .i');
-        this.modifyOrderSymbol = page.locator('.confirm-order-body__detail .order-symbol');
-        this.modifyOrderPriceInput = page.locator('.confirm-order-body__detail input[name="newPrice"]');
-        this.modifyOrderQuantityInput = page.locator('.confirm-order-body__detail input[name="newVol"]');
-        this.modifyOrderConfirmButton = page.locator('.confirm-order .btn-confirm');
-        this.modifyOrderCancelButton = page.locator('.confirm-order .btn-cancel');
     }
 
     // =================== DYNAMIC LOCATOR METHODS ===================
@@ -214,321 +96,129 @@ class OrderBook extends BasePage {
     /**
      * Get column locator for specific row
      */
-    private getColumnLocator(rowIndex: number, columnIndex: number): Locator {
+    private getColumnOpenPositionLocator(rowIndex: number, columnIndex: number): Locator {
         return this.page.locator(`.table-bordered.tbl-list tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${columnIndex})`);
     }
-
-    private checkboxColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 1);
-    private accountColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 2);
-    private orderNoColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 3);
-    private originOrderNoColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 4);
-    private timeColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 5);
-    private sideColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 6);
-    private stockCodeColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 7);
-    private orderTypeColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 8);
-    private priceColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 9);
-    private quantityColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 10);
-    private matchedQuantityColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 11);
-    private remainingQuantityColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 12);
-    private statusColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 13);
-    private actionColumn = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 14);
-    private expandOrderButton = (rowIndex: number): Locator => this.getColumnLocator(rowIndex, 15);
+    private contractCodeColumn = (rowIndex: number): Locator => this.getColumnOpenPositionLocator(rowIndex, 1);
+    private positionColumn = (rowIndex: number): Locator => this.getColumnOpenPositionLocator(rowIndex, 2);
+    private quantityOpenColumn = (rowIndex: number): Locator => this.getColumnOpenPositionLocator(rowIndex, 3);
+    private longPendingColumn = (rowIndex: number): Locator => this.getColumnOpenPositionLocator(rowIndex, 4);
+    private shortPendingColumn = (rowIndex: number): Locator => this.getColumnOpenPositionLocator(rowIndex, 5);
+    private avgPriceColumn = (rowIndex: number): Locator => this.getColumnOpenPositionLocator(rowIndex, 6);
+    private marketPriceColumn = (rowIndex: number): Locator => this.getColumnOpenPositionLocator(rowIndex, 7);
+    private profitLossPercentColumn = (rowIndex: number): Locator => this.getColumnOpenPositionLocator(rowIndex, 8);
+    private profitLossColumn = (rowIndex: number): Locator => this.getColumnOpenPositionLocator(rowIndex, 9);
 
     /**
      * Get action button locators for specific row
      */
-    private cancelOrderButton = (rowIndex: number): Locator =>
-        this.page.locator(`.table tbody tr:nth-child(${rowIndex + 1}) .btn--delete`);
+    private stopTakeProfitButton = (rowIndex: number): Locator =>
+        this.page.locator(`.table tbody tr:nth-child(${rowIndex + 1}) .btn--authen`);
 
-    private modifyOrderButton = (rowIndex: number): Locator =>
+    private reversePositionButton = (rowIndex: number): Locator =>
         this.page.locator(`.table tbody tr:nth-child(${rowIndex + 1}) .btn--edit`);
+
+    private closeOpenPositionButton = (rowIndex: number): Locator =>
+        this.page.locator(`.table tbody tr:nth-child(${rowIndex + 1}) .btn--delete`);
 
     // =================== NAVIGATION METHODS ===================
 
-    async openOrderBook(): Promise<void> {
-        await this.orderBookButton.click();
-        await this.page.waitForSelector('.card-panel-body', { timeout: OrderBook.DEFAULT_TIMEOUT });
+    async openPositionPanel(): Promise<void> {
+        await this.positionButton.click();
+        await this.page.waitForSelector('.card-panel-body', { timeout: PositionPage.DEFAULT_TIMEOUT });
     }
 
-    async reloadOrderBook(): Promise<void> {
-        await this.reloadOrderBookButton.click();
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
+
+    async expandPositionPanel(): Promise<void> {
+        await this.expandPositionButton.click();
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
     }
 
-    async expandOrderBook(): Promise<void> {
-        await this.expandOrderBookButton.click();
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
-    }
-
-    async closeOrderBook(): Promise<void> {
-        await this.closeOrderBookButton.click();
+    async closePositionPanel(): Promise<void> {
+        await this.closePositionButton.click();
     }
 
     async switchToTab(tabName: TabName): Promise<void> {
         const tabMap = {
-            inday: this.orderIndayTab,
-            history: this.orderHistoryTab,
-            conditional: this.conditionalOrderTab,
-            putthrough: this.putThroughOrderTab
+            openPosition: this.openPositionTab,
+            orderList: this.orderListTab,
+            history: this.historyTab,
+            conditionalOrderList: this.conditionalOrderListTab,
+            closedPosition: this.closedPositionTab,
+            PLReport: this.PLReportTab,
+            Asset: this.AssetTab
         };
 
         await tabMap[tabName].click();
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
-    }
-
-    async switchToOrderInDayTab(): Promise<void> {
-        await this.switchToTab('inday');
-    }
-
-    async switchToOrderHistoryTab(): Promise<void> {
-        await this.switchToTab('history');
-    }
-
-    async switchToConditionalOrderTab(): Promise<void> {
-        await this.switchToTab('conditional');
-    }
-
-    async switchToPutThroughOrderTab(): Promise<void> {
-        await this.switchToTab('putthrough');
-    }
-
-    // =================== FILTER AND SEARCH METHODS ===================
-
-    async searchOrder(searchTerm: string): Promise<void> {
-        await this.searchInput.fill(searchTerm);
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
-    }
-
-    async filterByStatus(status: string): Promise<void> {
-        await this.statusSelect.click();
-        await this.page.waitForSelector('.filter-control-select__menu-list', { state: 'visible' });
-        await this.page.locator('.filter-control-select__option').filter({ hasText: status }).click();
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
-    }
-
-    async filterByAccount(account: string): Promise<void> {
-        await this.accountSelect.click();
-        await this.page.waitForSelector('.filter-control-select__menu-list', { state: 'visible' });
-        await this.page.locator('.filter-control-select__option').filter({ hasText: account }).click();
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
-    }
-
-    async filterByOrderType(orderType: string): Promise<void> {
-        await this.orderTypeSelect.click();
-        await this.page.waitForSelector('.filter-control-select__menu-list', { state: 'visible' });
-        await this.page.locator('.filter-control-select__option').filter({ hasText: orderType }).click();
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
     }
 
     // =================== DATA RETRIEVAL METHODS ===================
 
-    async getTotalOrder(): Promise<string> {
-        return await this.totalOrder.textContent() ?? '';
-    }
 
-    async getOrderbookTableHeader(): Promise<string[]> {
+    async getOpenPositionTableHeader(): Promise<string[]> {
         return TableUtils.getTableHeaders(this.tableHeaders);
     }
 
-    async getOrderTableData(): Promise<OrderData[]> {
-        await this.orderTable.waitFor({ state: 'visible' });
+    async getOpenPositionTableData(): Promise<OpenPositionData[]> {
+        await this.positionTable.waitFor({ state: 'visible' });
         const rows = await this.tableRows.all();
-        const orders: OrderData[] = [];
+        const openPositions: OpenPositionData[] = [];
 
         for (const row of rows) {
             const cells = await row.locator('td').all();
             if (cells.length > 0) {
-                orders.push({
-                    account: await cells[1]?.innerText() || '',
-                    orderNo: await cells[2]?.innerText() || '',
-                    originOrderNo: await cells[3]?.innerText() || '',
-                    time: await cells[4]?.innerText() || '',
-                    side: await cells[5]?.innerText() || '',
-                    stockCode: await cells[6]?.innerText() || '',
-                    orderType: await cells[7]?.innerText() || '',
-                    price: await cells[8]?.innerText() || '',
-                    quantity: await cells[9]?.innerText() || '',
-                    matchedQuantity: await cells[10]?.innerText() || '',
-                    remainingQuantity: await cells[11]?.innerText() || '',
-                    status: await cells[12]?.innerText() || '',
+                openPositions.push({
+                    contractCode: await cells[1]?.innerText() || '',
+                    position: await cells[2]?.innerText() || '',
+                    quantityOpen: await cells[3]?.innerText() || '',
+                    longPending: await cells[4]?.innerText() || '',
+                    shortPending: await cells[5]?.innerText() || '',
+                    avgPrice: await cells[6]?.innerText() || '',
+                    marketPrice: await cells[8]?.innerText() || '',
+                    profitLossPercent: await cells[9]?.innerText() || '',
+                    profitLoss: await cells[10]?.innerText() || '',
                 });
             }
         }
-        return orders;
+        return openPositions;
     }
 
-    async getOrderDataByIndex(rowIndex: number): Promise<OrderData> {
+    async getOpenPositionDataByIndex(rowIndex: number): Promise<OpenPositionData> {
         return {
-            account: await this.accountColumn(rowIndex).innerText(),
-            orderNo: await this.orderNoColumn(rowIndex).innerText(),
-            originOrderNo: await this.originOrderNoColumn(rowIndex).innerText(),
-            time: await this.timeColumn(rowIndex).innerText(),
-            side: await this.sideColumn(rowIndex).innerText(),
-            stockCode: await this.stockCodeColumn(rowIndex).innerText(),
-            orderType: await this.orderTypeColumn(rowIndex).innerText(),
-            price: await this.priceColumn(rowIndex).innerText(),
-            quantity: await this.quantityColumn(rowIndex).innerText(),
-            matchedQuantity: await this.matchedQuantityColumn(rowIndex).innerText(),
-            remainingQuantity: await this.remainingQuantityColumn(rowIndex).innerText(),
-            status: await this.statusColumn(rowIndex).innerText(),
+            contractCode: await this.contractCodeColumn(rowIndex).innerText(),
+            position: await this.positionColumn(rowIndex).innerText(),
+            quantityOpen: await this.quantityOpenColumn(rowIndex).innerText(),
+            longPending: await this.longPendingColumn(rowIndex).innerText(),
+            shortPending: await this.shortPendingColumn(rowIndex).innerText(),
+            avgPrice: await this.avgPriceColumn(rowIndex).innerText(),
+            marketPrice: await this.marketPriceColumn(rowIndex).innerText(),
+            profitLossPercent: await this.profitLossPercentColumn(rowIndex).innerText(),
+            profitLoss: await this.profitLossColumn(rowIndex).innerText(),
         };
     }
 
-    async getOrderCount(): Promise<number> {
+    async getOpenPositionCount(): Promise<number> {
         return await this.tableRows.count();
-    }
-
-    // =================== SELECTION METHODS ===================
-
-    async selectAllOrders(): Promise<void> {
-        await this.checkboxHeaderAll.click();
-        await this.page.waitForTimeout(OrderBook.POLLING_INTERVAL);
-    }
-
-    async selectOrderByIndex(rowIndex: number): Promise<void> {
-        await this.checkboxColumn(rowIndex).click();
-        await this.page.waitForTimeout(300);
-    }
-
-    async selectOrdersByIndexes(orderIndexes: number[]): Promise<void> {
-        for (const index of orderIndexes) {
-            await this.selectOrderByIndex(index);
-        }
     }
 
     // =================== ORDER ACTION METHODS ===================
 
-    async cancelOrder(rowIndex: number = 0): Promise<void> {
-        await this.cancelOrderButton(rowIndex).click();
-        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
-        await this.deleteOrderConfirmButton.click();
-        await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
+    async stopTakeProfit(rowIndex: number = 0): Promise<void> {
+        await this.stopTakeProfitButton(rowIndex).click();
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
     }
 
-    async cancelActionCancelOrder(rowIndex: number = 0): Promise<void> {
-        await this.cancelOrderButton(rowIndex).click();
-        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
-        await this.deleteOrderCancelButton.click();
-        await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
+    async reversePosition(rowIndex: number = 0): Promise<void> {
+        await this.reversePositionButton(rowIndex).click();
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
     }
 
-    async getDeleteOrderModalInfo(rowIndex: number = 0): Promise<OrderModalInfo> {
-        await this.cancelOrderButton(rowIndex).click();
-        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
-        return {
-            stockCode: await this.deleteOrderStockCode.textContent() ?? '',
-            orderType: await this.deleteOrderType.textContent() ?? '',
-            orderNumber: await this.deleteOrderNumber.textContent() ?? ''
-        };
+    async closeOpenPosition(rowIndex: number = 0): Promise<void> {
+        await this.closeOpenPositionButton(rowIndex).click();
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
     }
 
-    async cancelOrderByStatus(targetStatus: string): Promise<void> {
-        const allOrders = await this.getOrderTableData();
-        const ordersToCancel = allOrders.filter(order => order.status.includes(targetStatus));
-
-        console.log(`Found ${ordersToCancel.length} orders with status '${targetStatus}' to cancel`);
-
-        for (let i = 0; i < ordersToCancel.length; i++) {
-            try {
-                const currentOrders = await this.getOrderTableData();
-                const orderIndex = currentOrders.findIndex(order =>
-                    order.orderNo === ordersToCancel[i].orderNo &&
-                    order.stockCode === ordersToCancel[i].stockCode
-                );
-
-                if (orderIndex >= 0) {
-                    await this.cancelOrder(orderIndex);
-                    console.log(`Canceled order ${ordersToCancel[i].stockCode} - ${ordersToCancel[i].orderNo}`);
-                } else {
-                    console.log(`Order not found: ${ordersToCancel[i].stockCode} - ${ordersToCancel[i].orderNo}`);
-                }
-
-                await this.page.waitForTimeout(OrderBook.POLLING_INTERVAL);
-            } catch (error) {
-                console.log(`Failed to cancel order ${ordersToCancel[i].stockCode}: ${error}`);
-            }
-        }
-    }
-
-    async cancelOrderByOrderNumber(orderNumber: string): Promise<void> {
-        const orderIndex = await this.findOrderIndexByOrderNumber(orderNumber);
-        if (orderIndex >= 0) {
-            await this.cancelOrder(orderIndex);
-        }
-    }
-
-    // =================== MODIFY ORDER METHODS ===================
-
-    async openModifyOrderModal(rowIndex: number = 0): Promise<void> {
-        await this.modifyOrderButton(rowIndex).click();
-        await this.modifyOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
-    }
-
-    async getModifyOrderModalInfo(rowIndex: number = 0): Promise<ModifyOrderModalInfo> {
-        await this.openModifyOrderModal(rowIndex);
-        return {
-            orderNumber: await this.modifyOrderNumber.textContent() ?? '',
-            account: await this.modifyOrderAccount.textContent() ?? '',
-            orderType: await this.modifyOrderType.textContent() ?? '',
-            symbol: await this.modifyOrderSymbol.textContent() ?? '',
-            currentPrice: await this.modifyOrderPriceInput.inputValue(),
-            currentQuantity: await this.modifyOrderQuantityInput.inputValue()
-        };
-    }
-
-    async modifyOrderPrice(newPrice: number): Promise<void> {
-        await FormUtils.fillField(this.modifyOrderPriceInput, newPrice);
-    }
-
-    async modifyOrderQuantity(newQuantity: number): Promise<void> {
-        await FormUtils.fillField(this.modifyOrderQuantityInput, newQuantity);
-    }
-
-    async modifyOrder(rowIndex: number = 0, newPrice?: number, newQuantity?: number): Promise<void> {
-        await this.openModifyOrderModal(rowIndex);
-
-        if (newPrice) {
-            await this.modifyOrderPrice(newPrice);
-        }
-
-        if (newQuantity) {
-            await this.modifyOrderQuantity(newQuantity);
-        }
-
-        await this.modifyOrderConfirmButton.click();
-        await this.modifyOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
-    }
-
-    async cancelModifyOrder(): Promise<void> {
-        await this.modifyOrderCancelButton.click();
-        await this.modifyOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
-    }
-
-    async modifyOrderByOrderNumber(orderNumber: string, newPrice?: number, newQuantity?: number): Promise<void> {
-        const orderIndex = await this.findOrderIndexByOrderNumber(orderNumber);
-        if (orderIndex >= 0) {
-            await this.modifyOrder(orderIndex, newPrice, newQuantity);
-            console.log(`Modified order ${orderNumber} with new price: ${newPrice}, new quantity: ${newQuantity}`);
-        } else {
-            throw new Error(`Order with number ${orderNumber} not found`);
-        }
-    }
-
-    async modifyOrderByStockCode(stockCode: string, newPrice?: number, newQuantity?: number): Promise<void> {
-        const allOrders = await this.getOrderTableData();
-        const orderIndex = allOrders.findIndex(order => order.stockCode.includes(stockCode));
-
-        if (orderIndex >= 0) {
-            await this.modifyOrder(orderIndex, newPrice, newQuantity);
-            console.log(`Modified order for ${stockCode} with new price: ${newPrice}, new quantity: ${newQuantity}`);
-        } else {
-            throw new Error(`Order for stock ${stockCode} not found`);
-        }
-    }
 
     // =================== CANCEL ALL ORDERS METHODS ===================
 
@@ -646,118 +336,7 @@ class OrderBook extends BasePage {
         return count > 0;
     }
 
-    async verifyNoDataMessage(): Promise<boolean> {
-        const noDataMessage = this.page.locator('table.table-bordered.tbl-list + p');
-        const message = await noDataMessage.textContent();
-        return message?.includes('Không có dữ liệu') ?? false;
-    }
 
-    async verifyOrderModified(stockCode: string, expectedPrice?: string, expectedQuantity?: string): Promise<boolean> {
-        await this.page.waitForTimeout(2000);
-        const orders = await this.getOrderTableData();
-        const modifiedOrder = orders.find(order => order.stockCode.includes(stockCode));
-
-        if (!modifiedOrder) return false;
-
-        let priceMatch = true;
-        let quantityMatch = true;
-
-        if (expectedPrice) {
-            priceMatch = modifiedOrder.price.includes(expectedPrice);
-        }
-
-        if (expectedQuantity) {
-            quantityMatch = modifiedOrder.quantity.includes(expectedQuantity);
-        }
-
-        return priceMatch && quantityMatch;
-    }
-
-    async verifySearchFunctionality(searchTerm: string): Promise<SearchVerificationResult> {
-        const originalCount = await this.getOrderCount();
-
-        await this.searchOrder(searchTerm);
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
-
-        const filteredCount = await this.getOrderCount();
-
-        // Clear search
-        await this.searchOrder('');
-        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
-
-        const clearedCount = await this.getOrderCount();
-
-        return {
-            success: clearedCount === originalCount,
-            filteredCount,
-            originalCount
-        };
-    }
-
-    // =================== STATUS AND INFORMATION METHODS ===================
-
-    async hasActionButtons(rowIndex: number): Promise<ActionButtonsAvailability> {
-        try {
-            const hasCancel = await this.cancelOrderButton(rowIndex).isVisible({ timeout: OrderBook.SHORT_TIMEOUT });
-            const hasModify = await this.modifyOrderButton(rowIndex).isVisible({ timeout: OrderBook.SHORT_TIMEOUT });
-            return { hasCancel, hasModify };
-        } catch {
-            return { hasCancel: false, hasModify: false };
-        }
-    }
-
-    async isOrderBookVisible(): Promise<boolean> {
-        try {
-            return await this.orderIndayTab.isVisible({ timeout: OrderBook.SHORT_TIMEOUT });
-        } catch {
-            return false;
-        }
-    }
-
-    async isTabActive(tabName: TabName): Promise<boolean> {
-        const tabMap = {
-            inday: this.orderIndayTab,
-            history: this.orderHistoryTab,
-            conditional: this.conditionalOrderTab,
-            putthrough: this.putThroughOrderTab
-        };
-
-        try {
-            const classes = await tabMap[tabName].getAttribute('class');
-            return classes?.includes('active') || classes?.includes('selected') || false;
-        } catch {
-            return false;
-        }
-    }
-
-    async checkAvailableFilters(): Promise<AvailableFilters> {
-        try {
-            const statusAvailable = await this.statusSelect.isVisible({ timeout: 2000 });
-            const accountAvailable = await this.accountSelect.isVisible({ timeout: 2000 });
-            const orderTypeAvailable = await this.orderTypeSelect.isVisible({ timeout: 2000 });
-
-            return {
-                status: statusAvailable,
-                account: accountAvailable,
-                orderType: orderTypeAvailable
-            };
-        } catch {
-            return {
-                status: false,
-                account: false,
-                orderType: false
-            };
-        }
-    }
-
-    async hasPagination(): Promise<boolean> {
-        try {
-            const paginationElement = this.page.locator('.pagination, .page-navigation, .pager');
-            return await paginationElement.isVisible({ timeout: 3000 });
-        } catch {
-            return false;
-        }
-    }
 }
 
-export default OrderBook;
+export default PositionPage;

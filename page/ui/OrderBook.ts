@@ -18,6 +18,22 @@ interface OrderData {
     status: string;
 }
 
+interface orderConditionalData {
+    orderNo: string;
+    orderType: string;
+    fromDate: string;
+    toDate: string;
+    method: string;
+    side: string;
+    stockCode: string;
+    price: string;
+    activeCondition?: string;
+    orderCondition?: string;
+    vol: string;
+    matchedQuantity: string;
+    status: string;
+}
+
 interface OrderModalInfo {
     stockCode: string;
     orderType: string;
@@ -143,6 +159,10 @@ class OrderBook extends BasePage {
     modifyOrderConfirmButton!: Locator;
     modifyOrderCancelButton!: Locator;
 
+
+    deleteOrderConfirmButtonConditional!: Locator;
+    deleteOrderCancelButtonConditional!: Locator;
+
     constructor(page: Page) {
         super(page);
         this.initializeLocators(page);
@@ -174,7 +194,8 @@ class OrderBook extends BasePage {
         this.orderTable = page.locator('.table.table-bordered.tbl-list');
         this.tableHeaders = page.locator('.table-bordered.tbl-list thead th');
         this.tableRows = page.locator('.table-bordered.tbl-list tbody tr');
-        this.checkboxHeaderAll = page.locator('.table-bordered.tbl-list thead th:nth-child(1) span');
+        this.checkboxHeaderAll = page.locator('.table-bordered.tbl-list thead th:nth-child(1) span')
+
 
         // Modal Elements
         this.initializeModalLocators(page);
@@ -185,7 +206,7 @@ class OrderBook extends BasePage {
      */
     private initializeModalLocators(page: Page): void {
         // Cancel All Orders Modal
-        this.cancelAllModal = page.locator('.wts-modal', { hasText: /Xác nhận hủy lệnh/ });
+        this.cancelAllModal = page.locator('.wts-modal .modal-content', { hasText: /Xác nhận hủy lệnh/ });
         this.cancelAllModalHeader = page.locator('.wts-modal__header', { hasText: /Xác nhận hủy lệnh/ });
         this.cancelAllModalTable = page.locator('.wts-modal .table.table-bordered.table-fix');
         this.cancelAllConfirmButton = page.locator('.wts-modal .btn.btn--primary');
@@ -209,7 +230,12 @@ class OrderBook extends BasePage {
         this.modifyOrderQuantityInput = page.locator('.confirm-order-body__detail input[name="newVol"]');
         this.modifyOrderConfirmButton = page.locator('.confirm-order .btn-confirm');
         this.modifyOrderCancelButton = page.locator('.confirm-order .btn-cancel');
+
+        // Delete Order Modal Conditional
+        this.deleteOrderConfirmButtonConditional = page.locator('button[type="submit"]');
+        this.deleteOrderCancelButtonConditional = page.locator('button[type="submit"] ~ button');
     }
+
 
     // =================== DYNAMIC LOCATOR METHODS ===================
 
@@ -359,6 +385,33 @@ class OrderBook extends BasePage {
         return orders;
     }
 
+    async getOrderConditionalTableData(): Promise<orderConditionalData[]> {
+        await this.orderTable.waitFor({ state: 'visible' });
+        const rows = await this.tableRows.all();
+        const orders: orderConditionalData[] = [];
+
+        for (const row of rows) {
+            const cells = await row.locator('td').all();
+            if (cells.length > 0) {
+                orders.push({
+                    orderNo: await cells[0]?.innerText() || '',
+                    orderType: await cells[1]?.innerText() || '',
+                    fromDate: await cells[2]?.innerText() || '',
+                    toDate: await cells[3]?.innerText() || '',
+                    method: await cells[4]?.innerText() || '',
+                    side: await cells[5]?.innerText() || '',
+                    stockCode: await cells[6]?.innerText() || '',
+                    price: await cells[7]?.innerText() || '',
+                    activeCondition: await cells[8]?.innerText() || '',
+                    vol: await cells[9]?.innerText() || '',
+                    matchedQuantity: await cells[10]?.innerText() || '',
+                    status: await cells[11]?.innerText() || '',
+                });
+            }
+        }
+        return orders;
+    }
+
     async getOrderDataByIndex(rowIndex: number): Promise<OrderData> {
         return {
             account: await this.accountColumn(rowIndex).innerText(),
@@ -404,6 +457,14 @@ class OrderBook extends BasePage {
         await this.cancelOrderButton(rowIndex).click();
         await this.deleteOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
         await this.deleteOrderConfirmButton.click();
+        await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
+    }
+
+    async cancelOrderConditional(rowIndex: number = 0): Promise<void> {
+        await this.cancelOrderButton(rowIndex).click();
+        await this.deleteOrderModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
+        await this.deleteOrderConfirmButtonConditional.click();
         await this.deleteOrderModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
         await this.page.waitForTimeout(OrderBook.SHORT_TIMEOUT);
     }
@@ -458,6 +519,124 @@ class OrderBook extends BasePage {
         const orderIndex = await this.findOrderIndexByOrderNumber(orderNumber);
         if (orderIndex >= 0) {
             await this.cancelOrder(orderIndex);
+        }
+    }
+
+
+    async cancelOrderConditionalByStatus(targetStatus: string): Promise<void> {
+        const allOrders = await this.getOrderConditionalTableData();
+        const ordersToCancel = allOrders.filter(order => order.status.includes(targetStatus));
+
+        console.log(`Found ${ordersToCancel.length} orders with status '${targetStatus}' to cancel`);
+
+        for (let i = 0; i < ordersToCancel.length; i++) {
+            try {
+                const currentOrders = await this.getOrderConditionalTableData();
+                const orderIndex = currentOrders.findIndex(order =>
+                    order.orderNo === ordersToCancel[i].orderNo &&
+                    order.stockCode === ordersToCancel[i].stockCode
+                );
+
+                if (orderIndex >= 0) {
+                    await this.cancelOrderConditional(orderIndex);
+                    console.log(`Canceled order ${ordersToCancel[i].stockCode} - ${ordersToCancel[i].orderNo}`);
+                } else {
+                    console.log(`Order not found: ${ordersToCancel[i].stockCode} - ${ordersToCancel[i].orderNo}`);
+                }
+
+                await this.page.waitForTimeout(OrderBook.POLLING_INTERVAL);
+            } catch (error) {
+                console.log(`Failed to cancel order ${ordersToCancel[i].stockCode}: ${error}`);
+            }
+        }
+    }
+
+    async cancelOrderConditionalByStockCodeAndStatus(stockCode: string, status: string[]): Promise<void> {
+        try {
+            // Define scroll container for conditional orders table
+            const scrollContainer = this.page.locator('.card-panel-body .scrollbar-container.ps.ps--active-y');
+
+            // Data extractor function for conditional orders
+            const dataExtractor = async (rowIndex: number): Promise<orderConditionalData> => {
+                const row = this.tableRows.nth(rowIndex);
+                const cells = await row.locator('td').all();
+
+                if (cells.length === 0) {
+                    throw new Error(`No cells found in row ${rowIndex}`);
+                }
+
+                return {
+                    orderNo: await cells[0]?.innerText() || '',
+                    orderType: await cells[1]?.innerText() || '',
+                    fromDate: await cells[2]?.innerText() || '',
+                    toDate: await cells[3]?.innerText() || '',
+                    method: await cells[4]?.innerText() || '',
+                    side: await cells[5]?.innerText() || '',
+                    stockCode: await cells[6]?.innerText() || '',
+                    price: await cells[7]?.innerText() || '',
+                    activeCondition: await cells[8]?.innerText() || '',
+                    vol: await cells[9]?.innerText() || '',
+                    matchedQuantity: await cells[10]?.innerText() || '',
+                    status: await cells[11]?.innerText() || '',
+                };
+            };
+
+            // Search criteria to find order by stock code
+            const searchCriteria = (data: orderConditionalData): boolean => {
+                return data.stockCode.trim() === stockCode.trim() && status.includes(data.status.trim());
+            };
+
+            // Use TableUtils.findRowWithScrolling to find the order with scrolling support
+            const foundOrder = await TableUtils.findRowWithScrolling(
+                this.page,
+                this.tableRows,
+                scrollContainer,
+                dataExtractor,
+                searchCriteria
+            );
+
+            if (foundOrder) {
+                await this.cancelOrderConditional(foundOrder.index);
+                console.log(`Canceled order ${stockCode} at index ${foundOrder.index}`);
+            } else {
+                console.log(`Order not found: ${stockCode}`);
+            }
+        } catch (error) {
+            console.log(`Failed to cancel order ${stockCode}: ${error}`);
+        }
+    }
+
+    async cancelRandomOrderConditionalByStatus(targetStatus: string): Promise<void> {
+        try {
+            const allOrders = await this.getOrderConditionalTableData();
+            const ordersToCancel = allOrders.filter(order => order.status.includes(targetStatus));
+
+            if (ordersToCancel.length === 0) {
+                console.log(`No orders found with status '${targetStatus}'`);
+                return;
+            }
+
+            // Chọn random 1 lệnh từ danh sách
+            const randomIndex = Math.floor(Math.random() * ordersToCancel.length);
+            const selectedOrder = ordersToCancel[randomIndex];
+
+            console.log(`Randomly selected order to cancel: ${selectedOrder.stockCode} - ${selectedOrder.orderNo} (from ${ordersToCancel.length} orders)`);
+
+            // Tìm lại index trong danh sách hiện tại để đảm bảo chính xác
+            const currentOrders = await this.getOrderConditionalTableData();
+            const orderIndex = currentOrders.findIndex(order =>
+                order.orderNo === selectedOrder.orderNo &&
+                order.stockCode === selectedOrder.stockCode
+            );
+
+            if (orderIndex >= 0) {
+                await this.cancelOrderConditional(orderIndex);
+                console.log(`Successfully canceled random order: ${selectedOrder.stockCode} - ${selectedOrder.orderNo}`);
+            } else {
+                console.log(`Order not found when trying to cancel: ${selectedOrder.stockCode} - ${selectedOrder.orderNo}`);
+            }
+        } catch (error) {
+            console.log(`Failed to cancel random order with status '${targetStatus}': ${error}`);
         }
     }
 
@@ -536,11 +715,16 @@ class OrderBook extends BasePage {
 
     async cancelAllOrders(): Promise<void> {
         await this.selectAllOrders();
-        await this.cancelAllOrderButton.click();
-        await this.cancelAllModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
-        await this.cancelAllConfirmButton.click();
-        await this.cancelAllModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
-        await this.page.waitForTimeout(2000);
+        const isChecked = await this.page.locator('.table-bordered.tbl-list thead th:nth-child(1) span .checkbox2__status--checked').isVisible();
+        if (isChecked) {
+            await this.cancelAllOrderButton.click();
+            await this.cancelAllModal.waitFor({ state: 'visible', timeout: OrderBook.DEFAULT_TIMEOUT });
+            await this.cancelAllConfirmButton.click();
+            await this.cancelAllModal.waitFor({ state: 'hidden', timeout: OrderBook.DEFAULT_TIMEOUT });
+            await this.page.waitForTimeout(2000);
+        } else {
+            console.log('No orders to cancel');
+        }
     }
 
     async closeCancelAllModal(): Promise<void> {

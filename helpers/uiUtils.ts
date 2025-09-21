@@ -279,21 +279,43 @@ export class FormUtils {
         options: RetryOptions = {}
     ): Promise<void> {
         const { maxAttempts = 3 } = options;
+        const stringValue = String(value);
 
         for (let attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
                 await field.waitFor({ state: 'visible' });
                 await field.clear();
-                await field.fill(String(value));
+                await field.fill(stringValue);
 
                 // Verify the value was set correctly
                 const inputValue = await field.inputValue();
-                if (inputValue === String(value)) {
+                if (inputValue === stringValue) {
+                    return;
+                }
+
+                // 🔄 Fallback 1: type từng ký tự
+                await field.click();
+                await field.pressSequentially(stringValue, { delay: 50 });
+
+                if ((await field.inputValue()) === stringValue) {
+                    return;
+                }
+
+                // 🔄 Fallback 2: set trực tiếp qua evaluate (React/Angular friendly)
+                await field.evaluate((el, v) => {
+                    (el as HTMLInputElement).value = v;
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    el.dispatchEvent(new Event('change', { bubbles: true }));
+                }, stringValue);
+
+                if ((await field.inputValue()) === stringValue) {
                     return;
                 }
             } catch (error) {
                 if (attempt === maxAttempts) {
-                    throw new Error(`Failed to fill field after ${maxAttempts} attempts: ${error}`);
+                    throw new Error(
+                        `Failed to fill field after ${maxAttempts} attempts: ${error}`
+                    );
                 }
                 await WaitUtils.delay(500);
             }

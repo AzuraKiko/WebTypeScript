@@ -136,9 +136,9 @@ class OrderPage extends BasePage {
         this.elements = {
             navigation: {
                 orderButton: page.locator('.footer-btn:has(.iOrder)'),
-                normalTab: page.locator('.card-panel .order .card-panel-header__left:nth-child(1)'),
-                conditionalTab: page.locator('.card-panel .order .card-panel-header__left:nth-child(2)'),
-                oddTab: page.locator('.card-panel .order .card-panel-header__left:nth-child(3)')
+                normalTab: page.locator('.card-panel .order .card-panel-header__left span:nth-child(1)'),
+                conditionalTab: page.locator('.card-panel .order .card-panel-header__left span:nth-child(2)'),
+                oddTab: page.locator('.card-panel .order .card-panel-header__left span:nth-child(3)'),
             },
             form: {
                 buyTab: page.locator('.order-button.order-buy'),
@@ -202,11 +202,11 @@ class OrderPage extends BasePage {
                 differenceTPInput: page.locator('input[name="giaChenhTp"]'),
                 lowestPriceInput: page.locator('input[name="giaMuaThapNhat"]'),
                 differenceBQInput: page.locator('input[name="chenhGiaBQ"]'),
-                cancelConditionalButton: page.locator('.btn-order.btn.btn-primary:nth-child(1)'),
+                cancelConditionalButton: page.getByRole('button', { name: 'Huỷ' }),
                 placeConditionalButton: page.locator('button[type="submit"]'),
-                priceCeilConditional: page.locator('div.d-flex span.c').first(),
-                priceFloorConditional: page.locator('div.d-flex span.f').first(),
-                priceReferenceConditional: page.locator('div.d-flex span.r').first(),
+                priceCeilConditional: page.locator('.card div.d-flex span.c'),
+                priceFloorConditional: page.locator('.card div.d-flex span.f'),
+                priceReferenceConditional: page.locator('.card div.d-flex span.r'),
             },
             messagesConditional: {
                 toastMessageConditional: page.locator('.notification.toast.top-right'),
@@ -530,7 +530,7 @@ class OrderPage extends BasePage {
             };
             const selectedElement = priceElements[priceType];
             await expect(selectedElement).toBeVisible();
-            const price: number | string = await selectedElement.textContent() || 0;
+            const price = (await selectedElement.textContent())?.trim() || "0";
             await this.fillOrderPriceConditional(price);
         } catch (error) {
             throw new Error(`Failed to select ${priceType} price: ${error}`);
@@ -787,19 +787,64 @@ class OrderPage extends BasePage {
         }
     }
 
-    // async placeTakeProfitOrder(orderData?: Partial<ConditionalOrderFormData>): Promise<string> {
-    //     const {
-    //         stockCodeConditional,
-    //         quantityConditional,
-    //         sideConditional = 'sell',
-    //     } = orderData || {};
-    //     try {
+    async placeTakeProfitOrder(orderData?: Partial<ConditionalOrderFormData>): Promise<string> {
+        const {
+            stockCodeConditional,
+            quantityConditional,
+            differenceBQ,
+            sideConditional = 'sell',
+        } = orderData || {};
+        try {
+            await this.switchConditionalTab('takeProfit');
+            await this.fillQuantityConditional(quantityConditional);
+            await this.fillDifferenceBQConditional(differenceBQ!);
+            await this.placeConditionalButton.click();
+            return stockCodeConditional || '';
 
-    //     } catch (error) {
-    //         throw new Error(`Failed to place take profit order: ${error}`);
-    //     }
-    // }
+        } catch (error) {
+            throw new Error(`Failed to place take profit order: ${error}`);
+        }
+    }
 
+    async placeStopLossOrder(orderData?: Partial<ConditionalOrderFormData>): Promise<string> {
+        const {
+            stockCodeConditional,
+            quantityConditional,
+            differenceBQ,
+            sideConditional = 'sell',
+        } = orderData || {};
+        try {
+            await this.switchConditionalTab('stopLoss');
+            await this.fillQuantityConditional(quantityConditional);
+            await this.fillDifferenceBQConditional(differenceBQ!);
+            await this.placeConditionalButton.click();
+            return stockCodeConditional || '';
+        } catch (error) {
+            throw new Error(`Failed to place stop loss order: ${error}`);
+        }
+    }
+
+    async placePurchaseOrder(orderData?: Partial<ConditionalOrderFormData>): Promise<string> {
+        const {
+            stockCodeConditional,
+            quantityConditional,
+            sideConditional,
+        } = orderData || {};
+        try {
+            await this.switchConditionalTab('purchase');
+            if (sideConditional === 'buy') {
+                await this.buyTabConditional.click();
+            } else {
+                await this.sellTabConditional.click();
+            }
+            await this.fillStockCodeConditional(stockCodeConditional);
+            await this.fillQuantityConditional(quantityConditional);
+            await this.placeConditionalButton.click();
+            return stockCodeConditional || '';
+        } catch (error) {
+            throw new Error(`Failed to place purchase order: ${error}`);
+        }
+    }
 
     // =================== MESSAGE VERIFICATION METHODS ===================
 

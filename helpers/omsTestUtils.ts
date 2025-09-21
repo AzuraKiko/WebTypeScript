@@ -62,6 +62,25 @@ export interface OrderWorkflowParams {
     modifyPrice?: number;
 }
 
+export interface OrderConditionalWorkflowParams {
+    page: any;
+    orderPage: OrderPage;
+    orderBook: OrderBook;
+    apiCapture: ApiCallCapture;
+    accountType: 'normal' | 'margin';
+    sideConditional?: 'buy' | 'sell';
+    stockCode?: string;
+    quantity: number;
+    navigationConditional: 'outTime' | 'trend' | 'takeProfit' | 'stopLoss' | 'purchase';
+    differenceBQ?: number;
+    differenceTP?: number;
+    lowestPrice?: number;
+    pauseValue?: number;
+    triggerPrice?: number;
+    orderPrice?: number;
+    enableCancel?: boolean;
+}
+
 /**
  * OMS Test Configuration - Centralized configuration for OMS tests
  */
@@ -635,14 +654,80 @@ export async function executeOrderWorkflow(params: OrderWorkflowParams): Promise
     }
 }
 
-// export async function executeConditionalOrderWorkflow(params: ConditionalOrderWorkflowParams): Promise<void> {
-//     const {
-//         page,
-//         orderPage,
-//         orderBook,
-//         apiCapture,
-//     } = params;
-// }
+export async function executeConditionalOrderWorkflow(params: OrderConditionalWorkflowParams): Promise<void> {
+    const {
+        page,
+        orderPage,
+        orderBook,
+        apiCapture,
+        accountType,
+        sideConditional,
+        stockCode,
+        quantity,
+        navigationConditional,
+        differenceBQ,
+        differenceTP,
+        pauseValue,
+        enableCancel,
+    } = params;
+    const workflowId = `${sideConditional}-${accountType}-${navigationConditional}-${Date.now()}`;
+    apiCapture.addTestStep(`Starting ${sideConditional} conditional order workflow for ${accountType} account (${workflowId})`);
+    try {
+        if (navigationConditional === 'outTime') {
+            await orderPage.placeOutTimeOrder({
+                stockCodeConditional: stockCode,
+                quantityConditional: quantity,
+                sideConditional
+            });
+        } else if (navigationConditional === 'trend') {
+            await orderPage.placeTrendOrder({
+                stockCodeConditional: stockCode,
+                quantityConditional: quantity,
+                pauseValue,
+                sideConditional,
+                differenceTP
+            });
+        } else if (navigationConditional === 'takeProfit') {
+            await orderPage.placeTakeProfitOrder({
+                stockCodeConditional: stockCode,
+                quantityConditional: quantity,
+                differenceBQ,
+                sideConditional,
+            });
+        } else if (navigationConditional === 'stopLoss') {
+            await orderPage.placeStopLossOrder({
+                stockCodeConditional: stockCode,
+                quantityConditional: quantity,
+                differenceBQ,
+                sideConditional,
+            });
+        } else if (navigationConditional === 'purchase') {
+            await orderPage.placePurchaseOrder({
+                stockCodeConditional: stockCode,
+                quantityConditional: quantity,
+                sideConditional
+            });
+        }
+
+        apiCapture.addTestStep(`${sideConditional} conditional order placed successfully`);
+
+        if (enableCancel) {
+            await orderPage.cancelConditionalButton.click();
+            await orderPage.closeOrder();
+            await orderBook.openOrderBook();
+            await orderBook.switchToConditionalOrderTab();
+            await orderBook.cancelOrderConditionalByStockCodeAndStatus(stockCode!, ['Chờ kích hoạt', 'Chờ kích hoạt lại', 'Đã kích hoạt']);
+            await orderBook.deleteOrderModal.waitFor({ state: 'hidden', timeout: 10000 });
+            await orderBook.closeOrderBook();
+            apiCapture.addTestStep(`Conditional order cancelled successfully`);
+        }
+
+    } catch (error) {
+        apiCapture.addTestStep(`Conditional order workflow failed (${workflowId}): ${error}`);
+        throw new Error(`Conditional order workflow failed for ${sideConditional} ${accountType}: ${error}`);
+
+    }
+}
 
 /**
  * Initialize page objects with enhanced error handling
@@ -710,6 +795,17 @@ export async function switchToMarginAccount(subaccPage: SubaccPage, apiCapture: 
     }
 }
 
+export async function switchToNormalAccount(subaccPage: SubaccPage, apiCapture: ApiCallCapture): Promise<void> {
+    try {
+        apiCapture.addTestStep('Switching to normal account');
+        await subaccPage.selectNormalSubacc();
+        apiCapture.addTestStep('Normal account selected');
+    } catch (error) {
+        apiCapture.addTestStep(`Normal account selection failed: ${error}`);
+        throw new Error(`Failed to select normal account: ${error}`);
+    }
+}
+
 export async function switchToOddTab(orderPage: OrderPage, apiCapture: ApiCallCapture): Promise<void> {
     try {
         apiCapture.addTestStep('Switching to odd tab');
@@ -718,6 +814,17 @@ export async function switchToOddTab(orderPage: OrderPage, apiCapture: ApiCallCa
     } catch (error) {
         apiCapture.addTestStep(`Odd tab selection failed: ${error}`);
         throw new Error(`Failed to select odd tab: ${error}`);
+    }
+}
+
+export async function switchToConditionalTab(orderPage: OrderPage, apiCapture: ApiCallCapture): Promise<void> {
+    try {
+        apiCapture.addTestStep('Switching to conditional tab');
+        await orderPage.switchToConditionalTab();
+        apiCapture.addTestStep('Conditional tab selected');
+    } catch (error) {
+        apiCapture.addTestStep(`Conditional tab selection failed: ${error}`);
+        throw new Error(`Failed to select conditional tab: ${error}`);
     }
 }
 
@@ -753,6 +860,17 @@ export async function closeOrderBook(orderBook: OrderBook, apiCapture: ApiCallCa
     } catch (error) {
         apiCapture.addTestStep(`Order book closing failed: ${error}`);
         throw new Error(`Failed to close order book: ${error}`);
+    }
+}
+
+export async function cancelAllOrders(orderBook: OrderBook, apiCapture: ApiCallCapture): Promise<void> {
+    try {
+        apiCapture.addTestStep('Cancelling all orders');
+        await orderBook.cancelAllOrders();
+        apiCapture.addTestStep('All orders cancelled');
+    } catch (error) {
+        apiCapture.addTestStep(`All orders cancellation failed: ${error}`);
+        throw new Error(`Failed to cancel all orders: ${error}`);
     }
 }
 
