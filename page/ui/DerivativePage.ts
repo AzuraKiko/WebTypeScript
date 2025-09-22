@@ -8,7 +8,7 @@ import PositionPage from './PositionPage';
 // Interface definitions for better type safety
 interface OrderDerivativeFormData {
     stockCode: string;
-    quantity: number;
+    quantity?: number;
     price?: number | string;
     side: 'long' | 'short';
 }
@@ -585,10 +585,7 @@ class DerivativePage extends BasePage {
     }
 
 
-    async placeOrderFromOpenPosition(orderData?: Partial<OrderDerivativeFormData>): Promise<string> {
-        const {
-            quantity = DerivativePage.DEFAULT_QUANTITY
-        } = orderData || {};
+    async placeStopTakeProfitOrderFromOpenPosition(orderData?: Partial<OrderDerivativeFormData>): Promise<string> {
         await this.positionPage.openPositionPanel();
         await this.positionPage.clickPositionRowByQuantity(quantity);
         const usedStockCode = await this.priceInput.textContent();
