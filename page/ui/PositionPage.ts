@@ -15,6 +15,24 @@ interface OpenPositionData {
     profitLoss: string;
 }
 
+interface reversePositionModalInfo {
+    vsdNumber: string;
+    subaccount: string;
+    orderType: string;
+    symbol: string;
+    currentPrice: string;
+    currentQuantity: string;
+}
+
+interface closeOpenPositionModalInfo {
+    vsdNumber: string;
+    subaccount: string;
+    orderType: string;
+    symbol: string;
+    currentPrice: string;
+    currentQuantity: string;
+}
+
 interface orderListData {
     orderNumber: string;
     orignalNumber: string;
@@ -70,6 +88,26 @@ class PositionPage extends BasePage {
     positionTable!: Locator;
     tableHeaders!: Locator;
     tableRows!: Locator;
+
+    reversePositionModal!: Locator;
+    reversePositionModalVsdNumber!: Locator;
+    reversePositionModalSubaccount!: Locator;
+    reversePositionModalOrderType!: Locator;
+    reversePositionModalSymbol!: Locator;
+    reversePositionModalCurrentPrice!: Locator;
+    reversePositionModalCurrentQuantity!: Locator;
+    reversePositionModalConfirmButton!: Locator;
+    reversePositionModalCancelButton!: Locator;
+
+    closeOpenPositionModal!: Locator;
+    closeOpenPositionModalVsdNumber!: Locator;
+    closeOpenPositionModalSubaccount!: Locator;
+    closeOpenPositionModalOrderType!: Locator;
+    closeOpenPositionModalSymbol!: Locator;
+    closeOpenPositionModalCurrentPrice!: Locator;
+    closeOpenPositionModalCurrentQuantity!: Locator;
+    closeOpenPositionModalConfirmButton!: Locator;
+    closeOpenPositionModalCancelButton!: Locator;
 
     closeAllPositionModal!: Locator;
     closeAllPositionConfirmButton!: Locator;
@@ -146,29 +184,51 @@ class PositionPage extends BasePage {
         // Close All Position Modal
         this.closeAllPositionModal = page.locator('.wts-modal', { hasText: /Xác nhận đóng vị thế/ });
         this.closeAllPositionConfirmButton = page.locator('.wts-modal .btn-confirm');
-        this.closeAllPositionModalCloseButton = page.locator('.wts-modal .btn-cancel');
+        this.closeAllPositionModalCloseButton = page.locator('.wts-modal .btn--cancel');
+
+        // Reverse Position Modal
+        this.reversePositionModal = page.locator('.wts-modal', { hasText: /Xác nhận đảo vị thế/ });
+        this.reversePositionModalVsdNumber = page.locator('.wts-modal .confirm-order-body__infor-value p').nth(0);
+        this.reversePositionModalSubaccount = page.locator('.wts-modal .confirm-order-body__infor-value p').nth(1);
+        this.reversePositionModalOrderType = page.locator('.wts-modal .confirm-order-body__detail .d');
+        this.reversePositionModalSymbol = page.locator('.wts-modal .confirm-order-body__detail .order-symbol');
+        this.reversePositionModalCurrentPrice = page.locator('.wts-modal .confirm-order-body__detail .order-price');
+        this.reversePositionModalCurrentQuantity = page.locator('.wts-modal .confirm-order-body__detail .order-quantity');
+        this.reversePositionModalConfirmButton = page.locator('.wts-modal .btn-confirm');
+        this.reversePositionModalCancelButton = page.locator('.wts-modal .btn--cancel');
+
+        // Close Open Position Modal
+        this.closeOpenPositionModal = page.locator('.wts-modal', { hasText: /Xác nhận đóng vị thế/ });
+        this.closeOpenPositionModalVsdNumber = page.locator('.wts-modal .confirm-order-body__infor-value p').nth(0);
+        this.closeOpenPositionModalSubaccount = page.locator('.wts-modal .confirm-order-body__infor-value p').nth(1);
+        this.closeOpenPositionModalOrderType = page.locator('.wts-modal .confirm-order-body__detail .d');
+        this.closeOpenPositionModalSymbol = page.locator('.wts-modal .confirm-order-body__detail .order-symbol');
+        this.closeOpenPositionModalCurrentPrice = page.locator('.wts-modal .confirm-order-body__detail .order-price');
+        this.closeOpenPositionModalCurrentQuantity = page.locator('.wts-modal .confirm-order-body__detail .order-quantity');
+        this.closeOpenPositionModalConfirmButton = page.locator('.wts-modal .btn-confirm');
+        this.closeOpenPositionModalCancelButton = page.locator('.wts-modal .btn--cancel');
 
         // Edit Order Modal
         this.editOrderModal = page.locator('.wts-modal', { hasText: /Xác nhận sửa lệnh/ });
         this.editOrderModalVsdNumber = page.locator('.wts-modal .confirm-order-body__infor-value p').nth(0);
         this.editOrderModalSubaccount = page.locator('.wts-modal .confirm-order-body__infor-value p').nth(1);
         this.editOrderModalOrderType = page.locator('.wts-modal .confirm-order-body__detail .d');
-        this.editOrderModalSymbol = page.locator('.wts-modal .order.order-symbol');
+        this.editOrderModalSymbol = page.locator('.wts-modal .confirm-order-body__detail .order-symbol');
         this.editOrderModalCurrentPrice = page.locator('.wts-modal .confirm-order-body__detail .order-price');
         this.editOrderModalCurrentQuantity = page.locator('.wts-modal .confirm-order-body__detail .order-quantity');
         this.editOrderModalConfirmButton = page.locator('.wts-modal .btn-confirm');
-        this.editOrderModalCancelButton = page.locator('.wts-modal .btn-cancel');
+        this.editOrderModalCancelButton = page.locator('.wts-modal .btn--cancel');
 
         this.cancelModal = page.locator('.wts-modal', { hasText: /Xác nhận hủy lệnh/ });
         this.cancelModalContractCode = page.locator('.wts-modal .delete-order-body__infor-value p').nth(0);
         this.cancelModalOrderType = page.locator('.wts-modal .delete-order-body__infor-value p').nth(1);
         this.cancelModalOrderNumber = page.locator('.wts-modal .delete-order-body__infor-value p').nth(2);
         this.cancelModalConfirmButton = page.locator('.wts-modal .btn-confirm');
-        this.cancelModalCancelButton = page.locator('.wts-modal .btn-cancel');
+        this.cancelModalCancelButton = page.locator('.wts-modal .btn--cancel');
 
         this.cancelAllModal = page.locator('.wts-modal', { hasText: /Xác nhận hủy tất cả lệnh/ });
         this.cancelAllConfirmButton = page.locator('.wts-modal .btn-confirm');
-        this.cancelAllModalCloseButton = page.locator('.wts-modal .btn-cancel');
+        this.cancelAllModalCloseButton = page.locator('.wts-modal .btn--cancel');
 
     }
 
@@ -359,16 +419,6 @@ class PositionPage extends BasePage {
         await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
     }
 
-    async reversePosition(rowIndex: number = 0): Promise<void> {
-        await this.reversePositionButton(rowIndex).click();
-        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
-    }
-
-    async closeOpenPosition(rowIndex: number = 0): Promise<void> {
-        await this.closeOpenPositionButton(rowIndex).click();
-        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
-    }
-
     // =================== CANCEL ORDER METHODS ===================
 
     async cancelOrder(rowIndex: number = 0): Promise<void> {
@@ -456,6 +506,21 @@ class PositionPage extends BasePage {
     async closeCancelAllModal(): Promise<void> {
         await this.cancelAllModalCloseButton.click();
         await this.cancelAllModal.waitFor({ state: 'hidden', timeout: 5000 });
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
+    }
+
+    async closeAllPositions(): Promise<void> {
+        await this.closeAllPositionButton.click();
+        await this.closeAllPositionModal.waitFor({ state: 'visible', timeout: PositionPage.DEFAULT_TIMEOUT });
+        await this.closeAllPositionConfirmButton.click();
+        await this.closeAllPositionModal.waitFor({ state: 'hidden', timeout: PositionPage.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(2000);
+    }
+
+    async closeCloseAllPositions(): Promise<void> {
+        await this.closeAllPositionModalCloseButton.click();
+        await this.closeAllPositionModal.waitFor({ state: 'hidden', timeout: PositionPage.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
     }
 
     // =================== EDIT ORDER METHODS ===================
@@ -514,6 +579,85 @@ class PositionPage extends BasePage {
         }
         else {
             throw new Error(`Order with contract code ${contractCode} not found`);
+        }
+    }
+
+    // =================== REVERSE POSITION METHODS ===================
+    async openReversePositionModal(rowIndex: number = 0): Promise<void> {
+        await this.reversePositionButton(rowIndex).click();
+        await this.reversePositionModal.waitFor({ state: 'visible', timeout: PositionPage.DEFAULT_TIMEOUT });
+    }
+
+    async getReversePositionModalInfo(rowIndex: number = 0): Promise<reversePositionModalInfo> {
+        await this.openReversePositionModal(rowIndex);
+        return {
+            vsdNumber: await this.reversePositionModalVsdNumber.textContent() || '',
+            subaccount: await this.reversePositionModalSubaccount.textContent() || '',
+            orderType: await this.reversePositionModalOrderType.textContent() || '',
+            symbol: await this.reversePositionModalSymbol.textContent() || '',
+            currentPrice: await this.reversePositionModalCurrentPrice.textContent() || '',
+            currentQuantity: await this.reversePositionModalCurrentQuantity.textContent() || '',
+        };
+    }
+    async reversePosition(rowIndex: number = 0): Promise<void> {
+        await this.reversePositionButton(rowIndex).click();
+        await this.reversePositionModal.waitFor({ state: 'visible', timeout: PositionPage.DEFAULT_TIMEOUT });
+        await this.reversePositionModalConfirmButton.click();
+        await this.reversePositionModal.waitFor({ state: 'hidden', timeout: PositionPage.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
+    }
+
+    async cancelReversePosition(): Promise<void> {
+        await this.reversePositionModalCancelButton.click();
+        await this.reversePositionModal.waitFor({ state: 'hidden', timeout: PositionPage.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
+    }
+
+    async reversePositionByContractCode(contractCode: string): Promise<void> {
+        const allOrders = await this.getOrderListTableData();
+        const orderIndex = allOrders.findIndex(order => order.contractCode.includes(contractCode));
+        if (orderIndex >= 0) {
+            await this.reversePosition(orderIndex);
+        }
+    }
+
+    // =================== CLOSE OPEN POSITION METHODS ===================
+    async openCloseOpenPositionModal(rowIndex: number = 0): Promise<void> {
+        await this.closeOpenPositionButton(rowIndex).click();
+        await this.closeOpenPositionModal.waitFor({ state: 'visible', timeout: PositionPage.DEFAULT_TIMEOUT });
+    }
+
+    async getCloseOpenPositionModalInfo(rowIndex: number = 0): Promise<closeOpenPositionModalInfo> {
+        await this.openCloseOpenPositionModal(rowIndex);
+        return {
+            vsdNumber: await this.closeOpenPositionModalVsdNumber.textContent() || '',
+            subaccount: await this.closeOpenPositionModalSubaccount.textContent() || '',
+            orderType: await this.closeOpenPositionModalOrderType.textContent() || '',
+            symbol: await this.closeOpenPositionModalSymbol.textContent() || '',
+            currentPrice: await this.closeOpenPositionModalCurrentPrice.textContent() || '',
+            currentQuantity: await this.closeOpenPositionModalCurrentQuantity.textContent() || '',
+        };
+    }
+
+    async closeOpenPosition(rowIndex: number = 0): Promise<void> {
+        await this.closeOpenPositionButton(rowIndex).click();
+        await this.closeOpenPositionModal.waitFor({ state: 'visible', timeout: PositionPage.DEFAULT_TIMEOUT });
+        await this.closeOpenPositionModalConfirmButton.click();
+        await this.closeOpenPositionModal.waitFor({ state: 'hidden', timeout: PositionPage.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
+    }
+
+    async cancelCloseOpenPosition(): Promise<void> {
+        await this.closeOpenPositionModalCancelButton.click();
+        await this.closeOpenPositionModal.waitFor({ state: 'hidden', timeout: PositionPage.DEFAULT_TIMEOUT });
+        await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
+    }
+
+    async closeOpenPositionByContractCode(contractCode: string): Promise<void> {
+        const allOrders = await this.getOrderListTableData();
+        const orderIndex = allOrders.findIndex(order => order.contractCode.includes(contractCode));
+        if (orderIndex >= 0) {
+            await this.closeOpenPosition(orderIndex);
         }
     }
 

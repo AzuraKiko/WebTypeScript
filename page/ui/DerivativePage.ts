@@ -613,7 +613,7 @@ class DerivativePage extends BasePage {
             await this.setCustomPrice(price);
 
             // Fill quantity
-            await this.fillQuantity(quantity);
+            await this.fillQuantity(quantity!);
 
 
             if (side === 'long') {
@@ -1109,8 +1109,10 @@ class DerivativePage extends BasePage {
                 await this.setStopLimitOrderPrice(price);
             }
 
-            // Set quantity
-            await this.setStopLimitQuantity(quantity);
+            if (quantity) {
+                // Set quantity
+                await this.setStopLimitQuantity(quantity);
+            }
 
             // Set valid date range if provided
             if (validFromDate || validToDate) {
