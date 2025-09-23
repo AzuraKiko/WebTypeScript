@@ -585,7 +585,7 @@ class DerivativePage extends BasePage {
     }
 
 
-    async placeStopTakeProfitOrderFromOpenPosition(orderData?: Partial<OrderDerivativeFormData>): Promise<string> {
+    async placeStopTakeProfitOrderFromOpenPositionByContractCode(contractCode: string): Promise<string> {
         await this.positionPage.openPositionPanel();
         await this.positionPage.clickPositionRowByQuantity(quantity);
         const usedStockCode = await this.priceInput.textContent();

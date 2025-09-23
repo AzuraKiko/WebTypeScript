@@ -8,6 +8,7 @@ class SelectSubacc {
     normalSubacc: Locator;
     marginSubacc: Locator;
     futureSubacc: Locator;
+    folioSubacc: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -19,6 +20,7 @@ class SelectSubacc {
         this.normalSubacc = this.listSubacc.locator('.user-select__option').filter({ hasText: 'Thường' });
         this.marginSubacc = this.listSubacc.locator('.user-select__option').filter({ hasText: 'Margin' });
         this.futureSubacc = this.listSubacc.locator('.user-select__option').filter({ hasText: 'Phái sinh' });
+        this.folioSubacc = this.listSubacc.locator('.user-select__option').filter({ hasText: 'PineFolio' });
     }
 
     async openDropdownSubacc() {
@@ -43,6 +45,11 @@ class SelectSubacc {
     async selectFutureSubacc() {
         await this.openDropdownSubacc();
         await this.futureSubacc.click();
+    }
+
+    async selectFolioSubacc() {
+        await this.openDropdownSubacc();
+        await this.folioSubacc.click();
     }
 }
 

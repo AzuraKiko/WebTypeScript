@@ -7,6 +7,7 @@ import {
     performLogin,
     navigateToOrderPage,
     switchToMarginAccount,
+    switchToFolioAccount,
     OmsTestConfig,
     switchToOddTab,
     openOrderBook,
@@ -70,6 +71,15 @@ function createOmsCaptureTest(captureType: 'url' | 'body', testStepMessage: stri
         });
 
         await WaitUtils.delay(3000);
+
+        await switchToFolioAccount(subaccPage, apiCapture);
+
+        await orderPage.placeBuyOrder({
+            stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.NORMAL_ACCOUNT,
+            quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
+        });
+        await WaitUtils.delay(3000);
+
         // Switch to margin account using shared utility
         await switchToMarginAccount(subaccPage, apiCapture);
 

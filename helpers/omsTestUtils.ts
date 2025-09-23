@@ -806,6 +806,17 @@ export async function switchToNormalAccount(subaccPage: SubaccPage, apiCapture: 
     }
 }
 
+export async function switchToFolioAccount(subaccPage: SubaccPage, apiCapture: ApiCallCapture): Promise<void> {
+    try {
+        apiCapture.addTestStep('Switching to folio account');
+        await subaccPage.selectFolioSubacc();
+        apiCapture.addTestStep('Folio account selected');
+    } catch (error) {
+        apiCapture.addTestStep(`Folio account selection failed: ${error}`);
+        throw new Error(`Failed to select folio account: ${error}`);
+    }
+}
+
 export async function switchToOddTab(orderPage: OrderPage, apiCapture: ApiCallCapture): Promise<void> {
     try {
         apiCapture.addTestStep('Switching to odd tab');

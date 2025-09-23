@@ -419,6 +419,14 @@ class PositionPage extends BasePage {
         await this.page.waitForTimeout(PositionPage.SHORT_TIMEOUT);
     }
 
+    async stopTakeProfitByContractCode(contractCode: string): Promise<void> {
+        const allPositions = await this.getOpenPositionTableData();
+        const positionIndex = allPositions.findIndex(position => position.contractCode.includes(contractCode));
+        if (positionIndex >= 0) {
+            await this.stopTakeProfit(positionIndex);
+        }
+    }
+
     // =================== CANCEL ORDER METHODS ===================
 
     async cancelOrder(rowIndex: number = 0): Promise<void> {
