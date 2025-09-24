@@ -1,0 +1,1964 @@
+{
+  "info": {
+    "name": "OMS Captured API - http://10.8.90.164:8888/, http://10.8.90.16:8888/ (UAT) - STREAMING",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "🔴 STREAMING CAPTURE - Updated: 2025-09-24T10:17:03.918Z. Environment: UAT. Total calls: 60. Real-time API streaming without batch delays."
+  },
+  "item": [
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 34ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"b71c6495-2738-42e7-ab15-662b208523e6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 34ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"b71c6495-2738-42e7-ab15-662b208523e6\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 33ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"03fb4ff7-6c96-4238-b558-e77bb032de0f\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 33ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"03fb4ff7-6c96-4238-b558-e77bb032de0f\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt (200) - 45ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderListHist\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"94c4ae50-d8fb-48a1-9ee3-0f5a3d260d40\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"frDt\":\"20250917\",\"toDt\":\"20250924\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.16:8888/CoreServlet.pt (200) - 45ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderListHist\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"94c4ae50-d8fb-48a1-9ee3-0f5a3d260d40\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"frDt\":\"20250917\",\"toDt\":\"20250924\"}}"
+        },
+        "url": "http://10.8.90.16:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 9ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"91a5153d-4e7e-454b-955f-3721b291d9ec\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"153ae590-9bca-4dd9-811c-80e99b00aa36\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"e7363f60-be8e-44f3-806f-c070227d15e0\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"ff6e03bf-1dc7-4669-93ce-0a5dfc7c8631\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 9ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"91a5153d-4e7e-454b-955f-3721b291d9ec\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"a542e17d-39e4-455a-bd00-d69740cb1b34\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"25450\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 347ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"153ae590-9bca-4dd9-811c-80e99b00aa36\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"2f284e72-9a99-4dc3-bb05-2cfa726c7fb9\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"22150\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 8ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"e7363f60-be8e-44f3-806f-c070227d15e0\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"NewOrder\",\"rqId\":\"f05e2ae8-3a61-4e10-94b2-80daaeca18c7\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrQty\":\"200\",\"ordrUntprc\":\"22150\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"0hWUkA2h1+Ulsoz+BjIjwIRKe6S5y3KOERzdXmDCGaU=\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 32ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"ff6e03bf-1dc7-4669-93ce-0a5dfc7c8631\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"5806ec7a-f7f2-4de9-98ec-a93c0dfbc34a\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"a3d533d8-de4f-4462-9b5e-21ddd7729f80\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"25450\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 174ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"a542e17d-39e4-455a-bd00-d69740cb1b34\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"25450\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 40ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"de589306-24c3-4522-867e-27a82c03d3f8\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 9ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"2f284e72-9a99-4dc3-bb05-2cfa726c7fb9\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"22150\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"0fe547c4-2dae-4bae-823b-58249b5bcbf9\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"25450\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 329ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"NewOrder\",\"rqId\":\"f05e2ae8-3a61-4e10-94b2-80daaeca18c7\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrQty\":\"200\",\"ordrUntprc\":\"22150\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"1\",\"oddOrdrYn\":\"N\",\"signStr\":\"0hWUkA2h1+Ulsoz+BjIjwIRKe6S5y3KOERzdXmDCGaU=\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"ce7ded67-99b6-427a-b632-f44b40895880\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"1a90d80a-f478-4c32-b9b6-df573194b900\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"a8466bbc-c567-4905-8353-f7d42be740e2\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 58ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"5806ec7a-f7f2-4de9-98ec-a93c0dfbc34a\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"4444b936-46b9-4132-bd18-4a866f76ddd5\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 17ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"a3d533d8-de4f-4462-9b5e-21ddd7729f80\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"25450\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"7c0fb232-533a-4904-be62-a911b7bbb84e\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"23500\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 40ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"de589306-24c3-4522-867e-27a82c03d3f8\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"rqId\":\"2a9872ca-2455-4af9-a2c3-92bd270bcb9b\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"90006545\",\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"ordrQty\":100,\"ordrUntprc\":\"22250\",\"ordrTrdTp\":\"01\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 72ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"0fe547c4-2dae-4bae-823b-58249b5bcbf9\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"25450\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"5ad17aea-1687-45c1-8d4c-aeaa9382837e\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"cd4273a5-5971-4375-bc8a-af3a0272aed8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 353ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"ce7ded67-99b6-427a-b632-f44b40895880\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"91948df0-d4cc-445c-bdea-6d3df162741d\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 30ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"1a90d80a-f478-4c32-b9b6-df573194b900\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"19989b88-9bdc-4459-aaa9-a28f428a69c3\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"23500\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 30ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"a8466bbc-c567-4905-8353-f7d42be740e2\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"rqId\":\"6a5cd581-bc2e-4bd0-8936-3af27f0f2973\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"90006545\",\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"ordrQty\":200,\"ordrUntprc\":\"20500\",\"ordrTrdTp\":\"01\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 31ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"4444b936-46b9-4132-bd18-4a866f76ddd5\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"b7c010a5-96bf-4de8-b4c0-e18656f610b7\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"95cc888e-b8b7-431e-929a-69e182dd3032\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 5ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"7c0fb232-533a-4904-be62-a911b7bbb84e\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"23500\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"CancelOrder\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"rqId\":\"c88ff19e-d581-4315-a006-3448ef6f72aa\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"90006545\",\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 14ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"rqId\":\"2a9872ca-2455-4af9-a2c3-92bd270bcb9b\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"90006545\",\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"ordrQty\":100,\"ordrUntprc\":\"22250\",\"ordrTrdTp\":\"01\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"63869837-ab21-44c7-b3ec-3d4e0848c6c8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 60ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"5ad17aea-1687-45c1-8d4c-aeaa9382837e\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"da011c91-3610-480b-b39d-ad1b588896e7\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 39ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"cd4273a5-5971-4375-bc8a-af3a0272aed8\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"0d0e62b3-bc04-41ee-8db8-fcd4830cc1fd\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"23500\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 32ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"91948df0-d4cc-445c-bdea-6d3df162741d\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"2801643f-eca7-4d78-a021-51181ac66b1f\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\",\"symbol\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 64ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"PurchasePower\",\"rqId\":\"19989b88-9bdc-4459-aaa9-a28f428a69c3\",\"channel\":\"WTS\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"MBB\",\"ordrUntprc\":\"23500\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"NewOrder\",\"rqId\":\"f7413eb9-ef27-4dea-93ee-8aa744ca1176\",\"channel\":\"WTS\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"data\":{\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"symbol\":\"ACB\",\"ordrQty\":\"200\",\"ordrUntprc\":\"23500\",\"ordrTrdTp\":\"01\",\"buySelTp\":\"2\",\"oddOrdrYn\":\"N\",\"signStr\":\"bcIvx/hTS9XZtvhXbk3X+vLz30kM7OyU5rqgSNauzcg=\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 35ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"cmd\":\"EditOrder\",\"type\":\"3\",\"token\":\"9uCh4qxBlFqap/+KiqoM68EqO8yYGpKa1c+BCgkOEa4=\",\"rqId\":\"6a5cd581-bc2e-4bd0-8936-3af27f0f2973\",\"channel\":\"WTS\",\"data\":{\"origOrdrNo\":\"90006545\",\"acntNo\":\"00000187\",\"subAcntNo\":\"N00000187\",\"ordrQty\":200,\"ordrUntprc\":\"20500\",\"ordrTrdTp\":\"01\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt  ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"22738b60-729c-4112-a2fe-d321a008d8f3\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": []
+    },
+    {
+      "name": "POST http://10.8.90.164:8888/CoreServlet.pt (200) - 71ms",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "referer",
+            "value": "http://10.8.80.134:3009/"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-US"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json; charset=UTF-8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"group\":\"CORE\",\"cmd\":\"getAllOrderList\",\"user\":\"010C000289\",\"session\":\"y27FXAHTUQESPFSsHZsr9tSYV3odm6ULD9mxYew4rfR9CqqNEBYMrf9TW3qp74qH\",\"rqId\":\"b7c010a5-96bf-4de8-b4c0-e18656f610b7\",\"channel\":\"WTS\",\"data\":{\"custNo\":\"00000187\",\"subAcntNo\":\"\"}}"
+        },
+        "url": "http://10.8.90.164:8888/CoreServlet.pt"
+      },
+      "response": [
+        {
+          "name": "Captured Response",
+          "status": "200"
+        }
+      ]
+    }
+  ]
+}

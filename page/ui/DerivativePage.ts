@@ -25,13 +25,13 @@ interface SLTPOrderData {
     quantity: number;
     side: 'long' | 'short';
     takeProfitOrder?: {
-        enabled: boolean;
+        type: 'ON' | 'OFF';
         triggerPrice?: number;
         orderPrice?: number;
         orderType?: 'LO' | 'MTL';
     };
     stopLossOrder?: {
-        enabled: boolean;
+        type: 'ON' | 'OFF';
         triggerPrice?: number;
         orderPrice?: number;
         orderType?: 'LO' | 'MTL';
@@ -585,15 +585,40 @@ class DerivativePage extends BasePage {
     }
 
 
-    async placeStopTakeProfitOrderFromOpenPositionByContractCode(contractCode: string): Promise<string> {
-        await this.positionPage.openPositionPanel();
-        await this.positionPage.clickPositionRowByQuantity(quantity);
-        const usedStockCode = await this.priceInput.textContent();
-        await this.selectPriceOption('ceil');
-        await this.fillQuantity(quantity);
-        await this.submitOrder('short');
-        return usedStockCode || '';
+    async placeStopTakeProfitOrderFromOpenPositionByContractCode(contractCode: string, validFromDate?: string, validToDate?: string): Promise<string> {
+        try {
+            await this.positionPage.openPositionPanel();
+            await this.positionPage.stopTakeProfitByContractCode(contractCode);
+            const positionInfo = await this.getSLTPPositionInfo();
+            const priceInfo = await this.getInfoPrice();
+            if (positionInfo.position === 'Mua') {
+                await this.setTakeProfitTriggerPrice(priceInfo.priceCeil);
+                await this.selectTakeProfitOrderType('MTL');
+                await this.setStopLossTriggerPrice(priceInfo.priceCeil);
+                await this.selectStopLossOrderType('MTL');
+            } else {
+                await this.setTakeProfitTriggerPrice(priceInfo.priceFloor);
+                await this.selectTakeProfitOrderType('MTL');
+                await this.setStopLossTriggerPrice(priceInfo.priceCeil);
+                await this.selectStopLossOrderType('MTL');
+            }
 
+            // Set valid date range if provided
+            if (validFromDate || validToDate) {
+                await this.setSLTPValidDate(validFromDate, validToDate);
+            }
+
+            // Submit order
+            await this.elements.sltp.orderButton.click();
+
+            // Confirm order if confirmation dialog appears
+            if (await this.elements.form.confirmOrderButton.isVisible()) {
+                await this.elements.form.confirmOrderButton.click();
+            }
+            return contractCode || '';
+        } catch (error) {
+            throw new Error(`Failed to place stop take profit order from open position by contract code: ${error}`);
+        }
     }
 
     /**
@@ -1157,8 +1182,6 @@ class DerivativePage extends BasePage {
         currentPL: string;
     }> {
         try {
-            await this.switchToSLTPTab();
-
             const position = await this.elements.sltp.positionInfo.positionValue.textContent() || '';
             const avgPrice = await this.elements.sltp.positionInfo.avgPriceValue.textContent() || '';
             const quantity = await this.elements.sltp.positionInfo.quantityValue.textContent() || '';
@@ -1202,10 +1225,12 @@ class DerivativePage extends BasePage {
     /**
      * Enable/disable take profit order
      */
-    async toggleTakeProfitOrder(enabled: boolean): Promise<void> {
+    async toggleTakeProfitOrder(type: 'ON' | 'OFF'): Promise<void> {
         try {
             const isChecked = await this.elements.sltp.takeProfitSection.checkbox.isChecked();
-            if (isChecked !== enabled) {
+            if (isChecked === true && type === 'OFF') {
+                await this.elements.sltp.takeProfitSection.checkbox.click();
+            } else if (isChecked === false && type === 'ON') {
                 await this.elements.sltp.takeProfitSection.checkbox.click();
             }
         } catch (error) {
@@ -1274,10 +1299,12 @@ class DerivativePage extends BasePage {
     /**
      * Enable/disable stop loss order
      */
-    async toggleStopLossOrder(enabled: boolean): Promise<void> {
+    async toggleStopLossOrder(type: 'ON' | 'OFF'): Promise<void> {
         try {
             const isChecked = await this.elements.sltp.stopLossSection.checkbox.isChecked();
-            if (isChecked !== enabled) {
+            if (isChecked === true && type === 'OFF') {
+                await this.elements.sltp.stopLossSection.checkbox.click();
+            } else if (isChecked === false && type === 'ON') {
                 await this.elements.sltp.stopLossSection.checkbox.click();
             }
         } catch (error) {
@@ -1404,9 +1431,9 @@ class DerivativePage extends BasePage {
 
             // Configure take profit order if provided
             if (takeProfitOrder) {
-                await this.toggleTakeProfitOrder(takeProfitOrder.enabled);
 
-                if (takeProfitOrder.enabled) {
+                if (takeProfitOrder.type === 'ON') {
+                    await this.toggleTakeProfitOrder('ON');
                     if (takeProfitOrder.triggerPrice) {
                         await this.setTakeProfitTriggerPrice(takeProfitOrder.triggerPrice);
                     }
@@ -1420,13 +1447,14 @@ class DerivativePage extends BasePage {
                     }
 
                 }
+            } else {
+                await this.toggleTakeProfitOrder('OFF');
             }
 
             // Configure stop loss order if provided
             if (stopLossOrder) {
-                await this.toggleStopLossOrder(stopLossOrder.enabled);
-
-                if (stopLossOrder.enabled) {
+                if (stopLossOrder.type === 'ON') {
+                    await this.toggleStopLossOrder('ON');
                     if (stopLossOrder.triggerPrice) {
                         await this.setStopLossTriggerPrice(stopLossOrder.triggerPrice);
                     }
@@ -1439,6 +1467,8 @@ class DerivativePage extends BasePage {
                         await this.setStopLossOrderPrice(stopLossOrder.orderPrice);
                     }
                 }
+            } else {
+                await this.toggleStopLossOrder('OFF');
             }
 
             // Set valid date range if provided

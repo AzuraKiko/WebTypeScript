@@ -57,6 +57,8 @@ function createOmsCaptureTest(captureType: 'url' | 'body', testStepMessage: stri
             side: 'buy',
             stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.NORMAL_ACCOUNT,
             quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
+            enableModify: true,
+            modifyQuantity: 200,
         });
 
         // Place sell order with normal account
@@ -67,18 +69,18 @@ function createOmsCaptureTest(captureType: 'url' | 'body', testStepMessage: stri
             apiCapture,
             accountType: 'normal',
             side: 'sell',
-            quantity: OmsTestConfig.TEST_DATA.ODD_QUANTITY
+            quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
         });
 
         await WaitUtils.delay(3000);
 
         await switchToFolioAccount(subaccPage, apiCapture);
 
-        await orderPage.placeBuyOrder({
-            stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.NORMAL_ACCOUNT,
-            quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
-        });
-        await WaitUtils.delay(3000);
+        // await orderPage.placeBuyOrder({
+        //     stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.NORMAL_ACCOUNT,
+        //     quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
+        // });
+        // await WaitUtils.delay(3000);
 
         // Switch to margin account using shared utility
         await switchToMarginAccount(subaccPage, apiCapture);
@@ -93,6 +95,7 @@ function createOmsCaptureTest(captureType: 'url' | 'body', testStepMessage: stri
             side: 'buy',
             stockCode: OmsTestConfig.TEST_DATA.STOCK_CODES.MARGIN_ACCOUNT,
             quantity: OmsTestConfig.TEST_DATA.ORDER_QUANTITY,
+            enableModify: true,
         });
 
         // Place sell order with margin account
