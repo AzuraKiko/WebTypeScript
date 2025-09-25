@@ -4,7 +4,7 @@ Có đầy đủ tất cả các phiên:
 
 | Giai đoạn      | BORD_EVNT_ID | OPER_STAT_TP | TRD_SESSN_ID |
 | -------------- | ------------ | ------------ | ------------ |
-| ATO (Mở cửa)   | AB2          | 2            | 10           |
+| ATO (Mở cửa)   | AA1          | 2            | 10           |
 | Liên tục sáng  | AB1          | 3            | 10           |
 | Nghỉ trưa      | AC2          | 5            | 30           |
 | Liên tục chiều | AB1          | 3            | 10           |
@@ -47,16 +47,16 @@ Chỉ có LO (Liên tục cả ngày) + Nghỉ trưa + Kết thúc.
 
 3. Bảng giao dịch (Board ID)
 
-| Board Id | Tên bảng (VN)              | Ý nghĩa                                                                                        |
-| -------- | -------------------------- | ---------------------------------------------------------------------------------------------- |
-| **G1**   | Main Board                 | Bảng khớp lệnh liên tục chính (Regular Board – thường là khớp lệnh liên tục cổ phiếu niêm yết) |
-| **G3**   | Negotiation Board          | Giao dịch thoả thuận (Negotiation – cổ phiếu)                                                  |
-| **G4**   | Outright Bond Board        | Bảng trái phiếu (giao dịch outright cho bond niêm yết)                                         |
-| **G7**   | Derivative Board           | Bảng phái sinh (hợp đồng tương lai, quyền chọn – Futures/Options)                              |
-| **T1**   | Main Board – TPDN          | Giao dịch trái phiếu doanh nghiệp (Corporate Bond Market) – khớp lệnh thường                   |
-| **T3**   | Negotiation Board – TPDN   | Thoả thuận trái phiếu doanh nghiệp                                                             |
-| **T4**   | Outright Bond Board – TPDN | Trái phiếu doanh nghiệp (giao dịch outright)                                                   |
-| **T6**   | Repo Bond Board – TPDN     | Giao dịch repo trái phiếu doanh nghiệp                                                         |
+| Board Id | Tên bảng (VN)              | Ý nghĩa                                                                      |
+| -------- | -------------------------- | ---------------------------------------------------------------------------- |
+| **G1**   | Main Board                 | Bảng khớp lệnh liên tục chính                                                |
+| **G3**   | Negotiation Board          | Giao dịch thoả thuận (Negotiation – cổ phiếu)                                |
+| **G4**   | Odd lot                    | Bảng lô lẻ                                                                   |
+| **G7**   | Derivative Board           | Bảng phái sinh (hợp đồng tương lai, quyền chọn – Futures/Options)            |
+| **T1**   | Main Board – TPDN          | Giao dịch trái phiếu doanh nghiệp (Corporate Bond Market) – khớp lệnh thường |
+| **T3**   | Negotiation Board – TPDN   | Thoả thuận trái phiếu doanh nghiệp                                           |
+| **T4**   | Outright Bond Board – TPDN | Trái phiếu doanh nghiệp (giao dịch outright)                                 |
+| **T6**   | Repo Bond Board – TPDN     | Giao dịch repo trái phiếu doanh nghiệp                                       |
 
 2. Mapping theo sàn (MKT_ID)
 
