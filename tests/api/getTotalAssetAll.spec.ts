@@ -36,7 +36,7 @@ async function processAssetData(
 
     // Prepare account lists for parallel processing
     const baseAccounts = [loginResponse.subAcntNormal, loginResponse.subAcntMargin];
-    const optionalAccounts = [];
+    const optionalAccounts: any[] = [];
 
     if (loginResponse.subAcntDerivative) {
         optionalAccounts.push(loginResponse.subAcntDerivative);
@@ -88,7 +88,7 @@ async function processAssetData(
             ApiAssetUtils.safeNumber(result.marginAccount)
         ];
 
-        const optionalAccounts = [];
+        const optionalAccounts: any[] = [];
         if (loginResponse.subAcntDerivative) {
             optionalAccounts.push(ApiAssetUtils.safeNumber(result.derivativeAccount));
         }
@@ -105,7 +105,7 @@ async function processAssetData(
             ApiAssetUtils.safeNumber(result.marginAccountCash)
         ];
 
-        const optionalAccounts = [];
+        const optionalAccounts: any[] = [];
         if (loginResponse.subAcntDerivative) {
             optionalAccounts.push(ApiAssetUtils.safeNumber(result.derivativeAccountCash));
         }
